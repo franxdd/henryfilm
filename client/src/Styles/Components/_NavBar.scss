@@ -1,0 +1,66 @@
+@import "../Utilidades/Variables";
+
+.nav-superior {
+  width: 100%;
+  background-color:$background-claro;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  ul{
+    list-style: none;
+  }
+  .logo {
+    margin-top:8px;
+    width: 130px;
+  }
+  .contenedor-iconos {
+    width: 70%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    .icono-nav {
+      color: $blanco;
+      font-size: 22px;
+      margin-right: 20px;
+      margin-left: 10px;
+    }
+    .icono-nav:hover {
+      color: $detalles;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .nav-superior {
+    .contenedor-iconos {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  nav {
+    .contenedor-iconos {
+      .link-nav {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav-superior {
+    .logo {
+      width: 40px;
+      margin-left: 15px;
+    }
+    .contenedor-iconos {
+      justify-content: flex-start;
+    }
+  }
+}
