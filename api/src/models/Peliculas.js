@@ -10,5 +10,31 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
+    titulo:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    genero:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    descripcion:{
+      type: DataTypes.STRING,
+    },
+    actores:{
+      type: DataTypes.STRING,
+    },
+    duracion:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    lanzamiento:{
+      type: DataTypes.INTEGER,
+    },
+    imagen:{
+      type: DataTypes.TEXT
+    }
+  },{
+    timestamps: false
   });
 };
