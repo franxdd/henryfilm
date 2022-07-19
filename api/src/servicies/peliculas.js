@@ -33,10 +33,6 @@ const getAllMovies = async (req, res) => {
   }
 };
 
-
-
-
-
 console.log('prueba')
 
 module.exports = {
