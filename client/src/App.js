@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import LandingPage from "./Components/LandingPage/LandingPage.jsx";
 import Nav from "./Components/NavBar/Nav";
 
