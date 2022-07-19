@@ -51,6 +51,9 @@ const getAllMovies = async (req, res) => {
   }
 };
 
+
+
+
 module.exports = {
   getAllMovies,
 };
