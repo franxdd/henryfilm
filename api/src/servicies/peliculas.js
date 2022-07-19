@@ -79,6 +79,9 @@ const getMovieDetail = async (req, res) => {
   }
 };
 
+
+
+
 module.exports = {
   getAllMovies,
   getMovie,
