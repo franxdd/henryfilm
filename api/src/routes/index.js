@@ -1,10 +1,12 @@
 const {Router} = require("express");
-const peliculas = require("./peliculas.js")
+const router = Router();
+const peliculas  = require("./peliculas")
+const series = require('./series')
 
-const routes = Router();
 
-routes.use("/peliculas", peliculas);
+router.use("/peliculas", peliculas);
+router.use("/series", series)
 // routes.use("usuarios", usuarios) //falta hacer e importar
 
 
-module.exports = routes;
+module.exports = router;
