@@ -2,7 +2,7 @@ const { Router } = require("express");
 const route = Router();
 const axios = require("axios");
 const { Op } = require("sequelize");
-const {getAllMovies} = require("../servicies/servicies.js")
+const {getAllMovies} = require("../servicies/peliculas.js")
 require("dotenv").config();
 
 const { API_KEY } = process.env;
