@@ -51,9 +51,35 @@ const getAllMovies = async (req, res) => {
   }
 };
 
+const getMovie = async (req, res) => {
+  try {
+    let { id } = req.query;
 
+    var movie = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=3832b93c32749d817ba7fc39076d3398&language=en-US`
+    );
 
+    res.status(200).json(movie.data);
+  } catch (error) {
+    console.log("hubo un error con la API", error);
+  }
+};
+
+const getMovieDetail = async (req, res) => {
+  const cantidadDeMovies = 5;
+
+  try {
+    var generosData = await axios.get(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=3832b93c32749d817ba7fc39076d3398&language=en-US`
+    );
+
+    res.status(200).json(resultado);
+  } catch (error) {
+    console.log("hubo un error con la API", error);
+  }
+};
 
 module.exports = {
   getAllMovies,
+  getMovie,
 };
