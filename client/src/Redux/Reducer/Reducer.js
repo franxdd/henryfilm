@@ -3,12 +3,6 @@ const initialState = {
   allmovies: [],
   detail: {},
 };
-const rootRouter = (state = initialState, action) => {
-  switch (key) {
-    case value:
-      break;
+const rootRouter = (state = initialState, action) => {};
 
-    default:
-      break;
-  }
-};
+export default rootRouter;
