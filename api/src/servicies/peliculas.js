@@ -51,12 +51,7 @@ const getAllMovies = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
-
-
-=======
 console.log('prueba')
->>>>>>> dev-back
 
 module.exports = {
   getAllMovies,
