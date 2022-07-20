@@ -1,8 +1,10 @@
 const { Router } = require("express");
 const route = Router();
-const { getSeriesInfo } = require("../servicies/Series.js")
+const { infoQuery, seriePorId } = require("../servicies/series.js")
 require("dotenv").config();
 
-route.get("/", getSeriesInfo);
+route.get("/", infoQuery);
+route.get("/detalleDeSerie", infoQuery)
+route.get("/seriePorId/:id", seriePorId)
 
 module.exports = route;
