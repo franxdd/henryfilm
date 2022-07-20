@@ -54,26 +54,35 @@ const getAllMovies = async (req, res) => {
       resultado[img].backDropImagen = urlImg + resultado[img].backdrop_path;
       resultado[img].posterImagen = urlImg + resultado[img].poster_path;
     }
-
-    res.status(200).json(resultado);
+    return resultado;
   } catch (error) {
     console.log("hubo un error con la API", error);
   }
-};
+}; // TERMINADO
 
-const getMovie = async (req, res) => {
+const infoMovie = async (req, res) => {
+  var resultado = [];
+
   try {
-    let { id } = req.query;
+    resultado = await getAllMovies();
 
-    let movie = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`
-    );
+    let { name } = req.query;
 
-    res.status(200).json(movie.data);
+    if (name) {
+      const pelicula = resultado.filter((p) =>
+        p.title.toLowerCase().includes(name.toLowerCase())
+      );
+
+      pelicula.length
+        ? res.status(200).json(pelicula)
+        : res.status(404).send("No hay peliculas");
+    } else {
+      res.status(200).json(resultado);
+    }
   } catch (error) {
     console.log("hubo un error con la API", error);
   }
-};
+}; // TERMINADO
 
 const getMovieDetail = async (req, res) => {
   try {
@@ -105,7 +114,7 @@ const getMovieDetailParams = async (req, res) => {
 
 module.exports = {
   getAllMovies,
-  getMovie,
+  infoMovie,
   getMovieDetail,
   getMovieDetailParams,
 };
