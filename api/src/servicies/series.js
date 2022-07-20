@@ -62,12 +62,10 @@ const seriePorId = async (req, res) => {
    try {
       // console.log('Hola?')
       const { id } = req.params;
-      const allSeries = await getSeriesInfo();
-      // console.log("Esto es para obtener la info de los detalles:", allSeries)
-      if(id){
-         const serie = allSeries.filter(i => i.id == id);
-         serie.length ? res.status(200).json(serie) : res.status(404).send('No hay serie')
-      }
+      const allSeries = await axios(`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`);
+      const serieId = allSeries.data;
+      // console.log("Esto es para obtener la info de los detalles:", serieId)
+      res.status(200).json(serieId)
    } catch (error) {
       console.log(error)
    }
