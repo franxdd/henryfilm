@@ -12,8 +12,6 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         allSeries: action.payload,
-<<<<<<< HEAD
-=======
         backupSeries: action.payload,
       };
 
@@ -21,7 +19,6 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         allMovies: action.payload,
->>>>>>> dev/edi
         backupSeries: action.payload,
       };
 
