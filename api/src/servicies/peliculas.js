@@ -28,15 +28,12 @@ const getAllMovies = async (req, res) => {
 
     for (let i = 0; i < cantidadDeMovies; i++) {
       newGet = await axios.get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${
-          i + 1
-        }`
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${i + 1}`
       );
 
       for (let index = 0; index < newGet.data.results.length; index++) {
         for (let g = 0; g < newGet.data.results[index].genre_ids.length; g++) {
-          newGet.data.results[index].genre_ids[g] =
-            generos[newGet.data.results[index].genre_ids[g] + ""];
+          newGet.data.results[index].genre_ids[g] = generos[newGet.data.results[index].genre_ids[g] + ""];
         }
 
         resultado = [...resultado, newGet.data.results[index]];
@@ -79,10 +76,8 @@ const getMovieDetail = async (req, res) => {
   }
 };
 
-
-
-
 module.exports = {
   getAllMovies,
   getMovie,
+  getMovieDetail,
 };
