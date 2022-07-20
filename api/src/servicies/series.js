@@ -49,12 +49,8 @@ const infoQuery = async (req, res) => {
   let allSeries = await getSeriesInfo();
   // console.log("aaaaaaaaaaaaaaaaaaaaaa", allSeries)
   if (name) {
-    const serie = allSeries.filter((s) =>
-      s.name.toLowerCase().includes(name.toLowerCase())
-    );
-    serie.length
-      ? res.status(200).send(serie)
-      : res.status(404).send("No hay series");
+    const serie = allSeries.filter((s) => s.name.toLowerCase().includes(name.toLowerCase()));
+    serie.length ? res.status(200).send(serie) : res.status(404).send("No hay series");
   } else {
     res.status(200).json(allSeries);
   }
@@ -68,9 +64,7 @@ const seriePorId = async (req, res) => {
     // console.log("Esto es para obtener la info de los detalles:", allSeries)
     if (id) {
       const serie = allSeries.filter((i) => i.id == id);
-      serie.length
-        ? res.status(200).json(serie)
-        : res.status(404).send("No hay serie");
+      serie.length ? res.status(200).json(serie) : res.status(404).send("No hay serie");
     }
   } catch (error) {
     console.log(error);
