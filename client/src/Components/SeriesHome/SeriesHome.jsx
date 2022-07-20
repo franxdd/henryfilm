@@ -10,7 +10,6 @@ function SeriesHome() {
     dispatch(getAllSeries());
   }, [dispatch]);
   let allSeries = useSelector((state) => state.allSeries);
-  console.log(allSeries);
   return (
     <div>
       {allSeries.map((e) => {

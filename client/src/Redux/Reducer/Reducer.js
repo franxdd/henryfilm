@@ -1,4 +1,9 @@
-import { DETAIL, GET_ALL_SERIES, GET_ALL_MOVIES } from "../Actions/Actions.js";
+import {
+  DETAIL,
+  GET_ALL_SERIES,
+  GET_ALL_MOVIES,
+  GET_NAME,
+} from "../Actions/Actions.js";
 const initialState = {
   allMovies: [],
   allSeries: [],
@@ -6,6 +11,7 @@ const initialState = {
   seriesDetail: {},
   backupSeries: [],
   backupMovies: [],
+  all: [],
 };
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
@@ -21,6 +27,11 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         allMovies: action.payload,
         backupMovies: action.payload,
+      };
+    case GET_NAME:
+      return {
+        ...state,
+        allSeries: action.payload,
       };
 
     default:

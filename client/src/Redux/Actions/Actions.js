@@ -1,6 +1,9 @@
+import axios from "axios";
+
 export const DETAIL = "DETAIL";
 export const GET_ALL_SERIES = "GET_ALL_SERIES";
 export const GET_ALL_MOVIES = "GET_ALL_MOVIES";
+export const GET_NAME = "GET_NAME";
 
 export const getAllSeries = () => {
   return (dispatch) => {
@@ -27,3 +30,18 @@ export function getAllMovies() {
       );
   };
 }
+export const getnameSeries = (name) => {
+  return async function (dispatch) {
+    try {
+      let json = await axios.get(
+        "http://localhost:3001/series/detalleDeSerie?name=" + name
+      );
+      return dispatch({
+        type: GET_NAME,
+        payload: json.data,
+      });
+    } catch (error) {
+      alert(error.response.data);
+    }
+  };
+};
