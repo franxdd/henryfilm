@@ -5,6 +5,7 @@ const initialState = {
   movieDetail: {},
   seriesDetail: {},
   backupSeries: [],
+  backupMovies: [],
 };
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
@@ -19,7 +20,7 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         allMovies: action.payload,
-        backupSeries: action.payload,
+        backupMovies: action.payload,
       };
 
     default:
