@@ -1,14 +1,16 @@
-import { React, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllSeries } from "../../Redux/Actions/Actions";
-function CardSeries() {
-  const dispatch = useDispatch();
+import React from "react";
 
-  useEffect(() => {
-    dispatch(getAllSeries());
-  }, []);
-  let { allSeries } = useSelector((state) => state);
-  return <div>CardSeries</div>;
+function CardSeries({ name, poster }) {
+  return (
+    <div>
+      <div>
+        <h1>{name}</h1>
+      </div>
+      <div>
+        <img src={poster} alt="poster" />
+      </div>
+    </div>
+  );
 }
 
 export default CardSeries;
