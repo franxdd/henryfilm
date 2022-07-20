@@ -30,7 +30,6 @@ export function getAllMovies() {
       );
   };
 }
-<<<<<<< HEAD
 export const getnameSeries = (name) => {
   return async function (dispatch) {
     try {
@@ -46,23 +45,3 @@ export const getnameSeries = (name) => {
     }
   };
 };
-=======
-
-
-export function getMovie(id) {
-
-  return function (dispatch) {
-    return fetch(`http://localhost:3001/peliculas/pelicula?${id}`)
-      .then((r) => r.json())
-      .then((rjson) =>
-        dispatch({
-          type: GET_ALL_MOVIES,
-          payload: rjson,
-        })
-      );
-  };
-}
-
-
-
->>>>>>> 6190bda2ea512fa4845e49a54a8ed2b7828a084b
