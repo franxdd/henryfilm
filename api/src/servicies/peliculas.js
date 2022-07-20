@@ -8,8 +8,14 @@ const getAllMovies = async (req, res) => {
   try {
     var resultado = [];
     var generos = {};
+    var urlImg;
     var num;
     var newGet = "";
+
+    var imagenesConfig = await axios.get(
+      "https://api.themoviedb.org/3/configuration?api_key=3832b93c32749d817ba7fc39076d3398"
+    );
+    urlImg = imagenesConfig.data.images.base_url + "original";
 
     var generosData = await axios.get(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=3832b93c32749d817ba7fc39076d3398&language=en-US`
@@ -27,12 +33,15 @@ const getAllMovies = async (req, res) => {
 
     for (let i = 0; i < cantidadDeMovies; i++) {
       newGet = await axios.get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${i + 1}`
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${
+          i + 1
+        }`
       );
 
       for (let index = 0; index < newGet.data.results.length; index++) {
         for (let g = 0; g < newGet.data.results[index].genre_ids.length; g++) {
-          newGet.data.results[index].genre_ids[g] = generos[newGet.data.results[index].genre_ids[g] + ""];
+          newGet.data.results[index].genre_ids[g] =
+            generos[newGet.data.results[index].genre_ids[g] + ""];
         }
 
         resultado = [...resultado, newGet.data.results[index]];
@@ -41,11 +50,17 @@ const getAllMovies = async (req, res) => {
       newGet = "";
     }
 
+    for (let img = 0; img < resultado.length; img++) {
+      resultado[img].backDropImagen = urlImg + resultado[img].backdrop_path;
+      resultado[img].posterImagen = urlImg + resultado[img].poster_path;
+    }
+
     res.status(200).json(resultado);
   } catch (error) {
     console.log("hubo un error con la API", error);
   }
 };
+
 const getMovie = async (req, res) => {
   try {
     let { id } = req.query;
@@ -59,7 +74,22 @@ const getMovie = async (req, res) => {
     console.log("hubo un error con la API", error);
   }
 };
+
 const getMovieDetail = async (req, res) => {
+  try {
+    let { id } = req.query;
+
+    let movie = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`
+    );
+
+    res.status(200).json(movie.data);
+  } catch (error) {
+    console.log("hubo un error con la API", error);
+  }
+}; // TERMINADO
+
+const getMovieDetailParams = async (req, res) => {
   let { idPelicula } = req.params;
 
   try {
@@ -71,10 +101,11 @@ const getMovieDetail = async (req, res) => {
   } catch (error) {
     console.log("hubo un error con la API", error);
   }
-};
+}; //TERMINADO
 
 module.exports = {
   getAllMovies,
   getMovie,
   getMovieDetail,
+  getMovieDetailParams,
 };

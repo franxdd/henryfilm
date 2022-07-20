@@ -27,3 +27,21 @@ export function getAllMovies() {
       );
   };
 }
+
+
+export function getMovie(id) {
+
+  return function (dispatch) {
+    return fetch(`http://localhost:3001/peliculas/pelicula?${id}`)
+      .then((r) => r.json())
+      .then((rjson) =>
+        dispatch({
+          type: GET_ALL_MOVIES,
+          payload: rjson,
+        })
+      );
+  };
+}
+
+
+
