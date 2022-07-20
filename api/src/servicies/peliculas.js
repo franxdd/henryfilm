@@ -1,4 +1,3 @@
-const { Peliculas, Usuarios } = require("../DB/db.js");
 const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
@@ -47,13 +46,12 @@ const getAllMovies = async (req, res) => {
     console.log("hubo un error con la API", error);
   }
 };
-
 const getMovie = async (req, res) => {
   try {
     let { id } = req.query;
 
-    var movie = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=3832b93c32749d817ba7fc39076d3398&language=en-US`
+    let movie = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`
     );
 
     res.status(200).json(movie.data);
@@ -61,16 +59,15 @@ const getMovie = async (req, res) => {
     console.log("hubo un error con la API", error);
   }
 };
-
 const getMovieDetail = async (req, res) => {
-  const cantidadDeMovies = 5;
+  let { idPelicula } = req.params;
 
   try {
-    var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=3832b93c32749d817ba7fc39076d3398&language=en-US`
+    let movie = await axios.get(
+      `https://api.themoviedb.org/3/movie/${idPelicula}?api_key=${API_KEY}&language=en-US`
     );
 
-    res.status(200).json(resultado);
+    res.status(200).json(movie.data);
   } catch (error) {
     console.log("hubo un error con la API", error);
   }
