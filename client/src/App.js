@@ -17,6 +17,7 @@ function App() {
       <Nav />
 
       <Routes>
+        <Route exact path="home" element={<Home />}></Route>
         <Route exact path="series" element={<SeriesHome />}></Route>
         <Route exact path="peliculas" element={<MoviesHome />}></Route>
         <Route exact path="Register" element={<LoginRegister />}></Route>

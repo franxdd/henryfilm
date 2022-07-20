@@ -5,17 +5,17 @@ import { getAllMovies } from "../../Redux/Actions/Actions";
 import { useEffect } from "react";
 
 function MoviesHome() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllMovies());
-  }, [dispatch]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getAllMovies());
+  // }, [dispatch]);
   let allMovies = useSelector((state) => state.allMovies);
-  console.log(allMovies);
+  console.log(allMovies, "soy serie");
 
   return (
     <div>
       {allMovies.map((r) => {
-        return <CardMovies key={r.id} name={r.title} poster={r.poster_path} />;
+        return <CardMovies key={r.id} name={r.title} poster={r.posterImagen} />;
       })}
     </div>
   );

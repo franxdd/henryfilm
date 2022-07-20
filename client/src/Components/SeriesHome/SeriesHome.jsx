@@ -5,15 +5,15 @@ import CardSeries from "../CardSeries/CardSeries";
 import { getAllSeries } from "../../Redux/Actions/Actions";
 
 function SeriesHome() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllSeries());
-  }, [dispatch]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getAllSeries());
+  // }, [dispatch]);
   let allSeries = useSelector((state) => state.allSeries);
   return (
     <div>
       {allSeries.map((e) => {
-        return <CardSeries key={e.id} name={e.name} poster={e.poster_path} />;
+        return <CardSeries key={e.id} name={e.name} poster={e.posterImagen} />;
       })}
     </div>
   );

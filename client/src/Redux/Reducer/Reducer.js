@@ -20,6 +20,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         allSeries: action.payload,
         backupSeries: action.payload,
+        all: [...state.all, action.payload],
       };
 
     case GET_ALL_MOVIES:
@@ -27,6 +28,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         allMovies: action.payload,
         backupMovies: action.payload,
+        all: [...state.all, action.payload],
       };
     case GET_NAME:
       return {
