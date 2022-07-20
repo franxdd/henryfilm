@@ -11,7 +11,7 @@ const rootRouter = (state = initialState, action) => {
     case GET_ALL_SERIES:
       return {
         ...state,
-        allseries: action.payload,
+        allSeries: action.payload,
         backupSeries: action.payload,
       };
 

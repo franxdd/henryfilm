@@ -3,7 +3,7 @@ export const GET_ALL_SERIES = "GET_ALL_SERIES";
 
 export const getAllSeries = () => {
   return (dispatch) => {
-    return fetch("http://localhost:3001/")
+    return fetch("http://localhost:3001/series")
       .then((r) => r.json())
       .then((series) => {
         dispatch({

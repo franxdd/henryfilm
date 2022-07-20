@@ -6,16 +6,16 @@ function LandingPage() {
   return (
     <div className="conteiner">
       <div>
-      <div>
-        <Link to="/home">
-        <button class="learn-more">
-        <span class="circle" aria-hidden="true">
-        <span class="icon arrow"></span>
-        </span>
-        <span class="button-text">Ingresar</span>
-        </button>      
-        </Link>
-      </div>
+        <div>
+          <Link to="/home">
+            <button className="learn-more">
+              <span className="circle" aria-hidden="true">
+                <span className="icon arrow"></span>
+              </span>
+              <span className="button-text">Ingresar</span>
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
