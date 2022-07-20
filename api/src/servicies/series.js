@@ -10,6 +10,7 @@ const getSeriesInfo = async (req, res) => {
    let generosAEnviar = {};
    let idGenero;
    let seriesAEnviar = [];
+   // let series
 
    try {
       let generosApi = await axios(API_GENRES);
@@ -37,43 +38,15 @@ const getSeriesInfo = async (req, res) => {
             // console.log("Quedo?:", series)
             seriesAEnviar = [...seriesAEnviar, series[s]]
          }
+         console.log("Series a enviar:", seriesAEnviar)
       }
-      // console.log("Series a enviar:", seriesAEnviar)
-      return seriesAEnviar
+      res.status(200).send(seriesAEnviar)      
    } catch (error) {
       console.log(error)
    }
 
-}
-
-const infoQuery = async (req, res) => {
-   const { name } = req.query;
-   let allSeries = await getSeriesInfo();
-   // console.log("aaaaaaaaaaaaaaaaaaaaaa", allSeries)
-   if(name){
-      const serie = allSeries.filter(s => s.name.toLowerCase().includes(name.toLowerCase()));
-      serie.length ? res.status(200).send(serie) : res.status(404).send('No hay series');
-   }else{
-      res.status(200).json(allSeries)
-   }
-}
-
-const seriePorId = async (req, res) => {
-   try {
-      // console.log('Hola?')
-      const { id } = req.params;
-      const allSeries = await getSeriesInfo();
-      // console.log("Esto es para obtener la info de los detalles:", allSeries)
-      if(id){
-         const serie = allSeries.filter(i => i.id == id);
-         serie.length ? res.status(200).json(serie) : res.status(404).send('No hay serie')
-      }
-   } catch (error) {
-      console.log(error)
-   }
 }
 
 module.exports = {
-   infoQuery,
-   seriePorId
+   getSeriesInfo
 }
