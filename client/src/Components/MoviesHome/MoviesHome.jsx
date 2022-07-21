@@ -5,12 +5,12 @@ import { getAllMovies } from "../../Redux/Actions/Actions";
 import { useEffect } from "react";
 
 function MoviesHome() {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getAllMovies());
-  // }, [dispatch]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllMovies());
+  }, [dispatch]);
   let allMovies = useSelector((state) => state.allMovies);
-  console.log(allMovies, "soy serie");
+  // console.log(allMovies, "soy serie");
 
   return (
     <div>

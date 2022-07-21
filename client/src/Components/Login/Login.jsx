@@ -11,6 +11,7 @@ function Login() {
       ...input,
       [e.target.name]: e.target.value,
     });
+    console.log(input);
   }
   function handdleSubmit(e) {
     e.preventDefault();
@@ -24,23 +25,17 @@ function Login() {
   return (
     <div>
       <form onSubmit={(e) => handdleSubmit(e)}>
-        <label>Usuario</label>
-        <input
-          autoComplete="off"
-          type={"text"}
-          value={input.usuario}
-          name="usuario"
-          onChange={handdleChange}
-        />
+        <label>Usuario: </label>
+        <input autoComplete="off" type={"text"} value={input.usuario} name="usuario" onChange={handdleChange} />
         <label>Contraseña</label>
         <input
           autoComplete="off"
           type={"password"}
           value={input.contraseña}
-          name="password"
+          name="contraseña"
           onChange={handdleChange}
         />
-        <button type="submit"> Acceder</button>
+        <button type="submit">Iniciar Sesion</button>
       </form>
     </div>
   );
