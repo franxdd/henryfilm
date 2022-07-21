@@ -6,6 +6,7 @@ const initialState = {
   seriesDetail: {},
   backupSeries: [],
   backupMovies: [],
+  all: [],
 };
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
