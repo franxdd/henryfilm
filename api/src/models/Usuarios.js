@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    telefono:{
+    /* telefono:{
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -18,6 +18,10 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     apellido:{
+      type: DataTypes.STRING,
+      allowNull: false
+    }, */
+    username:{
       type: DataTypes.STRING,
       allowNull: false
     },
