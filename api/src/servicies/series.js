@@ -14,6 +14,7 @@ const getSeriesInfo = async (req, res) => {
   try {
     let generosApi = await axios(API_GENRES);
     let generos = generosApi.data.genres;
+    console.log("Hola")
     // console.log("generos", generos)
 
     var imagenesConfig = await axios.get(
