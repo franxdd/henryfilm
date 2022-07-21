@@ -7,7 +7,7 @@ function CardSeries({ name, poster }) {
         <h1>{name}</h1>
       </div>
       <div>
-        <img src={poster} alt="poster" width="100px" height="100px" />
+        <img src={poster} alt="poster" width="200px" height="350px" />
       </div>
     </div>
   );

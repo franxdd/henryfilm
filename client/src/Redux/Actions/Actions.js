@@ -33,15 +33,13 @@ export function getAllMovies() {
 export const getnameSeries = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "http://localhost:3001/series/detalleDeSerie?name=" + name
-      );
+      let json = await axios.get("http://localhost:3001/series/detalleDeSerie?name=" + name);
       return dispatch({
         type: GET_NAME,
         payload: json.data,
       });
     } catch (error) {
-      alert(error.response.data);
+      console.log(error);
     }
   };
 };

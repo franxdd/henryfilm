@@ -5,10 +5,10 @@ import CardSeries from "../CardSeries/CardSeries";
 import { getAllSeries } from "../../Redux/Actions/Actions";
 
 function SeriesHome() {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getAllSeries());
-  // }, [dispatch]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllSeries());
+  }, [dispatch]);
   let allSeries = useSelector((state) => state.allSeries);
   return (
     <div>

@@ -27,27 +27,15 @@ function LoginRegister() {
     <div>
       <form onSubmit={(e) => handdleSubmit(e)}>
         <label>Usuario</label>
-        <input
-          autoComplete="off"
-          type={"text"}
-          value={input.usuario}
-          name="usuario"
-          onChange={handdleChange}
-        />
+        <input autoComplete="off" type={"text"} value={input.usuario} name="usuario" onChange={handdleChange} />
         <label>Email</label>
-        <input
-          autoComplete="off"
-          type={"email"}
-          value={input.email}
-          name="email"
-          onChange={handdleChange}
-        />
+        <input autoComplete="off" type={"email"} value={input.email} name="email" onChange={handdleChange} />
         <label>Contraseña</label>
         <input
           autoComplete="off"
           type={"password"}
           value={input.contraseña}
-          name="password"
+          name="contraseña"
           onChange={handdleChange}
         />
         <button type="submit"> Registrarse</button>
