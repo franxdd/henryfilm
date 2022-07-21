@@ -2,6 +2,7 @@ import {
   DETAIL,
   GET_ALL_SERIES,
   GET_ALL_MOVIES,
+  GET_SERIES_DETAIL,
   GET_NAME,
 } from "../Actions/Actions.js";
 const initialState = {
@@ -20,7 +21,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         allSeries: action.payload,
         backupSeries: action.payload,
-        all: [...state.all, action.payload],
+        all: [...state.all, ...action.payload],
       };
 
     case GET_ALL_MOVIES:
@@ -28,14 +29,23 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         allMovies: action.payload,
         backupMovies: action.payload,
-        all: [...state.all, action.payload],
+        all: [...state.all, ...action.payload],
       };
     case GET_NAME:
       return {
         ...state,
         allSeries: action.payload,
       };
-
+    case GET_NAME:
+      return {
+        ...state,
+        allMovies: action.payload,
+      };
+    case GET_SERIES_DETAIL:
+      return {
+        ...state,
+        seriesDetail: action.payload,
+      };
     default:
       return { ...state };
   }
