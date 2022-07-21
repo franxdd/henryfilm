@@ -1,15 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function CardSeries({ name, poster }) {
+function CardSeries({ id, name, poster }) {
   return (
-    <div>
+    <Link to={`/series/${id}`}>
       <div>
-        <h1>{name}</h1>
+        <div>
+          <h1>{name}</h1>
+        </div>
+        <div>
+          <img src={poster} alt="poster" width="200px" height="350px" />
+        </div>
       </div>
-      <div>
-        <img src={poster} alt="poster" />
-      </div>
-    </div>
+    </Link>
   );
 }
 

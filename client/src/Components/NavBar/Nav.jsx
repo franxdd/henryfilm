@@ -2,8 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../Styles/Img/logo.png";
 import "../../Styles/Components/_NavBar.scss";
-import { BsHouseDoor as HomeIcon, BsCameraVideo as CamaraIcon } from "react-icons/bs";
+import {
+  BsHouseDoor as HomeIcon,
+  BsCameraVideo as CamaraIcon,
+} from "react-icons/bs";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
+import SearchBar from "./SearchBar";
 
 function Nav() {
   return (
@@ -28,6 +32,9 @@ function Nav() {
           </li>
         </Link>
       </ul>
+      <SearchBar />
+      <Link to="/Login">Únete</Link>
+      <Link to="/Register">Registrate</Link>
     </nav>
   );
 }
