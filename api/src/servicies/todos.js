@@ -54,6 +54,18 @@ const todos = async (req, res) => {
       res.status(200).json(datosParseadosMovies);
     } else if (name === "series") {
       res.status(200).json(datosParseadosSeries);
+    } else if (name === "caruselPeliculas") {
+      var auxobj = {
+        results: datosParseadosMovies,
+      };
+
+      res.status(200).json(auxobj);
+    } else if (name === "caruselSeries") {
+      var auxobj = {
+        results: datosParseadosSeries,
+      };
+
+      res.status(200).json(auxobj);
     } else {
       res.status(200).json(datosAEnviar);
     }
