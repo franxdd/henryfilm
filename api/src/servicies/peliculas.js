@@ -1,5 +1,6 @@
 const axios = require("axios");
 require("dotenv").config();
+const { Peliculas } = require("../DB/db.js");
 const { parseador } = require("../utils/utils.js");
 const { API_KEY } = process.env;
 
@@ -66,8 +67,10 @@ const infoMovie = async (req, res) => {
 
   try {
     resultado = await getAllMovies();
-
     let { name } = req.query;
+
+    const peliculasBd = await Peliculas.findAll();
+    resultado = [...peliculasBd, ...resultado];
 
     if (name) {
       const pelicula = resultado.filter((p) =>
@@ -85,6 +88,7 @@ const infoMovie = async (req, res) => {
   }
 }; // TERMINADO
 
+//Detalles
 const getMovieDetail = async (req, res) => {
   try {
     let { id } = req.query;
@@ -137,9 +141,56 @@ const getMovieDetailParams = async (req, res) => {
   }
 }; // TERMINADO
 
+//Posteo
+const postPeliculas = async (req, res) => {
+  let {
+    name,
+    genre_ids,
+    overview,
+    cast,
+    runtime,
+    release_date,
+    posterImagen,
+    backDropImagen,
+    vote_average,
+    popularity,
+  } = req.body;
+
+  try {
+    if (
+      !name ||
+      !genre_ids ||
+      !overview ||
+      !cast ||
+      !runtime ||
+      !release_date ||
+      !posterImagen
+    )
+      return res.status(404).send("Falta completar un dato..");
+
+    const response = await Peliculas.create({
+      name,
+      genre_ids,
+      overview,
+      cast,
+      runtime,
+      release_date,
+      posterImagen,
+      backDropImagen,
+      vote_average,
+      popularity,
+    });
+
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.log("hubo un error con la API", error);
+  }
+}; // TERMINADO
+
 module.exports = {
   getAllMovies,
   infoMovie,
   getMovieDetail,
   getMovieDetailParams,
+  postPeliculas,
 };
