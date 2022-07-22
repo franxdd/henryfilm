@@ -73,4 +73,15 @@ export const getSeriesDetail = (id) => {
   };
 };
 
-export const getMoviesDetail = (id) => {};
+export const getMoviesDetail = (id) => {
+  return (dispatch) => {
+    return fetch(`http://localhost:3001/peliculas/${id}`)
+      .then((r) => r.json())
+      .then((data) => {
+        dispatch({
+          type: GET_MOVIES_DETAIL,
+          payload: data,
+        });
+      });
+  };
+};

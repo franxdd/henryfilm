@@ -1,16 +1,18 @@
 import React from "react";
-function CardMovies({ name, poster }) {
-  // console.log(name);
+import { Link } from "react-router-dom";
 
+function CardMovies({ id, name, poster }) {
   return (
-    <div>
+    <Link to={`/home/peliculas/${id}`}>
       <div>
-        <h1>{name}</h1>
+        <div>
+          <h1>{name}</h1>
+        </div>
+        <div>
+          <img src={poster} alt="poster" width="200px" height="350px" />
+        </div>
       </div>
-      <div>
-        <img src={poster} alt="poster" width="200px" height="350px" />
-      </div>
-    </div>
+    </Link>
   );
 }
 export default CardMovies;

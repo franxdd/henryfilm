@@ -13,14 +13,7 @@ function SeriesHome() {
   return (
     <div>
       {allSeries.map((e) => {
-        return (
-          <CardSeries
-            key={e.id}
-            id={e.id}
-            name={e.name}
-            poster={e.posterImagen}
-          />
-        );
+        return <CardSeries key={e.id} id={e.id} name={e.name} poster={e.posterImagen} />;
       })}
     </div>
   );
