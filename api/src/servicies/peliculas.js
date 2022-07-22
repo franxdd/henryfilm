@@ -103,8 +103,6 @@ const getMovieDetail = async (req, res) => {
 
     var data_parseado = [movie.data];
 
-    console.log(data_parseado);
-
     var datosAEnviar = parseador(data_parseado, urlImg, generosData);
 
     res.status(200).json(datosAEnviar);
