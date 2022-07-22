@@ -1,5 +1,6 @@
 const axios = require("axios");
 require("dotenv").config();
+const { parseador } = require("../utils/utils.js");
 const { API_KEY } = process.env;
 
 const getAllMovies = async (req, res) => {
@@ -91,8 +92,22 @@ const getMovieDetail = async (req, res) => {
     let movie = await axios.get(
       `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`
     );
+    var imagenesConfig = await axios.get(
+      `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
+    );
+    urlImg = imagenesConfig.data.images.base_url + "original";
 
-    res.status(200).json(movie.data);
+    var generosData = await axios.get(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+    );
+
+    var data_parseado = [movie.data];
+
+    console.log(data_parseado);
+
+    var datosAEnviar = parseador(data_parseado, urlImg, generosData);
+
+    res.status(200).json(datosAEnviar);
   } catch (error) {
     console.log("hubo un error con la API", error);
   }
@@ -105,8 +120,20 @@ const getMovieDetailParams = async (req, res) => {
     let movie = await axios.get(
       `https://api.themoviedb.org/3/movie/${idPelicula}?api_key=${API_KEY}&language=en-US`
     );
+    var imagenesConfig = await axios.get(
+      `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
+    );
+    urlImg = imagenesConfig.data.images.base_url + "original";
 
-    res.status(200).json(movie.data);
+    var generosData = await axios.get(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+    );
+
+    var data_parseado = [movie.data];
+
+    var datosAEnviar = parseador(data_parseado, urlImg, generosData);
+
+    res.status(200).json(datosAEnviar);
   } catch (error) {
     console.log("hubo un error con la API", error);
   }
