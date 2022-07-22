@@ -1,17 +1,35 @@
-import { React, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllSeries, getAllMovies } from "../../Redux/Actions/Actions";
+import Carousel from "../Carousel/Carousel";
+import { useContext } from "react";
+import Context from "../../contexto/Context";
+import {
+  titulosSeries,
+  titulosPeliculas,
+  urlBase,
+  apiKey,
+} from "../../auxiliares/Variables";
+import "./_Home.scss";
 
-function Home() {
-  const dispatch = useDispatch();
+const Home = () => {
+  const lenguajeSeleccionado = useContext(Context).lenguaje;
 
-  useEffect(() => {
-    dispatch(getAllSeries());
-    dispatch(getAllMovies());
-  }, []);
-  let { all } = useSelector((state) => state);
-  console.log(all);
-  return <div>home</div>;
-}
+  return (
+    <section className="contenedor-carousels">
+      <Carousel
+        url={`${urlBase}/trending/movie/week?api_key=${apiKey}&language=${lenguajeSeleccionado}`}
+        tipo="movie"
+        categoria="trending"
+        titulo={titulosPeliculas[lenguajeSeleccionado].tendencia}
+      />
+
+      <Carousel
+        url={`${urlBase}/trending/tv/week?api_key=${apiKey}&language=${lenguajeSeleccionado}`}
+        tipo="tv"
+        categoria="trending"
+        titulo={titulosSeries[lenguajeSeleccionado].tendencia}
+      />
+    </section>
+  );
+};
 
 export default Home;
+

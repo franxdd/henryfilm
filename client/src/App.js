@@ -1,30 +1,39 @@
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import "./App.scss";
 import Home from "./Components/Home/Home";
 import LandingPage from "./Components/LandingPage/LandingPage.jsx";
 import Login from "./Components/Login/Login";
 import LoginRegister from "./Components/Login/LoginRegister";
 import MoviesHome from "./Components/MoviesHome/MoviesHome";
-import Nav from "./Components/NavBar/Nav";
 import SeriesHome from "./Components/SeriesHome/SeriesHome";
+import Context from "./contexto/Context";
+import NavBar from "./Components/NavBar/NavBar"
 
-function App() {
+const App = () => {
+  const [lenguaje, setLenguaje] = useState("es")
+  const contexto = {
+    lenguaje: lenguaje,
+    setLenguaje: setLenguaje,
+  }
   return (
-    <div className="App">
+    <Context.Provider value={contexto}>
       <Routes>
         <Route exact path={"/"} element={<LandingPage />}></Route>
       </Routes>
-      <Nav />
-
+      <NavBar/>
       <Routes>
-        <Route exact path="home" element={<Home />}></Route>
-        <Route exact path="series" element={<SeriesHome />}></Route>
-        <Route exact path="peliculas" element={<MoviesHome />}></Route>
-        <Route exact path="Register" element={<LoginRegister />}></Route>
-        <Route exact path="Login" element={<Login />}></Route>
+        <Route path="home" element={<Home />}></Route>
+        <Route path="series*" element={<SeriesHome />}>
+        </Route>
+        <Route path="movies" element={<MoviesHome />}>
+        </Route>
+
+        <Route path="Register" element={<LoginRegister />}></Route>
+        <Route path="Login" element={<Login />}></Route>
       </Routes>
-    </div>
+      </Context.Provider>
   );
-}
+};
 
 export default App;
