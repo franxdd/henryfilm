@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Carousel from "../Carousel/Carousel";
 import { useContext } from "react";
 import Context from "../../contexto/Context";
@@ -30,6 +31,23 @@ const Home = () => {
     </section>
   );
 };
+=======
+import { React, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getAllSeries, getAllMovies } from "../../Redux/Actions/Actions";
+
+function Home() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllSeries());
+    dispatch(getAllMovies());
+  }, []);
+  let { all } = useSelector((state) => state);
+  console.log(all);
+  return <div>home</div>;
+}
+>>>>>>> a630283ffaa9ac0e0fc19e1c8ff70c839993bd35
 
 export default Home;
 
