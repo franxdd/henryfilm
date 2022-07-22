@@ -79,9 +79,7 @@ const seriePorId = async (req, res) => {
   try {
     // console.log('Hola?')
     const { id } = req.params;
-    const allSeries = await axios(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`
-    );
+    const allSeries = await axios(`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`);
     const serieId = allSeries.data;
     // console.log("Esto es para obtener la info de los detalles:", serieId)
     res.status(200).json(serieId);
@@ -90,7 +88,21 @@ const seriePorId = async (req, res) => {
   }
 };
 
+const serieTranslate = async (req,res) => {
+  try {
+    console.log('Hola?')
+    const { id } = req.params;
+    const tvTranslate = await axios(`https://api.themoviedb.org/3/tv/${id}/translations?api_key=${API_KEY}`)
+    const traductor = tvTranslate.data
+    console.log(tvTranslate)
+    res.status(200).json(traductor);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
   infoQuery,
   seriePorId,
+  serieTranslate
 };
