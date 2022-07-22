@@ -4,6 +4,8 @@ import {
   GET_ALL_MOVIES,
   GET_SERIES_DETAIL,
   GET_NAME,
+  GET_MOVIES_DETAIL,
+  WILLUNMOUNT,
 } from "../Actions/Actions.js";
 const initialState = {
   allMovies: [],
@@ -45,6 +47,22 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         seriesDetail: action.payload,
+      };
+    case GET_MOVIES_DETAIL:
+      console.log(state.movieDetail);
+      return {
+        ...state,
+        movieDetail: action.payload,
+      };
+    case WILLUNMOUNT:
+      return {
+        ...state,
+        seriesDetail: {},
+      };
+    case WILLUNMOUNT:
+      return {
+        ...state,
+        movieDetail: {},
       };
     default:
       return { ...state };
