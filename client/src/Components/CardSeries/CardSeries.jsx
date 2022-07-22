@@ -15,5 +15,4 @@ function CardSeries({ id, name, poster }) {
     </Link>
   );
 }
-
 export default CardSeries;

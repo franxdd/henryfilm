@@ -8,7 +8,7 @@ function CardMovies({ name, poster }) {
         <h1>{name}</h1>
       </div>
       <div>
-        <img src={poster} alt="poster" width="200px" height="350px" />
+        <img src={poster} alt="poster" width="300px" height="450px" />
       </div>
     </div>
   );
