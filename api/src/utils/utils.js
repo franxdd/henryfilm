@@ -18,13 +18,20 @@ const parseador = (data, urlImg, generosData) => {
   }
 
   for (let index = 0; index < data.length; index++) {
-    for (let g = 0; g < data[index].genre_ids.length; g++) {
-      data[index].genre_ids[g] = generos[data[index].genre_ids[g] + ""];
+    if (data[index].genre_ids) {
+      for (let g = 0; g < data[index].genre_ids.length; g++) {
+        data[index].genre_ids[g] = generos[data[index].genre_ids[g] + ""];
+      }
+    } else if (data[index].genres) {
+      data[index].genre_ids = [];
+
+      for (let gd = 0; gd < data[index].genres.length; gd++) {
+        data[index].genre_ids.push(data[index].genres[gd].name);
+      }
     }
 
     resultado = [...resultado, data[index]];
   }
-
   for (let img = 0; img < resultado.length; img++) {
     if (resultado[img].hasOwnProperty("title")) {
       resultado[img].name = resultado[img].title;
@@ -36,6 +43,8 @@ const parseador = (data, urlImg, generosData) => {
 
   return resultado;
 };
+
+
 
 module.exports = {
   parseador,

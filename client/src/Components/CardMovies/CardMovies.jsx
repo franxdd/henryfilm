@@ -12,7 +12,14 @@ function CardMovies({ id, name, poster }) {
           <img src={poster} alt="poster" width="200px" height="350px" />
         </div>
       </div>
+<<<<<<< HEAD
     </Link>
+=======
+      <div>
+        <img src={poster} alt="poster" width="300px" height="450px" />
+      </div>
+    </div>
+>>>>>>> b67a49de986b6bd91693857ce6a42a40682a4fe2
   );
 }
 export default CardMovies;

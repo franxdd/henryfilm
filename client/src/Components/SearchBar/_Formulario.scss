@@ -1,0 +1,40 @@
+@import "../../Styles/Utilidades/Variables";
+.formulario{
+form {
+  display: flex;
+  margin-left: -7%;
+  // width: 30%;
+  input,
+  button {
+    background-color:  #191919;
+    border: none;
+    color: $detalles;
+  }
+  input {
+    font-size: 18px;
+    padding: 4px;
+    width: 60%;
+  }
+  input::placeholder {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 600px) {
+  form {
+    width: 95%;
+    button {
+      width: 40px;
+      .icono-nav {
+        width: 20px;
+        margin: 0%;
+      }
+    }
+    input {
+      font-size: 10px;
+    }
+    input::placeholder {
+      font-size: 18px;
+    }
+  }
+};
+}

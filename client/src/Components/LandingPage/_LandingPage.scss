@@ -1,12 +1,12 @@
-@import "../Utilidades/Variables";
-@import "../Utilidades/Mixin";
+@import "../../Styles/Utilidades/Variables";
+@import "../../Styles/Utilidades/Mixin";
 @import url('https://fonts.googleapis.com/css2?family=Jua&family=Mali&display=swap');
 
 .conteiner {
   height: 100vh;
   width: 100%;
   background-size: cover;
-  background-image: url("../Img/Landing2.png"); 
+  background-image: url("./Landing2.png"); 
   overflow: auto;
   display: flex;
   flex-direction: column-reverse;

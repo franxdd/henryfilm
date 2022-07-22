@@ -1,0 +1,74 @@
+@import "../../styles/utilidades/Variables";
+@import "../../styles/utilidades/Mixin";
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.carousel {
+  margin: auto;
+.slider{
+margin-top: 20%;
+}
+  .contenedor-carousel{
+    height: 500px; 
+   }
+  .contenedor-titulo {
+    font-family: 'Poppins', sans-serif;
+    width:1000px;
+    height:100px;
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    h2 {
+      font-size:20px;
+      @include h2-secciones;
+    }
+    .iconoMas {
+      margin-left: 20px;
+      font-size: 1.5rem;
+      color: $detalles;
+    }
+  }
+  .slick-slider {
+    width: 95%;
+    color: $blanco;
+    .slick-prev:before,
+    .slick-next:before {
+      margin-top: 12%;
+      color: $blanco;
+      font-size: 24px;
+    }
+    .slick-dots li button:before {
+      color: $blanco;
+      font-size: 8px;
+       
+    }
+    .slick-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+ 
+}
+@media screen and (max-width: 900px) {
+  .carousel {
+    .slick-slider {
+      width: 90%;
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  .carousel {
+    .contenedor-titulo {
+      h2 {
+        font-size: 1.3rem;
+      }
+      .iconoMas {
+        font-size: 1.3rem;
+        color: $detalles;
+      }
+    }
+    .slick-slider {
+      width: 80%;
+    }
+  }
+}
