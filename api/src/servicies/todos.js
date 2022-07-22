@@ -54,6 +54,22 @@ const todos = async (req, res) => {
       res.status(200).json(datosParseadosMovies);
     } else if (name === "series") {
       res.status(200).json(datosParseadosSeries);
+    } else if (name === "caruselPeliculas") {
+      var auxobj = {
+        results: datosParseadosMovies,
+        total_pages: 125,
+        total_results: 2488,
+      };
+
+      res.status(200).json(auxobj);
+    } else if (name === "caruselSeries") {
+      var auxobj = {
+        results: datosParseadosSeries,
+        total_pages: 125,
+        total_results: 2488,
+      };
+
+      res.status(200).json(auxobj);
     } else {
       res.status(200).json(datosAEnviar);
     }
