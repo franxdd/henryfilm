@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const Carousel = ({ url, tipo, titulo, clase}) => {
   const { resultados} = useFetch(url);
-  console.log (clase)
+
 
   const settings = {
     className: "carousel",
