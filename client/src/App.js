@@ -14,7 +14,6 @@ import { useState } from "react"
 
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es")
-
   const contexto = {
     lenguaje: lenguaje,
     setLenguaje: setLenguaje,

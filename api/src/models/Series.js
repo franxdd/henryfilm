@@ -10,29 +10,39 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    titulo:{
+    name:{
       type: DataTypes.STRING,
       allowNull: false
     },
-    genero:{
+    genre_ids:{
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false
+    },
+    overview:{
+      type: DataTypes.TEXT,
+    },
+    cast:{
+      type: DataTypes.ARRAY(DataTypes.STRING),
+    },
+    episode_run_time:{
       type: DataTypes.STRING,
       allowNull: false
     },
-    descripcion:{
-      type: DataTypes.STRING,
-    },
-    actores:{
-      type: DataTypes.STRING,
-    },
-    duracion:{
+    popularity:{
       type: DataTypes.INTEGER,
-      allowNull: false
     },
-    lanzamiento:{
-      type: DataTypes.INTEGER,
-    },
-    imagen:{
+    backDropImagen:{
       type: DataTypes.TEXT
+    },
+    posterImagen:{
+      type: DataTypes.TEXT
+    },
+    vote_average:{
+      type: DataTypes.INTEGER,
+    },
+    number_of_episodes:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
     }
   },{
     timestamps: false
