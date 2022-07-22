@@ -5,7 +5,7 @@ export const GET_ALL_SERIES = "GET_ALL_SERIES";
 export const GET_ALL_MOVIES = "GET_ALL_MOVIES";
 export const GET_NAME_SERIES = "GET_NAME_SERIES";
 export const GET_NAME_MOVIES = "GET_NAME_MOVIES";
-
+export const WILLUNMOUNT = "WILLUNMOUNT";
 export const GET_NAME = "GET_NAME";
 export const GET_SERIES_DETAIL = "GET_SERIES_DETAIL";
 export const GET_MOVIES_DETAIL = "GET_MOVIES_DETAIL";
@@ -74,5 +74,12 @@ export const getSeriesDetail = (id) => {
           payload: data,
         });
       });
+  };
+};
+export const willunmont = () => {
+  return function (dispatch) {
+    return dispatch({
+      type: WILLUNMOUNT,
+    });
   };
 };
