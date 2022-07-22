@@ -110,7 +110,7 @@ const getMovieDetailParams = async (req, res) => {
   } catch (error) {
     console.log("hubo un error con la API", error);
   }
-}; //TERMINADO
+}; // TERMINADO
 
 module.exports = {
   getAllMovies,

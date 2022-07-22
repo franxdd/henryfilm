@@ -62,7 +62,7 @@ export const getnameMovies = (name) => {
 };
 export const getSeriesDetail = (id) => {
   return (dispatch) => {
-    return fetch(`http://localhost:3001/series/seriePorId/:${id}`)
+    return fetch(`http://localhost:3001/series/seriePorId/${id}`)
       .then((r) => r.json())
       .then((data) => {
         dispatch({
