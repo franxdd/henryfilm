@@ -1,6 +1,6 @@
 const axios = require("axios");
 require("dotenv").config();
-const { parseador } = require("../Parseador/parseador.js");
+const { parseador } = require("../utils/parseador.js");
 const { API_KEY } = process.env;
 
 const todos = async (req, res) => {
@@ -54,6 +54,18 @@ const todos = async (req, res) => {
       res.status(200).json(datosParseadosMovies);
     } else if (name === "series") {
       res.status(200).json(datosParseadosSeries);
+    } else if (name === "caruselPeliculas") {
+      var auxobj = {
+        results: datosParseadosMovies,
+      };
+
+      res.status(200).json(auxobj);
+    } else if (name === "caruselSeries") {
+      var auxobj = {
+        results: datosParseadosSeries,
+      };
+
+      res.status(200).json(auxobj);
     } else {
       res.status(200).json(datosAEnviar);
     }
