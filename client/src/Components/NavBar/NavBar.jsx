@@ -1,13 +1,13 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import logo from "../../Styles/Img/logo.png";
-import "../../Styles/Components/_NavBar.scss";
+import logo from "../../img/logo.png";
+import "./_NavBar.scss";
 import {
   BsHouseDoor as HomeIcon,
   BsCameraVideo as CamaraIcon,
 } from "react-icons/bs";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
-import SearchBar from "./SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 
 function Nav() {
   return (
