@@ -4,6 +4,7 @@ const {
   infoMovie,
   getMovieDetail,
   getMovieDetailParams,
+  postPeliculas
 } = require("../servicies/peliculas.js");
 require("dotenv").config();
 
@@ -11,5 +12,6 @@ require("dotenv").config();
 route.get("/", infoMovie);// /peliculas --> te trae todas las peliculas || /peliculas?name=nombreDePeli --> te trae coincidencias por query
 route.get("/pelicula/detalle", getMovieDetail);// /peliculas/pelicula/detalle  esto es con query
 route.get("/:idPelicula", getMovieDetailParams);// /peliculas/:idPelicula   esto es con params
+route.post("/postPelicula", postPeliculas);
 
 module.exports = route;
