@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { Peliculas, Series, Usuarios } = require("../DB/db");
+const { parseador } = require("../utils/utils.js");
 const { API_KEY } = process.env;
 const API_URL_SERIES = `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
 const API_GENRES = `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=en-US`;
@@ -66,6 +67,7 @@ const infoQuery = async (req, res) => {
     const serie = allSeries.filter((s) =>
       s.name.toLowerCase().includes(name.toLowerCase())
     );
+
     serie.length
       ? res.status(200).send(serie)
       : res.status(404).send("No hay series");
@@ -74,16 +76,60 @@ const infoQuery = async (req, res) => {
   }
 };
 
-const seriePorId = async (req, res) => {
+const seriePorId = async (req,res) =>{
+  try {
+    // console.log('Hola?')
+    const { id } = req.query;
+
+    const allSeries = await axios(
+      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`
+
+    );
+    var imagenesConfig = await axios.get(
+      `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
+    );
+    urlImg = imagenesConfig.data.images.base_url + "original";
+
+    var generosData = await axios.get(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+    );
+
+    var data_parseado = [allSeries.data]
+
+    var datosAEnviar = parseador(data_parseado, urlImg, generosData);
+
+    // console.log("Esto es para obtener la info de los detalles:", serieId)
+    res.status(200).json(datosAEnviar);
+  } catch (error) {
+    console.log(error);
+  }
+
+}
+
+const seriePorIdParms = async (req, res) => {
   try {
     // console.log('Hola?')
     const { id } = req.params;
+
     const allSeries = await axios(
       `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`
+
     );
-    const serieId = allSeries.data;
+    var imagenesConfig = await axios.get(
+      `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
+    );
+    urlImg = imagenesConfig.data.images.base_url + "original";
+
+    var generosData = await axios.get(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+    );
+
+    var data_parseado = [allSeries.data]
+
+    var datosAEnviar = parseador(data_parseado, urlImg, generosData);
+
     // console.log("Esto es para obtener la info de los detalles:", serieId)
-    res.status(200).json(serieId);
+    res.status(200).json(datosAEnviar);
   } catch (error) {
     console.log(error);
   }
@@ -92,4 +138,5 @@ const seriePorId = async (req, res) => {
 module.exports = {
   infoQuery,
   seriePorId,
+  seriePorIdParms,
 };
