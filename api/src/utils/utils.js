@@ -17,8 +17,6 @@ const parseador = (data, urlImg, generosData) => {
     }
   }
 
-
-  
   for (let index = 0; index < data.length; index++) {
     if (data[index].genre_ids) {
       for (let g = 0; g < data[index].genre_ids.length; g++) {
@@ -34,7 +32,6 @@ const parseador = (data, urlImg, generosData) => {
 
     resultado = [...resultado, data[index]];
   }
-
   for (let img = 0; img < resultado.length; img++) {
     if (resultado[img].hasOwnProperty("title")) {
       resultado[img].name = resultado[img].title;
@@ -47,7 +44,7 @@ const parseador = (data, urlImg, generosData) => {
   return resultado;
 };
 
-const filtroGenero = () => {};
+
 
 module.exports = {
   parseador,

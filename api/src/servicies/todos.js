@@ -45,33 +45,25 @@ const todos = async (req, res) => {
       listaGetSeries = "";
     }
 
-
-
-
-
     datosParseadosMovies = parseador(newGetMovies, urlImg, generosData);
     datosParseadosSeries = parseador(newGetSeries, urlImg, generosData);
     var datosAEnviar = [...datosParseadosMovies, ...datosParseadosSeries];
 
+    // //filtros genero
+    // if(generos && name === 'peliculas'){
 
-    //filtros genero 
-    if(generos && name === 'peliculas'){
+    //   datosParseadosMovies = filtroGenero(datosParseadosMovies, generos)
 
-      datosParseadosMovies = filtroGenero(datosParseadosMovies, generos)
+    // }else if(generos && name === 'series'){
 
-    }else if(generos && name === 'series'){
+    //   datosParseadosSeries = filtroGenero(datosParseadosSeries, generos)
+    // }
 
-      datosParseadosSeries = filtroGenero(datosParseadosSeries, generos)
-    }
+    // //ordenamientos ABC y vote_averege
 
-    //ordenamientos ABC y vote_averege
+    // if(ordenamiento){
 
-    if(ordenamiento){
-
-
-    }
-
-
+    // }
 
     if (name === "peliculas") {
       res.status(200).json(datosParseadosMovies);
