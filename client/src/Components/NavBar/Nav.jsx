@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import logo from "../../Styles/Img/logo.png";
 import "../../Styles/Components/_NavBar.scss";
 import {
@@ -11,31 +11,36 @@ import SearchBar from "./SearchBar";
 
 function Nav() {
   return (
-    <nav className="nav-superior">
-      <Link to={"/home"}>
-        <img className="logo" src={logo} alt="Logo" />
-      </Link>
-      <ul className="contenedor-iconos">
-        <Link to="/" className="link-nav">
-          <li>
-            <HomeIcon className="icono-nav" />
-          </li>
+    <main>
+      <nav className="nav-superior">
+        <Link to={"/home"}>
+          <img className="logo" src={logo} alt="Logo" />
         </Link>
-        <Link to="/peliculas" className="link-nav">
-          <li>
-            <CamaraIcon className="icono-nav" />
-          </li>
-        </Link>
-        <Link to="/series" className="link-nav">
-          <li>
-            <MonitorIcon className="icono-nav" />
-          </li>
-        </Link>
-      </ul>
-      <SearchBar />
-      <Link to="/Login">Únete</Link>
-      <Link to="/Register">Registrate</Link>
-    </nav>
+        <ul className="contenedor-iconos">
+          <Link to="/" className="link-nav">
+            <li>
+              <HomeIcon className="icono-nav" />
+            </li>
+          </Link>
+          <Link to="/home/peliculas" className="link-nav">
+            <li>
+              <CamaraIcon className="icono-nav" />
+            </li>
+          </Link>
+          <Link to="/home/series" className="link-nav">
+            <li>
+              <MonitorIcon className="icono-nav" />
+            </li>
+          </Link>
+        </ul>
+        <SearchBar />
+        <Link to="/home/Login">Únete</Link>
+        <Link to="/home/Register">Registrate</Link>
+      </nav>
+      <section>
+        <Outlet />
+      </section>
+    </main>
   );
 }
 
