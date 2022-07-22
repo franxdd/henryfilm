@@ -1,6 +1,6 @@
 const axios = require("axios");
 require("dotenv").config();
-const { parseador } = require("../Parseador/parseador.js");
+const { parseador } = require("../utils/parseador.js");
 const { API_KEY } = process.env;
 
 const todos = async (req, res) => {
