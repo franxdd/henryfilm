@@ -94,6 +94,7 @@ const allInfo = async(req,res) => {
   return allTheData
 }
 
+
 const infoQuery = async(req, res) => {
   const { name } = req.query;
   let allSeries = await allInfo();
