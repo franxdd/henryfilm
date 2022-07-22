@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+import React from "react";
 import Carousel from "../Carousel/Carousel";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Context from "../../contexto/Context";
 import {
   titulosSeries,
@@ -9,45 +9,40 @@ import {
   apiKey,
 } from "../../auxiliares/Variables";
 import "./_Home.scss";
-
-const Home = () => {
-  const lenguajeSeleccionado = useContext(Context).lenguaje;
-
-  return (
-    <section className="contenedor-carousels">
-      <Carousel
-        url={`${urlBase}/trending/movie/week?api_key=${apiKey}&language=${lenguajeSeleccionado}`}
-        tipo="movie"
-        categoria="trending"
-        titulo={titulosPeliculas[lenguajeSeleccionado].tendencia}
-      />
-
-      <Carousel
-        url={`${urlBase}/trending/tv/week?api_key=${apiKey}&language=${lenguajeSeleccionado}`}
-        tipo="tv"
-        categoria="trending"
-        titulo={titulosSeries[lenguajeSeleccionado].tendencia}
-      />
-    </section>
-  );
-};
-=======
-import { React, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useSelector, useDispatch  } from "react-redux";
 import { getAllSeries, getAllMovies } from "../../Redux/Actions/Actions";
 
-function Home() {
+
+const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllSeries());
     dispatch(getAllMovies());
   }, []);
-  let { all } = useSelector((state) => state);
-  console.log(all);
-  return <div>home</div>;
-}
->>>>>>> a630283ffaa9ac0e0fc19e1c8ff70c839993bd35
+
+ let movies = useSelector((state)=> state.allMovies)
+console.log (movies)
+  const lenguajeSeleccionado = useContext(Context).lenguaje;
+
+  return (
+    <section className="contenedor-carousels">
+      <Carousel
+        url={`https://api.themoviedb.org/3/tv/top_rated?api_key=3832b93c32749d817ba7fc39076d3398&language=en-US&page=1`}
+        tipo="movies"
+        categoria="trending"
+        titulo={titulosPeliculas[lenguajeSeleccionado].tendencia}
+        clase="peliculas"
+      />
+      <Carousel
+        url={`${urlBase}/trending/tv/week?api_key=${apiKey}&language=${lenguajeSeleccionado}`}
+        tipo="tv"
+        categoria="trending"
+        titulo={titulosSeries[lenguajeSeleccionado].tendencia}
+        clase="series"
+      />
+    </section>
+  );
+};
 
 export default Home;
 

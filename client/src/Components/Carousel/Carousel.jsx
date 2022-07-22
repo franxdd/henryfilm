@@ -8,8 +8,9 @@ import useFetch from "../../Hooks/useFetch";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-const Carousel = ({ url,tipo, titulo}) => {
+const Carousel = ({ url, tipo, titulo, clase}) => {
   const { resultados} = useFetch(url);
+  console.log (clase)
 
   const settings = {
     className: "carousel",
@@ -26,7 +27,7 @@ const Carousel = ({ url,tipo, titulo}) => {
     <div className="carousel">
       <div className="contenedor-titulo">
         <h2>{titulo}</h2>
-        <Link to={`/movies`}>
+        <Link to={`/home/${clase}`}>
           <AiOutlinePlus className="iconoMas" />
         </Link>
       </div>
