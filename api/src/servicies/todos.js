@@ -1,10 +1,10 @@
 const axios = require("axios");
 require("dotenv").config();
-const { parseador } = require("../utils/parseador.js");
+const { parseador } = require("../utils/utils.js");
 const { API_KEY } = process.env;
 
 const todos = async (req, res) => {
-  let { name } = req.query;
+  let { name, generos, ordenamiento } = req.query;
 
   try {
     const cantidadDeMovies = 5;
@@ -45,10 +45,33 @@ const todos = async (req, res) => {
       listaGetSeries = "";
     }
 
+
+
+
+
     datosParseadosMovies = parseador(newGetMovies, urlImg, generosData);
     datosParseadosSeries = parseador(newGetSeries, urlImg, generosData);
-
     var datosAEnviar = [...datosParseadosMovies, ...datosParseadosSeries];
+
+
+    //filtros genero 
+    if(generos && name === 'peliculas'){
+
+      datosParseadosMovies = filtroGenero(datosParseadosMovies, generos)
+
+    }else if(generos && name === 'series'){
+
+      datosParseadosSeries = filtroGenero(datosParseadosSeries, generos)
+    }
+
+    //ordenamientos ABC y vote_averege
+
+    if(ordenamiento){
+
+
+    }
+
+
 
     if (name === "peliculas") {
       res.status(200).json(datosParseadosMovies);
