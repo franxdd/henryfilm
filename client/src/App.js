@@ -16,19 +16,17 @@ function App() {
       <Routes>
         <Route path={"/"} element={<LandingPage />}></Route>
       </Routes>
-      <Nav />
 
       <Routes>
-        <Route path="home" element={<Home />}></Route>
-        <Route path="series/*" element={<SeriesHome />}>
-          <Route element={<DetailsSeries />}></Route>
+        <Route path="home" element={<Nav />}>
+          <Route index element={<Home />} />
+          <Route path="series" element={<SeriesHome />} />
+          <Route path="series/:id" element={<DetailsSeries />} />
+          <Route path="peliculas" element={<MoviesHome />} />
+          <Route path=":id" element={<DetailMovie />} />
+          <Route path="Register" element={<LoginRegister />} />
+          <Route path="Login" element={<Login />} />
         </Route>
-        <Route path="peliculas" element={<MoviesHome />}>
-          <Route path=":id" element={<DetailMovie />}></Route>
-        </Route>
-
-        <Route path="Register" element={<LoginRegister />}></Route>
-        <Route path="Login" element={<Login />}></Route>
       </Routes>
     </div>
   );

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function CardSeries({ id, name, poster }) {
   return (
-    <Link to={`/series/${id}`}>
+    <Link to={`/home/series/${id}`}>
       <div>
         <div>
           <h1>{name}</h1>
