@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 function Paginacion({ pagina, setPagina, maximo }) {
-  const [input, setInput] = useState();
+  const [input, setInput] = useState(1);
   const previousPage = () => {
     setPagina(pagina - 1);
     setInput(parseInt(input) - 1);
@@ -43,10 +43,7 @@ function Paginacion({ pagina, setPagina, maximo }) {
         type="number"
       />
       <p> de {maximo} </p>
-      <button
-        disabled={pagina === maximo || pagina > maximo}
-        onClick={nextPage}
-      >
+      <button disabled={pagina === maximo || pagina > maximo} onClick={nextPage}>
         Next
       </button>
     </div>
