@@ -12,7 +12,6 @@ import "./_Home.scss";
 import { useSelector, useDispatch  } from "react-redux";
 import { getAllSeries, getAllMovies } from "../../Redux/Actions/Actions";
 
-
 const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -21,13 +20,12 @@ const Home = () => {
   }, []);
 
  let movies = useSelector((state)=> state.allMovies)
-console.log (movies)
   const lenguajeSeleccionado = useContext(Context).lenguaje;
 
   return (
     <section className="contenedor-carousels">
       <Carousel
-        url={`https://api.themoviedb.org/3/tv/top_rated?api_key=3832b93c32749d817ba7fc39076d3398&language=en-US&page=1`}
+        url={`${urlBase}/trending/movie/week?api_key=${apiKey}&language=${lenguajeSeleccionado}`}
         tipo="movies"
         categoria="trending"
         titulo={titulosPeliculas[lenguajeSeleccionado].tendencia}
