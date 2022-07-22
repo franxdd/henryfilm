@@ -1,6 +1,6 @@
 import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMoviesDetail } from "../../Redux/Actions/Actions";
+import { getMoviesDetail, willunmont } from "../../Redux/Actions/Actions";
 import { useParams } from "react-router-dom";
 
 function DetailMovie() {
@@ -9,7 +9,7 @@ function DetailMovie() {
   let movieDetail = useSelector((state) => state.movieDetail);
   useEffect(() => {
     dispatch(getMoviesDetail(id));
-    // console.log(movieDetail[0]);
+    return () => dispatch(willunmont());
   }, []);
   return (
     <div>
