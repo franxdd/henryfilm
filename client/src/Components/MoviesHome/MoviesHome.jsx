@@ -4,6 +4,7 @@ import CardMovies from "../CardMovies/CardMovies";
 import { getAllMovies } from "../../Redux/Actions/Actions";
 import { useEffect, useState } from "react";
 import PaginadoMovies from "./PaginadoMovies";
+import SearchBar from "../SearchBar/SearchBar";
 
 function MoviesHome() {
   const dispatch = useDispatch();
