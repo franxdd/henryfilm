@@ -6,6 +6,7 @@ const { PassThrough } = require("stream");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 const modelUsuario = require("../Models/Usuarios.js")
 const modelPeliculas = require("../Models/Peliculas.js")
+const modelSeries = require("../Models/Series.js")
 
 
 const sequelize = new Sequelize(
@@ -20,13 +21,13 @@ const sequelize = new Sequelize(
   const modelDefiners = [];
   
   // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
-  fs.readdirSync(path.join(__dirname, "../../src/Models"))
+  fs.readdirSync(path.join(__dirname, "../../src/models"))
   .filter(
     (file) =>
     file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
     )
     .forEach((file) => {
-      modelDefiners.push(require(path.join(__dirname, "../../src/Models", file)));
+      modelDefiners.push(require(path.join(__dirname, "../../src/models", file)));
     });
     
     // Injectamos la conexion (sequelize) a todos los modelos
@@ -45,14 +46,18 @@ const sequelize = new Sequelize(
    
     modelUsuario(sequelize)
     modelPeliculas(sequelize)
+    modelSeries(sequelize)
     
     
-    const { Peliculas, Usuarios } = sequelize.models;
+    const { Peliculas, Usuarios, Series } = sequelize.models;
     
     // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 Peliculas.belongsToMany(Usuarios, { through: "Peliculas-Usuario" });
 Usuarios.belongsToMany(Peliculas, { through: "Peliculas-Usuario" });
+
+Series.belongsToMany(Usuarios, { through: "Peliculas-Usuario" });
+Usuarios.belongsToMany(Series, { through: "Peliculas-Usuario" });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

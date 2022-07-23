@@ -1,13 +1,15 @@
 const axios = require("axios");
 require("dotenv").config();
 const { parseador } = require("../utils/utils.js");
+const { Peliculas } = require("../DB/db.js");
+const { Series } = require("../DB/db.js");
 const { API_KEY } = process.env;
 
 const todos = async (req, res) => {
-  let { name, generos, ordenamiento } = req.query;
+  let { name, tipo } = req.query;
 
   try {
-    const cantidadDeMovies = 5;
+    const cantidad = 5;
     var urlImg;
     var datosParseadosMovies = "";
     var datosParseadosSeries = "";
@@ -23,7 +25,7 @@ const todos = async (req, res) => {
       `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
     );
 
-    for (let i = 0; i < cantidadDeMovies; i++) {
+    for (let i = 0; i < cantidad; i++) {
       var listaGetMovies = await axios.get(
         `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${
           i + 1
@@ -34,7 +36,7 @@ const todos = async (req, res) => {
       listaGetMovies = "";
     }
 
-    for (let j = 0; j < cantidadDeMovies; j++) {
+    for (let j = 0; j < cantidad; j++) {
       var listaGetSeries = await axios.get(
         `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=en-US&page=${
           j + 1
@@ -45,30 +47,26 @@ const todos = async (req, res) => {
       listaGetSeries = "";
     }
 
+    const peliculasBd = await Peliculas.findAll();
+    const seriesBd = await Series.findAll();
+
     datosParseadosMovies = parseador(newGetMovies, urlImg, generosData);
     datosParseadosSeries = parseador(newGetSeries, urlImg, generosData);
-    var datosAEnviar = [...datosParseadosMovies, ...datosParseadosSeries];
-
-    // //filtros genero
-    // if(generos && name === 'peliculas'){
-
-    //   datosParseadosMovies = filtroGenero(datosParseadosMovies, generos)
-
-    // }else if(generos && name === 'series'){
-
-    //   datosParseadosSeries = filtroGenero(datosParseadosSeries, generos)
-    // }
-
-    // //ordenamientos ABC y vote_averege
-
-    // if(ordenamiento){
-
-    // }
+    var datosAEnviar = [
+      ...datosParseadosMovies,
+      ...peliculasBd,
+      ...seriesBd,
+      ...datosParseadosSeries,
+    ];
 
     if (name === "peliculas") {
-      res.status(200).json(datosParseadosMovies);
+      var datosPeliculas = [...peliculasBd, ...datosParseadosMovies];
+
+      res.status(200).json(datosPeliculas);
     } else if (name === "series") {
-      res.status(200).json(datosParseadosSeries);
+      var datosSeries = [...seriesBd, ...datosParseadosSeries];
+
+      res.status(200).json(datosSeries);
     } else if (name === "caruselPeliculas") {
       var auxobj = {
         results: datosParseadosMovies,
