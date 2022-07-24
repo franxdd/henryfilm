@@ -9,6 +9,7 @@ import {
   orderVoteAvgDES,
   filtradoGeneroSeries,
   filtradoGeneroSeriesReversa,
+  clear
 } from "../../Redux/Actions/Actions";
 import NavBar from "../NavBar/NavBar.jsx";
 import Paginacion from "./PaginadoSeries";
@@ -40,6 +41,7 @@ function SeriesHome() {
   };
   const HandleClickClear = () => {
     setgenerosCache([]);
+    // dispatch(clear('series'))
     dispatch(filtradoGeneroSeriesReversa([]));
   };
 

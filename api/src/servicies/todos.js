@@ -52,6 +52,7 @@ const todos = async (req, res) => {
 
     datosParseadosMovies = parseador(newGetMovies, urlImg, generosData);
     datosParseadosSeries = parseador(newGetSeries, urlImg, generosData);
+
     var datosAEnviar = [
       ...datosParseadosMovies,
       ...peliculasBd,

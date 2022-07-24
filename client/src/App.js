@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.scss";
 import DetailMovie from "./Components/Details/DetailMovie";
 import DetailsSeries from "./Components/Details/DetailsSeries";
+import FormPeliculas from "./Components/Form/FormPeliculas";
 import Home from "./Components/Home/Home";
 import LandingPage from "./Components/LandingPage/LandingPage.jsx";
 import Login from "./Components/Login/Login";
@@ -27,6 +28,7 @@ const App = () => {
         <Routes>
           <Route path="home" element={<NavBar />}>
             <Route index element={<Home />} />
+            <Route path="formPeliculas" element={<FormPeliculas/>}/>
             <Route path="series" element={<SeriesHome />} />
             <Route path="series/:id" element={<DetailsSeries />} />
             <Route path="peliculas" element={<MoviesHome />} />
