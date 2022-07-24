@@ -1,8 +1,10 @@
 const { Router } = require("express");
 const route = Router();
-const { getGeneros } = require("../servicies/generos.js");
+const { getGenerosMovies, getGenerosSeries } = require("../servicies/generos.js");
 require("dotenv").config();
 
-route.get("/", getGeneros);
+route.get("/series", getGenerosSeries);
+route.get("/peliculas", getGenerosMovies);
+
 
 module.exports = route;
