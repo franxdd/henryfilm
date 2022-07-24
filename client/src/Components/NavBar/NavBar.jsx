@@ -10,7 +10,10 @@ import {
 } from "../../Redux/Actions/Actions";
 import { useSelector, useDispatch } from "react-redux";
 
-import { BsHouseDoor as HomeIcon, BsCameraVideo as CamaraIcon } from "react-icons/bs";
+import {
+  BsHouseDoor as HomeIcon,
+  BsCameraVideo as CamaraIcon,
+} from "react-icons/bs";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import { useContext } from "react";
@@ -28,11 +31,11 @@ const Nav = (array) => {
   return (
     <main>
       <nav className="nav-superior">
-        <Link to={"/home"}>
+        <Link to={"/"}>
           <img className="logo" src={logo} alt="Logo" />
         </Link>
         <ul className="contenedor-iconos">
-          <Link to="/" className="link-nav">
+          <Link to="/home" className="link-nav">
             <li>
               <HomeIcon className="icono-nav" />
             </li>

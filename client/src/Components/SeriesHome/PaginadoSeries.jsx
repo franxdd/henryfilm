@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { FaAngleLeft, FaAngleRight} from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 function Paginacion({ pagina, setPagina, maximo }) {
   const [input, setInput] = useState(1);
@@ -10,6 +10,14 @@ function Paginacion({ pagina, setPagina, maximo }) {
   const nextPage = () => {
     setPagina(pagina + 1);
     setInput(parseInt(input) + 1);
+  };
+  const ultPage = () => {
+    setPagina(Math.ceil(maximo));
+    setInput(parseInt(maximo) + 1);
+  };
+  const priPage = () => {
+    setPagina(Math.ceil(1));
+    setInput(parseInt(0) + 1);
   };
   const onKeyDown = (e) => {
     if (e.keyCode == 13) {
@@ -31,8 +39,11 @@ function Paginacion({ pagina, setPagina, maximo }) {
   };
   return (
     <div className="contenedor-paginado">
+      <button disabled={pagina === 1 || pagina < 1} onClick={priPage}>
+        <FaAngleLeft />
+      </button>
       <button disabled={pagina === 1 || pagina < 1} onClick={previousPage}>
-      <FaAngleLeft />
+        <FaAngleLeft />
       </button>
       <input
         onChange={(e) => onChange(e)}
@@ -42,9 +53,14 @@ function Paginacion({ pagina, setPagina, maximo }) {
         value={input}
         min="1"
       />
-      <p> de {Math.ceil(maximo)} </p>
-      <button disabled={pagina === maximo || pagina > maximo} onClick={nextPage}>
-      <FaAngleRight />
+      <button
+        disabled={pagina === maximo || pagina > maximo}
+        onClick={nextPage}
+      >
+        <FaAngleRight />
+      </button>
+      <button disabled={pagina === maximo || pagina > maximo} onClick={ultPage}>
+        <FaAngleRight />
       </button>
     </div>
   );
