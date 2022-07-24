@@ -33,8 +33,13 @@ const parseador = (data, urlImg, generosData) => {
     resultado = [...resultado, data[index]];
   }
   for (let img = 0; img < resultado.length; img++) {
+    
     if (resultado[img].hasOwnProperty("title")) {
       resultado[img].name = resultado[img].title;
+      resultado[img].tipo = "pelicula"
+    }else{
+      resultado[img].tipo = "serie"
+
     }
 
     resultado[img].backDropImagen = urlImg + resultado[img].backdrop_path;

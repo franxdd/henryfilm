@@ -10,34 +10,34 @@ import MoviesHome from "./Components/MoviesHome/MoviesHome";
 import NavBar from "./Components/NavBar/NavBar";
 import SeriesHome from "./Components/SeriesHome/SeriesHome";
 import Context from "./contexto/Context";
-import { useState } from "react"
+import { useState } from "react";
 
 const App = () => {
-  const [lenguaje, setLenguaje] = useState("es")
+  const [lenguaje, setLenguaje] = useState("es");
   const contexto = {
     lenguaje: lenguaje,
     setLenguaje: setLenguaje,
-  }
+  };
   return (
     <div className="App">
-   <Context.Provider value={contexto}>
-      <Routes>
-        <Route path={"/"} element={<LandingPage />}></Route>
-      </Routes>
-      <Routes>
-        <Route path="home" element={<NavBar />}>
-          <Route index element={<Home />} />
-          <Route path="series" element={<SeriesHome />} />
-          <Route path="series/:id" element={<DetailsSeries />} />
-          <Route path="peliculas" element={<MoviesHome />} />
-          <Route path="peliculas/:id" element={<DetailMovie />} />
-          <Route path="Register" element={<LoginRegister />} />
-          <Route path="Login" element={<Login />} />
-        </Route>
-      </Routes>
+      <Context.Provider value={contexto}>
+        <Routes>
+          <Route path={"/"} element={<LandingPage />}></Route>
+        </Routes>
+        <Routes>
+          <Route path="home" element={<NavBar />}>
+            <Route index element={<Home />} />
+            <Route path="series" element={<SeriesHome />} />
+            <Route path="series/:id" element={<DetailsSeries />} />
+            <Route path="peliculas" element={<MoviesHome />} />
+            <Route path="peliculas/:id" element={<DetailMovie />} />
+            <Route path="Register" element={<LoginRegister />} />
+            <Route path="Login" element={<Login />} />
+          </Route>
+        </Routes>
       </Context.Provider>
     </div>
   );
-}
+};
 
 export default App;

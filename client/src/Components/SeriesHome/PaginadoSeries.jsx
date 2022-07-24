@@ -42,6 +42,7 @@ function Paginacion({ pagina, setPagina, maximo }) {
         value={input}
         min="1"
       />
+      <p> de {Math.ceil(maximo)} </p>
       <button disabled={pagina === maximo || pagina > maximo} onClick={nextPage}>
       <FaAngleRight />
       </button>
