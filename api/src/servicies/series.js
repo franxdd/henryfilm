@@ -2,14 +2,8 @@ const axios = require("axios");
 const { Peliculas, Series, Usuarios } = require("../DB/db");
 const { parseador } = require("../utils/utils.js");
 const { API_KEY } = process.env;
-<<<<<<< HEAD
 const API_URL_SERIES = `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=es-SP&page=1`;
 const API_GENRES = `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=es-SP`;
-=======
-const API_URL_SERIES = `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=en-US&page=`;
-
-const API_GENRES = `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=en-US`;
->>>>>>> developer
 
 const getSeriesInfo = async (req, res) => {
   const paginas = 5;
@@ -124,12 +118,8 @@ const seriePorId = async (req, res) => {
     const { id } = req.query;
 
     const allSeries = await axios(
-<<<<<<< HEAD
       `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=es-SP`
 
-=======
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`
->>>>>>> developer
     );
     var imagenesConfig = await axios.get(
       `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
@@ -137,11 +127,7 @@ const seriePorId = async (req, res) => {
     urlImg = imagenesConfig.data.images.base_url + "original";
 
     var generosData = await axios.get(
-<<<<<<< HEAD
       `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
-=======
-      `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=en-US`
->>>>>>> developer
     );
 
     var data_parseado = [allSeries.data];
@@ -161,12 +147,7 @@ const seriePorIdParms = async (req, res) => {
     const { id } = req.params;
 
     const allSeries = await axios(
-<<<<<<< HEAD
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=es-SP`
-
-=======
       `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`
->>>>>>> developer
     );
     var imagenesConfig = await axios.get(
       `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
