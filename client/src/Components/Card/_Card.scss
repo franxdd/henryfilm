@@ -1,0 +1,36 @@
+@import "../../styles/utilidades/Variables";
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+.tarjeta {
+  width: 250px;
+  height: 500px;
+  margin-top: 20px;
+  border-color:2px solid rgba(249,249,249,0.8);
+  
+  .contenedor-img {
+    width: 245px;
+    height: 380px;
+    overflow: hidden;
+    border-color:2px solid rgba(249,249,249,0.8);
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .contenedor-img:hover{
+    transform:scale(1.1);
+
+  }
+  .titulo-resultado {
+    font-family: 'Poppins', sans-serif;
+    color: $blanco;
+    font-weight: 100;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-decoration: none;
+  }
+  .titulo-resultado:hover {
+    color: white;
+  }
+}
+
+

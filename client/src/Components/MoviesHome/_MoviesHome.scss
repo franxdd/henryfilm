@@ -1,0 +1,38 @@
+@import "../../Styles/utilidades/Variables";
+@import "../../Styles/utilidades/Mixin";
+
+.contenedor-seccion {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+
+    .contenedor-resultados {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      align-content: flex-start;
+      flex-wrap: wrap;
+      gap:20px;
+    
+      .no-disponible {
+        margin-top: 100px;
+        margin-bottom: 150px;
+        color: $blanco;
+        font-size: 2rem;
+      }
+    }
+  }
+  .containerPag{
+    margin-top: 40px;
+  }
+@media screen and (max-width: 600px) {
+  .contenedor-seccion {
+    section {
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}
