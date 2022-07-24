@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./_LandingPage.scss";
 
 function LandingPage() {
+  
   return (
     <div className="conteiner">
       <div>

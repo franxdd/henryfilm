@@ -50,6 +50,7 @@ const getSeriesInfo = async (req, res) => {
     // console.log("Series a enviar:", seriesAEnviar)
 
     for (let img = 0; img < seriesAEnviar.length; img++) {
+      seriesAEnviar[img].tipo = "serie"
       seriesAEnviar[img].backDropImagen =
         urlImg + seriesAEnviar[img].backdrop_path;
       seriesAEnviar[img].posterImagen = urlImg + seriesAEnviar[img].poster_path;
