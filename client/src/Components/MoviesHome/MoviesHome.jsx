@@ -19,6 +19,9 @@ import "./_MoviesHome.scss";
 import SearchBar from "../SearchBar/SearchBar";
 
 function MoviesHome() {
+  // useEffect(() => {
+  //   dispatch(getAllMovies());
+  // }, []);
   const dispatch = useDispatch();
 
   const allMovies = useSelector((state) => state.allMovies);

@@ -10,7 +10,13 @@ import {
 } from "../../auxiliares/Variables";
 import "./_Home.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllSeries, getAllMovies, getGenerosMovies, getGenerosSeries } from "../../Redux/Actions/Actions";
+import {
+  getAllSeries,
+  getAllMovies,
+  getGenerosMovies,
+  getGenerosSeries,
+  getTodo,
+} from "../../Redux/Actions/Actions";
 
 const Home = () => {
   
@@ -18,8 +24,9 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllSeries());
     dispatch(getAllMovies());
-    dispatch(getGenerosSeries())
-    dispatch(getGenerosMovies())
+    dispatch(getGenerosSeries());
+    dispatch(getGenerosMovies());
+    dispatch(getTodo());
   }, []);
 
   //let movies = useSelector((state)=> state.allMovies)

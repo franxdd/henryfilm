@@ -12,6 +12,7 @@ import NavBar from "./Components/NavBar/NavBar";
 import SeriesHome from "./Components/SeriesHome/SeriesHome";
 import Context from "./contexto/Context";
 import { useState } from "react";
+import Search from "./Components/Search/Search";
 
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="peliculas/:id" element={<DetailMovie />} />
             <Route path="Register" element={<LoginRegister />} />
             <Route path="Login" element={<Login />} />
+            <Route path="Search" element={<Search />}></Route>
           </Route>
         </Routes>
       </Context.Provider>
