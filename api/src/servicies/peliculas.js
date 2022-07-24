@@ -20,7 +20,7 @@ const getAllMovies = async (req, res) => {
     urlImg = imagenesConfig.data.images.base_url + "original";
 
     var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=3832b93c32749d817ba7fc39076d3398&language=en-US`
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=3832b93c32749d817ba7fc39076d3398&language=es-SP`
     );
 
     for (let j = 0; j < generosData.data.genres.length; j++) {
@@ -35,7 +35,7 @@ const getAllMovies = async (req, res) => {
 
     for (let i = 0; i < cantidadDeMovies; i++) {
       newGet = await axios.get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=es-SP&page=${
           i + 1
         }`
       );
@@ -94,7 +94,7 @@ const getMovieDetail = async (req, res) => {
     let { id } = req.query;
 
     let movie = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-SP`
     );
     var imagenesConfig = await axios.get(
       `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
@@ -102,7 +102,7 @@ const getMovieDetail = async (req, res) => {
     urlImg = imagenesConfig.data.images.base_url + "original";
 
     var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
     );
 
     var data_parseado = [movie.data];
@@ -120,7 +120,7 @@ const getMovieDetailParams = async (req, res) => {
 
   try {
     let movie = await axios.get(
-      `https://api.themoviedb.org/3/movie/${idPelicula}?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/movie/${idPelicula}?api_key=${API_KEY}&language=es-SP`
     );
     var imagenesConfig = await axios.get(
       `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
@@ -128,7 +128,7 @@ const getMovieDetailParams = async (req, res) => {
     urlImg = imagenesConfig.data.images.base_url + "original";
 
     var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
     );
 
     var data_parseado = [movie.data];
