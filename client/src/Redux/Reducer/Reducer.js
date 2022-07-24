@@ -20,6 +20,8 @@ import {
   GET_NAME_SERIES,
   GET_TODO,
   FILTER_NAME,
+  CLEAR,
+  POST_PELICULAS,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -33,6 +35,7 @@ const initialState = {
   backupMovies: [],
   generosMovies: [],
   generosSeries: [],
+  errores: [],
   all: [],
   todo: [],
   backupTodo: [],
@@ -72,6 +75,12 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         movieDetail: action.payload,
+      };
+
+    case POST_PELICULAS:
+      return {
+        ...state,
+        errores: action.payload,
       };
     case WILLUNMOUNT:
       return {
@@ -262,6 +271,20 @@ const rootRouter = (state = initialState, action) => {
           all: filter,
         };
       }
+    // case CLEAR:
+    //   console.log(action.payload)
+    //   if (action.payload === "series") {
+    //     return {
+    //       ...state,
+    //       allSeries: state.backupSeries.slice(),
+    //     };
+    //   } else if (action.payload === "peliculas") {
+    //     return {
+    //       ...state,
+    //       allMovies: state.backupMovies.slice(),
+    //     };
+    //   }
+
     default:
       return { ...state };
   }

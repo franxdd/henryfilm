@@ -1,7 +1,7 @@
 const axios = require("axios");
 require("dotenv").config();
 const { Peliculas } = require("../DB/db.js");
-const { parseador } = require("../utils/utils.js");
+const { parseador, validate } = require("../utils/utils.js");
 const { API_KEY } = process.env;
 
 const getAllMovies = async (req, res) => {
@@ -126,7 +126,19 @@ const getMovieDetailParams = async (req, res) => {
 //Posteo
 const postPeliculas = async (req, res) => {
   let {
-    name,
+    name, //*
+    genre_ids,
+    overview, //*
+    cast,//*
+    runtime,//*
+    release_date,//*
+    posterImagen,//*
+    backDropImagen,//*
+    vote_average,//*
+    popularity,//*
+  } = req.body;
+
+  var errores = validate(name,
     genre_ids,
     overview,
     cast,
@@ -135,8 +147,9 @@ const postPeliculas = async (req, res) => {
     posterImagen,
     backDropImagen,
     vote_average,
-    popularity,
-  } = req.body;
+    popularity,)
+
+  if(errores) res.json(errores)
 
   try {
     if (

@@ -33,13 +33,11 @@ const parseador = (data, urlImg, generosData) => {
     resultado = [...resultado, data[index]];
   }
   for (let img = 0; img < resultado.length; img++) {
-    
     if (resultado[img].hasOwnProperty("title")) {
       resultado[img].name = resultado[img].title;
-      resultado[img].tipo = "pelicula"
-    }else{
-      resultado[img].tipo = "serie"
-
+      resultado[img].tipo = "pelicula";
+    } else {
+      resultado[img].tipo = "serie";
     }
 
     resultado[img].backDropImagen = urlImg + resultado[img].backdrop_path;
@@ -49,8 +47,85 @@ const parseador = (data, urlImg, generosData) => {
   return resultado;
 };
 
+const validate = (
+  name,
+  genre_ids,
+  overview,
+  cast,
+  runtime,
+  release_date,
+  posterImagen,
+  backDropImagen,
+  vote_average,
+  popularity,
+  number_of_episodes,
+  episode_run_time,
+  tipo
+) => {
+  let error = {};
+  let regRating = new RegExp(/[0-9]{0,2}/);
+  let regCaracteresEspeciales = new RegExp(
+    /([@${}[<>,.:;#%^&()`~+=\*\]\-\.\'\"\\\/\|_])+/g
+  );
+  let regPrimerLetraMayus = new RegExp(/^[A-Z]/);
+  let regRelease = new RegExp(
+    /[0-9]{0,2}-[0-9]{0,2}-[2]{1,1}[0]{1,1}[2-9]{1,1}[0-9]{1,1}$/
+  );
 
+  if (!tipo) {
+    error.tipo = "Se debe elegir un tipo";
+  } else if (!name) {
+    error.name = "Falta ingresar un nombre";
+  } else if (!regPrimerLetraMayus.test(name)) {
+    error.name = "La primer letra debe ser mayuscula";
+  } else if (regCaracteresEspeciales.test(name)) {
+    error.name = "Solo se permiten letras en el nombre";
+  } else if (name.length > 20) {
+    error.name = "Excedido cantidad de caracteres";
+  } else if (!genre_ids.length) {
+    error.genre_ids = "Debe existir un genero";
+  } else if (genre_ids.length === 0) {
+    error.genre_ids = "Se debe ingresar al menos un genero";
+  } else if (!overview) {
+    error.overview = "Falta ingresar una descripcion";
+  } else if (!isNaN(overview)) {
+    error.overview = "Solo se pueden ingresar letras";
+  } else if (!release_date) {
+    error.release_date = "Falta ingresar fecha de lanzamiento";
+  } else if (!regRelease.test(release_date)) {
+    error.released = "La fecha debe tener formato dd-mm-aaaa";
+  } else if (!vote_average) {
+    error.rating = "Falta ingresar un rating";
+  } else if (isNaN(vote_average)) {
+    error.rating = "El rating debe ser un valor numerico";
+  } else if (!regRating.test(vote_average)) {
+    error.rating = "El rating debe ser un valor numerico entre 0 y 5";
+  } else if (!cast) {
+    error.cast = "El rating debe ser un valor numerico entre 0 y 5";
+  } else if (!posterImagen) {
+    error.posterImagen = "El rating debe ser un valor numerico entre 0 y 5";
+  } else if (!backDropImagen) {
+    error.backDropImagen = "El rating debe ser un valor numerico entre 0 y 5";
+  } else if (!popularity) {
+    error.popularity = "El rating debe ser un valor numerico entre 0 y 5";
+  }
+
+  if (tipo && tipo === "serie") {
+    if (!number_of_episodes) {
+      error.number_of_episodes = "Debe existir un numero de episodio";
+    } else if (!episode_run_time) {
+      error.episode_run_time = "Debe existir una duracion de episodio";
+    }
+  } else if (tipo && tipo === "pelicula") {
+    if (!runtime) {
+      error.runtime = "Debe existir una duracion de pelicula";
+    }
+  }
+
+  return error;
+};
 
 module.exports = {
   parseador,
+  validate,
 };

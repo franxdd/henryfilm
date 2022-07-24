@@ -19,8 +19,8 @@ import {
 } from "../../Redux/Actions/Actions";
 
 const Home = () => {
+  
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getAllSeries());
     dispatch(getAllMovies());
