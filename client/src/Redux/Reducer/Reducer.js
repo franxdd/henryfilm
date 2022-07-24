@@ -6,6 +6,7 @@ import {
   GET_NAME,
   GET_MOVIES_DETAIL,
   WILLUNMOUNT,
+  WILLUNMOUNT2,
 } from "../Actions/Actions.js";
 const initialState = {
   allMovies: [],
@@ -59,7 +60,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         seriesDetail: {},
       };
-    case WILLUNMOUNT:
+    case WILLUNMOUNT2:
       return {
         ...state,
         movieDetail: {},
