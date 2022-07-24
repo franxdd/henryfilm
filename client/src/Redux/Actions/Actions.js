@@ -44,7 +44,7 @@ export const getnameSeries = (name) => {
         payload: json.data,
       });
     } catch (error) {
-      console.log(error);
+      alert("No se existe!!");
     }
   };
 };
@@ -53,11 +53,11 @@ export const getnameMovies = (name) => {
     try {
       let json = await axios.get("http://localhost:3001/peliculas?name=" + name);
       return dispatch({
-        type: GET_NAME,
+        type: GET_NAME_MOVIES,
         payload: json.data,
       });
     } catch (error) {
-      console.log(error);
+      alert("No se existe!!");
     }
   };
 };

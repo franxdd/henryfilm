@@ -33,7 +33,5 @@ function SeriesHome() {
     </div>
       </div>
   );
-
 }
-
 export default SeriesHome;

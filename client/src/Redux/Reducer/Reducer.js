@@ -3,10 +3,11 @@ import {
   GET_ALL_SERIES,
   GET_ALL_MOVIES,
   GET_SERIES_DETAIL,
-  GET_NAME,
   GET_MOVIES_DETAIL,
   WILLUNMOUNT,
   WILLUNMOUNT2,
+  GET_NAME_MOVIES,
+  GET_NAME_SERIES,
 } from "../Actions/Actions.js";
 const initialState = {
   allMovies: [],
@@ -34,12 +35,12 @@ const rootRouter = (state = initialState, action) => {
         backupMovies: action.payload,
         all: [...state.all, ...action.payload],
       };
-    case GET_NAME:
+    case GET_NAME_SERIES:
       return {
         ...state,
         allSeries: action.payload,
       };
-    case GET_NAME:
+    case GET_NAME_MOVIES:
       return {
         ...state,
         allMovies: action.payload,
