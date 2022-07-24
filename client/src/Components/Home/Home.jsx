@@ -19,7 +19,6 @@ const Home = () => {
     dispatch(getAllMovies());
   }, []);
 
- let movies = useSelector((state)=> state.allMovies)
   const lenguajeSeleccionado = useContext(Context).lenguaje;
 
   return (
