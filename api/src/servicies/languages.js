@@ -5,6 +5,7 @@ const { API_KEY } = process.env;
 
 const getLanguages = async (req, res) => {
    var idioma = {}
+   var iso;
  
    try {
      console.log("Hola?");
