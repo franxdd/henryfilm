@@ -6,7 +6,7 @@ const { API_KEY } = process.env;
 const getGenerosMovies = async (req, res) => {
     
     var generosData = await axios.get(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
       );
 
     

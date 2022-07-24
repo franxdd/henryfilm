@@ -1,7 +1,7 @@
 const axios = require("axios");
 require("dotenv").config();
 const { Peliculas } = require("../DB/db.js");
-const { parseador } = require("../utils/utils.js");
+const { parseador, validate } = require("../utils/utils.js");
 const { API_KEY } = process.env;
 
 const getAllMovies = async (req, res) => {
@@ -76,7 +76,7 @@ const getMovieDetail = async (req, res) => {
     let { id } = req.query;
 
     let movie = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-SP`
     );
     var imagenesConfig = await axios.get(
       `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
@@ -84,7 +84,7 @@ const getMovieDetail = async (req, res) => {
     urlImg = imagenesConfig.data.images.base_url + "original";
 
     var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
     );
 
     var data_parseado = [movie.data];
@@ -102,7 +102,7 @@ const getMovieDetailParams = async (req, res) => {
 
   try {
     let movie = await axios.get(
-      `https://api.themoviedb.org/3/movie/${idPelicula}?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/movie/${idPelicula}?api_key=${API_KEY}&language=es-SP`
     );
     var imagenesConfig = await axios.get(
       `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
@@ -110,7 +110,7 @@ const getMovieDetailParams = async (req, res) => {
     urlImg = imagenesConfig.data.images.base_url + "original";
 
     var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
     );
 
     var data_parseado = [movie.data];
@@ -126,7 +126,19 @@ const getMovieDetailParams = async (req, res) => {
 //Posteo
 const postPeliculas = async (req, res) => {
   let {
-    name,
+    name, //*
+    genre_ids,
+    overview, //*
+    cast,//*
+    runtime,//*
+    release_date,//*
+    posterImagen,//*
+    backDropImagen,//*
+    vote_average,//*
+    popularity,//*
+  } = req.body;
+
+  var errores = validate(name,
     genre_ids,
     overview,
     cast,
@@ -135,8 +147,9 @@ const postPeliculas = async (req, res) => {
     posterImagen,
     backDropImagen,
     vote_average,
-    popularity,
-  } = req.body;
+    popularity,)
+
+  if(errores) res.json(errores)
 
   try {
     if (

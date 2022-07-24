@@ -43,6 +43,9 @@ module.exports = (sequelize) => {
     number_of_episodes:{
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    tipo: {
+      type: DataTypes.ENUM(["serie", "pelicula"]),
     }
   },{
     timestamps: false

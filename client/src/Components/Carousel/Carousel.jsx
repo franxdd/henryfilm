@@ -8,9 +8,8 @@ import useFetch from "../../Hooks/useFetch";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-const Carousel = ({ url, tipo, titulo, clase}) => {
-  const { resultados} = useFetch(url);
-
+const Carousel = ({ url, tipo, titulo, clase }) => {
+  const { resultados } = useFetch(url);
 
   const settings = {
     className: "carousel",
@@ -22,7 +21,7 @@ const Carousel = ({ url, tipo, titulo, clase}) => {
     autoplay: true,
     autoplaySpeed: 3000,
   };
-
+  console.log(clase);
   return (
     <div className="carousel">
       <div className="contenedor-titulo">
@@ -32,9 +31,14 @@ const Carousel = ({ url, tipo, titulo, clase}) => {
         </Link>
       </div>
       <div className="contenedor-carousel">
-        <Slider className="slider"{...settings}>
+        <Slider className="slider" {...settings}>
           {resultados.map((resultado) => (
-            <Card resultado={resultado} tipo={tipo} key={resultado.id} />
+            <Card
+              resultado={resultado}
+              clase={clase}
+              key={resultado.id}
+              id={resultado.id}
+            />
           ))}
         </Slider>
       </div>
