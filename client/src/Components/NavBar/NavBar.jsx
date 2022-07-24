@@ -2,13 +2,29 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "./_NavBar.scss";
-import { BsHouseDoor as HomeIcon, BsCameraVideo as CamaraIcon } from "react-icons/bs";
+import {
+  orderNameASC,
+  orderNameDES,
+  orderVoteAvgASC,
+  orderVoteAvgDES,
+} from "../../Redux/Actions/Actions";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  BsHouseDoor as HomeIcon,
+  BsCameraVideo as CamaraIcon,
+} from "react-icons/bs";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import { useContext } from "react";
 import Context from "../../contexto/Context";
-const Nav = () => {
+import { useLocation } from "react-router-dom";
+
+const Nav = (props) => {
+  const dispatch = useDispatch();
+  const allMovies = useSelector((state) => state.allMovies);
   const contexto = useContext(Context);
+  let location = useLocation();
 
   const handleChangeLenguaje = (e) => {
     contexto.setLenguaje(e.target.value);
@@ -17,11 +33,11 @@ const Nav = () => {
   return (
     <main>
       <nav className="nav-superior">
-        <Link to={"/home"}>
+        <Link to={"/"}>
           <img className="logo" src={logo} alt="Logo" />
         </Link>
         <ul className="contenedor-iconos">
-          <Link to="/" className="link-nav">
+          <Link to="/home" className="link-nav">
             <li>
               <HomeIcon className="icono-nav" />
             </li>
@@ -36,10 +52,27 @@ const Nav = () => {
               <MonitorIcon className="icono-nav" />
             </li>
           </Link>
+          <Link to="/home/formPeliculas" className="link-nav">
+            <li>
+              FORMULARIO
+            </li>
+          </Link>
         </ul>
-        <div className="search">
-          <SearchBar />
-        </div>
+
+        {location.pathname !== "/home" && (
+          <div className="search">
+            <SearchBar />
+          </div>
+        )}
+
+
+        {/* <Link to="/home/peliculas/nueva" className="link-nav">
+            <div>AGREGAR PELICULA</div>
+        </Link>
+        <Link to="/home/series/nueva" className="link-nav">
+            <div>AGREGAR SERIE</div>
+        </Link> */}
+
         <div className="select">
           <select className="select-lenguaje" onChange={handleChangeLenguaje}>
             <option value="es">Español</option>
