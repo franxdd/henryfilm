@@ -3,7 +3,6 @@ import {
   GET_ALL_SERIES,
   GET_ALL_MOVIES,
   GET_SERIES_DETAIL,
-  GET_NAME,
   GET_MOVIES_DETAIL,
   WILLUNMOUNT,
   ORDER_NAME_ASC,
@@ -16,6 +15,9 @@ import {
   FILTRO_GENERO_SERIES,
   FILTRO_GENERO_MOVIES_REVERSA,
   FILTRO_GENERO_SERIES_REVERSA,
+  WILLUNMOUNT2,
+  GET_NAME_MOVIES,
+  GET_NAME_SERIES,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -48,12 +50,12 @@ const rootRouter = (state = initialState, action) => {
         backupMovies: action.payload,
         all: [...state.all, ...action.payload],
       };
-    case GET_NAME:
+    case GET_NAME_SERIES:
       return {
         ...state,
         allSeries: action.payload,
       };
-    case GET_NAME:
+    case GET_NAME_MOVIES:
       return {
         ...state,
         allMovies: action.payload,
@@ -74,8 +76,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         seriesDetail: {},
       };
-
-    case WILLUNMOUNT:
+    case WILLUNMOUNT2:
       return {
         ...state,
         movieDetail: {},

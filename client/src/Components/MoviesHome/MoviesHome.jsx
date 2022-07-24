@@ -14,6 +14,8 @@ import {
   filtradoGeneroMoviesReversa,
 } from "../../Redux/Actions/Actions.js";
 import PaginadoMovies from "./PaginadoMovies";
+import "./_MoviesHome.scss";
+import SearchBar from "../SearchBar/SearchBar";
 
 function MoviesHome() {
   const dispatch = useDispatch();
@@ -23,7 +25,7 @@ function MoviesHome() {
 
   const [generosCache, setgenerosCache] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const pelisPerPage = 10;
+  const pelisPerPage = 12;
   const indexOfLastMovies = currentPage * pelisPerPage; //10
   const indexOfFirstMovies = indexOfLastMovies - pelisPerPage; //0
   const currentMovies = allMovies?.slice(indexOfFirstMovies, indexOfLastMovies);
@@ -108,22 +110,38 @@ function MoviesHome() {
         );
       })}
 
-      <PaginadoMovies
-        pelisPerPage={pelisPerPage}
-        todasLasMovies={allMovies?.length}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-      />
-      {currentMovies?.map((r) => {
-        return (
-          <CardMovies
-            key={r.id}
-            id={r.id}
-            name={r.title}
-            poster={r.posterImagen}
-          />
-        );
-      })}
+      <div className="contenedor-seccion">
+        <div className="contenedor-resultados">
+          {currentMovies?.map((r) => {
+            return (
+              <CardMovies
+                key={r.id}
+                id={r.id}
+                name={r.title}
+                poster={r.posterImagen}
+              />
+            );
+          })}
+        </div>
+      </div>
+      <div className="containerPag">
+        <PaginadoMovies
+          pelisPerPage={pelisPerPage}
+          todasLasMovies={allMovies?.length}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
+        {/* {currentMovies?.map((r) => {
+          return (
+            <CardMovies
+              key={r.id}
+              id={r.id}
+              name={r.title}
+              poster={r.posterImagen}
+            />
+          );
+        })} */}
+      </div>
     </div>
   );
 }

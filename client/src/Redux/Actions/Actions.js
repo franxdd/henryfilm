@@ -6,6 +6,7 @@ export const GET_ALL_MOVIES = "GET_ALL_MOVIES";
 export const GET_NAME_SERIES = "GET_NAME_SERIES";
 export const GET_NAME_MOVIES = "GET_NAME_MOVIES";
 export const WILLUNMOUNT = "WILLUNMOUNT";
+export const WILLUNMOUNT2 = "WILLUNMOUNT2";
 export const GET_NAME = "GET_NAME";
 export const GET_SERIES_DETAIL = "GET_SERIES_DETAIL";
 export const GET_MOVIES_DETAIL = "GET_MOVIES_DETAIL";
@@ -58,7 +59,7 @@ export const getnameSeries = (name) => {
         payload: json.data,
       });
     } catch (error) {
-      console.log(error);
+      alert("No se existe!!");
     }
   };
 };
@@ -69,11 +70,11 @@ export const getnameMovies = (name) => {
         "http://localhost:3001/peliculas?name=" + name
       );
       return dispatch({
-        type: GET_NAME,
+        type: GET_NAME_MOVIES,
         payload: json.data,
       });
     } catch (error) {
-      console.log(error);
+      alert("No se existe!!");
     }
   };
 };
@@ -224,3 +225,10 @@ export const filtradoGeneroSeriesReversa = (arrGenerosSeries) => {
 //     payload: new_array,
 //   };
 // };
+export const willunmont2 = () => {
+  return function (dispatch) {
+    return dispatch({
+      type: WILLUNMOUNT2,
+    });
+  };
+};
