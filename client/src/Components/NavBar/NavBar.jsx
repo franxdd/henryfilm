@@ -2,12 +2,23 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "./_NavBar.scss";
+import {
+  orderNameASC,
+  orderNameDES,
+  orderVoteAvgASC,
+  orderVoteAvgDES,
+} from "../../Redux/Actions/Actions";
+import { useSelector, useDispatch } from "react-redux";
+
 import { BsHouseDoor as HomeIcon, BsCameraVideo as CamaraIcon } from "react-icons/bs";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import { useContext } from "react";
 import Context from "../../contexto/Context";
-const Nav = () => {
+
+const Nav = (array) => {
+  const dispatch = useDispatch();
+  const allMovies = useSelector((state) => state.allMovies);
   const contexto = useContext(Context);
 
   const handleChangeLenguaje = (e) => {

@@ -5,58 +5,40 @@ const { parseador } = require("../utils/utils.js");
 const { API_KEY } = process.env;
 
 const getAllMovies = async (req, res) => {
-  const cantidadDeMovies = 5;
-
   try {
-    var resultado = [];
-    var generos = {};
+    const cantidad = 5;
     var urlImg;
-    var num;
-    var newGet = "";
+    var datosParseadosMovies = "";
+    var newGetMovies = "";
 
     var imagenesConfig = await axios.get(
-      "https://api.themoviedb.org/3/configuration?api_key=3832b93c32749d817ba7fc39076d3398"
+      `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
     );
     urlImg = imagenesConfig.data.images.base_url + "original";
 
     var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=3832b93c32749d817ba7fc39076d3398&language=en-US`
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
     );
 
-    for (let j = 0; j < generosData.data.genres.length; j++) {
-      for (const prop in generosData.data.genres[j]) {
-        if (typeof generosData.data.genres[j][prop] === "number") {
-          num = generosData.data.genres[j][prop];
-        } else if (typeof generosData.data.genres[j][prop] === "string") {
-          generos[num] = generosData.data.genres[j][prop];
-        }
-      }
-    }
-
-    for (let i = 0; i < cantidadDeMovies; i++) {
-      newGet = await axios.get(
+    for (let i = 0; i < cantidad; i++) {
+      var listaGetMovies = await axios.get(
         `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${
           i + 1
         }`
       );
 
-      for (let index = 0; index < newGet.data.results.length; index++) {
-        for (let g = 0; g < newGet.data.results[index].genre_ids.length; g++) {
-          newGet.data.results[index].genre_ids[g] =
-            generos[newGet.data.results[index].genre_ids[g] + ""];
-        }
-
-        resultado = [...resultado, newGet.data.results[index]];
-      }
-
-      newGet = "";
+      newGetMovies = [...newGetMovies, ...listaGetMovies.data.results];
+      listaGetMovies = "";
     }
 
-    for (let img = 0; img < resultado.length; img++) {
-      resultado[img].backDropImagen = urlImg + resultado[img].backdrop_path;
-      resultado[img].posterImagen = urlImg + resultado[img].poster_path;
-    }
-    return resultado;
+    const peliculasBd = await Peliculas.findAll();
+
+    datosParseadosMovies = parseador(newGetMovies, urlImg, generosData);
+
+    var datosAEnviar = [...datosParseadosMovies, ...peliculasBd];
+
+    return datosAEnviar;
+
   } catch (error) {
     console.log("hubo un error con la API", error);
   }
