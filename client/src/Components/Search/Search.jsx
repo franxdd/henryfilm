@@ -10,7 +10,7 @@ function Search() {
   }, [dispatch]);
   const allF = useSelector((state) => state.todo);
   const all = useSelector((state) => state.all);
-  console.log(all);
+  console.log(allF);
   return (
     <div>
       {all?.map((r) => {
@@ -20,6 +20,7 @@ function Search() {
             id={r.id}
             name={r.name}
             poster={r.posterImagen}
+            tipo={r.tipo}
           />
         );
       })}

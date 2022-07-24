@@ -2,9 +2,9 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-function CardSearch({ id, name, poster }) {
+function CardSearch({ id, name, poster, tipo }) {
   return (
-    <Link to={`/home/peliculas/${id}`}>
+    <Link to={`/home/${tipo}s/${id}`}>
       <div>
         <div>
           <h1>{name}</h1>

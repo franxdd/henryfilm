@@ -1,4 +1,6 @@
 import { React, useState } from "react";
+import { FaAngleLeft, FaAngleRight} from "react-icons/fa";
+
 function Paginacion({ pagina, setPagina, maximo }) {
   const [input, setInput] = useState(1);
   const previousPage = () => {
@@ -24,15 +26,13 @@ function Paginacion({ pagina, setPagina, maximo }) {
       }
     }
   };
-
   const onChange = (e) => {
     setInput(e.target.value);
   };
-
   return (
-    <div>
+    <div className="contenedor-paginado">
       <button disabled={pagina === 1 || pagina < 1} onClick={previousPage}>
-        Previus
+      <FaAngleLeft />
       </button>
       <input
         onChange={(e) => onChange(e)}
@@ -40,11 +40,11 @@ function Paginacion({ pagina, setPagina, maximo }) {
         name="page"
         autoComplete="off"
         value={input}
-        type="number"
+        min="1"
       />
-      <p> de {maximo} </p>
+      <p> de {Math.ceil(maximo)} </p>
       <button disabled={pagina === maximo || pagina > maximo} onClick={nextPage}>
-        Next
+      <FaAngleRight />
       </button>
     </div>
   );

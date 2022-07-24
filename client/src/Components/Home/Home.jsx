@@ -13,18 +13,23 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getAllSeries,
   getAllMovies,
+  getGenerosMovies,
+  getGenerosSeries,
   getTodo,
 } from "../../Redux/Actions/Actions";
 
 const Home = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllSeries());
     dispatch(getAllMovies());
+    dispatch(getGenerosSeries());
+    dispatch(getGenerosMovies());
     dispatch(getTodo());
   }, []);
 
-  let movies = useSelector((state) => state.allMovies);
+  //let movies = useSelector((state)=> state.allMovies)
   const lenguajeSeleccionado = useContext(Context).lenguaje;
 
   return (

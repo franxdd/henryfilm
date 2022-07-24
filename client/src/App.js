@@ -34,7 +34,7 @@ const App = () => {
             <Route path="peliculas/:id" element={<DetailMovie />} />
             <Route path="Register" element={<LoginRegister />} />
             <Route path="Login" element={<Login />} />
-            <Route path="Search" element={<Search />} />
+            <Route path="Search" element={<Search />}></Route>
           </Route>
         </Routes>
       </Context.Provider>
