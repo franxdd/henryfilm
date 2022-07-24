@@ -1,14 +1,10 @@
 import React from "react";
 import { useState } from "react";
-
+import { FaAngleLeft, FaAngleRight} from "react-icons/fa";
+import "./_Paginado.scss"
 export default function PaginadoMovies({ pelisPerPage, todasLasMovies, setCurrentPage, currentPage }) {
   const maximo = todasLasMovies / pelisPerPage;
-  // const previousPage = () => {
-  //   setCurrentPage(currentPage - 1);
-  // };
-  // const nextPage = () => {
-  //   setCurrentPage(currentPage + 1);
-  // };
+
   const onKeyDown = (e) => {
     if (e.keyCode == 13) {
       setCurrentPage(parseInt(e.target.value));
@@ -38,10 +34,9 @@ export default function PaginadoMovies({ pelisPerPage, todasLasMovies, setCurren
     setInput(e.target.value);
   };
   return (
-    <div>
-      <div>
+      <div className="contenedor-paginado">
         <button disabled={currentPage === 1 || currentPage < 1} onClick={previousPage}>
-          Previus
+        <FaAngleLeft />
         </button>
         <input
           onChange={(e) => onChange(e)}
@@ -49,12 +44,11 @@ export default function PaginadoMovies({ pelisPerPage, todasLasMovies, setCurren
           name="page"
           autoComplete="off"
           value={input}
-          type="number"
+          min="1"
         />
         <button disabled={currentPage === maximo || currentPage > maximo} onClick={nextPage}>
-          Next
+        <FaAngleRight />
         </button>
-      </div>
-    </div>
+      </div> 
   );
 }

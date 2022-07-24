@@ -2,10 +2,7 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "./_NavBar.scss";
-import {
-  BsHouseDoor as HomeIcon,
-  BsCameraVideo as CamaraIcon,
-} from "react-icons/bs";
+import { BsHouseDoor as HomeIcon, BsCameraVideo as CamaraIcon } from "react-icons/bs";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import { useContext } from "react";
@@ -44,25 +41,24 @@ const Nav = () => {
           <SearchBar />
         </div>
         <div className="select">
-        <select className="select-lenguaje" onChange={handleChangeLenguaje}>
-        <option value="es">Español</option>
-        <option value="in">Ingles</option>
-        <option value="fr">Français</option>
-        <option value="pt">Português</option>
-        </select>
+          <select className="select-lenguaje" onChange={handleChangeLenguaje}>
+            <option value="es">Español</option>
+            <option value="in">Ingles</option>
+            <option value="fr">Français</option>
+            <option value="pt">Português</option>
+          </select>
         </div>
-      <div className="login">
-      <Link to="/home/Login">
-        <button>
-        <b>Iniciar Sesión</b>
-        </button>
-        </Link>
-        <Link to="/home/Register">
-        <button>
-        <b>Registrate</b>
-        </button>
-        </Link>
-
+        <div className="login">
+          <Link to="/home/Login">
+            <button>
+              <b>Iniciar Sesión</b>
+            </button>
+          </Link>
+          <Link to="/home/Register">
+            <button>
+              <b>Registrate</b>
+            </button>
+          </Link>
         </div>
       </nav>
       <section>
@@ -70,6 +66,6 @@ const Nav = () => {
       </section>
     </main>
   );
-}
+};
 
 export default Nav;

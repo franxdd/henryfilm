@@ -1,4 +1,8 @@
 import img from "../img/imagen-no-encontrada.jpg";
+import {
+  AiOutlineStar as EstrellaVacia,
+  AiFillStar as EstrellaCompleta,
+} from "react-icons/ai";
 
 // CAPITALIZAR
 export const capitalizar = (str) => {
@@ -32,6 +36,30 @@ export const mostrarImagen = (resultado, tamaño) => {
     return `https://image.tmdb.org/t/p/${tamaño}${resultado.still_path}`;
   } else {
     return img;
+  }
+};
+// ARMADO DE RATING CON ESTRELLAS
+export const estrellas = (valoracion) => {
+  const estrellas = [];
+
+  for (let i = 0; i < valoracion; i++) {
+    estrellas.push(
+      <div className="icono" key={i}>
+        <EstrellaCompleta />
+      </div>
+    );
+  }
+  for (let i = 0; i < 10 - valoracion; i++) {
+    estrellas.push(
+      <div className="icono" key={i + 10}>
+        <EstrellaVacia />
+      </div>
+    );
+  }
+  if (valoracion === 0) {
+    return [];
+  } else {
+    return estrellas;
   }
 };
 
