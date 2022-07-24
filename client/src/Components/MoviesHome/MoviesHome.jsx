@@ -7,6 +7,7 @@ import {
   orderNameDES,
   orderVoteAvgASC,
   orderVoteAvgDES,
+  clear,
 } from "../../Redux/Actions/Actions";
 import { useEffect, useState } from "react";
 import {
@@ -42,6 +43,7 @@ function MoviesHome() {
   };
   const HandleClickClear = () => {
     setgenerosCache([]);
+    // dispatch(clear('peliculas'))
     dispatch(filtradoGeneroMoviesReversa([]));
   };
   const HandleClickASC = (e) => {

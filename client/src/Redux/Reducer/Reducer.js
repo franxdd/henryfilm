@@ -18,6 +18,8 @@ import {
   WILLUNMOUNT2,
   GET_NAME_MOVIES,
   GET_NAME_SERIES,
+  CLEAR,
+  POST_PELICULAS
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -31,6 +33,7 @@ const initialState = {
   backupMovies: [],
   generosMovies: [],
   generosSeries: [],
+  errores : [],
   all: [],
 };
 const rootRouter = (state = initialState, action) => {
@@ -39,7 +42,7 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         allSeries: action.payload,
-        backupSeries: action.payload,
+        backupSeries: action.payload.slice(),
         all: [...state.all, ...action.payload],
       };
 
@@ -47,7 +50,7 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         allMovies: action.payload,
-        backupMovies: action.payload,
+        backupMovies: action.payload.slice(),
         all: [...state.all, ...action.payload],
       };
     case GET_NAME_SERIES:
@@ -71,6 +74,12 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         movieDetail: action.payload,
       };
+
+    case POST_PELICULAS:
+      return{
+        ...state,
+        errores : action.payload
+      }
     case WILLUNMOUNT:
       return {
         ...state,
@@ -238,6 +247,19 @@ const rootRouter = (state = initialState, action) => {
           allSeries: arrSeries,
         };
       }
+    // case CLEAR:
+    //   console.log(action.payload)
+    //   if (action.payload === "series") {
+    //     return {
+    //       ...state,
+    //       allSeries: state.backupSeries.slice(),
+    //     };
+    //   } else if (action.payload === "peliculas") {
+    //     return {
+    //       ...state,
+    //       allMovies: state.backupMovies.slice(),
+    //     };
+    //   }
 
     default:
       return { ...state };

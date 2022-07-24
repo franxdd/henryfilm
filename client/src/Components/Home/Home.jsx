@@ -13,8 +13,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllSeries, getAllMovies, getGenerosMovies, getGenerosSeries } from "../../Redux/Actions/Actions";
 
 const Home = () => {
+  
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getAllSeries());
     dispatch(getAllMovies());
