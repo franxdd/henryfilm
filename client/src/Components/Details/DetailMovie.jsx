@@ -11,12 +11,15 @@ function DetailMovie() {
     dispatch(getMoviesDetail(id));
     return () => dispatch(willunmont2());
   }, []);
+  console.log(movieDetail);
   return (
     <div>
       <div>
-        <h1>{movieDetail[0]?.name}</h1>
+        <h1>
+          {movieDetail.length && movieDetail.map((e) => <div>{e.name}</div>)}
+        </h1>
       </div>
-      <div>
+      {/* <div>
         <img src={movieDetail[0]?.backDropImagen} />
       </div>
       <div>Votacion Promedio: {movieDetail[0]?.vote_average}</div>
@@ -35,7 +38,7 @@ function DetailMovie() {
         {movieDetail[0]?.production_companies.map((e) => {
           return <div>{e.name}</div>;
         })}
-      </div>
+      </div> */}
     </div>
   );
 }

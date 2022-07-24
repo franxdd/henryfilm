@@ -9,17 +9,22 @@ import {
   apiKey,
 } from "../../auxiliares/Variables";
 import "./_Home.scss";
-import { useSelector, useDispatch  } from "react-redux";
-import { getAllSeries, getAllMovies } from "../../Redux/Actions/Actions";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getAllSeries,
+  getAllMovies,
+  getTodo,
+} from "../../Redux/Actions/Actions";
 
 const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllSeries());
     dispatch(getAllMovies());
+    dispatch(getTodo());
   }, []);
 
- let movies = useSelector((state)=> state.allMovies)
+  let movies = useSelector((state) => state.allMovies);
   const lenguajeSeleccionado = useContext(Context).lenguaje;
 
   return (
@@ -43,4 +48,3 @@ const Home = () => {
 };
 
 export default Home;
-

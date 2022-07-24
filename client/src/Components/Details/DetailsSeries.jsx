@@ -10,51 +10,67 @@ function DetailsSeries() {
     dispatch(getSeriesDetail(id));
     return () => dispatch(willunmont());
   }, []);
-  console.log(seriesDetail[0]);
+  console.log(seriesDetail);
 
   return (
     <div>
       <div>
-        <h1>{seriesDetail[0]?.name}</h1>
+        <h1>
+          {seriesDetail.length && seriesDetail.map((e) => <div>{e.name}</div>)}
+        </h1>
       </div>
       <div>
-        <img src={seriesDetail[0]?.backDropImagen} alt="backimg" />
+        <img
+          src={seriesDetail.length && seriesDetail.map((e) => e.backDropImagen)}
+        />
       </div>
       <div>
-        <h3>Mejor Votacion: {seriesDetail[0]?.vote_average}</h3>
+        <h3>
+          Mejor Votacion:{" "}
+          {seriesDetail.length && seriesDetail.map((e) => e.vote_average)}
+        </h3>
       </div>
-      <div>{seriesDetail[0]?.overview}</div>
+      <div>{seriesDetail.length && seriesDetail.map((e) => e.overview)}</div>
       <div>
-        {seriesDetail[0]?.episode_run_time?.map((e) => {
-          return (
-            <div>
-              <h3>Duracion: {e}</h3>
-            </div>
-          );
-        })}
+        {seriesDetail.length &&
+          seriesDetail.episode_run_time?.map((e) => {
+            return (
+              <div>
+                <h3>Duracion: {e}</h3>
+              </div>
+            );
+          })}
       </div>
       <div>
         <h3>
           Generos:{" "}
-          {seriesDetail[0]?.genres?.map((e) => {
-            return <div>{e.name}</div>;
-          })}
+          {seriesDetail.length &&
+            seriesDetail.genres?.map((e) => {
+              return <div>{e.name}</div>;
+            })}
         </h3>
       </div>
 
       <div>
         <h3>
           Productoras:{" "}
-          {seriesDetail[0]?.production_companies?.map((e) => {
-            return <div>{e.name}</div>;
-          })}
+          {seriesDetail.length &&
+            seriesDetail.production_companies?.map((e) => {
+              return <div>{e.name}</div>;
+            })}
         </h3>
       </div>
       <div>
-        <h3>Numero de episodios: {seriesDetail[0]?.number_of_episodes}</h3>
+        <h3>
+          Numero de episodios:{" "}
+          {seriesDetail.length && seriesDetail.map((e) => e.number_of_episodes)}
+        </h3>
       </div>
       <div>
-        <h3>Numero de Temporadas: {seriesDetail[0]?.number_of_seasons}</h3>
+        <h3>
+          Numero de Temporadas:{" "}
+          {seriesDetail.length && seriesDetail.map((e) => e.number_of_seasons)}
+        </h3>
       </div>
     </div>
   );

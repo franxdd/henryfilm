@@ -8,6 +8,8 @@ import {
   WILLUNMOUNT2,
   GET_NAME_MOVIES,
   GET_NAME_SERIES,
+  GET_TODO,
+  FILTER_NAME,
 } from "../Actions/Actions.js";
 const initialState = {
   allMovies: [],
@@ -17,6 +19,8 @@ const initialState = {
   backupSeries: [],
   backupMovies: [],
   all: [],
+  todo: [],
+  backupTodo: [],
 };
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
@@ -25,7 +29,6 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         allSeries: action.payload,
         backupSeries: action.payload,
-        all: [...state.all, ...action.payload],
       };
 
     case GET_ALL_MOVIES:
@@ -33,7 +36,6 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         allMovies: action.payload,
         backupMovies: action.payload,
-        all: [...state.all, ...action.payload],
       };
     case GET_NAME_SERIES:
       return {
@@ -66,6 +68,29 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         movieDetail: {},
       };
+    case GET_TODO:
+      console.log(action.payload);
+      return {
+        ...state,
+        todo: action.payload,
+        backupTodo: action.payload,
+      };
+    case FILTER_NAME:
+      console.log(action.payload);
+      if (action.payload.length === 0) {
+        return {
+          todo: state.backupTodo,
+        };
+      } else {
+        const filter = state.todo.filter((e) =>
+          e.name.toLowerCase().includes(action.payload.toLowerCase())
+        );
+        return {
+          ...state,
+          all: filter,
+        };
+      }
+
     default:
       return { ...state };
   }
