@@ -1,8 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import { FaAngleLeft, FaAngleRight} from "react-icons/fa";
-import "./_Paginado.scss"
-export default function PaginadoMovies({ pelisPerPage, todasLasMovies, setCurrentPage, currentPage }) {
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import "./_Paginado.scss";
+export default function PaginadoMovies({
+  pelisPerPage,
+  todasLasMovies,
+  setCurrentPage,
+  currentPage,
+}) {
   const maximo = todasLasMovies / pelisPerPage;
 
   const onKeyDown = (e) => {
@@ -29,26 +34,49 @@ export default function PaginadoMovies({ pelisPerPage, todasLasMovies, setCurren
     setCurrentPage(currentPage + 1);
     setInput(parseInt(input) + 1);
   };
+  const ultPage = () => {
+    setCurrentPage(Math.ceil(maximo));
+    setInput(parseInt(maximo) + 1);
+  };
+  const priPage = () => {
+    setCurrentPage(Math.ceil(1));
+    setInput(parseInt(0) + 1);
+  };
 
   const onChange = (e) => {
     setInput(e.target.value);
   };
   return (
-      <div className="contenedor-paginado">
-        <button disabled={currentPage === 1 || currentPage < 1} onClick={previousPage}>
+    <div className="contenedor-paginado">
+      <button disabled={currentPage === 1 || currentPage < 1} onClick={priPage}>
         <FaAngleLeft />
-        </button>
-        <input
-          onChange={(e) => onChange(e)}
-          onKeyDown={(e) => onKeyDown(e)}
-          name="page"
-          autoComplete="off"
-          value={input}
-          min="1"
-        />
-        <button disabled={currentPage === maximo || currentPage > maximo} onClick={nextPage}>
+      </button>
+      <button
+        disabled={currentPage === 1 || currentPage < 1}
+        onClick={previousPage}
+      >
+        <FaAngleLeft />
+      </button>
+      <input
+        onChange={(e) => onChange(e)}
+        onKeyDown={(e) => onKeyDown(e)}
+        name="page"
+        autoComplete="off"
+        value={input}
+        min="1"
+      />
+      <button
+        disabled={currentPage === maximo || currentPage > maximo}
+        onClick={nextPage}
+      >
         <FaAngleRight />
-        </button>
-      </div> 
+      </button>
+      <button
+        disabled={currentPage === maximo || currentPage > maximo}
+        onClick={ultPage}
+      >
+        <FaAngleRight />
+      </button>
+    </div>
   );
 }

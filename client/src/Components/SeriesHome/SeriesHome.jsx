@@ -9,13 +9,18 @@ import {
   orderVoteAvgDES,
   filtradoGeneroSeries,
   filtradoGeneroSeriesReversa,
+  getAllSeries,
+  clear,
 } from "../../Redux/Actions/Actions";
 import NavBar from "../NavBar/NavBar.jsx";
 import Paginacion from "./PaginadoSeries";
-import "./_SeriesHome.scss"
+import "./_SeriesHome.scss";
 
 function SeriesHome() {
   const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getAllSeries());
+  // }, []);
   let allSeries = useSelector((state) => state.allSeries);
   const generos = useSelector((state) => state.generosSeries);
 
@@ -40,10 +45,10 @@ function SeriesHome() {
   };
   const HandleClickClear = () => {
     setgenerosCache([]);
+    // dispatch(clear('series'))
     dispatch(filtradoGeneroSeriesReversa([]));
   };
 
-  
   const HandleClickASC = (e) => {
     e.preventDefault();
     dispatch(orderNameASC(allSeries));
@@ -110,25 +115,24 @@ function SeriesHome() {
         );
       })}
 
-      <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo} />
-    <div className="contenedor-seccion">
-    <div className="contenedor-resultados">
-      {allpSeries.map((e) => {
-        return (
-          <CardSeries
-            key={e.id}
-            id={e.id}
-            name={e.name}
-            poster={e.posterImagen}
-          />
-        );
-      })}
+      <div className="contenedor-seccion">
+        <div className="contenedor-resultados">
+          {allpSeries.map((e) => {
+            return (
+              <CardSeries
+                key={e.id}
+                id={e.id}
+                name={e.name}
+                poster={e.posterImagen}
+              />
+            );
+          })}
+        </div>
+      </div>
+      <div className="containerPag">
+        <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo} />
       </div>
     </div>
-    <div className="containerPag">
-    <Paginacion pagina={pagina} setPagina={setPagina} maximo={maximo} />
-    </div>
-      </div>
   );
 }
 export default SeriesHome;

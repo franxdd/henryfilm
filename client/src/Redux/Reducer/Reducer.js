@@ -18,6 +18,10 @@ import {
   WILLUNMOUNT2,
   GET_NAME_MOVIES,
   GET_NAME_SERIES,
+  GET_TODO,
+  FILTER_NAME,
+  CLEAR,
+  POST_PELICULAS,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -31,7 +35,10 @@ const initialState = {
   backupMovies: [],
   generosMovies: [],
   generosSeries: [],
+  errores: [],
   all: [],
+  todo: [],
+  backupTodo: [],
 };
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
@@ -40,7 +47,6 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         allSeries: action.payload,
         backupSeries: action.payload,
-        all: [...state.all, ...action.payload],
       };
 
     case GET_ALL_MOVIES:
@@ -48,7 +54,6 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         allMovies: action.payload,
         backupMovies: action.payload,
-        all: [...state.all, ...action.payload],
       };
     case GET_NAME_SERIES:
       return {
@@ -70,6 +75,12 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         movieDetail: action.payload,
+      };
+
+    case POST_PELICULAS:
+      return {
+        ...state,
+        errores: action.payload,
       };
     case WILLUNMOUNT:
       return {
@@ -238,6 +249,41 @@ const rootRouter = (state = initialState, action) => {
           allSeries: arrSeries,
         };
       }
+    case GET_TODO:
+      return {
+        ...state,
+        todo: action.payload,
+        backupTodo: action.payload,
+      };
+    case FILTER_NAME:
+      if (action.payload.length === 0) {
+        return {
+          ...state,
+          todo: state.backupTodo,
+        };
+      } else {
+        console.log(action.payload);
+        const filter = state.todo.filter((e) =>
+          e.name.toLowerCase().includes(action.payload.toLowerCase())
+        );
+        return {
+          ...state,
+          all: filter,
+        };
+      }
+    // case CLEAR:
+    //   console.log(action.payload)
+    //   if (action.payload === "series") {
+    //     return {
+    //       ...state,
+    //       allSeries: state.backupSeries.slice(),
+    //     };
+    //   } else if (action.payload === "peliculas") {
+    //     return {
+    //       ...state,
+    //       allMovies: state.backupMovies.slice(),
+    //     };
+    //   }
 
     default:
       return { ...state };
