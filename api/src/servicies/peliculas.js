@@ -136,6 +136,7 @@ const postPeliculas = async (req, res) => {
     backDropImagen,//*
     vote_average,//*
     popularity,//*
+    tipo
   } = req.body;
 
   var errores = validate(name,
@@ -147,7 +148,8 @@ const postPeliculas = async (req, res) => {
     posterImagen,
     backDropImagen,
     vote_average,
-    popularity,)
+    popularity,
+    tipo)
 
   if(errores) res.json(errores)
 
@@ -174,6 +176,7 @@ const postPeliculas = async (req, res) => {
       backDropImagen,
       vote_average,
       popularity,
+      tipo
     });
 
     res.status(200).json(response.data);

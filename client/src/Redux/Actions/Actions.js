@@ -174,11 +174,7 @@ export const getGenerosSeries = () => {
 
 export const postPeliculas = (payload) => {
   return async function (dispatch) {
-    let created = await axios.post(
-      "http://localhost:3001/peliculas/postPelicula",
-      payload
-    );
-
+    let created = await axios.post("http://localhost:3001/peliculas/postPelicula", payload);
     return dispatch({ type: POST_PELICULAS, payload: created.data });
   };
 };
