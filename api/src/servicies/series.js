@@ -147,7 +147,7 @@ const seriePorIdParms = async (req, res) => {
     const { id } = req.params;
 
     const allSeries = await axios(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=es-SP`
     );
     var imagenesConfig = await axios.get(
       `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`

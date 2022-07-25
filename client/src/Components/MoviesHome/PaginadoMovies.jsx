@@ -1,6 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import {   
+  FaAngleDoubleLeft,
+  FaAngleLeft,
+  FaAngleRight,
+  FaAngleDoubleRight,} 
+  from "react-icons/fa";
 import "./_Paginado.scss";
 export default function PaginadoMovies({
   pelisPerPage,
@@ -48,35 +53,28 @@ export default function PaginadoMovies({
   };
   return (
     <div className="contenedor-paginado">
-      <button disabled={currentPage === 1 || currentPage < 1} onClick={priPage}>
-        <FaAngleLeft />
-      </button>
-      <button
+      <span className="buttonClass" disabled={currentPage === 1 || currentPage < 1} onClick={priPage}>
+        <FaAngleDoubleLeft />
+      </span>
+      <span className="buttonClass"
         disabled={currentPage === 1 || currentPage < 1}
         onClick={previousPage}
       >
         <FaAngleLeft />
-      </button>
-      <input
-        onChange={(e) => onChange(e)}
-        onKeyDown={(e) => onKeyDown(e)}
-        name="page"
-        autoComplete="off"
-        value={input}
-        min="1"
-      />
-      <button
+      </span>
+      <p>Página {currentPage}</p>
+      <span className="buttonClass"
         disabled={currentPage === maximo || currentPage > maximo}
         onClick={nextPage}
       >
         <FaAngleRight />
-      </button>
-      <button
+      </span>
+      <span className="buttonClass"
         disabled={currentPage === maximo || currentPage > maximo}
         onClick={ultPage}
       >
-        <FaAngleRight />
-      </button>
+        <FaAngleDoubleRight />
+      </span>
     </div>
   );
 }

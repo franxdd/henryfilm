@@ -17,7 +17,7 @@ const getGenerosMovies = async (req, res) => {
 const getGenerosSeries = async (req, res) => {
     
     var generosData = await axios.get(
-        `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=en-US`
+        `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=es-SP`
       );
 
     
