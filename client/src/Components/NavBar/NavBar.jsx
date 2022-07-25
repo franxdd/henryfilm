@@ -33,11 +33,11 @@ const Nav = (props) => {
   return (
     <main>
       <nav className="nav-superior">
-        <Link to={"/home"}>
+        <Link to={"/"}>
           <img className="logo" src={logo} alt="Logo" />
         </Link>
         <ul className="contenedor-iconos">
-          <Link to="/" className="link-nav">
+          <Link to="/home" className="link-nav">
             <li>
               <HomeIcon className="icono-nav" />
             </li>

@@ -18,8 +18,10 @@ import {
   WILLUNMOUNT2,
   GET_NAME_MOVIES,
   GET_NAME_SERIES,
+  GET_TODO,
+  FILTER_NAME,
   CLEAR,
-  POST_PELICULAS
+  POST_PELICULAS,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -33,8 +35,10 @@ const initialState = {
   backupMovies: [],
   generosMovies: [],
   generosSeries: [],
-  errores : [],
+  errores: [],
   all: [],
+  todo: [],
+  backupTodo: [],
 };
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
@@ -42,16 +46,14 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         allSeries: action.payload,
-        backupSeries: action.payload.slice(),
-        all: [...state.all, ...action.payload],
+        backupSeries: action.payload,
       };
 
     case GET_ALL_MOVIES:
       return {
         ...state,
         allMovies: action.payload,
-        backupMovies: action.payload.slice(),
-        all: [...state.all, ...action.payload],
+        backupMovies: action.payload,
       };
     case GET_NAME_SERIES:
       return {
@@ -76,10 +78,10 @@ const rootRouter = (state = initialState, action) => {
       };
 
     case POST_PELICULAS:
-      return{
+      return {
         ...state,
-        errores : action.payload
-      }
+        errores: action.payload,
+      };
     case WILLUNMOUNT:
       return {
         ...state,
@@ -245,6 +247,28 @@ const rootRouter = (state = initialState, action) => {
         return {
           ...state,
           allSeries: arrSeries,
+        };
+      }
+    case GET_TODO:
+      return {
+        ...state,
+        todo: action.payload,
+        backupTodo: action.payload,
+      };
+    case FILTER_NAME:
+      if (action.payload.length === 0) {
+        return {
+          ...state,
+          todo: state.backupTodo,
+        };
+      } else {
+        console.log(action.payload);
+        const filter = state.todo.filter((e) =>
+          e.name.toLowerCase().includes(action.payload.toLowerCase())
+        );
+        return {
+          ...state,
+          all: filter,
         };
       }
     // case CLEAR:
