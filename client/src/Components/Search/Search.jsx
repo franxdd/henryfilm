@@ -2,6 +2,7 @@ import { React, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getTodo } from "../../Redux/Actions/Actions";
 import CardSearch from "./CardSearch";
+import "./_Search.scss"
 
 function Search() {
   const dispatch = useDispatch();
@@ -12,7 +13,8 @@ function Search() {
   const all = useSelector((state) => state.all);
   console.log(allF);
   return (
-    <div>
+    <div className="contenedorSearch">
+      <div className="contenedorCards">
       {all?.map((r) => {
         return (
           <CardSearch
@@ -24,6 +26,7 @@ function Search() {
           />
         );
       })}
+      </div>
     </div>
   );
 }

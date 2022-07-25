@@ -15,6 +15,8 @@ import {
 import NavBar from "../NavBar/NavBar.jsx";
 import Paginacion from "./PaginadoSeries";
 import "./_SeriesHome.scss";
+import "../MoviesHome/_Filter.scss"
+import {AiOutlineClear as ClearIcon} from "react-icons/ai";
 
 function SeriesHome() {
   const dispatch = useDispatch();
@@ -69,23 +71,21 @@ function SeriesHome() {
   return allSeries.length === 0 ? (
     <h1>LOADER</h1>
   ) : (
-    <div>
-      <button onClick={(e) => HandleClickASC(e)}>
-        BOTON PRUEBA ORDENADO ASC
+    <div className="filter">
+    <span>Ordenar por:</span>
+    <button class="cta" onClick={(e) => HandleClickASC(e)}>
+    <span class="hover-underline-animation"> A - Z </span>
+    </button>
+    <button class="cta" onClick={(e) => HandleClickDES(e)} > 
+    <span class="hover-underline-animation"> Z - A </span>
+    </button>
+      <button class="cta" onClick={(e) => HandleClickVoteASC(e)}>
+      <span class="hover-underline-animation"> + Puntuación</span>
       </button>
-
-      <button onClick={(e) => HandleClickDES(e)}>
-        BOTON PRUEBA ORDENADO DES
+      <button class="cta" onClick={(e) => HandleClickVoteDES(e)}>
+      <span class="hover-underline-animation"> - Puntuación </span>
       </button>
-
-      <button onClick={(e) => HandleClickVoteASC(e)}>
-        BOTON PRUEBA ORDENADO VOTE AVG ASC
-      </button>
-
-      <button onClick={(e) => HandleClickVoteDES(e)}>
-        BOTON PRUEBA ORDENADO VOTE AVG DES
-      </button>
-
+      <span>Filtrar por:</span>
       <div className="Selects">
         <div className="select-genero">
           <select
@@ -95,7 +95,6 @@ function SeriesHome() {
             className="selectgenero"
           >
             <option value={"Default"}>Generos..</option>
-
             {generos?.map((t) => (
               <option key={t.id} value={t.name}>
                 {t.name}
@@ -104,7 +103,7 @@ function SeriesHome() {
           </select>
         </div>
       </div>
-      <button onClick={() => HandleClickClear()}>CLEAR</button>
+      <span onClick={() => HandleClickClear()}><ClearIcon className="icono-clear" /></span>
 
       {generosCache?.map((g) => {
         return (
