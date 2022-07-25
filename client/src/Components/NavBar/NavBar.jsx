@@ -18,17 +18,20 @@ import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import { useContext } from "react";
 import Context from "../../contexto/Context";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-const Nav = (props) => {
+const Nav = () => {
   const dispatch = useDispatch();
   const allMovies = useSelector((state) => state.allMovies);
   const contexto = useContext(Context);
   let location = useLocation();
+  let { id } = useParams();
 
   const handleChangeLenguaje = (e) => {
     contexto.setLenguaje(e.target.value);
   };
+  console.log(location);
+  console.log(id);
 
   return (
     <main>
@@ -53,25 +56,18 @@ const Nav = (props) => {
             </li>
           </Link>
           <Link to="/home/formPeliculas" className="link-nav">
-            <li>
-              FORMULARIO
-            </li>
+            <li>FORMULARIO</li>
           </Link>
         </ul>
 
-        {location.pathname !== "/home" && (
+        {location.pathname === `/home/series` ||
+        location.pathname === `/home/peliculas` ? (
           <div className="search">
             <SearchBar />
           </div>
+        ) : (
+          <></>
         )}
-
-
-        {/* <Link to="/home/peliculas/nueva" className="link-nav">
-            <div>AGREGAR PELICULA</div>
-        </Link>
-        <Link to="/home/series/nueva" className="link-nav">
-            <div>AGREGAR SERIE</div>
-        </Link> */}
 
         <div className="select">
           <select className="select-lenguaje" onChange={handleChangeLenguaje}>
