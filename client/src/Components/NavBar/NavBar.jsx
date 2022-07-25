@@ -14,6 +14,8 @@ import {
   BsHouseDoor as HomeIcon,
   BsCameraVideo as CamaraIcon,
 } from "react-icons/bs";
+import {MdLock as LockIcon} from "react-icons/md";
+
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import { useContext } from "react";
@@ -55,9 +57,11 @@ const Nav = () => {
               <MonitorIcon className="icono-nav" />
             </li>
           </Link>
-          <Link to="/home/formPeliculas" className="link-nav">
-            <li>FORMULARIO</li>
-          </Link>
+          {/* <Link to="/home/formPeliculas" className="link-nav">
+            <li>
+              FORMULARIO
+            </li>
+          </Link> */}
         </ul>
 
         {location.pathname === `/home/series` ||
@@ -78,14 +82,14 @@ const Nav = () => {
           </select>
         </div>
         <div className="login">
-          <Link to="/home/Login">
-            <button>
-              <b>Iniciar Sesión</b>
-            </button>
-          </Link>
+          {/* <Link to="/home/Login"> */}
           <Link to="/home/Register">
             <button>
               <b>Registrate</b>
+            </button>
+        
+            <button>
+            <LockIcon className="icono-nav" />
             </button>
           </Link>
         </div>

@@ -1,24 +1,26 @@
 @import "../../Styles/utilidades/Variables";
 
 .contenedor-paginado {
-  width: 150px;
+  width: 300px;
   display: flex;
   justify-content:space-between;
   margin: auto;
   margin-bottom: 50px;
 
   p {
+    margin-top: -1px;
     color: $detalles;
   }
-  button {
+  .buttonClass {
     border: none;
     background-color: transparent;
     svg {
-      color: $detalles;
-      font-size: 30px;
+      color: $blanco;
+      font-size: 24px;
+      font-weight: 200;
     }
     svg :hover {
-      color: $blanco;
+      color:$detalles;
     }
   }
   input{

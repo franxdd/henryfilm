@@ -2,7 +2,7 @@ const axios = require("axios");
 const { Peliculas, Series, Usuarios } = require("../DB/db");
 const { parseador } = require("../utils/utils.js");
 const { API_KEY } = process.env;
-const API_URL_SERIES = `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=es-SP&page=1`;
+const API_URL_SERIES = `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=es-SP&page=`;
 const API_GENRES = `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=es-SP`;
 
 const getSeriesInfo = async (req, res) => {
@@ -147,7 +147,7 @@ const seriePorIdParms = async (req, res) => {
     const { id } = req.params;
 
     const allSeries = await axios(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=es-SP`
     );
     var imagenesConfig = await axios.get(
       `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
