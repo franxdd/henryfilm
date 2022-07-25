@@ -1,11 +1,13 @@
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getnameMovies, getnameSeries } from "../../Redux/Actions/Actions";
+import { filterName } from "../../Redux/Actions/Actions";
+import { useNavigate } from "react-router-dom";
 import { BsSearch as LupaIcon } from "react-icons/bs";
 import "./_SearchBar.scss";
 import "./_Formulario.scss";
 
 function SearchBar() {
+  let navigate = useNavigate();
   const dispatch = useDispatch();
   const [name, setName] = useState("");
 
@@ -15,16 +17,24 @@ function SearchBar() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(getnameMovies(name));
-    dispatch(getnameSeries(name));
+    dispatch(filterName(name));
+    navigate("/home/search");
   }
   return (
     <div className="formulario">
-      <form type="submit" onClick={(e) => handleSubmit(e)}>
-        <button className="boton-buscar" aria-label="Buscar">
+      <form type="submit" onSubmit={handleSubmit}>
+        <button
+          className="boton-buscar"
+          aria-label="Buscar"
+          onClick={(e) => handleSubmit(e)}
+        >
           <LupaIcon className="icono-nav" />
         </button>
-        <input onChange={(e) => handleName(e)} type={"text"} placeholder="Buscar..."></input>
+        <input
+          onChange={(e) => handleName(e)}
+          type={"text"}
+          placeholder="Buscar..."
+        ></input>
       </form>
     </div>
   );

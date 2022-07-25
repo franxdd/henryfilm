@@ -19,10 +19,13 @@ export const FILTRO_GENERO_MOVIES = "FILTRO_GENERO_MOVIES";
 export const FILTRO_GENERO_SERIES = "FILTRO_GENERO_SERIES";
 export const FILTRO_GENERO_MOVIES_REVERSA = "FILTRO_GENERO_MOVIES_REVERSA";
 export const FILTRO_GENERO_SERIES_REVERSA = "FILTRO_GENERO_SERIES_REVERSA";
+export const GET_TODO = "GET_TODO";
 
+export const FILTER_NAME = "FILTER_NAME";
+export const CLEAR = "CLEAR";
 export const GET_GENEROS_MOVIES = "GET_GENEROS_MOVIES";
 export const GET_GENEROS_SERIES = "GET_GENEROS_SERIES";
-
+export const POST_PELICULAS = "POST_PELICULAS";
 
 export const getAllSeries = () => {
   return (dispatch) => {
@@ -51,9 +54,7 @@ export function getAllMovies() {
 export const getnameSeries = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "http://localhost:3001/series/detalleDeSerie?name=" + name
-      );
+      let json = await axios.get("http://localhost:3001/series/detalleDeSerie?name=" + name);
       return dispatch({
         type: GET_NAME_SERIES,
         payload: json.data,
@@ -66,9 +67,7 @@ export const getnameSeries = (name) => {
 export const getnameMovies = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "http://localhost:3001/peliculas?name=" + name
-      );
+      let json = await axios.get("http://localhost:3001/peliculas?name=" + name);
       return dispatch({
         type: GET_NAME_MOVIES,
         payload: json.data,
@@ -105,14 +104,15 @@ export const getSeriesDetail = (id) => {
 // };
 
 export const getMoviesDetail = (id) => {
-  return async (dispatch) => {
-    // const r = await fetch(`/peliculas/${id}`);
-    // const data = await r.json();
-    var detail = await axios.get(`/peliculas/${id}`);
-    dispatch({
-      type: GET_MOVIES_DETAIL,
-      payload: detail.data,
-    });
+  return (dispatch) => {
+    return fetch(`http://localhost:3001/peliculas/${id}`)
+      .then((r) => r.json())
+      .then((data) => {
+        dispatch({
+          type: GET_MOVIES_DETAIL,
+          payload: data,
+        });
+      });
   };
 };
 
@@ -169,7 +169,6 @@ export const getGenerosMovies = () => {
   };
 };
 
-
 export const getGenerosSeries = () => {
   return function (dispatch) {
     return fetch("http://localhost:3001/generos/series")
@@ -183,6 +182,12 @@ export const getGenerosSeries = () => {
   };
 };
 
+export const postPeliculas = (payload) => {
+  return async function (dispatch) {
+    let created = await axios.post("http://localhost:3001/peliculas/postPelicula", payload);
+    return dispatch({ type: POST_PELICULAS, payload: created.data });
+  };
+};
 
 export const filtradoGeneroMovies = (arrGenerosMovies) => {
   return {
@@ -212,36 +217,38 @@ export const filtradoGeneroSeriesReversa = (arrGenerosSeries) => {
   };
 };
 
-// //filtros todavia sin hacer
-// export const filtroAgregado = (array) => {
-//   try {
-//     var new_array = array.filter((arr) => arr.hasOwnProperty("created"));
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-
+// export const clear = (tipo) => {
 //   return {
-//     type: FILTRO_AGREGADO,
-//     payload: new_array,
+//     type: CLEAR,
+//     payload: tipo,
 //   };
 // };
 
-// export const filtroExistentes = (array) => {
-//   try {
-//     var new_array = array.filter((arr) => !arr.hasOwnProperty("created"));
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-
-//   return {
-//     type: FILTRO_EXISTENTES,
-//     payload: new_array,
-//   };
-// };
 export const willunmont2 = () => {
   return function (dispatch) {
     return dispatch({
       type: WILLUNMOUNT2,
     });
   };
+};
+
+export function getTodo() {
+  return function (dispatch) {
+    return fetch("http://localhost:3001/todos")
+      .then((r) => r.json())
+      .then((rjson) =>
+        dispatch({
+          type: GET_TODO,
+          payload: rjson,
+        })
+      );
+  };
+}
+
+export const filterName = (payload) => {
+  return (dispatch) =>
+    dispatch({
+      type: FILTER_NAME,
+      payload: payload,
+    });
 };
