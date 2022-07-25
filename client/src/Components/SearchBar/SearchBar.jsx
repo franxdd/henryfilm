@@ -30,7 +30,6 @@ function SearchBar() {
         >
           <LupaIcon className="icono-nav" />
         </button>
-
         <input
           onChange={(e) => handleName(e)}
           type={"text"}
