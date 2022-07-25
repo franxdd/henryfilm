@@ -45,7 +45,8 @@ module.exports = (sequelize) => {
     },// * 
     // - number of episodes
     tipo: {
-      type: DataTypes.ENUM(["serie", "pelicula"])
+      type: DataTypes.ENUM(["serie", "pelicula"]),
+      allowNull: true
     }
   },{
     timestamps: false
