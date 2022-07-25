@@ -1,5 +1,10 @@
 import { React, useState } from "react";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import {   
+  FaAngleDoubleLeft,
+  FaAngleLeft,
+  FaAngleRight,
+  FaAngleDoubleRight,} 
+  from "react-icons/fa";
 
 function Paginacion({ pagina, setPagina, maximo }) {
   const [input, setInput] = useState(1);
@@ -39,29 +44,30 @@ function Paginacion({ pagina, setPagina, maximo }) {
   };
   return (
     <div className="contenedor-paginado">
-      <button disabled={pagina === 1 || pagina < 1} onClick={priPage}>
+      <span style={{ color: "white" }} disabled={pagina === 1 || pagina < 1} onClick={priPage}>
+        <FaAngleDoubleLeft />
+      </span>
+      <span style={{ color: "white" }} disabled={pagina === 1 || pagina < 1} onClick={previousPage}>
         <FaAngleLeft />
-      </button>
-      <button disabled={pagina === 1 || pagina < 1} onClick={previousPage}>
-        <FaAngleLeft />
-      </button>
-      <input
+      </span>
+      {/* <input
         onChange={(e) => onChange(e)}
         onKeyDown={(e) => onKeyDown(e)}
         name="page"
         autoComplete="off"
         value={input}
         min="1"
-      />
-      <button
+      /> */}
+       <p>Página {pagina}</p>
+      <span style={{ color: "white" }}
         disabled={pagina === maximo || pagina > maximo}
         onClick={nextPage}
       >
         <FaAngleRight />
-      </button>
-      <button disabled={pagina === maximo || pagina > maximo} onClick={ultPage}>
-        <FaAngleRight />
-      </button>
+      </span>
+      <span style={{ color: "white" }} disabled={pagina === maximo || pagina > maximo} onClick={ultPage}>
+        <FaAngleDoubleRight />
+      </span>
     </div>
   );
 }

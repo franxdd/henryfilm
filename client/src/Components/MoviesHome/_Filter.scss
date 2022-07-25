@@ -1,0 +1,75 @@
+@import "../../Styles/utilidades/Variables";
+@import "../../Styles/utilidades/Mixin";
+
+.filter{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: center;
+    margin-top: 20px;
+    span{
+      color:$detalles;
+    }
+
+    .cta {
+      border: none;
+      background: none;
+     }
+     
+     .cta span {
+      padding-bottom: 7px;
+      letter-spacing: 1px;
+      font-size: 15px;
+      padding-right: 14px;
+      cursor: pointer;
+     }
+     
+     .cta svg {
+      transform: translateX(-8px);
+      transition: all 0.3s ease;
+     }
+     
+     .cta:hover svg {
+      transform: translateX(0);
+     }
+     
+     .cta:active svg {
+      transform: scale(0.9);
+     }
+     
+     .hover-underline-animation {
+      position: relative;
+      color: $blanco;
+      padding-bottom: 20px;
+     }
+     
+     .hover-underline-animation:after {
+      content: "";
+      position: absolute;
+      width: 90%;
+      transform: scaleX(0);
+      height: 1.5px;
+      bottom: 0;
+      left: 0;
+      background-color:$detalles;
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+     }
+     
+     .cta:hover .hover-underline-animation:after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+     }
+     .icono-clear{
+      color: $blanco;
+      font-size: 25px;
+      margin-right: 20px;
+      margin-left: 10px;
+    }
+    .icono-clear:hover {
+      color: $detalles;
+    }
+    }

@@ -17,12 +17,12 @@ const getAllMovies = async (req, res) => {
     urlImg = imagenesConfig.data.images.base_url + "original";
 
     var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
     );
 
     for (let i = 0; i < cantidad; i++) {
       var listaGetMovies = await axios.get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=${
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=es-SP&page=${
           i + 1
         }`
       );
