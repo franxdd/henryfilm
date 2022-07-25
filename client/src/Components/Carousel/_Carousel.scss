@@ -16,7 +16,7 @@ margin-top: 20%;
     height:100px;
     display: flex;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 20px;
     h2 {
       font-size:20px;
       @include h2-secciones;
@@ -29,15 +29,15 @@ margin-top: 20%;
   }
   .slick-slider {
     width: 95%;
-    color: $blanco;
+    color: $detalles;
     .slick-prev:before,
     .slick-next:before {
       margin-top: 12%;
-      color: $blanco;
+      color: $detalles;
       font-size: 24px;
     }
     .slick-dots li button:before {
-      color: $blanco;
+      color: $detalles;
       font-size: 8px;
        
     }
