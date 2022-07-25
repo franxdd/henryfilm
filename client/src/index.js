@@ -7,11 +7,10 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "./Redux/Store/Store.js";
-const dotenv = require ("dotenv");
+// const dotenv = require ("dotenv");
 
-dotenv.config();
-axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:3001';
-
+// dotenv.config();
+// axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:3001';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

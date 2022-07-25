@@ -23,10 +23,9 @@ export const FILTRO_GENERO_SERIES_REVERSA = "FILTRO_GENERO_SERIES_REVERSA";
 export const GET_GENEROS_MOVIES = "GET_GENEROS_MOVIES";
 export const GET_GENEROS_SERIES = "GET_GENEROS_SERIES";
 
-
 export const getAllSeries = () => {
   return (dispatch) => {
-    return fetch("/series")
+    return fetch("http://localhost:3001/series")
       .then((r) => r.json())
       .then((series) => {
         dispatch({
@@ -38,7 +37,7 @@ export const getAllSeries = () => {
 };
 export function getAllMovies() {
   return function (dispatch) {
-    return fetch("/peliculas")
+    return fetch("http://localhost:3001/peliculas")
       .then((r) => r.json())
       .then((rjson) =>
         dispatch({
@@ -51,9 +50,7 @@ export function getAllMovies() {
 export const getnameSeries = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "/series/detalleDeSerie?name=" + name
-      );
+      let json = await axios.get("http://localhost:3001/series/detalleDeSerie?name=" + name);
       return dispatch({
         type: GET_NAME_SERIES,
         payload: json.data,
@@ -66,9 +63,7 @@ export const getnameSeries = (name) => {
 export const getnameMovies = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "/peliculas?name=" + name
-      );
+      let json = await axios.get("http://localhost:3001/peliculas?name=" + name);
       return dispatch({
         type: GET_NAME_MOVIES,
         payload: json.data,
@@ -80,7 +75,7 @@ export const getnameMovies = (name) => {
 };
 export const getSeriesDetail = (id) => {
   return (dispatch) => {
-    return fetch(`/series/seriePorId/${id}`)
+    return fetch(`http://localhost:3001/series/seriePorId/${id}`)
       .then((r) => r.json())
       .then((data) => {
         dispatch({
@@ -93,7 +88,7 @@ export const getSeriesDetail = (id) => {
 
 export const getMoviesDetail = (id) => {
   return (dispatch) => {
-    return fetch(`/peliculas/${id}`)
+    return fetch(`http://localhost:3001/peliculas/${id}`)
       .then((r) => r.json())
       .then((data) => {
         dispatch({
@@ -145,7 +140,7 @@ export const orderVoteAvgDES = (array) => {
 
 export const getGenerosMovies = () => {
   return function (dispatch) {
-    return fetch("/generos/peliculas")
+    return fetch("http://localhost:3001/generos/peliculas")
       .then((r) => r.json())
       .then((rjson) =>
         dispatch({
@@ -156,10 +151,9 @@ export const getGenerosMovies = () => {
   };
 };
 
-
 export const getGenerosSeries = () => {
   return function (dispatch) {
-    return fetch("/generos/series")
+    return fetch("http://localhost:3001/generos/series")
       .then((r) => r.json())
       .then((rjson) =>
         dispatch({
@@ -169,7 +163,6 @@ export const getGenerosSeries = () => {
       );
   };
 };
-
 
 export const filtradoGeneroMovies = (arrGenerosMovies) => {
   return {
