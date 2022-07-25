@@ -1,27 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./_CardMovies.scss";
 import {MdAddShoppingCart as ShopIcon} from "react-icons/md";
+import { Link } from "react-router-dom";
 
-function CardMovies({ id, name, poster }) {
+function CardSearch({ id, name, poster, tipo }) {
   function getRandomArbitrary(min, max) {
-   return Math.random() * (max - min) + min;
- }
-  // console.log(Math.ceil(getRandomArbitrary(1, 50)))
+    return Math.random() * (max - min) + min;
+  }
   return (
     <div class="card">
       <div class="card-img">
         <img src={poster} />
       </div>
       <div class="card-info">
-        <ShopIcon className="iconoShop"/>
+      <ShopIcon className="iconoShop"/>
         <p class="text-title">{name}</p>
         <p class="text-body">${(Math.ceil(getRandomArbitrary(15, 30)))}</p>
-        <Link to={`/home/peliculas/${id}`}>
+        <Link to={`/home/${tipo}s/${id}`}>
           <button class="card-button"> + Info</button>
         </Link>
       </div>
     </div>
   );
 }
-export default CardMovies;
+
+export default CardSearch;

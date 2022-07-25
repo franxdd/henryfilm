@@ -7,6 +7,7 @@ import {
   orderNameDES,
   orderVoteAvgASC,
   orderVoteAvgDES,
+  clear,
 } from "../../Redux/Actions/Actions";
 import { useEffect, useState } from "react";
 import {
@@ -15,9 +16,15 @@ import {
 } from "../../Redux/Actions/Actions.js";
 import PaginadoMovies from "./PaginadoMovies";
 import "./_MoviesHome.scss";
-import SearchBar from "../SearchBar/SearchBar";
+import "./_Filter.scss";
+import "./_Loading.scss";
+import {AiOutlineClear as ClearIcon} from "react-icons/ai";
+
 
 function MoviesHome() {
+  // useEffect(() => {
+  //   dispatch(getAllMovies());
+  // }, []);
   const dispatch = useDispatch();
 
   const allMovies = useSelector((state) => state.allMovies);
@@ -42,6 +49,7 @@ function MoviesHome() {
   };
   const HandleClickClear = () => {
     setgenerosCache([]);
+    // dispatch(clear('peliculas'))
     dispatch(filtradoGeneroMoviesReversa([]));
   };
   const HandleClickASC = (e) => {
@@ -62,25 +70,23 @@ function MoviesHome() {
   };
 
   return allMovies.length === 0 ? (
-    <h1 style={{ color: "white" }}>LOADER</h1>
+    <div class="momentum"></div>
   ) : (
-    <div>
-      <button onClick={(e) => HandleClickASC(e)}>
-        BOTON PRUEBA ORDENADO ASC
+  <div className="filter">
+    <span>Ordenar por:</span>
+    <button className="cta" onClick={(e) => HandleClickASC(e)}>
+    <span className="hover-underline-animation"> A - Z </span>
+    </button>
+    <button className="cta" onClick={(e) => HandleClickDES(e)} > 
+    <span className="hover-underline-animation"> Z - A </span>
+    </button>
+      <button className="cta" onClick={(e) => HandleClickVoteASC(e)}>
+      <span className="hover-underline-animation"> + Puntuación</span>
       </button>
-
-      <button onClick={(e) => HandleClickDES(e)}>
-        BOTON PRUEBA ORDENADO DES
+      <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
+      <span className="hover-underline-animation"> - Puntuación </span>
       </button>
-
-      <button onClick={(e) => HandleClickVoteASC(e)}>
-        BOTON PRUEBA ORDENADO VOTE AVG ASC
-      </button>
-
-      <button onClick={(e) => HandleClickVoteDES(e)}>
-        BOTON PRUEBA ORDENADO VOTE AVG DES
-      </button>
-
+      <span>Filtrar por:</span>
       <div className="Selects">
         <div className="select-genero">
           <select
@@ -90,7 +96,6 @@ function MoviesHome() {
             className="selectgenero"
           >
             <option value={"Default"}>Generos..</option>
-
             {generos?.map((t) => (
               <option key={t.id} value={t.name}>
                 {t.name}
@@ -99,7 +104,7 @@ function MoviesHome() {
           </select>
         </div>
       </div>
-      <button onClick={() => HandleClickClear()}>CLEAR</button>
+      <span onClick={() => HandleClickClear()}><ClearIcon className="icono-clear" /></span>
 
       {generosCache?.map((g) => {
         return (
