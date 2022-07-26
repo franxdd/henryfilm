@@ -27,13 +27,11 @@ const Nav = () => {
   const allMovies = useSelector((state) => state.allMovies);
   const contexto = useContext(Context);
   let location = useLocation();
-  let { id } = useParams();
 
   const handleChangeLenguaje = (e) => {
     contexto.setLenguaje(e.target.value);
   };
-  console.log(location);
-  console.log(id);
+
 
   return (
     <main>
