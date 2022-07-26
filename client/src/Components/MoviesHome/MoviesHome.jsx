@@ -18,8 +18,7 @@ import PaginadoMovies from "./PaginadoMovies";
 import "./_MoviesHome.scss";
 import "./_Filter.scss";
 import "./_Loading.scss";
-import {AiOutlineClear as ClearIcon} from "react-icons/ai";
-
+import { AiOutlineClear as ClearIcon } from "react-icons/ai";
 
 function MoviesHome() {
   // useEffect(() => {
@@ -70,21 +69,21 @@ function MoviesHome() {
   };
 
   return allMovies.length === 0 ? (
-    <div class="momentum"></div>
+    <div className="momentum"></div>
   ) : (
-  <div className="filter">
-    <span>Ordenar por:</span>
-    <button className="cta" onClick={(e) => HandleClickASC(e)}>
-    <span className="hover-underline-animation"> A - Z </span>
-    </button>
-    <button className="cta" onClick={(e) => HandleClickDES(e)} > 
-    <span className="hover-underline-animation"> Z - A </span>
-    </button>
+    <div className="filter">
+      <span>Ordenar por:</span>
+      <button className="cta" onClick={(e) => HandleClickASC(e)}>
+        <span className="hover-underline-animation"> A - Z </span>
+      </button>
+      <button className="cta" onClick={(e) => HandleClickDES(e)}>
+        <span className="hover-underline-animation"> Z - A </span>
+      </button>
       <button className="cta" onClick={(e) => HandleClickVoteASC(e)}>
-      <span className="hover-underline-animation"> + Puntuación</span>
+        <span className="hover-underline-animation"> + Puntuación</span>
       </button>
       <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
-      <span className="hover-underline-animation"> - Puntuación </span>
+        <span className="hover-underline-animation"> - Puntuación </span>
       </button>
       <span>Filtrar por:</span>
       <div className="Selects">
@@ -104,7 +103,9 @@ function MoviesHome() {
           </select>
         </div>
       </div>
-      <span onClick={() => HandleClickClear()}><ClearIcon className="icono-clear" /></span>
+      <span onClick={() => HandleClickClear()}>
+        <ClearIcon className="icono-clear" />
+      </span>
 
       {generosCache?.map((g) => {
         return (

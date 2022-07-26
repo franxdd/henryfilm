@@ -2,6 +2,15 @@ const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
 
+// function getRandomArbitrary() {
+//   return Math.random() * (max - min) + min;
+// }
+// {
+//   Math.ceil(getRandomArbitrary(15, 30));
+// }
+// var min = 15;
+// var max = 30;
+
 const parseador = (data, urlImg, generosData) => {
   var num;
   let generos = {};
@@ -124,7 +133,7 @@ const validate = ({
   } else if (!tipo) {
     error.tipo = "Se debe seleccionar un tipo";
   }
-  
+
   if (tipo && tipo === "serie") {
     if (!number_of_episodes) {
       error.number_of_episodes = "Debe existir un numero de episodio";

@@ -1,5 +1,5 @@
 import React from "react";
-import {MdAddShoppingCart as ShopIcon} from "react-icons/md";
+import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 function CardSearch({ id, name, poster, tipo }) {
@@ -7,16 +7,16 @@ function CardSearch({ id, name, poster, tipo }) {
     return Math.random() * (max - min) + min;
   }
   return (
-    <div class="card">
-      <div class="card-img">
+    <div className="card">
+      <div className="card-img">
         <img src={poster} />
       </div>
-      <div class="card-info">
-      <ShopIcon className="iconoShop"/>
-        <p class="text-title">{name}</p>
-        <p class="text-body">${(Math.ceil(getRandomArbitrary(15, 30)))}</p>
+      <div className="card-info">
+        <ShopIcon className="iconoShop" />
+        <p className="text-title">{name}</p>
+        <p className="text-body">${Math.ceil(getRandomArbitrary(15, 30))}</p>
         <Link to={`/home/${tipo}s/${id}`}>
-          <button class="card-button"> + Info</button>
+          <button className="card-button"> + Info</button>
         </Link>
       </div>
     </div>

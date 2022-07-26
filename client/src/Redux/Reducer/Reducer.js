@@ -22,6 +22,10 @@ import {
   FILTER_NAME,
   CLEAR,
   POST_PELICULAS,
+  ADD_TO_CART,
+  REMOVE_TO_CART,
+  ADJUST_QTY,
+  LOAD_CURRENT_ITEM,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -39,6 +43,8 @@ const initialState = {
   all: [],
   todo: [],
   backupTodo: [],
+  cart: [],
+  current: null,
 };
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
@@ -285,6 +291,42 @@ const rootRouter = (state = initialState, action) => {
     //     };
     //   }
 
+    case ADD_TO_CART:
+      console.log(typeof action.payload);
+      const item = state.todo.find((e) => e.id === action.payload);
+      console.log(state.cart, "soy el carro");
+      console.log(state.todo, "asd");
+      const incart = state.cart.find((i) =>
+        i.id === action.payload ? true : false
+      );
+      return {
+        ...state,
+        cart: incart
+          ? state.cart.map((i) =>
+              i.id === action.payload ? { ...i, qty: 1 } : i
+            )
+          : [...state.cart, { ...item, qty: 1 }],
+      };
+
+    case REMOVE_TO_CART:
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.id !== action.payload),
+      };
+    case ADJUST_QTY:
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.id === action.payload
+            ? { ...item, qty: action.payload.qty }
+            : item
+        ),
+      };
+    case LOAD_CURRENT_ITEM:
+      return {
+        ...state,
+        current: action.payload,
+      };
     default:
       return { ...state };
   }
