@@ -20,12 +20,14 @@ export const FILTRO_GENERO_SERIES = "FILTRO_GENERO_SERIES";
 export const FILTRO_GENERO_MOVIES_REVERSA = "FILTRO_GENERO_MOVIES_REVERSA";
 export const FILTRO_GENERO_SERIES_REVERSA = "FILTRO_GENERO_SERIES_REVERSA";
 export const GET_TODO = "GET_TODO";
-
+export const GET_CARUSEL = "GET_CARUSEL";
 export const FILTER_NAME = "FILTER_NAME";
 export const CLEAR = "CLEAR";
 export const GET_GENEROS_MOVIES = "GET_GENEROS_MOVIES";
 export const GET_GENEROS_SERIES = "GET_GENEROS_SERIES";
 export const POST_PELICULAS = "POST_PELICULAS";
+
+
 
 export const getAllSeries = () => {
   return (dispatch) => {

@@ -2,10 +2,19 @@ const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
 
-const parseador = (data, urlImg, generosData) => {
+const parseador = (
+  data,
+  urlImg,
+  generosData,
+  cast,
+  videosAEnviar,
+  urlVideos
+) => {
   var num;
   let generos = {};
   var resultado = [];
+
+  // console.log(cast.length)
 
   for (let j = 0; j < generosData.data.genres.length; j++) {
     for (const prop in generosData.data.genres[j]) {
@@ -27,6 +36,29 @@ const parseador = (data, urlImg, generosData) => {
 
       for (let gd = 0; gd < data[index].genres.length; gd++) {
         data[index].genre_ids.push(data[index].genres[gd].name);
+      }
+    }
+
+    if (cast) {
+      data[index].cast = [];
+
+      for (let c = 0; c < cast.length; c++) {
+        if (cast[c].known_for_department === "Acting") {
+          data[index].cast = [...data[index].cast, cast[c].name];
+        }
+      }
+    }
+
+    if (videosAEnviar) {
+      console.log(videosAEnviar)
+      data[index].videosAMostrar = [];
+      for (let v = 0; v < videosAEnviar.length; v++) {
+        if (videosAEnviar[v].site === "YouTube") {
+          data[index].videosAMostrar = [
+            ...data[index].videosAMostrar,
+            urlVideos + videosAEnviar[v].key,
+          ];
+        }
       }
     }
 
@@ -124,7 +156,7 @@ const validate = ({
   } else if (!tipo) {
     error.tipo = "Se debe seleccionar un tipo";
   }
-  
+
   if (tipo && tipo === "serie") {
     if (!number_of_episodes) {
       error.number_of_episodes = "Debe existir un numero de episodio";

@@ -20,9 +20,9 @@ import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import { useContext } from "react";
 import Context from "../../contexto/Context";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-const Nav = (props) => {
+const Nav = () => {
   const dispatch = useDispatch();
   const allMovies = useSelector((state) => state.allMovies);
   const contexto = useContext(Context);
@@ -31,6 +31,7 @@ const Nav = (props) => {
   const handleChangeLenguaje = (e) => {
     contexto.setLenguaje(e.target.value);
   };
+
 
   return (
     <main>
@@ -61,19 +62,14 @@ const Nav = (props) => {
           </Link> */}
         </ul>
 
-        {location.pathname !== "/home" && (
+        {location.pathname === `/home/series` ||
+        location.pathname === `/home/peliculas` ? (
           <div className="search">
             <SearchBar />
           </div>
+        ) : (
+          <></>
         )}
-
-
-        {/* <Link to="/home/peliculas/nueva" className="link-nav">
-            <div>AGREGAR PELICULA</div>
-        </Link>
-        <Link to="/home/series/nueva" className="link-nav">
-            <div>AGREGAR SERIE</div>
-        </Link> */}
 
         <div className="select">
           <select className="select-lenguaje" onChange={handleChangeLenguaje}>
@@ -89,8 +85,7 @@ const Nav = (props) => {
             <button>
               <b>Registrate</b>
             </button>
-          </Link>
-          <Link to="/home/formPeliculas" className="link-nav">
+        
             <button>
             <LockIcon className="icono-nav" />
             </button>
