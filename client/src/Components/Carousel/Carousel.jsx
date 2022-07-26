@@ -21,7 +21,7 @@ const Carousel = ({ url, tipo, titulo, clase }) => {
     autoplay: true,
     autoplaySpeed: 3000,
   };
-  console.log(clase);
+
   return (
     <div className="carousel">
       <div className="contenedor-titulo">

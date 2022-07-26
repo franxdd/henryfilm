@@ -22,6 +22,7 @@ import {
   FILTER_NAME,
   CLEAR,
   POST_PELICULAS,
+  GET_CARUSEL
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -42,6 +43,8 @@ const initialState = {
 };
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
+
+
     case GET_ALL_SERIES:
       return {
         ...state,
