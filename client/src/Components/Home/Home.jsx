@@ -19,7 +19,6 @@ import {
 } from "../../Redux/Actions/Actions";
 
 const Home = () => {
-  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllSeries());
@@ -31,7 +30,6 @@ const Home = () => {
 
   //let movies = useSelector((state)=> state.allMovies)
   const lenguajeSeleccionado = useContext(Context).lenguaje;
-
   return (
     <section className="contenedor-carousels">
       <Carousel

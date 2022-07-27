@@ -20,12 +20,16 @@ export const FILTRO_GENERO_SERIES = "FILTRO_GENERO_SERIES";
 export const FILTRO_GENERO_MOVIES_REVERSA = "FILTRO_GENERO_MOVIES_REVERSA";
 export const FILTRO_GENERO_SERIES_REVERSA = "FILTRO_GENERO_SERIES_REVERSA";
 export const GET_TODO = "GET_TODO";
-
+export const GET_CARUSEL = "GET_CARUSEL";
 export const FILTER_NAME = "FILTER_NAME";
 export const CLEAR = "CLEAR";
 export const GET_GENEROS_MOVIES = "GET_GENEROS_MOVIES";
 export const GET_GENEROS_SERIES = "GET_GENEROS_SERIES";
 export const POST_PELICULAS = "POST_PELICULAS";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_TO_CART = "REMOVE_TO_CART";
+export const ADJUST_QTY = "ADJUST_QTY";
+export const LOAD_CURRENT_ITEM = "LOAD_CURRENT_ITEM";
 
 export const getAllSeries = () => {
   return (dispatch) => {
@@ -54,9 +58,7 @@ export function getAllMovies() {
 export const getnameSeries = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "http://localhost:3001/series/detalleDeSerie?name=" + name
-      );
+      let json = await axios.get("http://localhost:3001/series/detalleDeSerie?name=" + name);
       return dispatch({
         type: GET_NAME_SERIES,
         payload: json.data,
@@ -69,9 +71,7 @@ export const getnameSeries = (name) => {
 export const getnameMovies = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "http://localhost:3001/peliculas?name=" + name
-      );
+      let json = await axios.get("http://localhost:3001/peliculas?name=" + name);
       return dispatch({
         type: GET_NAME_MOVIES,
         payload: json.data,
@@ -174,7 +174,10 @@ export const getGenerosSeries = () => {
 
 export const postPeliculas = (payload) => {
   return async function (dispatch) {
-    let created = await axios.post("http://localhost:3001/peliculas/postPelicula", payload);
+    let created = await axios.post(
+      "http://localhost:3001/peliculas/postPelicula",
+      payload
+    );
     return dispatch({ type: POST_PELICULAS, payload: created.data });
   };
 };
@@ -239,6 +242,37 @@ export const filterName = (payload) => {
   return (dispatch) =>
     dispatch({
       type: FILTER_NAME,
+      payload: payload,
+    });
+};
+export const addToCart = (payload) => {
+  return (dispatch) =>
+    dispatch({
+      type: ADD_TO_CART,
+      payload: payload,
+    });
+};
+export const removeCart = (id) => {
+  return (dispatch) =>
+    dispatch({
+      type: REMOVE_TO_CART,
+      payload: id,
+    });
+};
+export const adjusq = (id, value) => {
+  return (dispatch) =>
+    dispatch({
+      type: ADJUST_QTY,
+      payload: {
+        id: id,
+        value: value,
+      },
+    });
+};
+export const loadCurren = (payload) => {
+  return (dispatch) =>
+    dispatch({
+      type: LOAD_CURRENT_ITEM,
       payload: payload,
     });
 };
