@@ -38,7 +38,6 @@ const getAllMovies = async (req, res) => {
     var datosAEnviar = [...datosParseadosMovies, ...peliculasBd];
 
     return datosAEnviar;
-
   } catch (error) {
     console.log("hubo un error con la API", error);
   }
@@ -87,9 +86,30 @@ const getMovieDetail = async (req, res) => {
       `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
     );
 
+    var cast = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=es-SP`
+    );
+
+    var castAEnviar = cast.data.cast;
+
+    var videos = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
+    );
+
+    var videosAEnviar = videos.data.results;
+
+    var urlVideos = `https://www.youtube.com/watch?v=`;
+
     var data_parseado = [movie.data];
 
-    var datosAEnviar = parseador(data_parseado, urlImg, generosData);
+    var datosAEnviar = parseador(
+      data_parseado,
+      urlImg,
+      generosData,
+      castAEnviar,
+      videosAEnviar,
+      urlVideos
+    );
 
     res.status(200).json(datosAEnviar);
   } catch (error) {
@@ -112,10 +132,30 @@ const getMovieDetailParams = async (req, res) => {
     var generosData = await axios.get(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
     );
+    var cast = await axios.get(
+      `https://api.themoviedb.org/3/movie/${idPelicula}/credits?api_key=${API_KEY}&language=es-SP`
+    );
+
+    var castAEnviar = cast.data.cast;
+
+    var videos = await axios.get(
+      `https://api.themoviedb.org/3/movie/${idPelicula}/videos?api_key=${API_KEY}&language=en-US`
+    );
+
+    var videosAEnviar = videos.data.results;
+
+    var urlVideos = `https://www.youtube.com/watch?v=`;
 
     var data_parseado = [movie.data];
 
-    var datosAEnviar = parseador(data_parseado, urlImg, generosData);
+    var datosAEnviar = parseador(
+      data_parseado,
+      urlImg,
+      generosData,
+      castAEnviar,
+      videosAEnviar,
+      urlVideos
+    );
 
     res.status(200).json(datosAEnviar);
   } catch (error) {
@@ -129,17 +169,18 @@ const postPeliculas = async (req, res) => {
     name, //*
     genre_ids,
     overview, //*
-    cast,//*
-    runtime,//*
-    release_date,//*
-    posterImagen,//*
-    backDropImagen,//*
-    vote_average,//*
-    popularity,//*
-    tipo
+    cast, //*
+    runtime, //*
+    release_date, //*
+    posterImagen, //*
+    backDropImagen, //*
+    vote_average, //*
+    popularity, //*
+    tipo,
   } = req.body;
 
-  var errores = validate(name,
+  var errores = validate(
+    name,
     genre_ids,
     overview,
     cast,
@@ -149,9 +190,10 @@ const postPeliculas = async (req, res) => {
     backDropImagen,
     vote_average,
     popularity,
-    tipo)
+    tipo
+  );
 
-  if(errores) res.json(errores)
+  if (errores) res.json(errores);
 
   try {
     if (
@@ -176,7 +218,7 @@ const postPeliculas = async (req, res) => {
       backDropImagen,
       vote_average,
       popularity,
-      tipo
+      tipo,
     });
 
     res.status(200).json(response.data);
