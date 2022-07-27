@@ -56,9 +56,7 @@ export function getAllMovies() {
 export const getnameSeries = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "http://localhost:3001/series/detalleDeSerie?name=" + name
-      );
+      let json = await axios.get("http://localhost:3001/series/detalleDeSerie?name=" + name);
       return dispatch({
         type: GET_NAME_SERIES,
         payload: json.data,
@@ -71,9 +69,7 @@ export const getnameSeries = (name) => {
 export const getnameMovies = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "http://localhost:3001/peliculas?name=" + name
-      );
+      let json = await axios.get("http://localhost:3001/peliculas?name=" + name);
       return dispatch({
         type: GET_NAME_MOVIES,
         payload: json.data,
