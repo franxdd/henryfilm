@@ -22,7 +22,8 @@ import {
   FILTER_NAME,
   CLEAR,
   POST_PELICULAS,
-  GET_CARUSEL
+  ADD_TO_CART,
+  REMOVE_TO_CART,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -40,11 +41,11 @@ const initialState = {
   all: [],
   todo: [],
   backupTodo: [],
+  cart: [],
+  current: null,
 };
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
-
-
     case GET_ALL_SERIES:
       return {
         ...state,
@@ -288,6 +289,28 @@ const rootRouter = (state = initialState, action) => {
     //     };
     //   }
 
+    case ADD_TO_CART:
+      console.log(typeof action.payload);
+      const item = state.todo.find((e) => e.id === action.payload);
+      console.log(state.cart, "soy el carro");
+      console.log(state.todo, "asd");
+      const incart = state.cart.find((i) =>
+        i.id === action.payload ? true : false
+      );
+      return {
+        ...state,
+        cart: incart
+          ? state.cart.map((i) =>
+              i.id === action.payload ? { ...i, qty: 1 } : i
+            )
+          : [...state.cart, { ...item, qty: 1 }],
+      };
+
+    case REMOVE_TO_CART:
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.id !== action.payload),
+      };
     default:
       return { ...state };
   }

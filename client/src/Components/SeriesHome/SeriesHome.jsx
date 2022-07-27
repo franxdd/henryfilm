@@ -15,14 +15,14 @@ import {
 import NavBar from "../NavBar/NavBar.jsx";
 import Paginacion from "./PaginadoSeries";
 import "./_SeriesHome.scss";
-import "../MoviesHome/_Filter.scss"
-import {AiOutlineClear as ClearIcon} from "react-icons/ai";
+import "../MoviesHome/_Filter.scss";
+import { AiOutlineClear as ClearIcon } from "react-icons/ai";
 
 function SeriesHome() {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getAllSeries());
-  // }, []);
+  useEffect(() => {
+    dispatch(getAllSeries());
+  }, []);
   let allSeries = useSelector((state) => state.allSeries);
   const generos = useSelector((state) => state.generosSeries);
 
@@ -72,18 +72,18 @@ function SeriesHome() {
     <h1>LOADER</h1>
   ) : (
     <div className="filter">
-    <span>Ordenar por:</span>
-    <button class="cta" onClick={(e) => HandleClickASC(e)}>
-    <span class="hover-underline-animation"> A - Z </span>
-    </button>
-    <button class="cta" onClick={(e) => HandleClickDES(e)} > 
-    <span class="hover-underline-animation"> Z - A </span>
-    </button>
-      <button class="cta" onClick={(e) => HandleClickVoteASC(e)}>
-      <span class="hover-underline-animation"> + Puntuación</span>
+      <span>Ordenar por:</span>
+      <button className="cta" onClick={(e) => HandleClickASC(e)}>
+        <span className="hover-underline-animation"> A - Z </span>
       </button>
-      <button class="cta" onClick={(e) => HandleClickVoteDES(e)}>
-      <span class="hover-underline-animation"> - Puntuación </span>
+      <button className="cta" onClick={(e) => HandleClickDES(e)}>
+        <span className="hover-underline-animation"> Z - A </span>
+      </button>
+      <button className="cta" onClick={(e) => HandleClickVoteASC(e)}>
+        <span className="hover-underline-animation"> + Puntuación</span>
+      </button>
+      <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
+        <span className="hover-underline-animation"> - Puntuación </span>
       </button>
       <span>Filtrar por:</span>
       <div className="Selects">
@@ -103,7 +103,9 @@ function SeriesHome() {
           </select>
         </div>
       </div>
-      <span onClick={() => HandleClickClear()}><ClearIcon className="icono-clear" /></span>
+      <span onClick={() => HandleClickClear()}>
+        <ClearIcon className="icono-clear" />
+      </span>
 
       {generosCache?.map((g) => {
         return (

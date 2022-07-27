@@ -50,7 +50,7 @@ const parseador = (
     }
 
     if (videosAEnviar) {
-      console.log(videosAEnviar)
+      console.log(videosAEnviar);
       data[index].videosAMostrar = [];
       for (let v = 0; v < videosAEnviar.length; v++) {
         if (videosAEnviar[v].site === "YouTube") {
@@ -68,7 +68,9 @@ const parseador = (
     if (resultado[img].hasOwnProperty("title")) {
       resultado[img].name = resultado[img].title;
       resultado[img].tipo = "pelicula";
+      resultado[img].price = Math.floor(Math.random() * (30 - 10) + 10); //max - min
     } else {
+      resultado[img].price = Math.floor(Math.random() * (30 - 10) + 10);
       resultado[img].tipo = "serie";
     }
 

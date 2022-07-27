@@ -26,16 +26,36 @@ export const CLEAR = "CLEAR";
 export const GET_GENEROS_MOVIES = "GET_GENEROS_MOVIES";
 export const GET_GENEROS_SERIES = "GET_GENEROS_SERIES";
 export const POST_PELICULAS = "POST_PELICULAS";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_TO_CART = "REMOVE_TO_CART";
+export const ADJUST_QTY = "ADJUST_QTY";
+export const LOAD_CURRENT_ITEM = "LOAD_CURRENT_ITEM";
 
-export const getAllSeries = (name) => {
-  return async function (dispatch){
-    let getAllSeries = await axios(`/series`)
-    return dispatch({
-      type: GET_ALL_SERIES,
-      payload: getAllSeries.data,
-    })
-  }
-}
+export const getAllSeries = () => {
+  return (dispatch) => {
+    return fetch("http://localhost:3001/series")
+      .then((r) => r.json())
+      .then((series) => {
+        dispatch({
+          type: GET_ALL_SERIES,
+          payload: series,
+        });
+      });
+  };
+};
+
+// export function getAllMovies() {
+//   return function (dispatch) {
+//     return fetch("http://localhost:3001/peliculas")
+//       .then((r) => r.json())
+//       .then((rjson) =>
+//         dispatch({
+//           type: GET_ALL_MOVIES,
+//           payload: rjson,
+//         })
+//       );
+//   };
+// }
 
 // export const getAllSeries = () => {
 //   return (dispatch) => {
@@ -268,7 +288,10 @@ export const getGenerosSeries = (payload) => {
 
 export const postPeliculas = (payload) => {
   return async function (dispatch) {
-    let created = await axios.post("/peliculas/postPelicula", payload);
+    let created = await axios.post(
+      "http://localhost:3001/peliculas/postPelicula",
+      payload
+    );
     return dispatch({ type: POST_PELICULAS, payload: created.data });
   };
 };
@@ -343,6 +366,37 @@ export const filterName = (payload) => {
   return (dispatch) =>
     dispatch({
       type: FILTER_NAME,
+      payload: payload,
+    });
+};
+export const addToCart = (payload) => {
+  return (dispatch) =>
+    dispatch({
+      type: ADD_TO_CART,
+      payload: payload,
+    });
+};
+export const removeCart = (id) => {
+  return (dispatch) =>
+    dispatch({
+      type: REMOVE_TO_CART,
+      payload: id,
+    });
+};
+export const adjusq = (id, value) => {
+  return (dispatch) =>
+    dispatch({
+      type: ADJUST_QTY,
+      payload: {
+        id: id,
+        value: value,
+      },
+    });
+};
+export const loadCurren = (payload) => {
+  return (dispatch) =>
+    dispatch({
+      type: LOAD_CURRENT_ITEM,
       payload: payload,
     });
 };
