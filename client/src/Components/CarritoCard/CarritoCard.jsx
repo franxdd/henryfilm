@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { removeCart } from "../../Redux/Actions/Actions";
 
-function CarritoCard({ id, nombre, image, qty, tipo }) {
+function CarritoCard({ id, nombre, image, qty, tipo, precio }) {
   const dispatch = useDispatch();
   function handleDelete(id) {
     console.log(id);
@@ -17,7 +17,7 @@ function CarritoCard({ id, nombre, image, qty, tipo }) {
       <div>
         <p>titulo: {nombre}</p>
         <p>detalle: Es una {tipo}</p>
-        <p>$ "aqui va precio"</p>
+        <p>$ {precio}</p>
         <div>
           <div>
             <p>Cantidad: {qty}</p>

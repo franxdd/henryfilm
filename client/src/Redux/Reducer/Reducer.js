@@ -24,8 +24,6 @@ import {
   POST_PELICULAS,
   ADD_TO_CART,
   REMOVE_TO_CART,
-  ADJUST_QTY,
-  LOAD_CURRENT_ITEM,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -312,20 +310,6 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
-      };
-    case ADJUST_QTY:
-      return {
-        ...state,
-        cart: state.cart.map((item) =>
-          item.id === action.payload
-            ? { ...item, qty: action.payload.qty }
-            : item
-        ),
-      };
-    case LOAD_CURRENT_ITEM:
-      return {
-        ...state,
-        current: action.payload,
       };
     default:
       return { ...state };
