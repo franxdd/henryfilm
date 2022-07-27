@@ -14,27 +14,16 @@ function SearchBar() {
   function handleName(e) {
     e.preventDefault();
     setName(e.target.value);
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(filterName(name));
     navigate("/home/search");
+    dispatch(filterName(name));
   }
   return (
     <div className="formulario">
-      <form type="submit" onSubmit={handleSubmit}>
-        <button
-          className="boton-buscar"
-          aria-label="Buscar"
-          onClick={(e) => handleSubmit(e)}
-        >
+      <form type="submit">
+        <button className="boton-buscar" aria-label="Buscar">
           <LupaIcon className="icono-nav" />
         </button>
-        <input
-          onChange={(e) => handleName(e)}
-          type={"text"}
-          placeholder="Buscar..."
-        ></input>
+        <input onChange={(e) => handleName(e)} type={"text"} placeholder="Buscar..."></input>
       </form>
     </div>
   );
