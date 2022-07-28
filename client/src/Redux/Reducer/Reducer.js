@@ -1,5 +1,4 @@
 import {
-  DETAIL,
   GET_ALL_SERIES,
   GET_ALL_MOVIES,
   GET_SERIES_DETAIL,
@@ -20,7 +19,6 @@ import {
   GET_NAME_SERIES,
   GET_TODO,
   FILTER_NAME,
-  CLEAR,
   POST_PELICULAS,
   ADD_TO_CART,
   REMOVE_TO_CART,
@@ -28,9 +26,12 @@ import {
 
 import { filterGenres } from "../../util/filter.js";
 import { toast } from "react-toastify";
-let cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
-if (!cartFromLocalStorage) {
+// let cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+console.log(cartFromLocalStorage);
+if (cartFromLocalStorage && !cartFromLocalStorage.length) {
   cartFromLocalStorage = [];
+} else {
+  var cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
 }
 const initialState = {
   allMovies: [],
@@ -47,7 +48,12 @@ const initialState = {
   backupTodo: [],
   cart: cartFromLocalStorage,
   current: null,
+  idioma: [],
+  idiomaDefault: "es/ES",
 };
+// if (!state.cart.length) {
+// }
+
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_SERIES:
@@ -334,6 +340,53 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
       };
+    // case GET_LENGUAJE:
+    //   return {
+    //     ...state,
+    //     lenguaje: action.payload,
+    //   };
+    // case ENGLISH:
+    //   const iso1 = state.isos.map((t) => t.iso_639_1);
+    //   const iso2 = state.isos.map((r) => r.iso_3166_1);
+    //   const isosconcat = iso1.concat(iso2);
+    //   console.log(isosconcat);
+    //   console.log(action.payload);
+    //   if (action.payload === "en") {
+    //     let english = `${isosconcat[6]}/${isosconcat[38]}`;
+    //     console.log(english);
+    //     return {
+    //       ...state,
+    //       idioma: english,
+    //     };
+    //   } else if (action.payload === "fr") {
+    //     let frances = `${isosconcat[10]}/${isosconcat[42]}`;
+    //     return {
+    //       ...state,
+    //       idioma: frances,
+    //     };
+    //   } else if (action.payload === "pt") {
+    //     let portugues = `${isosconcat[19]}/${isosconcat[51]}`;
+    //     return {
+    //       ...state,
+    //       idioma: portugues,
+    //     };
+    //   } else if (action.payload === "ch") {
+    //     let chino = `${isosconcat[30]}/${isosconcat[62]}`;
+    //     return {
+    //       ...state,
+    //       idioma: chino,
+    //     };
+    //   } else
+    //     return {
+    //       idioma: state.idiomaDefault,
+    //     };
+
+    // case GET_ISOS:
+    //   return {
+    //     ...state,
+    //     isos: action.payload,
+    //   };
+
     default:
       return { ...state };
   }
