@@ -1,6 +1,7 @@
 const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
+[1,2,3,3,1,3,1,3,1,2,1,2,]
 
 const parseador = (
   data,
