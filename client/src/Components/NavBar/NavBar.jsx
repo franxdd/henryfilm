@@ -6,12 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { BiHomeHeart as HomeIcon, BiCameraMovie as CamaraIcon } from "react-icons/bi";
 import {MdLock as LockIcon} from "react-icons/md";
-
-import {
-  BsHouseDoor as HomeIcon,
-  BsCameraVideo as CamaraIcon,
-} from "react-icons/bs";
-import { MdLock as LockIcon } from "react-icons/md";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
@@ -36,7 +30,6 @@ const [extendNavbar, setExtendNavbar] = useState(false);
         <Link className="logo" to={"/"}>
         <img className="logo" src={logo} alt="Logo" />
         </Link>
-<<<<<<< HEAD
         <div className="LeftContainer">
           <div className="NavbarLinkContainer">
             <Link to="/home" className="NavbarLink">
@@ -62,43 +55,6 @@ const [extendNavbar, setExtendNavbar] = useState(false);
       </div>
       <div className="RightContainer">
       <div className="select">
-=======
-        <ul className="contenedor-iconos">
-          <Link to="/home" className="link-nav">
-            <li>
-              <HomeIcon className="icono-nav" />
-            </li>
-          </Link>
-          <Link to="/home/peliculas" className="link-nav">
-            <li>
-              <CamaraIcon className="icono-nav" />
-            </li>
-          </Link>
-          <Link to="/home/series" className="link-nav">
-            <li>
-              <MonitorIcon className="icono-nav" />
-            </li>
-          </Link>
-
-
-          {/* <Link to="/home/formPeliculas" className="link-nav">
-            <li>
-              FORMULARIO
-            </li>
-          </Link> */}
-        </ul>
-
-        {location.pathname === `/home/series` ||
-        location.pathname === `/home/peliculas` ? (
-          <div className="search">
-            <SearchBar />
-          </div>
-        ) : (
-          <></>
-        )}
-
-        <div className="select">
->>>>>>> developer
           <select className="select-lenguaje" onChange={handleChangeLenguaje}>
             <option value="es">Español</option>
             <option value="in">Ingles</option>

@@ -14,16 +14,10 @@ import {
 } from "../../Redux/Actions/Actions";
 import NavBar from "../NavBar/NavBar.jsx";
 import Paginacion from "./PaginadoSeries";
-<<<<<<< HEAD
 import "../../Styles/components/_SeriesHome.scss";
 import "../../Styles/components/_Filter.scss"
 import {AiOutlineClear as ClearIcon} from "react-icons/ai";
 import {FaWindowClose} from "react-icons/fa";
-=======
-import "./_SeriesHome.scss";
-import "../MoviesHome/_Filter.scss";
-import { AiOutlineClear as ClearIcon } from "react-icons/ai";
->>>>>>> developer
 
 function SeriesHome() {
   const dispatch = useDispatch();
