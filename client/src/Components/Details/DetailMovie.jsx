@@ -2,8 +2,8 @@ import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMoviesDetail, willunmont2 } from "../../Redux/Actions/Actions";
 import { useParams } from "react-router-dom";
-import "./_DetailsMovies.scss";
-import { estrellas } from "../../auxiliares/Funciones";
+import "../../Styles/components/_DetailsMovies.scss";
+import { estrellas } from "../../Auxiliares/Funciones";
 import { Link } from "react-router-dom";
 
 function DetailMovie() {

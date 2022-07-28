@@ -1,27 +1,49 @@
 import Slider from "react-slick";
 import "../../Styles/slick-carousel/slick/slick.css";
 import "../../Styles/slick-carousel/slick/slick-theme.css";
-import "./_Carousel.scss";
+import "../../Styles/components/_Carousel.scss";
 import Card from "../Card/Card";
-import { cantidadTarjetas } from "../../auxiliares/Funciones";
-import useFetch from "../../Hooks/useFetch";
+import useFetch from "../../Auxiliares/useFetch";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-const Carousel = ({ url, tipo, titulo, clase }) => {
+const Carousel = ({ url, titulo, clase }) => {
   const { resultados } = useFetch(url);
 
   const settings = {
     className: "carousel",
-    dots: true,
+    // dots: true,
     infinite: true,
-    speed: 800,
-    slidesToShow: cantidadTarjetas(),
-    slidesToScroll: cantidadTarjetas(),
-    autoplay: true,
-    autoplaySpeed: 3000,
+    // speed: 800,
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    // autoplay: true,
+    // autoplaySpeed: 6000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   };
-  console.log(clase);
   return (
     <div className="carousel">
       <div className="contenedor-titulo">

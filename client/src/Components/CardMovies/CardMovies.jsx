@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./_CardMovies.scss";
+import "../../Styles/components/_CardMovies.scss";
 import {MdAddShoppingCart as ShopIcon} from "react-icons/md";
 
 function CardMovies({ id, name, poster }) {

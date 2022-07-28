@@ -1,8 +1,6 @@
-@import "../../styles/utilidades/Variables";
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 .tarjeta {
   width: 250px;
-  height: 500px;
   margin-top: 20px;
   border-color:2px solid rgba(249,249,249,0.8);
   
@@ -17,12 +15,11 @@
     }
   }
   .contenedor-img:hover{
-    transform:scale(1.1);
-
+    transform:scale(1.07);
   }
   .titulo-resultado {
     font-family: 'Poppins', sans-serif;
-    color: $blanco;
+    color: white;
     font-weight: 100;
     font-size: 15px;
     letter-spacing: 1px;

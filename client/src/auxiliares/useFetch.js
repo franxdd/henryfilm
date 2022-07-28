@@ -3,7 +3,7 @@ import { useContext } from "react";
 import Context from "../contexto/Context";
 
 const useFetch = (url) => {
-  const lenguajeSeleccionado = useContext(Context).lenguaje;
+  const idioma = useContext(Context).lenguaje;
   const [resultados, setResultados] = useState([]);
 
   const [data, setData] = useState({});
@@ -15,7 +15,7 @@ const useFetch = (url) => {
         setResultados(data.results);
         setData(data);
       });
-  }, [lenguajeSeleccionado, url]);
+  }, [idioma, url]);
 
   return {
     resultados: resultados,

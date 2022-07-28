@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import "./App.scss";
+import "./Styles/App.scss";
 import DetailMovie from "./Components/Details/DetailMovie";
 import DetailsSeries from "./Components/Details/DetailsSeries";
 import FormPeliculas from "./Components/Form/FormPeliculas";
