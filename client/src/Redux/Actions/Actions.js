@@ -31,18 +31,18 @@ export const REMOVE_TO_CART = "REMOVE_TO_CART";
 export const ADJUST_QTY = "ADJUST_QTY";
 export const LOAD_CURRENT_ITEM = "LOAD_CURRENT_ITEM";
 
-export const getAllSeries = () => {
-  return (dispatch) => {
-    return fetch("http://localhost:3001/series")
-      .then((r) => r.json())
-      .then((series) => {
-        dispatch({
-          type: GET_ALL_SERIES,
-          payload: series,
-        });
-      });
-  };
-};
+// export const getAllSeries = () => {
+//   return (dispatch) => {
+//     return fetch("http://localhost:3001/series")
+//       .then((r) => r.json())
+//       .then((series) => {
+//         dispatch({
+//           type: GET_ALL_SERIES,
+//           payload: series,
+//         });
+//       });
+//   };
+// };
 
 // export function getAllMovies() {
 //   return function (dispatch) {
@@ -57,18 +57,15 @@ export const getAllSeries = () => {
 //   };
 // }
 
-// export const getAllSeries = () => {
-//   return (dispatch) => {
-//     return fetch("http://localhost:3001/series")
-//       .then((r) => r.json())
-//       .then((series) => {
-//         dispatch({
-//           type: GET_ALL_SERIES,
-//           payload: series,
-//         });
-//       });
-//   };
-// };
+export const getAllSeries = () => {
+  return async function (dispatch){
+    let getAllSeries = await axios(`/series`)
+    return dispatch({
+      type: GET_ALL_SERIES,
+      payload: getAllSeries.data,
+    })
+  }
+}
 
 export const getAllMovies = () => {
   return async function (dispatch){
@@ -289,7 +286,7 @@ export const getGenerosSeries = (payload) => {
 export const postPeliculas = (payload) => {
   return async function (dispatch) {
     let created = await axios.post(
-      "http://localhost:3001/peliculas/postPelicula",
+      "/peliculas/postPelicula",
       payload
     );
     return dispatch({ type: POST_PELICULAS, payload: created.data });
