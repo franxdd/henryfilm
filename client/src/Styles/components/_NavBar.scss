@@ -1,0 +1,126 @@
+@import "../Utilidades/_Variables.scss";
+
+ .NavbarContainer{
+    width: 100%;
+    height:  "100vh";
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+  @media (min-width: 700px) {
+    height: 70px;
+  }
+ .LeftContainer {
+    flex: 70%;
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
+ }
+.RightContainer{
+  margin-top: 15px;
+  flex: 30%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+  button {
+    margin-right: 8px;
+    margin-left: 8px;
+    position: relative;
+    font-size: 0.8em;
+    padding: 0.7em 1.4em;
+    background-color:$background-intermedio;
+    text-decoration: none;
+    border: none;
+    border-radius: 0.5em;
+    color: #DEDEDE;
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.3);
+    cursor: pointer; 
+  }
+    button::before {
+    position: absolute;
+    content: '';
+    background: linear-gradient(135deg, rgba(33,33,33,1) 0%, rgba(33,33,33,1) 50%, rgb(227, 190, 2) 50%, rgb(191, 172, 4) 60%);
+    border-radius: 0 0 0.5em 0;
+    box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
+  }
+    button:hover::before {
+    width: 2em;
+    height: 2em;
+  }
+    button:active {
+    box-shadow: 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.3);
+    transform: translate(0.1em, 0.1em);
+  }
+    .select-lenguaje {
+    border-radius: 7px;
+    background-color:#191919;
+    color: $detalles;
+    height: 30px;
+    padding: 5px;
+  }
+};
+
+.NavbarInnerContainer{
+  width: 100%;
+  height: 70px;
+  display: flex;
+};
+
+.NavbarLinkContainer{
+  display: flex;
+};
+
+.NavbarLink{
+  color: white;
+  font-size: x-large;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  margin: 35px;
+  margin-left: 1%;
+   :hover{
+    color: $detalles;
+  }
+  @media (max-width: 700px) {
+    display: none;
+  }
+};
+
+ .NavbarLinkExtended{
+  color: white;
+  font-size: x-large;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  margin: 10px;
+ };
+
+.logo {
+  margin: 10px;
+  width: 130px;
+  height: auto;
+  @media (max-width: 700px) {
+    width: 90px;
+  }
+};
+
+.OpenLinksButton{
+  width: 70px;
+  height: 50px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 45px;
+  cursor: pointer;
+  @media (min-width: 700px) {
+    display: none;
+  }
+};
+
+.NavbarExtendedContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 700px) {
+    display: none;
+  }
+}
+};

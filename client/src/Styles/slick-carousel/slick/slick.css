@@ -2,14 +2,12 @@
 .slick-slider
 {
     position:relative;
-    height: 480px;
 
     display: block;
     box-sizing: border-box;
 
     -webkit-user-select: none;
        -moz-user-select: none;
-        -ms-user-select: none;
             user-select: none;
 
     -webkit-touch-callout: none;
@@ -22,10 +20,8 @@
 .slick-list
 {
     position: relative;
-
     display: block;
     overflow: hidden;
-
     margin: 0;
     padding: 0;
 }

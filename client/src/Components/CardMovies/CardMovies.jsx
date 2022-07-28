@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./_CardMovies.scss";
-import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
+import "../../Styles/components/_CardMovies.scss";
+import {MdAddShoppingCart as ShopIcon} from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Redux/Actions/Actions";
 

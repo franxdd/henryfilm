@@ -1,5 +1,4 @@
 import {
-  DETAIL,
   GET_ALL_SERIES,
   GET_ALL_MOVIES,
   GET_SERIES_DETAIL,
@@ -20,14 +19,20 @@ import {
   GET_NAME_SERIES,
   GET_TODO,
   FILTER_NAME,
-  CLEAR,
   POST_PELICULAS,
   ADD_TO_CART,
   REMOVE_TO_CART,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
-
+import { toast } from "react-toastify";
+// let cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+console.log(cartFromLocalStorage);
+if (cartFromLocalStorage && !cartFromLocalStorage.length) {
+  cartFromLocalStorage = [];
+} else {
+  var cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+}
 const initialState = {
   allMovies: [],
   allSeries: [],
@@ -41,9 +46,14 @@ const initialState = {
   all: [],
   todo: [],
   backupTodo: [],
-  cart: [],
+  cart: cartFromLocalStorage,
   current: null,
+  idioma: [],
+  idiomaDefault: "es/ES",
 };
+// if (!state.cart.length) {
+// }
+
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_SERIES:
@@ -297,13 +307,32 @@ const rootRouter = (state = initialState, action) => {
       const incart = state.cart.find((i) =>
         i.id === action.payload ? true : false
       );
+      function a() {
+        return toast.error("Ya se encuentra en el carro", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      function b() {
+        return toast.success("Fue añadida al carro", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      incart ? a() : b();
       return {
         ...state,
-        cart: incart
-          ? state.cart.map((i) =>
-              i.id === action.payload ? { ...i, qty: 1 } : i
-            )
-          : [...state.cart, { ...item, qty: 1 }],
+        cart: incart ? state.cart : [...state.cart, { ...item, qty: 1 }],
       };
 
     case REMOVE_TO_CART:
@@ -311,6 +340,53 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
       };
+    // case GET_LENGUAJE:
+    //   return {
+    //     ...state,
+    //     lenguaje: action.payload,
+    //   };
+    // case ENGLISH:
+    //   const iso1 = state.isos.map((t) => t.iso_639_1);
+    //   const iso2 = state.isos.map((r) => r.iso_3166_1);
+    //   const isosconcat = iso1.concat(iso2);
+    //   console.log(isosconcat);
+    //   console.log(action.payload);
+    //   if (action.payload === "en") {
+    //     let english = `${isosconcat[6]}/${isosconcat[38]}`;
+    //     console.log(english);
+    //     return {
+    //       ...state,
+    //       idioma: english,
+    //     };
+    //   } else if (action.payload === "fr") {
+    //     let frances = `${isosconcat[10]}/${isosconcat[42]}`;
+    //     return {
+    //       ...state,
+    //       idioma: frances,
+    //     };
+    //   } else if (action.payload === "pt") {
+    //     let portugues = `${isosconcat[19]}/${isosconcat[51]}`;
+    //     return {
+    //       ...state,
+    //       idioma: portugues,
+    //     };
+    //   } else if (action.payload === "ch") {
+    //     let chino = `${isosconcat[30]}/${isosconcat[62]}`;
+    //     return {
+    //       ...state,
+    //       idioma: chino,
+    //     };
+    //   } else
+    //     return {
+    //       idioma: state.idiomaDefault,
+    //     };
+
+    // case GET_ISOS:
+    //   return {
+    //     ...state,
+    //     isos: action.payload,
+    //   };
+
     default:
       return { ...state };
   }

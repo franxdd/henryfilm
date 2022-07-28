@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { filterName } from "../../Redux/Actions/Actions";
 import { useNavigate } from "react-router-dom";
 import { BsSearch as LupaIcon } from "react-icons/bs";
-import "./_SearchBar.scss";
-import "./_Formulario.scss";
+import "../../Styles/components/_SearchBar.scss";
+import "../../Styles/components/_Formulario.scss";
 
 function SearchBar() {
   let navigate = useNavigate();

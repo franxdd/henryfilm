@@ -14,9 +14,10 @@ import {
 } from "../../Redux/Actions/Actions";
 import NavBar from "../NavBar/NavBar.jsx";
 import Paginacion from "./PaginadoSeries";
-import "./_SeriesHome.scss";
-import "../MoviesHome/_Filter.scss";
-import { AiOutlineClear as ClearIcon } from "react-icons/ai";
+import "../../Styles/components/_SeriesHome.scss";
+import "../../Styles/components/_Filter.scss"
+import {AiOutlineClear as ClearIcon} from "react-icons/ai";
+import {FaWindowClose} from "react-icons/fa";
 
 function SeriesHome() {
   const dispatch = useDispatch();
@@ -109,10 +110,10 @@ function SeriesHome() {
 
       {generosCache?.map((g) => {
         return (
-          <div style={{ color: "white" }} onClick={() => FiltradoReversa(g)}>
-            {" "}
-            {g}
-          </div>
+          <button onClick={() => FiltradoReversa(g)}>
+          {" "}
+          {g} <FaWindowClose/>
+        </button>
         );
       })}
 
