@@ -70,21 +70,28 @@ function MoviesHome() {
   };
 
   return allMovies.length === 0 ? (
-    <div class="momentum"></div>
+    <div className="momentum"></div>
   ) : (
-  <div className="filter">
-    <span>Ordenar por:</span>
-    <button className="cta" onClick={(e) => HandleClickASC(e)}>
-    <span className="hover-underline-animation"> A - Z </span>
-    </button>
-    <button className="cta" onClick={(e) => HandleClickDES(e)} > 
-    <span className="hover-underline-animation"> Z - A </span>
-    </button>
+    <div className="filter">
+      <span>Ordenar por:</span>
+      <button className="cta" onClick={(e) => HandleClickASC(e)}>
+        <span className="hover-underline-animation"> A - Z </span>
+      </button>
+      <button className="cta" onClick={(e) => HandleClickDES(e)}>
+        <span className="hover-underline-animation"> Z - A </span>
+      </button>
       <button className="cta" onClick={(e) => HandleClickVoteASC(e)}>
+<<<<<<< HEAD
       <span className="hover-underline-animation"><strong> + </strong> Puntuación</span>
       </button>
       <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
       <span className="hover-underline-animation"> <strong> - </strong>  Puntuación </span>
+=======
+        <span className="hover-underline-animation"> + Puntuación</span>
+      </button>
+      <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
+        <span className="hover-underline-animation"> - Puntuación </span>
+>>>>>>> developer
       </button>
       <span>Filtrar por:</span>
       
@@ -104,9 +111,18 @@ function MoviesHome() {
               </option>
             ))}
           </select>
+<<<<<<< HEAD
         {/* </div>
       </div> */}
       <span onClick={() => HandleClickClear()}><ClearIcon className="icono-clear" /></span>
+=======
+        </div>
+      </div>
+      <span onClick={() => HandleClickClear()}>
+        <ClearIcon className="icono-clear" />
+      </span>
+
+>>>>>>> developer
       {generosCache?.map((g) => {
         return (
           <button onClick={() => FiltradoReversa(g)}>

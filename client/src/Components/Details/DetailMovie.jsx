@@ -1,21 +1,29 @@
 import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMoviesDetail, willunmont2 } from "../../Redux/Actions/Actions";
+import {
+  addToCart,
+  getMoviesDetail,
+  willunmont2,
+} from "../../Redux/Actions/Actions";
 import { useParams } from "react-router-dom";
 import "../../Styles/components/_DetailsMovies.scss";
 import { estrellas } from "../../Auxiliares/Funciones";
 import { Link } from "react-router-dom";
+import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 
 function DetailMovie() {
   let { id } = useParams();
   const dispatch = useDispatch();
-
+  function addCart(id) {
+    let idParseado = parseInt(id);
+    dispatch(addToCart(idParseado));
+  }
   let movieDetail = useSelector((state) => state.movieDetail);
   useEffect(() => {
     dispatch(getMoviesDetail(id));
     return () => dispatch(willunmont2());
   }, []);
-  console.log(movieDetail);
+
   return (
     <section>
       <header
@@ -55,6 +63,9 @@ function DetailMovie() {
               <Link to={`/videos`}>
                 <button>Reparto</button>
               </Link>
+              <span onClick={() => addCart(id)}>
+                <ShopIcon className="iconoShop" />
+              </span>
             </div>
           </div>
         </div>
