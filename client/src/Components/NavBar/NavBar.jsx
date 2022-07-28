@@ -54,6 +54,8 @@ const Nav = () => {
               <MonitorIcon className="icono-nav" />
             </li>
           </Link>
+
+
           {/* <Link to="/home/formPeliculas" className="link-nav">
             <li>
               FORMULARIO
