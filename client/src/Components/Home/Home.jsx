@@ -6,13 +6,8 @@ import Context from "../../contexto/Context";
 import { seriesName, moviesName, urlBase, apiKey } from "../../Auxiliares/Variables";
 import "../../Styles/components/_Home.scss";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getAllSeries,
-  getAllMovies,
-  getGenerosMovies,
-  getGenerosSeries,
-  getTodo,
-} from "../../Redux/Actions/Actions";
+import { getAllSeries, getAllMovies, getGenerosMovies, getGenerosSeries, getTodo } from "../../Redux/Actions/Actions";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -29,7 +24,7 @@ const Home = () => {
 
   return (
     <section className="contenedor-carousels">
-      <Header/>
+      <Header />
       <Carousel
         url={`${urlBase}/trending/movie/week?api_key=${apiKey}&language=${idioma}`}
         tipo="movies"
@@ -44,6 +39,7 @@ const Home = () => {
         titulo={seriesName[idioma].tendencia}
         clase="series"
       />
+      <Footer />
     </section>
   );
 };

@@ -2,12 +2,11 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../Styles/components/_NavBar.scss";
+import { orderNameASC, orderNameDES, orderVoteAvgASC, orderVoteAvgDES } from "../../Redux/Actions/Actions";
 import { useSelector, useDispatch } from "react-redux";
+import "../../Styles/components/_NavBar.scss";
 import { useState } from "react";
-import {
-  BiHomeHeart as HomeIcon,
-  BiCameraMovie as CamaraIcon,
-} from "react-icons/bi";
+import { BiHomeHeart as HomeIcon, BiCameraMovie as CamaraIcon } from "react-icons/bi";
 import { MdLock as LockIcon } from "react-icons/md";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
@@ -59,31 +58,28 @@ const Nav = () => {
           </div>
           <div className="RightContainer">
             <div className="select">
-              <select
-                className="select-lenguaje"
-                onChange={handleChangeLenguaje}
-              >
+              <select className="select-lenguaje" onChange={handleChangeLenguaje}>
                 <option value="es">Español</option>
                 <option value="in">Ingles</option>
                 <option value="fr">Français</option>
                 <option value="pt">Português</option>
               </select>
-              <Link to="/home/Register">
-                <button>
-                  <b>Registrate</b>
-                </button>
-              </Link>
-              <Link to="/home/carro">
-                <button>
-                  <ShopIcon className="iconoShop" />
-                </button>
-              </Link>
-              <Link to="/home/formPeliculas" className="link-nav">
-                <button>
-                  <LockIcon className="icono-nav" />
-                </button>
-              </Link>
             </div>
+            <Link to="/home/Register">
+              <button>
+                <b>Registrate</b>
+              </button>
+            </Link>
+            <Link to="/home/carro">
+              <button>
+                <ShopIcon className="iconoShop" />
+              </button>
+            </Link>
+            <Link to="/home/formPeliculas" className="link-nav">
+              <button>
+                <LockIcon className="icono-nav" />
+              </button>
+            </Link>
           </div>
         </div>
         {extendNavbar && (
@@ -104,26 +100,17 @@ const Nav = () => {
               <button>
                 <b>Registrate</b>
               </button>
-              <Link to="/home/carro">
-                <button>
-                  <ShopIcon className="iconoShop" />
-                </button>
-              </Link>
-
               <button>
                 <LockIcon className="icono-nav" />
               </button>
             </Link>
+            <Link to="/home/carro">
+              <button>
+                <ShopIcon className="iconoShop" />
+              </button>
+            </Link>
           </div>
         )}
-        {/* {location.pathname !== "/home" && (
-          <div className="search">
-            <SearchBar />
-          </div>
-        )} */}
-        {/* 
-        {/* <div className="login"> */}
-        {/* <Link to="/home/Login"> */}
       </nav>
       <section>
         <Outlet />
