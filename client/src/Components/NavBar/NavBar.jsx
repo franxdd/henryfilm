@@ -1,13 +1,10 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
-import "./_NavBar.scss";
+import "../../Styles/components/_NavBar.scss";
 import { orderNameASC, orderNameDES, orderVoteAvgASC, orderVoteAvgDES } from "../../Redux/Actions/Actions";
 import { useSelector, useDispatch } from "react-redux";
-
-import { BsHouseDoor as HomeIcon, BsCameraVideo as CamaraIcon } from "react-icons/bs";
 import "../../Styles/components/_NavBar.scss";
-import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { BiHomeHeart as HomeIcon, BiCameraMovie as CamaraIcon } from "react-icons/bi";
 import { MdLock as LockIcon } from "react-icons/md";
@@ -113,12 +110,6 @@ const Nav = () => {
               </button>
             </Link>
           </div>
-          // {location.pathname === `/home/series` ||
-          // location.pathname === `/home/search` ||
-          // location.pathname === `/home/peliculas` ?}
-          //   <div className="search">
-          //     <SearchBar />
-          //   </div>
         )}
       </nav>
       <section>
