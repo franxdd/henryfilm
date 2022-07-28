@@ -15,7 +15,6 @@ import {
   BsCameraVideo as CamaraIcon,
 } from "react-icons/bs";
 import {MdLock as LockIcon} from "react-icons/md";
-
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import { useContext } from "react";
@@ -55,6 +54,8 @@ const Nav = () => {
               <MonitorIcon className="icono-nav" />
             </li>
           </Link>
+
+
           {/* <Link to="/home/formPeliculas" className="link-nav">
             <li>
               FORMULARIO

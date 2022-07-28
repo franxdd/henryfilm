@@ -1,9 +1,12 @@
 const { Router } = require("express");
 const route = Router();
-const { postUser, getAllUsers } = require("../servicies/usuarios.js");
+const { validateToken} = require("../utils/JWT.js")
+const { postUser, postLogin,getProfile ,getAllUsers  } = require("../servicies/usuarios.js");
 require("dotenv").config();
 
 route.get("/", getAllUsers)
-route.post("/create", postUser);
+route.post("/register", postUser);
+route.post("/login", postLogin);
+route.get("/profile", validateToken, getProfile);
 
 module.exports = route;
