@@ -1,19 +1,12 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
-import "./_NavBar.scss";
-import {
-  orderNameASC,
-  orderNameDES,
-  orderVoteAvgASC,
-  orderVoteAvgDES,
-} from "../../Redux/Actions/Actions";
+import "../../Styles/components/_NavBar.scss";
+import { orderNameASC, orderNameDES, orderVoteAvgASC, orderVoteAvgDES } from "../../Redux/Actions/Actions";
 import { useSelector, useDispatch } from "react-redux";
-
-import {
-  BsHouseDoor as HomeIcon,
-  BsCameraVideo as CamaraIcon,
-} from "react-icons/bs";
+import "../../Styles/components/_NavBar.scss";
+import { useState } from "react";
+import { BiHomeHeart as HomeIcon, BiCameraMovie as CamaraIcon } from "react-icons/bi";
 import { MdLock as LockIcon } from "react-icons/md";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
@@ -31,72 +24,93 @@ const Nav = () => {
   const handleChangeLenguaje = (e) => {
     contexto.setLenguaje(e.target.value);
   };
-
+  const [extendNavbar, setExtendNavbar] = useState(false);
   return (
     <main>
-      <nav className="nav-superior">
-        <Link to={"/"}>
-          <img className="logo" src={logo} alt="Logo" />
-        </Link>
-        <ul className="contenedor-iconos">
-          <Link to="/home" className="link-nav">
-            <li>
-              <HomeIcon className="icono-nav" />
-            </li>
+      <nav className="NavbarContainer " extendNavbar={extendNavbar}>
+        <div className="NavbarInnerContainer">
+          <Link className="logo" to={"/"}>
+            <img className="logo" src={logo} alt="Logo" />
           </Link>
-          <Link to="/home/peliculas" className="link-nav">
-            <li>
-              <CamaraIcon className="icono-nav" />
-            </li>
-          </Link>
-          <Link to="/home/series" className="link-nav">
-            <li>
-              <MonitorIcon className="icono-nav" />
-            </li>
-          </Link>
-
-
-          {/* <Link to="/home/formPeliculas" className="link-nav">
-            <li>
-              FORMULARIO
-            </li>
-          </Link> */}
-        </ul>
-
-        {location.pathname === `/home/series` ||
-        location.pathname === `/home/peliculas` ? (
-          <div className="search">
-            <SearchBar />
+          <div className="LeftContainer">
+            <div className="NavbarLinkContainer">
+              <Link to="/home" className="NavbarLink">
+                <HomeIcon className="icono-nav" />
+              </Link>
+              <Link to="/home/peliculas" className="NavbarLink">
+                <CamaraIcon className="icono-nav" />
+              </Link>
+              <Link to="/home/series" className="NavbarLink">
+                <MonitorIcon className="icono-nav" />
+              </Link>
+              <div className="NavbarLink">
+                <SearchBar />
+              </div>
+            </div>
+            <button
+              className="OpenLinksButton"
+              onClick={() => {
+                setExtendNavbar((curr) => !curr);
+              }}
+            >
+              {extendNavbar ? <>&#10005;</> : <> &#8801;</>}
+            </button>
           </div>
-        ) : (
-          <></>
+          <div className="RightContainer">
+            <div className="select">
+              <select className="select-lenguaje" onChange={handleChangeLenguaje}>
+                <option value="es">Español</option>
+                <option value="in">Ingles</option>
+                <option value="fr">Français</option>
+                <option value="pt">Português</option>
+              </select>
+            </div>
+            <Link to="/home/Register">
+              <button>
+                <b>Registrate</b>
+              </button>
+            </Link>
+            <Link to="/home/carro">
+              <button>
+                <ShopIcon className="iconoShop" />
+              </button>
+            </Link>
+            <Link to="/home/formPeliculas" className="link-nav">
+              <button>
+                <LockIcon className="icono-nav" />
+              </button>
+            </Link>
+          </div>
+        </div>
+        {extendNavbar && (
+          <div className="NavbarExtendedContainer">
+            <Link to="/home" className="NavbarLinkExtended">
+              <div className="NavbarLinkExtended">
+                <SearchBar />
+              </div>
+              <HomeIcon className="icono-nav" /> Inicio
+            </Link>
+            <Link to="/home/peliculas" className="NavbarLinkExtended">
+              <CamaraIcon className="icono-nav" /> Películas
+            </Link>
+            <Link to="/home/series" className="NavbarLinkExtended">
+              <MonitorIcon className="icono-nav" /> Series
+            </Link>
+            <Link to="/home/Register">
+              <button>
+                <b>Registrate</b>
+              </button>
+              <button>
+                <LockIcon className="icono-nav" />
+              </button>
+            </Link>
+            <Link to="/home/carro">
+              <button>
+                <ShopIcon className="iconoShop" />
+              </button>
+            </Link>
+          </div>
         )}
-
-        <div className="select">
-          <select className="select-lenguaje" onChange={handleChangeLenguaje}>
-            <option value="es">Español</option>
-            <option value="in">Ingles</option>
-            <option value="fr">Français</option>
-            <option value="pt">Português</option>
-          </select>
-        </div>
-        <div className="login">
-          {/* <Link to="/home/Login"> */}
-          <Link to="/home/Register">
-            <button>
-              <b>Registrate</b>
-            </button>
-
-            <button>
-              <LockIcon className="icono-nav" />
-            </button>
-          </Link>
-          <Link to="/home/carro">
-            <button>
-              <ShopIcon className="iconoShop" />
-            </button>
-          </Link>
-        </div>
       </nav>
       <section>
         <Outlet />
