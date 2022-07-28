@@ -1,16 +1,16 @@
-@import "../../Styles/utilidades/Variables";
-@import "../../Styles/utilidades/Mixin";
+@import "../Utilidades/_Variables.scss";
+@import "../Utilidades/_Mixin.scss";
 
 .contenedor-seccion {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 30px;
+  margin-top: -40px;
 
     .contenedor-resultados {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-between;
       align-items: flex-start;
       align-content: flex-start;
       flex-wrap: wrap;
@@ -23,12 +23,11 @@
         font-size: 2rem;
       }
     }
+    
   }
   .containerPag{
     margin-top: 40px;
   }
-  
-
 @media screen and (max-width: 600px) {
   .contenedor-seccion {
     section {

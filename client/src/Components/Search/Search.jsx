@@ -2,7 +2,7 @@ import { React, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getTodo } from "../../Redux/Actions/Actions";
 import CardSearch from "./CardSearch";
-import "./_Search.scss"
+import "../../Styles/components/_Search.scss"
 
 function Search() {
   const dispatch = useDispatch();
