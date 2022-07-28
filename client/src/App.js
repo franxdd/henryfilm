@@ -15,7 +15,8 @@ import Context from "./contexto/Context";
 import { useState } from "react";
 import Search from "./Components/Search/Search";
 import Carro from "./Components/Carro/Carro";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
 
@@ -26,6 +27,7 @@ const App = () => {
   return (
     <div className="App">
       <Context.Provider value={contexto}>
+        <ToastContainer />
         <Routes>
           <Route path={"/"} element={<LandingPage />}></Route>
         </Routes>
