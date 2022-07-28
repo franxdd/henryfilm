@@ -2,18 +2,10 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "./_NavBar.scss";
-import {
-  orderNameASC,
-  orderNameDES,
-  orderVoteAvgASC,
-  orderVoteAvgDES,
-} from "../../Redux/Actions/Actions";
+import { orderNameASC, orderNameDES, orderVoteAvgASC, orderVoteAvgDES } from "../../Redux/Actions/Actions";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  BsHouseDoor as HomeIcon,
-  BsCameraVideo as CamaraIcon,
-} from "react-icons/bs";
+import { BsHouseDoor as HomeIcon, BsCameraVideo as CamaraIcon } from "react-icons/bs";
 import { MdLock as LockIcon } from "react-icons/md";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
@@ -62,6 +54,7 @@ const Nav = () => {
         </ul>
 
         {location.pathname === `/home/series` ||
+        location.pathname === `/home/search` ||
         location.pathname === `/home/peliculas` ? (
           <div className="search">
             <SearchBar />

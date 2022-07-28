@@ -2,21 +2,11 @@ import React from "react";
 import Carousel from "../Carousel/Carousel";
 import { useContext, useEffect } from "react";
 import Context from "../../contexto/Context";
-import {
-  titulosSeries,
-  titulosPeliculas,
-  urlBase,
-  apiKey,
-} from "../../auxiliares/Variables";
+import { titulosSeries, titulosPeliculas, urlBase, apiKey } from "../../auxiliares/Variables";
 import "./_Home.scss";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getAllSeries,
-  getAllMovies,
-  getGenerosMovies,
-  getGenerosSeries,
-  getTodo,
-} from "../../Redux/Actions/Actions";
+import { getAllSeries, getAllMovies, getGenerosMovies, getGenerosSeries, getTodo } from "../../Redux/Actions/Actions";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -46,6 +36,7 @@ const Home = () => {
         titulo={titulosSeries[lenguajeSeleccionado].tendencia}
         clase="series"
       />
+      <Footer />
     </section>
   );
 };

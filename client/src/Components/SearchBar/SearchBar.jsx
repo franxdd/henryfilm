@@ -1,6 +1,6 @@
 import { React, useState } from "react";
-import { useDispatch } from "react-redux";
-import { filterName } from "../../Redux/Actions/Actions";
+import { useDispatch, useSelector } from "react-redux";
+import { filterName, getTodo } from "../../Redux/Actions/Actions";
 import { useNavigate } from "react-router-dom";
 import { BsSearch as LupaIcon } from "react-icons/bs";
 import "./_SearchBar.scss";
@@ -12,11 +12,11 @@ function SearchBar() {
   const [name, setName] = useState("");
 
   function handleName(e) {
-    e.preventDefault();
     setName(e.target.value);
-    navigate("/home/search");
     dispatch(filterName(name));
+    navigate("/home/search");
   }
+
   return (
     <div className="formulario">
       <form type="submit">
