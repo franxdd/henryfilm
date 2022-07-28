@@ -1,20 +1,30 @@
 import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSeriesDetail, willunmont } from "../../Redux/Actions/Actions";
+import {
+  addToCart,
+  getSeriesDetail,
+  willunmont,
+} from "../../Redux/Actions/Actions";
 import { useParams } from "react-router-dom";
 import "./_DetailsMovies.scss";
 import { estrellas } from "../../auxiliares/Funciones";
 import { Link } from "react-router-dom";
-
+import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 function DetailsSeries() {
   let { id } = useParams();
   const dispatch = useDispatch();
 
+  function addCart(id) {
+    let idParseado = parseInt(id);
+    dispatch(addToCart(idParseado));
+  }
   let seriesDetail = useSelector((state) => state.seriesDetail);
   useEffect(() => {
     dispatch(getSeriesDetail(id));
     return () => dispatch(willunmont());
   }, []);
+
+  console.log(seriesDetail);
   return (
     <section>
       <header
@@ -60,6 +70,9 @@ function DetailsSeries() {
               <Link to={`/videos`}>
                 <button>Reparto</button>
               </Link>
+              <span onClick={() => addCart(id)}>
+                <ShopIcon className="iconoShop" />
+              </span>
             </div>
           </div>
         </div>

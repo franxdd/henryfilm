@@ -14,7 +14,8 @@ import {
   BsHouseDoor as HomeIcon,
   BsCameraVideo as CamaraIcon,
 } from "react-icons/bs";
-import {MdLock as LockIcon} from "react-icons/md";
+import { MdLock as LockIcon } from "react-icons/md";
+import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import { useContext } from "react";
@@ -30,7 +31,6 @@ const Nav = () => {
   const handleChangeLenguaje = (e) => {
     contexto.setLenguaje(e.target.value);
   };
-
 
   return (
     <main>
@@ -86,9 +86,14 @@ const Nav = () => {
             <button>
               <b>Registrate</b>
             </button>
-        
+
             <button>
-            <LockIcon className="icono-nav" />
+              <LockIcon className="icono-nav" />
+            </button>
+          </Link>
+          <Link to="/home/carro">
+            <button>
+              <ShopIcon className="iconoShop" />
             </button>
           </Link>
         </div>

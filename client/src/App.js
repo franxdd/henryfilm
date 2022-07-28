@@ -14,6 +14,7 @@ import SeriesHome from "./Components/SeriesHome/SeriesHome";
 import Context from "./contexto/Context";
 import { useState } from "react";
 import Search from "./Components/Search/Search";
+import Carro from "./Components/Carro/Carro";
 
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
@@ -40,6 +41,7 @@ const App = () => {
             <Route path="Register" element={<LoginRegister />} />
             <Route path="Login" element={<Login />} />
             <Route path="Search" element={<Search />}></Route>
+            <Route path="Carro" element={<Carro />}></Route>
           </Route>
         </Routes>
       </Context.Provider>
