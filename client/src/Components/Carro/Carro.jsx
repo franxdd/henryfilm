@@ -10,6 +10,7 @@ function Carro() {
   useEffect(() => {
     let items = 0;
     let price = 0;
+
     carrito.forEach((e) => {
       items += e.qty;
       price += e.price;
@@ -17,6 +18,9 @@ function Carro() {
     settotalItems(items);
     settotalPrecio(price);
   }, [carrito, totalItems, totalPrecio, settotalItems, settotalPrecio]);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(carrito));
+  }, [carrito]);
   console.log(carrito);
   return (
     <div>

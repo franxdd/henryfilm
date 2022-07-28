@@ -27,7 +27,11 @@ import {
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
-
+import { toast } from "react-toastify";
+let cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+if (!cartFromLocalStorage) {
+  cartFromLocalStorage = [];
+}
 const initialState = {
   allMovies: [],
   allSeries: [],
@@ -41,7 +45,7 @@ const initialState = {
   all: [],
   todo: [],
   backupTodo: [],
-  cart: [],
+  cart: cartFromLocalStorage,
   current: null,
 };
 const rootRouter = (state = initialState, action) => {
@@ -297,13 +301,32 @@ const rootRouter = (state = initialState, action) => {
       const incart = state.cart.find((i) =>
         i.id === action.payload ? true : false
       );
+      function a() {
+        return toast.error("Ya se encuentra en el carro", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      function b() {
+        return toast.success("Fue añadida al carro", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      incart ? a() : b();
       return {
         ...state,
-        cart: incart
-          ? state.cart.map((i) =>
-              i.id === action.payload ? { ...i, qty: 1 } : i
-            )
-          : [...state.cart, { ...item, qty: 1 }],
+        cart: incart ? state.cart : [...state.cart, { ...item, qty: 1 }],
       };
 
     case REMOVE_TO_CART:
