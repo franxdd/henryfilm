@@ -1,5 +1,5 @@
-@import "../../styles/utilidades/Variables";
-@import "../../styles/utilidades/Mixin";
+@import "../Utilidades/_Variables.scss";
+@import "../Utilidades/_Mixin.scss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 .carousel {
@@ -7,13 +7,12 @@
 .slider{
 margin-top: 20%;
 }
-  .contenedor-carousel{
-    height: 500px; 
-   }
+  // .contenedor-carousel{
+  //   height: 450px; 
+  //  }
   .contenedor-titulo {
     font-family: 'Poppins', sans-serif;
     width:1000px;
-    height:100px;
     display: flex;
     align-items: center;
     margin-top: 20px;

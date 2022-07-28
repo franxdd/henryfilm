@@ -6,8 +6,8 @@ import {
   willunmont,
 } from "../../Redux/Actions/Actions";
 import { useParams } from "react-router-dom";
-import "./_DetailsMovies.scss";
-import { estrellas } from "../../auxiliares/Funciones";
+import "../../Styles/components/_DetailsMovies.scss";
+import { estrellas } from "../../Auxiliares/Funciones";
 import { Link } from "react-router-dom";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 function DetailsSeries() {
