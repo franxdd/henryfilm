@@ -34,32 +34,6 @@ export const GET_LENGUAJE = "GET_LENGUAJE";
 export const ENGLISH = "ENGLISH";
 export const GET_ISOS = "GET_ISOS";
 
-// export const getAllSeries = () => {
-//   return (dispatch) => {
-//     return fetch("http://localhost:3001/series")
-//       .then((r) => r.json())
-//       .then((series) => {
-//         dispatch({
-//           type: GET_ALL_SERIES,
-//           payload: series,
-//         });
-//       });
-//   };
-// };
-
-// export function getAllMovies() {
-//   return function (dispatch) {
-//     return fetch("http://localhost:3001/peliculas")
-//       .then((r) => r.json())
-//       .then((rjson) =>
-//         dispatch({
-//           type: GET_ALL_MOVIES,
-//           payload: rjson,
-//         })
-//       );
-//   };
-// }
-
 export const getAllSeries = () => {
   return async function (dispatch){
     let getAllSeries = await axios(`/series`)
@@ -80,19 +54,6 @@ export const getAllMovies = () => {
   }
 }
 
-// export function getAllMovies() {
-//   return function (dispatch) {
-//     return fetch("http://localhost:3001/peliculas")
-//       .then((r) => r.json())
-//       .then((rjson) =>
-//         dispatch({
-//           type: GET_ALL_MOVIES,
-//           payload: rjson,
-//         })
-//       );
-//   };
-// }
-
 export const getnameSeries = (name) => {
   return async function (dispatch){
     let getnameSeries = await axios(`/series/detalleDeSerie?name=` + name)
@@ -102,20 +63,6 @@ export const getnameSeries = (name) => {
     })
   }
 }
-
-// export const getnameSeries = (name) => {
-//   return async function (dispatch) {
-//     try {
-//       let json = await axios.get("http://localhost:3001/series/detalleDeSerie?name=" + name);
-//       return dispatch({
-//         type: GET_NAME_SERIES,
-//         payload: json.data,
-//       });
-//     } catch (error) {
-//       alert("No se existe!!");
-//     }
-//   };
-// };
 
 export const getnameMovies = (name) => {
   return async function (dispatch){
@@ -127,20 +74,6 @@ export const getnameMovies = (name) => {
   }
 }
 
-// export const getnameMovies = (name) => {
-//   return async function (dispatch) {
-//     try {
-//       let json = await axios.get("http://localhost:3001/peliculas?name=" + name);
-//       return dispatch({
-//         type: GET_NAME_MOVIES,
-//         payload: json.data,
-//       });
-//     } catch (error) {
-//       alert("No se existe!!");
-//     }
-//   };
-// };
-
 export const getSeriesDetail = (id) => {
   return async function (dispatch){
     let getSeriesDetail = await axios(`/series/seriePorId/${id}`)
@@ -151,32 +84,6 @@ export const getSeriesDetail = (id) => {
   }
 }
 
-// export const getSeriesDetail = (id) => {
-//   return (dispatch) => {
-//     return fetch(`http://localhost:3001/series/seriePorId/${id}`)
-//       .then((r) => r.json())
-//       .then((data) => {
-//         dispatch({
-//           type: GET_SERIES_DETAIL,
-//           payload: data,
-//         });
-//       });
-//   };
-// };
-
-// export const getMoviesDetail = (id) => {
-//   return (dispatch) => {
-//     return fetch(`http://localhost:3001/peliculas/${id}`)
-//       .then((r) => r.json())
-//       .then((data) => {
-//         dispatch({
-//           type: GET_MOVIES_DETAIL,
-//           payload: data,
-//         });
-//       });
-//   };
-// };
-
 export const getMoviesDetail = (id) => {
   return async function (dispatch){
     let getMoviesDetail = await axios(`/peliculas/${id}`)
@@ -186,19 +93,6 @@ export const getMoviesDetail = (id) => {
     })
   }
 }
-
-// export const getMoviesDetail = (id) => {
-//   return (dispatch) => {
-//     return fetch(`http://localhost:3001/peliculas/${id}`)
-//       .then((r) => r.json())
-//       .then((data) => {
-//         dispatch({
-//           type: GET_MOVIES_DETAIL,
-//           payload: data,
-//         });
-//       });
-//   };
-// };
 
 export const willunmont = () => {
   return function (dispatch) {
@@ -250,19 +144,6 @@ export const getGenerosMovies = (payload) => {
   }
 }
 
-// export const getGenerosMovies = () => {
-//   return function (dispatch) {
-//     return fetch("http://localhost:3001getGenerosMovies")
-//       .then((r) => r.json())
-//       .then((rjson) =>
-//         dispatch({
-//           type: GET_GENEROS_MOVIES,
-//           payload: rjson,
-//         })
-//       );
-//   };
-// };
-
 export const getGenerosSeries = (payload) => {
   return async function (dispatch){
     let getGenerosSeries = await axios('/generos/series')
@@ -272,19 +153,6 @@ export const getGenerosSeries = (payload) => {
     })
   }
 }
-
-// export const getGenerosSeries = () => {
-//   return function (dispatch) {
-//     return fetch("http://localhost:3001/generos/series")
-//       .then((r) => r.json())
-//       .then((rjson) =>
-//         dispatch({
-//           type: GET_GENEROS_SERIES,
-//           payload: rjson,
-//         })
-//       );
-//   };
-// };
 
 export const postPeliculas = (payload) => {
   return async function (dispatch) {
@@ -349,19 +217,6 @@ export const getTodo = (payload) => {
   }
 }
 
-// export function getTodo() {
-//   return function (dispatch) {
-//     return fetch("http://localhost:3001/todos")
-//       .then((r) => r.json())
-//       .then((rjson) =>
-//         dispatch({
-//           type: GET_TODO,
-//           payload: rjson,
-//         })
-//       );
-//   };
-// }
-
 export const filterName = (payload) => {
   return (dispatch) =>
     dispatch({
@@ -370,6 +225,7 @@ export const filterName = (payload) => {
     });
 };
 export const addToCart = (payload) => {
+  console.log('first', payload)
   return (dispatch) =>
     dispatch({
       type: ADD_TO_CART,
@@ -399,7 +255,7 @@ export const setdetailLenguage = (id, string) => {
   return async function (dispatch) {
     try {
       let json = await axios.get(
-        `http://localhost:3001/series/traductor/${id}/${string} `
+        `/series/traductor/${id}/${string} `
       );
       return dispatch({
         type: GET_LENGUAJE,
@@ -412,7 +268,7 @@ export const setdetailLenguage = (id, string) => {
 };
 export const getIso = (id) => {
   return (dispatch) => {
-    return fetch(`http://localhost:3001/languages/${id} `)
+    return fetch(`/languages/${id} `)
       .then((r) => r.json())
       .then((data) => {
         dispatch({

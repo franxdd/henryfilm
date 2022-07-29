@@ -31,7 +31,9 @@ import {
 import { filterGenres } from "../../util/filter.js";
 import { toast } from "react-toastify";
 
+console.log(!localStorage.getItem("cart"))
 if (!localStorage.getItem("cart")) {
+  console.log('entro')
   localStorage.setItem("cart", JSON.stringify([]));
 }
 var cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
@@ -49,7 +51,7 @@ const initialState = {
   all: [],
   todo: [],
   backupTodo: [],
-  cart: [],
+  cart: cartFromLocalStorage,
   current: null,
   idioma: [],
   idiomaDefault: "es/ES",
@@ -308,8 +310,9 @@ const rootRouter = (state = initialState, action) => {
     case ADD_TO_CART:
       const item = state.todo.find((e) => e.id === action.payload);
       const incart = state.cart.find((i) =>
-        i.id === action.payload ? true : false
+      i.id === action.payload ? true : false
       );
+      console.log('incart', incart)
       function a() {
         return toast.error("Ya se encuentra en el carro", {
           position: "bottom-left",
