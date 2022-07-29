@@ -11,7 +11,7 @@ function Carro() {
     let items = 0;
     let price = 0;
 
-    carrito.forEach((e) => {
+    carrito && carrito.forEach((e) => {
       items += e.qty;
       price += e.price;
     });
@@ -25,7 +25,7 @@ function Carro() {
   return (
     <div>
       <div>
-        {carrito.map((e) => {
+        {carrito && carrito.map((e) => {
           return (
             <CarritoCard
               key={e.id}

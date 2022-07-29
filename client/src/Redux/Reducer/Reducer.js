@@ -26,13 +26,6 @@ import {
 
 import { filterGenres } from "../../util/filter.js";
 import { toast } from "react-toastify";
-// let cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
-console.log(cartFromLocalStorage);
-if (cartFromLocalStorage && !cartFromLocalStorage.length) {
-  cartFromLocalStorage = [];
-} else {
-  var cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
-}
 const initialState = {
   allMovies: [],
   allSeries: [],
@@ -46,13 +39,18 @@ const initialState = {
   all: [],
   todo: [],
   backupTodo: [],
-  cart: cartFromLocalStorage,
+  cart: [],
   current: null,
   idioma: [],
   idiomaDefault: "es/ES",
 };
 // if (!state.cart.length) {
 // }
+let cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+// console.log(cartFromLocalStorage);
+if (cartFromLocalStorage && cartFromLocalStorage.length === 0) {
+  cartFromLocalStorage = [];
+}
 
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
@@ -128,7 +126,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayAsc],
         };
       }
-
+      break;
     case ORDER_NAME_DES:
       let new_arrayDes = action.payload.sort((a, b) => {
         if (a.name > b.name) {
@@ -150,7 +148,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayDes],
         };
       }
-
+      break;
     case ORDER_VOTE_AVG_ASC:
       let new_arrayVoteDes = action.payload.sort((a, b) => {
         if (a.vote_average > b.vote_average) {
@@ -172,7 +170,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayVoteDes],
         };
       }
-
+      break;
     case ORDER_VOTE_AVG_DES:
       let new_arrayVoteAsc = action.payload.sort((a, b) => {
         if (a.vote_average > b.vote_average) {
@@ -194,6 +192,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayVoteAsc],
         };
       }
+      break;
     case GET_GENEROS_MOVIES:
       return {
         ...state,
@@ -304,6 +303,7 @@ const rootRouter = (state = initialState, action) => {
       const item = state.todo.find((e) => e.id === action.payload);
       console.log(state.cart, "soy el carro");
       console.log(state.todo, "asd");
+      console.log(state.cart);
       const incart = state.cart.find((i) =>
         i.id === action.payload ? true : false
       );

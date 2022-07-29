@@ -18,7 +18,7 @@ function CardMovies({ id, name, poster }) {
   return (
     <div className="card">
       <div className="card-img">
-        <img src={poster} />
+        <img src={poster} alt="poster"/>
       </div>
       <div className="card-info">
         <span onClick={() => addCart(id)}>
