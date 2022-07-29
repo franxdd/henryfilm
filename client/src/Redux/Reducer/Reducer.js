@@ -30,7 +30,6 @@ import {
 import { filterGenres } from "../../util/filter.js";
 import { toast } from "react-toastify";
 
-
 function a() {
   return toast.error("Ya se encuentra en el carro", {
     position: "bottom-left",
@@ -54,12 +53,10 @@ function b() {
   });
 }
 
-
 let cartStorage = JSON.parse(localStorage.getItem("cart"));
 
-if(!cartStorage){
+if (!cartStorage) {
   cartStorage = [];
-
 }
 
 const initialState = {
@@ -81,8 +78,6 @@ const initialState = {
   idiomaDefault: "es/ES",
   isos: [],
 };
-
-
 
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
@@ -306,9 +301,7 @@ const rootRouter = (state = initialState, action) => {
         };
       } else {
         console.log(action.payload);
-        const filter = state.todo.filter((e) =>
-          e.name.toLowerCase().includes(action.payload.toLowerCase())
-        );
+        const filter = state.todo.filter((e) => e.name.toLowerCase().includes(action.payload.toLowerCase()));
         return {
           ...state,
           all: filter,
@@ -329,7 +322,6 @@ const rootRouter = (state = initialState, action) => {
     //   }
 
     case ADD_TO_CART:
-
       const item = state.todo.find((e) => e.id === action.payload);
 
       let cartStorage = localStorage.getItem("cart");
@@ -351,6 +343,12 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         cart: datoCart,
+      };
+    case REMOVE_TO_CART:
+      let filter = state.cart.filter((e) => e.id !== action.payload);
+      return {
+        ...state,
+        cart: filter,
       };
 
     case GET_LENGUAJE:
