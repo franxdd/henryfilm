@@ -1,14 +1,13 @@
 const axios = require("axios");
-const express =require("express")
+const express = require("express");
 const app = express();
 require("dotenv").config();
 const { API_KEY } = process.env;
 const { Usuarios } = require("../DB/db");
 
-
 const bcrypt = require("bcrypt");
-const cookieParser = require("cookie-parser")
-const { createTokens} = require("../utils/JWT.js")
+const cookieParser = require("cookie-parser");
+const { createTokens } = require("../utils/JWT.js");
 
 // app.use(express.json());
 // app.use(cookieParser());
@@ -78,12 +77,11 @@ const postLogin = async (req, res) => {
             .status(400)
             .json({ error: "Combinacions de usuario y password erroneo" });
         } else {
-
-          const accessToken = createTokens(user)
+          const accessToken = createTokens(user);
 
           res.cookie("access-token", accessToken, {
-            maxAge: 60*60*60
-          })
+            maxAge: 60 * 60 * 60,
+          });
 
           res.send("postLogin");
         }
@@ -91,10 +89,6 @@ const postLogin = async (req, res) => {
       .catch((err) => {
         res.json(err);
       });
-
-
-
-
   } catch (error) {
     res.json(error);
   }
@@ -102,7 +96,6 @@ const postLogin = async (req, res) => {
 
 const getProfile = (req, res) => {
   try {
-
     res.send("getProfile");
   } catch (error) {}
 };
