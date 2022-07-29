@@ -22,17 +22,20 @@ import {
   POST_PELICULAS,
   ADD_TO_CART,
   REMOVE_TO_CART,
+  GET_LENGUAJE,
+  ENGLISH,
+  GET_ISOS,
+
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
 import { toast } from "react-toastify";
-// let cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
-console.log(cartFromLocalStorage);
-if (cartFromLocalStorage && !cartFromLocalStorage.length) {
-  cartFromLocalStorage = [];
-} else {
-  var cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+
+if (!localStorage.getItem("cart")) {
+  localStorage.setItem("cart", JSON.stringify([]));
 }
+var cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+
 const initialState = {
   allMovies: [],
   allSeries: [],
@@ -50,9 +53,12 @@ const initialState = {
   current: null,
   idioma: [],
   idiomaDefault: "es/ES",
+  isos: [],
 };
-// if (!state.cart.length) {
-// }
+
+if (cartFromLocalStorage && cartFromLocalStorage.length) {
+  cartFromLocalStorage = [];
+}
 
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
@@ -85,7 +91,6 @@ const rootRouter = (state = initialState, action) => {
         seriesDetail: action.payload,
       };
     case GET_MOVIES_DETAIL:
-      // console.log(state.movieDetail);
       return {
         ...state,
         movieDetail: action.payload,
@@ -300,10 +305,8 @@ const rootRouter = (state = initialState, action) => {
     //   }
 
     case ADD_TO_CART:
-      console.log(typeof action.payload);
       const item = state.todo.find((e) => e.id === action.payload);
-      console.log(state.cart, "soy el carro");
-      console.log(state.todo, "asd");
+
       const incart = state.cart.find((i) =>
         i.id === action.payload ? true : false
       );
@@ -340,52 +343,51 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
       };
-    // case GET_LENGUAJE:
-    //   return {
-    //     ...state,
-    //     lenguaje: action.payload,
-    //   };
-    // case ENGLISH:
-    //   const iso1 = state.isos.map((t) => t.iso_639_1);
-    //   const iso2 = state.isos.map((r) => r.iso_3166_1);
-    //   const isosconcat = iso1.concat(iso2);
-    //   console.log(isosconcat);
-    //   console.log(action.payload);
-    //   if (action.payload === "en") {
-    //     let english = `${isosconcat[6]}/${isosconcat[38]}`;
-    //     console.log(english);
-    //     return {
-    //       ...state,
-    //       idioma: english,
-    //     };
-    //   } else if (action.payload === "fr") {
-    //     let frances = `${isosconcat[10]}/${isosconcat[42]}`;
-    //     return {
-    //       ...state,
-    //       idioma: frances,
-    //     };
-    //   } else if (action.payload === "pt") {
-    //     let portugues = `${isosconcat[19]}/${isosconcat[51]}`;
-    //     return {
-    //       ...state,
-    //       idioma: portugues,
-    //     };
-    //   } else if (action.payload === "ch") {
-    //     let chino = `${isosconcat[30]}/${isosconcat[62]}`;
-    //     return {
-    //       ...state,
-    //       idioma: chino,
-    //     };
-    //   } else
-    //     return {
-    //       idioma: state.idiomaDefault,
-    //     };
+    case GET_LENGUAJE:
+      return {
+        ...state,
+        lenguaje: action.payload,
+      };
+    case ENGLISH:
+      const iso1 = state.isos.map((t) => t.iso_639_1);
+      const iso2 = state.isos.map((r) => r.iso_3166_1);
+      const isosconcat = iso1.concat(iso2);
 
-    // case GET_ISOS:
-    //   return {
-    //     ...state,
-    //     isos: action.payload,
-    //   };
+      if (action.payload === "en") {
+        let english = `${isosconcat[6]}/${isosconcat[38]}`;
+        console.log(english);
+        return {
+          ...state,
+          idioma: english,
+        };
+      } else if (action.payload === "fr") {
+        let frances = `${isosconcat[10]}/${isosconcat[42]}`;
+        return {
+          ...state,
+          idioma: frances,
+        };
+      } else if (action.payload === "pt") {
+        let portugues = `${isosconcat[19]}/${isosconcat[51]}`;
+        return {
+          ...state,
+          idioma: portugues,
+        };
+      } else if (action.payload === "ch") {
+        let chino = `${isosconcat[30]}/${isosconcat[62]}`;
+        return {
+          ...state,
+          idioma: chino,
+        };
+      } else
+        return {
+          idioma: state.idiomaDefault,
+        };
+
+    case GET_ISOS:
+      return {
+        ...state,
+        isos: action.payload,
+      };
 
     default:
       return { ...state };

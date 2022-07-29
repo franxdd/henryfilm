@@ -5,6 +5,7 @@ function Carro() {
   const dispatch = useDispatch();
   const [totalPrecio, settotalPrecio] = useState(0);
   const [totalItems, settotalItems] = useState(0);
+
   const carrito = useSelector((state) => state.cart);
 
   useEffect(() => {
@@ -18,10 +19,16 @@ function Carro() {
     settotalItems(items);
     settotalPrecio(price);
   }, [carrito, totalItems, totalPrecio, settotalItems, settotalPrecio]);
+
   useEffect(() => {
+
+    console.log(carrito)
+
     localStorage.setItem("cart", JSON.stringify(carrito));
-  }, [carrito]);
-  console.log(carrito);
+
+  },[carrito]);
+
+
   return (
     <div>
       <div>
