@@ -54,6 +54,14 @@ function b() {
   });
 }
 
+
+let cartStorage = JSON.parse(localStorage.getItem("cart"));
+
+if(!cartStorage){
+  cartStorage = [];
+
+}
+
 const initialState = {
   allMovies: [],
   allSeries: [],
@@ -67,7 +75,7 @@ const initialState = {
   all: [],
   todo: [],
   backupTodo: [],
-  cart: [],
+  cart: cartStorage,
   current: null,
   idioma: [],
   idiomaDefault: "es/ES",
@@ -345,6 +353,11 @@ const rootRouter = (state = initialState, action) => {
         cart: datoCart,
       };
 
+
+
+
+
+
     case GET_LENGUAJE:
       return {
         ...state,
@@ -382,6 +395,7 @@ const rootRouter = (state = initialState, action) => {
         };
       } else
         return {
+          ...state,
           idioma: state.idiomaDefault,
         };
 
