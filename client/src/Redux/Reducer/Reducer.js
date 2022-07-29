@@ -353,11 +353,6 @@ const rootRouter = (state = initialState, action) => {
         cart: datoCart,
       };
 
-
-
-
-
-
     case GET_LENGUAJE:
       return {
         ...state,

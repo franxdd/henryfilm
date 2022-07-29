@@ -255,13 +255,7 @@ export const addToCart = (payload) => {
       payload: payload,
     });
 };
-export const removeCart = (id) => {
-  return (dispatch) =>
-    dispatch({
-      type: REMOVE_TO_CART,
-      payload: id,
-    });
-};
+
 export const adjusq = (id, value) => {
   return (dispatch) =>
     dispatch({
