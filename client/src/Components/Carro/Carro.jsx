@@ -8,25 +8,25 @@ function Carro() {
 
   const carrito = useSelector((state) => state.cart);
 
-  useEffect(() => {
-    let items = 0;
-    let price = 0;
+  // useEffect(() => {
+  //   let items = 0;
+  //   let price = 0;
 
-    carrito.forEach((e) => {
-      items += e.qty;
-      price += e.price;
-    });
-    settotalItems(items);
-    settotalPrecio(price);
-  }, [carrito, totalItems, totalPrecio, settotalItems, settotalPrecio]);
+  //   carrito.forEach((e) => {
+  //     items += e.qty;
+  //     price += e.price;
+  //   });
+  //   settotalItems(items);
+  //   settotalPrecio(price);
+  // }, [carrito, totalItems, totalPrecio, settotalItems, settotalPrecio]);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    console.log(carrito)
+  //   console.log(carrito)
 
-    localStorage.setItem("cart", JSON.stringify(carrito));
+  //   localStorage.setItem("cart", JSON.stringify(carrito));
 
-  },[carrito]);
+  // },[carrito]);
 
 
   return (

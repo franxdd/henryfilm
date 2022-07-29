@@ -25,16 +25,34 @@ import {
   GET_LENGUAJE,
   ENGLISH,
   GET_ISOS,
-
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
 import { toast } from "react-toastify";
 
-if (!localStorage.getItem("cart")) {
-  localStorage.setItem("cart", JSON.stringify([]));
+
+function a() {
+  return toast.error("Ya se encuentra en el carro", {
+    position: "bottom-left",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
 }
-var cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+function b() {
+  return toast.success("Fue añadida al carro", {
+    position: "bottom-left",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+}
 
 const initialState = {
   allMovies: [],
@@ -49,16 +67,14 @@ const initialState = {
   all: [],
   todo: [],
   backupTodo: [],
-  cart: cartFromLocalStorage,
+  cart: [],
   current: null,
   idioma: [],
   idiomaDefault: "es/ES",
   isos: [],
 };
 
-if (cartFromLocalStorage && cartFromLocalStorage.length) {
-  cartFromLocalStorage = [];
-}
+
 
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
@@ -305,44 +321,30 @@ const rootRouter = (state = initialState, action) => {
     //   }
 
     case ADD_TO_CART:
+
       const item = state.todo.find((e) => e.id === action.payload);
 
-      const incart = state.cart.find((i) =>
-        i.id === action.payload ? true : false
-      );
-      function a() {
-        return toast.error("Ya se encuentra en el carro", {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+      let cartStorage = localStorage.getItem("cart");
+
+      if (!cartStorage) {
+        b();
+        localStorage.setItem("cart", JSON.stringify([item]));
+      } else {
+        let data = JSON.parse(cartStorage);
+
+        data.find((dato) => dato.id === item.id) ? a() : b();
+        if (!data.find((dato) => dato.id === item.id)) {
+          data.push(item);
+          localStorage.setItem("cart", JSON.stringify(data));
+        }
       }
-      function b() {
-        return toast.success("Fue añadida al carro", {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
-      incart ? a() : b();
+      let datoCart = JSON.parse(localStorage.getItem("cart"));
+
       return {
         ...state,
-        cart: incart ? state.cart : [...state.cart, { ...item, qty: 1 }],
+        cart: datoCart,
       };
 
-    case REMOVE_TO_CART:
-      return {
-        ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload),
-      };
     case GET_LENGUAJE:
       return {
         ...state,
