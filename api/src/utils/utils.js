@@ -177,5 +177,5 @@ const validate = ({
 
 module.exports = {
   parseador,
-  validate,
+  // validate,
 };

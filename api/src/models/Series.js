@@ -46,6 +46,7 @@ module.exports = (sequelize) => {
     },
     tipo: {
       type: DataTypes.ENUM(["serie", "pelicula"]),
+      allowNull: true
     }
   },{
     timestamps: false
