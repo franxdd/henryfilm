@@ -19,12 +19,18 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
+  const [token, setToken] = useState();
+
+  // if(!token) {
+  //   return <Login setToken={setToken} />
+  // }
 
   const contexto = {
     lenguaje: lenguaje,
     setLenguaje: setLenguaje,
   };
   return (
+    
     <div className="App">
       <Context.Provider value={contexto}>
         <ToastContainer />

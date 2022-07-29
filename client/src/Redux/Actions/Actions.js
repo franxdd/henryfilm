@@ -30,6 +30,9 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_TO_CART = "REMOVE_TO_CART";
 export const ADJUST_QTY = "ADJUST_QTY";
 export const LOAD_CURRENT_ITEM = "LOAD_CURRENT_ITEM";
+export const GET_LENGUAJE = "GET_LENGUAJE";
+export const ENGLISH = "ENGLISH";
+export const GET_ISOS = "GET_ISOS";
 
 // export const getAllSeries = () => {
 //   return (dispatch) => {
@@ -390,6 +393,43 @@ export const adjusq = (id, value) => {
       },
     });
 };
+
+export const setdetailLenguage = (id, string) => {
+  console.log(string);
+  return async function (dispatch) {
+    try {
+      let json = await axios.get(
+        `http://localhost:3001/series/traductor/${id}/${string} `
+      );
+      return dispatch({
+        type: GET_LENGUAJE,
+        payload: json.data,
+      });
+    } catch (error) {
+      alert("No se existe!!");
+    }
+  };
+};
+export const getIso = (id) => {
+  return (dispatch) => {
+    return fetch(`http://localhost:3001/languages/${id} `)
+      .then((r) => r.json())
+      .then((data) => {
+        dispatch({
+          type: GET_ISOS,
+          payload: data,
+        });
+      });
+  };
+};
+export const getIdioma = (payload) => {
+  return (dispatch) =>
+    dispatch({
+      type: ENGLISH,
+      payload: payload,
+    });
+};
+
 export const loadCurren = (payload) => {
   return (dispatch) =>
     dispatch({
