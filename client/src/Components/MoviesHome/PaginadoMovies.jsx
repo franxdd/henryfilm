@@ -6,7 +6,7 @@ import {
   FaAngleRight,
   FaAngleDoubleRight,} 
   from "react-icons/fa";
-import "./_Paginado.scss";
+import "../../Styles/components/_Paginado.scss";
 export default function PaginadoMovies({
   pelisPerPage,
   todasLasMovies,

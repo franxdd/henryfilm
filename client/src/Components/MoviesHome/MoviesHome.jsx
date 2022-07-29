@@ -15,10 +15,11 @@ import {
   filtradoGeneroMoviesReversa,
 } from "../../Redux/Actions/Actions.js";
 import PaginadoMovies from "./PaginadoMovies";
-import "./_MoviesHome.scss";
-import "./_Filter.scss";
-import "./_Loading.scss";
-import { AiOutlineClear as ClearIcon } from "react-icons/ai";
+import "../../Styles/components/_MoviesHome.scss";
+import "../../Styles/components/_Filter.scss";
+import "../../Styles/components/_Loading.scss";
+import {AiOutlineClear as ClearIcon} from "react-icons/ai";
+import {FaWindowClose} from "react-icons/fa";
 
 function MoviesHome() {
   // useEffect(() => {
@@ -80,19 +81,21 @@ function MoviesHome() {
         <span className="hover-underline-animation"> Z - A </span>
       </button>
       <button className="cta" onClick={(e) => HandleClickVoteASC(e)}>
-        <span className="hover-underline-animation"> + Puntuación</span>
+      <span className="hover-underline-animation"><strong> + </strong> Puntuación</span>
       </button>
       <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
-        <span className="hover-underline-animation"> - Puntuación </span>
+      <span className="hover-underline-animation"> <strong> - </strong>  Puntuación </span>
       </button>
       <span>Filtrar por:</span>
-      <div className="Selects">
-        <div className="select-genero">
-          <select
+      
+      {/* <div className="Selects">
+        <div className="select-genero"> */}
+  
+          <select 
+            className="select"
             name="FiltroGenero"
             onChange={(e) => FiltradoGenero(e)}
             defaultValue={"Default"}
-            className="selectgenero"
           >
             <option value={"Default"}>Generos..</option>
             {generos?.map((t) => (
@@ -101,18 +104,15 @@ function MoviesHome() {
               </option>
             ))}
           </select>
-        </div>
-      </div>
-      <span onClick={() => HandleClickClear()}>
-        <ClearIcon className="icono-clear" />
-      </span>
-
+        {/* </div>
+      </div> */}
+      <span onClick={() => HandleClickClear()}><ClearIcon className="icono-clear" /></span>
       {generosCache?.map((g) => {
         return (
-          <div style={{ color: "white" }} onClick={() => FiltradoReversa(g)}>
+          <button onClick={() => FiltradoReversa(g)}>
             {" "}
-            {g}
-          </div>
+            {g} <FaWindowClose/>
+          </button>
         );
       })}
 

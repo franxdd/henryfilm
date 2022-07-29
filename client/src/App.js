@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import "./App.scss";
+import "./Styles/App.scss";
 import DetailMovie from "./Components/Details/DetailMovie";
 import DetailsSeries from "./Components/Details/DetailsSeries";
 import FormPeliculas from "./Components/Form/FormPeliculas";
@@ -15,7 +15,8 @@ import Context from "./contexto/Context";
 import { useState } from "react";
 import Search from "./Components/Search/Search";
 import Carro from "./Components/Carro/Carro";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
   const [token, setToken] = useState();
@@ -32,6 +33,7 @@ const App = () => {
     
     <div className="App">
       <Context.Provider value={contexto}>
+        <ToastContainer />
         <Routes>
           <Route path={"/"} element={<LandingPage />}></Route>
         </Routes>

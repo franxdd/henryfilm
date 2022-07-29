@@ -1,4 +1,4 @@
-export const titulosSeries = {
+export const seriesName = {
   es: {
     tendencia: "Series en tendencia",
   },
@@ -13,36 +13,22 @@ export const titulosSeries = {
   },
 };
 
-export const titulosPeliculas = {
+export const moviesName= {
   es: {
     tendencia: "Películas en Tendencia",
   },
   in: {
-    tendencia: "Movies that are trending",
+    tendencia: "Trending Movies",
   },
 
   fr: {
-    tendencia: "Films à la mode",
+    tendencia: "Films tendance",
   },
   pt: {
-    tendencia: "Filmes que estão em alta",
+    tendencia: "Filmes em alta",
   },
 };
 
-export const titulosComunes = {
-  es: {
-    info: "Info",
-  },
-  in: {
-    info: "Info",
-    
-  },
-  
-  fr: {
-    info: "Info",
-   
-  },
-};
 export const urlBase = "https://api.themoviedb.org/3";
 
-export const apiKey = "252843cc327f9e10875f92a24a03d130";
+export const apiKey = "3832b93c32749d817ba7fc39076d3398";
