@@ -7,6 +7,6 @@ require("dotenv").config();
 route.get("/", getAllUsers)
 route.post("/register", postUser);
 route.post("/login", postLogin);
-route.get("/profile", validateToken, getProfile);
+route.get("/profile", getProfile);
 
 module.exports = route;

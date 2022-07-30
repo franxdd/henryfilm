@@ -12,24 +12,24 @@ const createTokens = (user) => {
   return accessToken;
 };
 
-const validateToken = (req, res, next) => {
+// const validateToken = (req, res, next) => {
 
-  const accessToken = req.cookies["access-token"];
+//   const accessToken = req.cookies["access-token"];
 
-  if (!accessToken)
-    return res.status(400).json({ error: "Usuario no autenticado" });
+//   if (!accessToken)
+//     return res.status(400).json({ error: "Usuario no autenticado" });
 
-  try {
-    const validToken = verify(accessToken, "jwtsecretcambiar");
+//   try {
+//     const validToken = verify(accessToken, "jwtsecretcambiar");
 
-    if (validToken) {
-      req.authenticated = true;
-      return next();
-    }
-  } catch (error) {
-    return res.status(400).json({ error: error });
-  }
-};
+//     if (validToken) {
+//       req.authenticated = true;
+//       return next();
+//     }
+//   } catch (error) {
+//     return res.status(400).json({ error: error });
+//   }
+// };
 
 
 
