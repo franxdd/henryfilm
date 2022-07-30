@@ -354,6 +354,7 @@ export const filterName = (payload) => {
     });
 };
 export const addToCart = (payload) => {
+  console.log('first', payload)
   return (dispatch) =>
     dispatch({
       type: ADD_TO_CART,
@@ -383,7 +384,7 @@ export const setdetailLenguage = (id, string) => {
   return async function (dispatch) {
     try {
       let json = await axios.get(
-        `http://localhost:3001/series/traductor/${id}/${string} `
+        `/series/traductor/${id}/${string} `
       );
       return dispatch({
         type: GET_LENGUAJE,
@@ -394,18 +395,30 @@ export const setdetailLenguage = (id, string) => {
     }
   };
 };
+
 export const getIso = (id) => {
-  return (dispatch) => {
-    return fetch(`http://localhost:3001/languages/${id} `)
-      .then((r) => r.json())
-      .then((data) => {
-        dispatch({
-          type: GET_ISOS,
-          payload: data,
-        });
-      });
+  return async function (dispatch) {
+    let getIso = await axios(`/languages/${id}`);
+    return dispatch({
+      type: GET_ISOS,
+      payload: getIso.data,
+    });
   };
 };
+
+// export const getIso = (id) => {
+//   return (dispatch) => {
+//     return fetch(`/languages/${id} `)
+//       .then((r) => r.json())
+//       .then((data) => {
+//         dispatch({
+//           type: GET_ISOS,
+//           payload: data,
+//         });
+//       });
+//   };
+// };
+
 export const getIdioma = (payload) => {
   return (dispatch) =>
     dispatch({

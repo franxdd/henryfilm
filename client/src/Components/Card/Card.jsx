@@ -1,4 +1,4 @@
-import "../../Styles/components/_Card.scss";
+import "../../Styles/components/card.scss";
 import { mostrarImagen } from "../../Auxiliares/Funciones";
 import { Link } from "react-router-dom";
 

@@ -161,7 +161,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayAsc],
         };
       }
-
+      break;
     case ORDER_NAME_DES:
       let new_arrayDes = action.payload.sort((a, b) => {
         if (a.name > b.name) {
@@ -183,7 +183,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayDes],
         };
       }
-
+      break;
     case ORDER_VOTE_AVG_ASC:
       let new_arrayVoteDes = action.payload.sort((a, b) => {
         if (a.vote_average > b.vote_average) {
@@ -205,7 +205,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayVoteDes],
         };
       }
-
+      break;
     case ORDER_VOTE_AVG_DES:
       let new_arrayVoteAsc = action.payload.sort((a, b) => {
         if (a.vote_average > b.vote_average) {
@@ -227,6 +227,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayVoteAsc],
         };
       }
+      break;
     case GET_GENEROS_MOVIES:
       return {
         ...state,

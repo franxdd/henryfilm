@@ -1,4 +1,4 @@
-import React from "react";
+import { React} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardMovies from "../CardMovies/CardMovies";
 import {
@@ -7,9 +7,13 @@ import {
   orderNameDES,
   orderVoteAvgASC,
   orderVoteAvgDES,
-  clear,
+  // clear,
 } from "../../Redux/Actions/Actions";
-import { useEffect, useState } from "react";
+import { 
+  useEffect, 
+  useState 
+} from "react";
+
 import {
   filtradoGeneroMovies,
   filtradoGeneroMoviesReversa,
@@ -29,6 +33,7 @@ function MoviesHome() {
 
   const allMovies = useSelector((state) => state.allMovies);
   const generos = useSelector((state) => state.generosMovies);
+  console.log(generos)
 
   const [generosCache, setgenerosCache] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
