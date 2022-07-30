@@ -346,6 +346,7 @@ const rootRouter = (state = initialState, action) => {
       };
     case REMOVE_TO_CART:
       let filter = state.cart.filter((e) => e.id !== action.payload);
+      localStorage.setItem("cart", JSON.stringify(filter));
       return {
         ...state,
         cart: filter,
