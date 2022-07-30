@@ -53,7 +53,16 @@ function b() {
   });
 }
 
-let cartStorage = JSON.parse(localStorage.getItem("cart"));
+let cartStorage;
+try {
+  let local = localStorage.getItem("cart") || [];
+  if (local !== "undefined") {
+    console.log(local);
+    cartStorage = JSON.parse(local);
+  }
+} catch (error) {
+  console.log(error);
+}
 
 if (!cartStorage) {
   cartStorage = [];
@@ -123,7 +132,7 @@ const rootRouter = (state = initialState, action) => {
     case WILLUNMOUNT:
       return {
         ...state,
-        seriesDetail: {},
+        lenguaje: {},
       };
     case WILLUNMOUNT2:
       return {
@@ -301,7 +310,9 @@ const rootRouter = (state = initialState, action) => {
         };
       } else {
         console.log(action.payload);
-        const filter = state.todo.filter((e) => e.name.toLowerCase().includes(action.payload.toLowerCase()));
+        const filter = state.todo.filter((e) =>
+          e.name.toLowerCase().includes(action.payload.toLowerCase())
+        );
         return {
           ...state,
           all: filter,
@@ -323,10 +334,10 @@ const rootRouter = (state = initialState, action) => {
 
     case ADD_TO_CART:
       const item = state.todo.find((e) => e.id === action.payload);
-
       let cartStorage = localStorage.getItem("cart");
+      console.log(typeof cartStorage);
 
-      if (!cartStorage) {
+      if (cartStorage === "undefined") {
         b();
         localStorage.setItem("cart", JSON.stringify([item]));
       } else {
