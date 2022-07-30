@@ -10,7 +10,10 @@ import {
   clear,
 } from "../../Redux/Actions/Actions";
 import { useEffect, useState } from "react";
-import { filtradoGeneroMovies, filtradoGeneroMoviesReversa } from "../../Redux/Actions/Actions.js";
+import {
+  filtradoGeneroMovies,
+  filtradoGeneroMoviesReversa,
+} from "../../Redux/Actions/Actions.js";
 import PaginadoMovies from "./PaginadoMovies";
 import "../../Styles/components/_MoviesHome.scss";
 import "../../Styles/components/_Filter.scss";
@@ -19,9 +22,9 @@ import { AiOutlineClear as ClearIcon } from "react-icons/ai";
 import { FaWindowClose } from "react-icons/fa";
 
 function MoviesHome() {
-  // useEffect(() => {
-  //   dispatch(getAllMovies());
-  // }, []);
+  useEffect(() => {
+    if (!allMovies.length) dispatch(getAllMovies());
+  }, []);
   const dispatch = useDispatch();
 
   const allMovies = useSelector((state) => state.allMovies);
@@ -93,7 +96,12 @@ function MoviesHome() {
       {/* <div className="Selects">
         <div className="select-genero"> */}
 
-      <select className="select" name="FiltroGenero" onChange={(e) => FiltradoGenero(e)} defaultValue={"Default"}>
+      <select
+        className="select"
+        name="FiltroGenero"
+        onChange={(e) => FiltradoGenero(e)}
+        defaultValue={"Default"}
+      >
         <option value={"Default"}>Generos..</option>
         {generos?.map((t) => (
           <option key={t.id} value={t.name}>
@@ -118,7 +126,14 @@ function MoviesHome() {
       <div className="contenedor-seccion">
         <div className="contenedor-resultados">
           {currentMovies?.map((r) => {
-            return <CardMovies key={r.id} id={r.id} name={r.title} poster={r.posterImagen} />;
+            return (
+              <CardMovies
+                key={r.id}
+                id={r.id}
+                name={r.title}
+                poster={r.posterImagen}
+              />
+            );
           })}
         </div>
       </div>

@@ -31,7 +31,7 @@ const postNuevaSerie = async (req, res) => {
       number_of_episodes,
       cast,
    })
-   res.status(200).send("Se agrego la serie de forma correcta.")
+   res.status(200).send("Se agrego la serie de forma correcta.", nuevaSerie)
 
 }
 

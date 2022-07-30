@@ -34,81 +34,159 @@ export const GET_LENGUAJE = "GET_LENGUAJE";
 export const ENGLISH = "ENGLISH";
 export const GET_ISOS = "GET_ISOS";
 
-export const getAllSeries = () => {
-  return (dispatch) => {
-    return fetch("http://localhost:3001/series")
-      .then((r) => r.json())
-      .then((series) => {
-        dispatch({
-          type: GET_ALL_SERIES,
-          payload: series,
-        });
-      });
-  };
-};
-export function getAllMovies() {
-  return function (dispatch) {
-    return fetch("http://localhost:3001/peliculas")
-      .then((r) => r.json())
-      .then((rjson) =>
-        dispatch({
-          type: GET_ALL_MOVIES,
-          payload: rjson,
-        })
-      );
-  };
-}
-export const getnameSeries = (name) => {
+export const getAllSeries = (name) => {
   return async function (dispatch) {
-    try {
-      let json = await axios.get("http://localhost:3001/series/detalleDeSerie?name=" + name);
-      return dispatch({
-        type: GET_NAME_SERIES,
-        payload: json.data,
-      });
-    } catch (error) {
-      alert("No se existe!!");
-    }
-  };
-};
-export const getnameMovies = (name) => {
-  return async function (dispatch) {
-    try {
-      let json = await axios.get("http://localhost:3001/peliculas?name=" + name);
-      return dispatch({
-        type: GET_NAME_MOVIES,
-        payload: json.data,
-      });
-    } catch (error) {
-      alert("No se existe!!");
-    }
-  };
-};
-export const getSeriesDetail = (id) => {
-  return (dispatch) => {
-    return fetch(`http://localhost:3001/series/seriePorId/${id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        dispatch({
-          type: GET_SERIES_DETAIL,
-          payload: data,
-        });
-      });
+    let getAllSeries = await axios(`/series`);
+    return dispatch({
+      type: GET_ALL_SERIES,
+      payload: getAllSeries.data,
+    });
   };
 };
 
-export const getMoviesDetail = (id) => {
-  return (dispatch) => {
-    return fetch(`http://localhost:3001/peliculas/${id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        dispatch({
-          type: GET_MOVIES_DETAIL,
-          payload: data,
-        });
-      });
+// export const getAllSeries = () => {
+//   return (dispatch) => {
+//     return fetch("http://localhost:3001/series")
+//       .then((r) => r.json())
+//       .then((series) => {
+//         dispatch({
+//           type: GET_ALL_SERIES,
+//           payload: series,
+//         });
+//       });
+//   };
+// };
+
+export const getAllMovies = () => {
+  return async function (dispatch) {
+    let getAllMovies = await axios(`/peliculas`);
+    return dispatch({
+      type: GET_ALL_MOVIES,
+      payload: getAllMovies.data,
+    });
   };
 };
+
+// export function getAllMovies() {
+//   return function (dispatch) {
+//     return fetch("http://localhost:3001/peliculas")
+//       .then((r) => r.json())
+//       .then((rjson) =>
+//         dispatch({
+//           type: GET_ALL_MOVIES,
+//           payload: rjson,
+//         })
+//       );
+//   };
+// }
+
+export const getnameSeries = (name) => {
+  return async function (dispatch) {
+    let getnameSeries = await axios(`/series/detalleDeSerie?name=` + name);
+    return dispatch({
+      type: GET_NAME_SERIES,
+      payload: getnameSeries.data,
+    });
+  };
+};
+
+// export const getnameSeries = (name) => {
+//   return async function (dispatch) {
+//     try {
+//       let json = await axios.get("http://localhost:3001/series/detalleDeSerie?name=" + name);
+//       return dispatch({
+//         type: GET_NAME_SERIES,
+//         payload: json.data,
+//       });
+//     } catch (error) {
+//       alert("No se existe!!");
+//     }
+//   };
+// };
+
+export const getnameMovies = (name) => {
+  return async function (dispatch) {
+    let getnameMovies = await axios(`/peliculas?name=` + name);
+    return dispatch({
+      type: GET_NAME_MOVIES,
+      payload: getnameMovies.data,
+    });
+  };
+};
+
+// export const getnameMovies = (name) => {
+//   return async function (dispatch) {
+//     try {
+//       let json = await axios.get("http://localhost:3001/peliculas?name=" + name);
+//       return dispatch({
+//         type: GET_NAME_MOVIES,
+//         payload: json.data,
+//       });
+//     } catch (error) {
+//       alert("No se existe!!");
+//     }
+//   };
+// };
+
+export const getSeriesDetail = (id) => {
+  return async function (dispatch) {
+    let getSeriesDetail = await axios(`/series/seriePorId/${id}`);
+    return dispatch({
+      type: GET_SERIES_DETAIL,
+      payload: getSeriesDetail.data,
+    });
+  };
+};
+
+// export const getSeriesDetail = (id) => {
+//   return (dispatch) => {
+//     return fetch(`http://localhost:3001/series/seriePorId/${id}`)
+//       .then((r) => r.json())
+//       .then((data) => {
+//         dispatch({
+//           type: GET_SERIES_DETAIL,
+//           payload: data,
+//         });
+//       });
+//   };
+// };
+
+// export const getMoviesDetail = (id) => {
+//   return (dispatch) => {
+//     return fetch(`http://localhost:3001/peliculas/${id}`)
+//       .then((r) => r.json())
+//       .then((data) => {
+//         dispatch({
+//           type: GET_MOVIES_DETAIL,
+//           payload: data,
+//         });
+//       });
+//   };
+// };
+
+export const getMoviesDetail = (id) => {
+  return async function (dispatch) {
+    let getMoviesDetail = await axios(`/peliculas/${id}`);
+    return dispatch({
+      type: GET_MOVIES_DETAIL,
+      payload: getMoviesDetail.data,
+    });
+  };
+};
+
+// export const getMoviesDetail = (id) => {
+//   return (dispatch) => {
+//     return fetch(`http://localhost:3001/peliculas/${id}`)
+//       .then((r) => r.json())
+//       .then((data) => {
+//         dispatch({
+//           type: GET_MOVIES_DETAIL,
+//           payload: data,
+//         });
+//       });
+//   };
+// };
+
 export const willunmont = () => {
   return function (dispatch) {
     return dispatch({
@@ -149,38 +227,55 @@ export const orderVoteAvgDES = (array) => {
   };
 };
 
-export const getGenerosMovies = () => {
-  return function (dispatch) {
-    return fetch("http://localhost:3001/generos/peliculas")
-      .then((r) => r.json())
-      .then((rjson) =>
-        dispatch({
-          type: GET_GENEROS_MOVIES,
-          payload: rjson,
-        })
-      );
+export const getGenerosMovies = (payload) => {
+  return async function (dispatch) {
+    let getGenerosMovies = await axios("getGenerosMovies");
+    return dispatch({
+      type: GET_GENEROS_MOVIES,
+      payload: getGenerosMovies.data,
+    });
   };
 };
 
-export const getGenerosSeries = () => {
-  return function (dispatch) {
-    return fetch("http://localhost:3001/generos/series")
-      .then((r) => r.json())
-      .then((rjson) =>
-        dispatch({
-          type: GET_GENEROS_SERIES,
-          payload: rjson,
-        })
-      );
+// export const getGenerosMovies = () => {
+//   return function (dispatch) {
+//     return fetch("http://localhost:3001getGenerosMovies")
+//       .then((r) => r.json())
+//       .then((rjson) =>
+//         dispatch({
+//           type: GET_GENEROS_MOVIES,
+//           payload: rjson,
+//         })
+//       );
+//   };
+// };
+
+export const getGenerosSeries = (payload) => {
+  return async function (dispatch) {
+    let getGenerosSeries = await axios("/generos/series");
+    return dispatch({
+      type: GET_GENEROS_SERIES,
+      payload: getGenerosSeries.data,
+    });
   };
 };
+
+// export const getGenerosSeries = () => {
+//   return function (dispatch) {
+//     return fetch("http://localhost:3001/generos/series")
+//       .then((r) => r.json())
+//       .then((rjson) =>
+//         dispatch({
+//           type: GET_GENEROS_SERIES,
+//           payload: rjson,
+//         })
+//       );
+//   };
+// };
 
 export const postPeliculas = (payload) => {
   return async function (dispatch) {
-    let created = await axios.post(
-      "http://localhost:3001/peliculas/postPelicula",
-      payload
-    );
+    let created = await axios.post("/peliculas/postPelicula", payload);
     return dispatch({ type: POST_PELICULAS, payload: created.data });
   };
 };
@@ -228,18 +323,28 @@ export const willunmont2 = () => {
   };
 };
 
-export function getTodo() {
-  return function (dispatch) {
-    return fetch("http://localhost:3001/todos")
-      .then((r) => r.json())
-      .then((rjson) =>
-        dispatch({
-          type: GET_TODO,
-          payload: rjson,
-        })
-      );
+export const getTodo = (payload) => {
+  return async function (dispatch) {
+    let getTodo = await axios("/todos");
+    return dispatch({
+      type: GET_TODO,
+      payload: getTodo.data,
+    });
   };
-}
+};
+
+// export function getTodo() {
+//   return function (dispatch) {
+//     return fetch("http://localhost:3001/todos")
+//       .then((r) => r.json())
+//       .then((rjson) =>
+//         dispatch({
+//           type: GET_TODO,
+//           payload: rjson,
+//         })
+//       );
+//   };
+// }
 
 export const filterName = (payload) => {
   return (dispatch) =>
