@@ -7,26 +7,29 @@ function Carro() {
   const [totalItems, settotalItems] = useState(0);
 
   const carrito = useSelector((state) => state.cart);
+  console.log("carrito", carrito)
 
-  // useEffect(() => {
-  //   let items = 0;
-  //   let price = 0;
+  useEffect(() => {
+    let items = carrito.length;
+    console.log("items", items)
+    let price = 0;
 
-  //   carrito.forEach((e) => {
-  //     items += e.qty;
-  //     price += e.price;
-  //   });
-  //   settotalItems(items);
-  //   settotalPrecio(price);
-  // }, [carrito, totalItems, totalPrecio, settotalItems, settotalPrecio]);
+    carrito.forEach((e) => {
+      // items += e.qty;
+      price += e.price;
+    });
+    settotalItems(items);
+    settotalPrecio(price);
+  }, [carrito, totalItems, totalPrecio, settotalItems, settotalPrecio]);
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   console.log(carrito)
+    console.log("UseEffect", carrito)
 
-  //   localStorage.setItem("cart", JSON.stringify(carrito));
+    localStorage.setItem("cart", JSON.stringify(carrito));
+    console.log("localStorage", localStorage)
 
-  // },[carrito]);
+  },[carrito]);
 
 
   return (

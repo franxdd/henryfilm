@@ -324,8 +324,10 @@ const rootRouter = (state = initialState, action) => {
     case ADD_TO_CART:
 
       const item = state.todo.find((e) => e.id === action.payload);
+      console.log(item)
 
       let cartStorage = localStorage.getItem("cart");
+      console.log("cartStorage", cartStorage)
 
       if (!cartStorage) {
         b();
@@ -383,6 +385,7 @@ const rootRouter = (state = initialState, action) => {
         };
       } else
         return {
+          ...state,
           idioma: state.idiomaDefault,
         };
 
