@@ -13,10 +13,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import "../../Styles/components/_NavBar.scss";
 import { useState, useEffect } from "react";
-import {
-  BiHomeHeart as HomeIcon,
-  BiCameraMovie as CamaraIcon,
-} from "react-icons/bi";
+import { BiHomeHeart as HomeIcon, BiCameraMovie as CamaraIcon } from "react-icons/bi";
 import { MdLock as LockIcon } from "react-icons/md";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
@@ -47,19 +44,14 @@ const Nav = () => {
 
   function handleLenguage(e) {
     e.preventDefault();
-    if (
-      e.target.value === "en" ||
-      e.target.value === "pt" ||
-      e.target.value === "fr" ||
-      e.target.value === "ch"
-    ) {
+    if (e.target.value === "en" || e.target.value === "pt" || e.target.value === "fr" || e.target.value === "ch") {
       dispatch(getIdioma(e.target.value));
     }
   }
 
   return (
     <main>
-      <nav className="NavbarContainer " extendNavbar={extendNavbar}>
+      <nav className="NavbarContainer ">
         <div className="NavbarInnerContainer">
           <Link className="logo" to={"/"}>
             <img className="logo" src={logo} alt="Logo" />
@@ -90,10 +82,7 @@ const Nav = () => {
           </div>
           <div className="RightContainer">
             <div className="select">
-              <select
-                className="select-lenguaje"
-                onChange={(e) => handleLenguage(e)}
-              >
+              <select className="select-lenguaje" onChange={(e) => handleLenguage(e)}>
                 <option value="es">Español</option>
                 <option value="en">Ingles</option>
                 <option value="fr">Français</option>
