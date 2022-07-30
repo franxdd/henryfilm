@@ -3,10 +3,21 @@ import Carousel from "../Carousel/Carousel";
 import Header from "../Header/Header";
 import { useContext, useEffect } from "react";
 import Context from "../../contexto/Context";
-import { seriesName, moviesName, urlBase, apiKey } from "../../Auxiliares/Variables";
+import {
+  seriesName,
+  moviesName,
+  urlBase,
+  apiKey,
+} from "../../Auxiliares/Variables";
 import "../../Styles/components/_Home.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllSeries, getAllMovies, getGenerosMovies, getGenerosSeries, getTodo } from "../../Redux/Actions/Actions";
+import {
+  getAllSeries,
+  getAllMovies,
+  getGenerosMovies,
+  getGenerosSeries,
+  getTodo,
+} from "../../Redux/Actions/Actions";
 import Footer from "../Footer/Footer";
 
 const Home = () => {
