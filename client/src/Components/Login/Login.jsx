@@ -1,8 +1,9 @@
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate} from "react-router-dom";
 import { PostLogin} from '../../Redux/Actions/Actions.js'
 function Login() {
-
+  let navigate = useNavigate();
   const dispatch = useDispatch();
   const [input, setInput] = useState({
     username: "",
@@ -16,13 +17,13 @@ function Login() {
   }
   function handdleSubmit(e) {
     e.preventDefault();
-    // console.log(input);
     dispatch(PostLogin(input));
     setInput({
       username: "",
       password: "",
     });
-    setTimeout(document.location.reload(), 1000);
+   
+    navigate('/home', {replace: true});
   }
 
   return (

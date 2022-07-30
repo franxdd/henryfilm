@@ -28,6 +28,7 @@ import {
   POST_USUARIOS,
   POST_LOGIN,
   GET_USER,
+  CHECK_STATE
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -81,6 +82,7 @@ const initialState = {
   idiomaDefault: "es/ES",
   isos: [],
   user:[],
+  isLogged: '',
 };
 
 const rootRouter = (state = initialState, action) => {
@@ -100,6 +102,12 @@ const rootRouter = (state = initialState, action) => {
     case POST_LOGIN:
 
       return{
+        ...state,
+        isLogged: true
+      }
+    case CHECK_STATE:
+      return{
+
         ...state,
       }
     

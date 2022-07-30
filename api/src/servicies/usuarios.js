@@ -24,7 +24,6 @@ const getAllUsers = async (req, res) => {
 
 const postUser = async (req, res) => {
   try {
-
     const { username, email, password, isAdmin } = req.body;
 
     if (!username || !email || !password)
@@ -38,13 +37,13 @@ const postUser = async (req, res) => {
           username: username,
           password: hash,
           email: email,
-          isAdmin, 
+          isAdmin,
         });
 
         return response;
       })
       .then((response) => {
-        res.status(200).send('Usuario creado con exito');
+        res.status(200).send("Usuario creado con exito");
       })
       .catch((err) => {
         console.log(err);
@@ -59,8 +58,9 @@ const postUser = async (req, res) => {
 
 const postLogin = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    
 
+    const { username, password } = req.body;
     const user = await Usuarios.findOne({
       where: {
         username: username,
@@ -80,7 +80,6 @@ const postLogin = async (req, res) => {
             .status(400)
             .json({ error: "Combinacions de usuario y password erroneo" });
         } else {
-
           const accessToken = createTokens(user);
 
           res.cookie("access-token", accessToken, {
@@ -94,20 +93,20 @@ const postLogin = async (req, res) => {
         res.json(err);
       });
   } catch (error) {
-    res.json(error);
+    res.json('error en postlogin',error);
   }
 };
 
-const getProfile = (req, res) => {
-  const data = JSON.parse(req.headers.cookies)
+const getProfile = async (req, res) => {
+  
+  const data = JSON.parse(req.headers.cookies);
   const accessToken = data["access-token"];
   const dataUser = verify(accessToken, "jwtsecretcambiar");
+  const users = await Usuarios.findOne({ where: { username: dataUser.username } });
 
-  console.log('etrpo')
 
   try {
-
-    res.send(dataUser);
+    res.send(users.dataValues);
   } catch (error) {}
 };
 

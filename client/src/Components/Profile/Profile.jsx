@@ -6,6 +6,7 @@ const Profile = () => {
     const HandleClick = ()=> {
 
         sessionStorage.removeItem('token')
+        
         document.location.reload();
 
     }

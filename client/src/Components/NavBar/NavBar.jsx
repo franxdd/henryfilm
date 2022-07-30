@@ -10,6 +10,7 @@ import {
   getIso,
   getIdioma,
   getUser,
+  checkState,
 } from "../../Redux/Actions/Actions";
 import { useSelector, useDispatch } from "react-redux";
 import "../../Styles/components/_NavBar.scss";
@@ -35,37 +36,21 @@ function getToken() {
 
 const Nav = () => {
   const dispatch = useDispatch();
-  const allMovies = useSelector((state) => state.allMovies);
   const userReducer = useSelector((state) => state.user);
+  const isLogged = useSelector((state)=>state.isLogged)
   const contexto = useContext(Context);
-  let location = useLocation();
-  
   const tokenString = getToken();
-  const [isLogged, setisLogged] = useState(false);
-  const [user, setuser] = useState();
-  
-  useEffect(() => {
 
+  useEffect(() => {
     dispatch(getIso(parseInt(94605)));
     dispatch(getIdioma("a"));
-    dispatch(getUser(tokenString))
- 
+    dispatch(getUser(tokenString));
+    console.log(isLogged)
+  }, [dispatch, isLogged]);
 
-  }, [dispatch]);
-
-
-  // console.log(userReducer)
-  // useEffect(()=>{
-
-  //   dispatch(getUser(tokenString))
-
-  // },[])
-
-  // useEffect(()=>{
-
-  //   setuser(userReducer)
-  //   console.log(user)
-  // },[userReducer])
+  useEffect(() => {
+    // console.log();
+  }, [dispatch, userReducer]);
 
   const handleChangeLenguaje = (e) => {
     contexto.setLenguaje(e.target.value);
@@ -73,14 +58,6 @@ const Nav = () => {
   const [extendNavbar, setExtendNavbar] = useState(false);
   const b = useSelector((state) => state.idioma);
   const c = useSelector((state) => state.isos);
-  // const handleChangeLenguaje = (e) => {
-  //   contexto.setLenguaje(e.target.value);
-  // };
-
-  // function HnadleClick(){
-
-  //   console.log(userReducer)
-  // }
 
   function handleLenguage(e) {
     e.preventDefault();
@@ -153,6 +130,12 @@ const Nav = () => {
               </Link>
             )}
 
+            {userReducer.isAdmin ? (
+              <button style={{ color: "white" }}>ES ADMIN</button>
+            ) : (
+              <button style={{ color: "white" }}>NO ES ADMIN</button>
+            )}
+
             <Link to="/home/carro">
               <button>
                 <ShopIcon className="iconoShop" />
@@ -179,7 +162,7 @@ const Nav = () => {
             <Link to="/home/series" className="NavbarLinkExtended">
               <MonitorIcon className="icono-nav" /> Series
             </Link>
-{/* 
+            {/* 
             {userReducer.username ? (
               <Link to="/home/Register">
                 <button>

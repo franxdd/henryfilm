@@ -36,6 +36,7 @@ export const GET_ISOS = "GET_ISOS";
 export const POST_USUARIOS = "POST_USUARIOS";
 export const POST_LOGIN = "POST_LOGIN";
 export const GET_USER = "GET_USER";
+export const CHECK_STATE = "CHECK_STATE";
 
 export const getAllSeries = () => {
   return (dispatch) => {
@@ -104,6 +105,15 @@ export const getSeriesDetail = (id) => {
   };
 };
 
+
+export const checkState = ()=>{
+  return {
+    type: CHECK_STATE,
+  };
+
+
+}
+
 export const getMoviesDetail = (id) => {
   return (dispatch) => {
     return fetch(`http://localhost:3001/peliculas/${id}`)
@@ -137,21 +147,16 @@ export const PostUsuario = (payload) => {
 
 export const PostLogin = (payload) => {
   return async function (dispatch) {
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //     },
-    //     withCredentials: true
-    //   }
+
     let created = await axios.post(
       "http://localhost:3001/usuarios/login",
       payload,
       { withCredentials: true }
     );
-    // console.log(created.data)
+
     sessionStorage.setItem("token", JSON.stringify(created.data));
 
-    return dispatch({ type: POST_LOGIN });
+    return dispatch({ type: POST_LOGIN , payload: created.data});
   };
 };
 

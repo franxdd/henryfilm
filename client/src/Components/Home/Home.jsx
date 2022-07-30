@@ -10,7 +10,6 @@ import { getAllSeries, getAllMovies, getGenerosMovies, getGenerosSeries, getTodo
 import Footer from "../Footer/Footer";
 function getToken() {
   const tokenString = sessionStorage.getItem('token');
-
   const userToken = JSON.parse(tokenString);
   return userToken
 }
@@ -18,6 +17,8 @@ function getToken() {
 const Home = () => {
   const tokenString = getToken()
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     dispatch(getAllSeries());
     dispatch(getAllMovies());
@@ -25,6 +26,7 @@ const Home = () => {
     dispatch(getGenerosMovies());
     dispatch(getTodo());
     dispatch(getUser(tokenString))
+
   }, []);
 
   //let movies = useSelector((state)=> state.allMovies)
