@@ -15,8 +15,6 @@ const parseador = (
   let generos = {};
   var resultado = [];
 
-  // console.log(cast.length)
-
   for (let j = 0; j < generosData.data.genres.length; j++) {
     for (const prop in generosData.data.genres[j]) {
       if (typeof generosData.data.genres[j][prop] === "number") {

@@ -1,5 +1,3 @@
-
-
 const { sign, verify, decode } = require("jsonwebtoken");
 
 const createTokens = (user) => {
@@ -8,30 +6,34 @@ const createTokens = (user) => {
     "jwtsecretcambiar"
   );
 
-
   return accessToken;
 };
 
-// const validateToken = (req, res, next) => {
+const validateToken = (req, res, next) => {
+  
+  const data = JSON.parse(req.headers.cookies)
 
-//   const accessToken = req.cookies["access-token"];
+  if(data["access-token"]){
 
-//   if (!accessToken)
-//     return res.status(400).json({ error: "Usuario no autenticado" });
+    const accessToken = data["access-token"];
+    if (!accessToken)
+      return res.status(400).json({ error: "Usuario no autenticado" });
+      try {
+        const validToken = verify(accessToken, "jwtsecretcambiar");
+    
+        if (validToken) {
+          req.authenticated = true;
+    
+          // res.status(200).json(validToken)
+          return next();
+        }
+      } catch (error) {
+        return res.status(400).json({ error: error });
+      }
+  } 
+  console.log(req.headers.cookies)
 
-//   try {
-//     const validToken = verify(accessToken, "jwtsecretcambiar");
 
-//     if (validToken) {
-//       req.authenticated = true;
-//       return next();
-//     }
-//   } catch (error) {
-//     return res.status(400).json({ error: error });
-//   }
-// };
-
-
-
+};
 
 module.exports = { createTokens, validateToken };

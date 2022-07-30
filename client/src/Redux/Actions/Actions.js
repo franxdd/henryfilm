@@ -33,6 +33,9 @@ export const LOAD_CURRENT_ITEM = "LOAD_CURRENT_ITEM";
 export const GET_LENGUAJE = "GET_LENGUAJE";
 export const ENGLISH = "ENGLISH";
 export const GET_ISOS = "GET_ISOS";
+export const POST_USUARIOS = "POST_USUARIOS";
+export const POST_LOGIN = "POST_LOGIN";
+export const GET_USER = "GET_USER";
 
 export const getAllSeries = () => {
   return (dispatch) => {
@@ -61,7 +64,9 @@ export function getAllMovies() {
 export const getnameSeries = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get("http://localhost:3001/series/detalleDeSerie?name=" + name);
+      let json = await axios.get(
+        "http://localhost:3001/series/detalleDeSerie?name=" + name
+      );
       return dispatch({
         type: GET_NAME_SERIES,
         payload: json.data,
@@ -74,7 +79,9 @@ export const getnameSeries = (name) => {
 export const getnameMovies = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get("http://localhost:3001/peliculas?name=" + name);
+      let json = await axios.get(
+        "http://localhost:3001/peliculas?name=" + name
+      );
       return dispatch({
         type: GET_NAME_MOVIES,
         payload: json.data,
@@ -114,6 +121,67 @@ export const willunmont = () => {
     return dispatch({
       type: WILLUNMOUNT,
     });
+  };
+};
+
+export const PostUsuario = (payload) => {
+  return async function (dispatch) {
+    let created = await axios.post(
+      "http://localhost:3001/usuarios/register",
+      payload
+    );
+    // console.log(created.data)
+    return dispatch({ type: POST_USUARIOS });
+  };
+};
+
+export const PostLogin = (payload) => {
+  return async function (dispatch) {
+    // const config = {
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //     },
+    //     withCredentials: true
+    //   }
+    let created = await axios.post(
+      "http://localhost:3001/usuarios/login",
+      payload,
+      { withCredentials: true }
+    );
+    // console.log(created.data)
+    sessionStorage.setItem("token", JSON.stringify(created.data));
+
+    return dispatch({ type: POST_LOGIN });
+  };
+};
+
+export const getUser = (token) => {
+  return async function (dispatch) {
+    // console.log("access-token=" + token);
+    var obj = {
+      'access-token':  token
+    }
+
+
+    let created = await axios.get(
+      "http://localhost:3001/usuarios/profile",
+
+      {
+        headers: {
+          Cookies: JSON.stringify(obj),
+        },
+      }
+    );
+    return dispatch({ type: GET_USER, payload: created.data });
+
+    // ).then((response)=>{
+    //   console.log(response)
+    //   return dispatch({ type: GET_USER, payload: response.data })
+
+    // }).catch((err)=>{
+    //   console.log(err)
+    //   return 'Error'
+    // })
   };
 };
 

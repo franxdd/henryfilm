@@ -25,6 +25,9 @@ import {
   GET_LENGUAJE,
   ENGLISH,
   GET_ISOS,
+  POST_USUARIOS,
+  POST_LOGIN,
+  GET_USER,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -77,6 +80,7 @@ const initialState = {
   idioma: [],
   idiomaDefault: "es/ES",
   isos: [],
+  user:[],
 };
 
 const rootRouter = (state = initialState, action) => {
@@ -87,6 +91,23 @@ const rootRouter = (state = initialState, action) => {
         allSeries: action.payload,
         backupSeries: action.payload,
       };
+    
+    case POST_USUARIOS:
+      return{
+        ...state,
+
+      }
+    case POST_LOGIN:
+
+      return{
+        ...state,
+      }
+    
+      case GET_USER:
+        return{
+          ...state,
+          user: action.payload
+        }
 
     case GET_ALL_MOVIES:
       return {
@@ -301,7 +322,9 @@ const rootRouter = (state = initialState, action) => {
         };
       } else {
         console.log(action.payload);
-        const filter = state.todo.filter((e) => e.name.toLowerCase().includes(action.payload.toLowerCase()));
+        const filter = state.todo.filter((e) =>
+          e.name.toLowerCase().includes(action.payload.toLowerCase())
+        );
         return {
           ...state,
           all: filter,

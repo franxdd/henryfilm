@@ -9,6 +9,7 @@ import {
   orderVoteAvgDES,
   getIso,
   getIdioma,
+  getUser,
 } from "../../Redux/Actions/Actions";
 import { useSelector, useDispatch } from "react-redux";
 import "../../Styles/components/_NavBar.scss";
@@ -25,11 +26,46 @@ import { useContext } from "react";
 import Context from "../../contexto/Context";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+function getToken() {
+  const tokenString = sessionStorage.getItem("token");
+
+  const userToken = JSON.parse(tokenString);
+  return userToken;
+}
+
 const Nav = () => {
   const dispatch = useDispatch();
   const allMovies = useSelector((state) => state.allMovies);
+  const userReducer = useSelector((state) => state.user);
   const contexto = useContext(Context);
   let location = useLocation();
+  
+  const tokenString = getToken();
+  const [isLogged, setisLogged] = useState(false);
+  const [user, setuser] = useState();
+  
+  useEffect(() => {
+
+    dispatch(getIso(parseInt(94605)));
+    dispatch(getIdioma("a"));
+    dispatch(getUser(tokenString))
+ 
+
+  }, [dispatch]);
+
+
+  // console.log(userReducer)
+  // useEffect(()=>{
+
+  //   dispatch(getUser(tokenString))
+
+  // },[])
+
+  // useEffect(()=>{
+
+  //   setuser(userReducer)
+  //   console.log(user)
+  // },[userReducer])
 
   const handleChangeLenguaje = (e) => {
     contexto.setLenguaje(e.target.value);
@@ -40,10 +76,11 @@ const Nav = () => {
   // const handleChangeLenguaje = (e) => {
   //   contexto.setLenguaje(e.target.value);
   // };
-  useEffect(() => {
-    dispatch(getIso(parseInt(94605)));
-    dispatch(getIdioma("a"));
-  }, [dispatch]);
+
+  // function HnadleClick(){
+
+  //   console.log(userReducer)
+  // }
 
   function handleLenguage(e) {
     e.preventDefault();
@@ -101,11 +138,21 @@ const Nav = () => {
                 <option value="ch">Chino</option>
               </select>
             </div>
-            <Link to="/home/Register">
-              <button>
-                <b>Registrate</b>
-              </button>
-            </Link>
+
+            {userReducer.username ? (
+              <Link to="/home/Register">
+                <button>
+                  <b>{userReducer.username}</b>
+                </button>
+              </Link>
+            ) : (
+              <Link to="/home/Register">
+                <button>
+                  <b>Registrate</b>
+                </button>
+              </Link>
+            )}
+
             <Link to="/home/carro">
               <button>
                 <ShopIcon className="iconoShop" />
@@ -132,14 +179,27 @@ const Nav = () => {
             <Link to="/home/series" className="NavbarLinkExtended">
               <MonitorIcon className="icono-nav" /> Series
             </Link>
-            <Link to="/home/Register">
-              <button>
-                <b>Registrate</b>
-              </button>
-              <button>
-                <LockIcon className="icono-nav" />
-              </button>
-            </Link>
+{/* 
+            {userReducer.username ? (
+              <Link to="/home/Register">
+                <button>
+                  <b>CAPO</b>
+                </button>
+                <button>
+                  <LockIcon className="icono-nav" />
+                </button>
+              </Link>
+            ) : (
+              <Link to="/home/Register">
+                <button>
+                  <b>Registrate</b>
+                </button>
+                <button>
+                  <LockIcon className="icono-nav" />
+                </button>
+              </Link>
+            )} */}
+
             <Link to="/home/carro">
               <button>
                 <ShopIcon className="iconoShop" />
