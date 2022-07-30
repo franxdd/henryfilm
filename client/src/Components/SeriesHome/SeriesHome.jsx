@@ -15,9 +15,9 @@ import {
 import NavBar from "../NavBar/NavBar.jsx";
 import Paginacion from "./PaginadoSeries";
 import "../../Styles/components/_SeriesHome.scss";
-import "../../Styles/components/_Filter.scss"
-import {AiOutlineClear as ClearIcon} from "react-icons/ai";
-import {FaWindowClose} from "react-icons/fa";
+import "../../Styles/components/_Filter.scss";
+import { AiOutlineClear as ClearIcon } from "react-icons/ai";
+import { FaWindowClose } from "react-icons/fa";
 
 function SeriesHome() {
   const dispatch = useDispatch();
@@ -111,23 +111,16 @@ function SeriesHome() {
       {generosCache?.map((g) => {
         return (
           <button onClick={() => FiltradoReversa(g)}>
-          {" "}
-          {g} <FaWindowClose/>
-        </button>
+            {" "}
+            {g} <FaWindowClose />
+          </button>
         );
       })}
 
       <div className="contenedor-seccion">
         <div className="contenedor-resultados">
           {allpSeries.map((e) => {
-            return (
-              <CardSeries
-                key={e.id}
-                id={e.id}
-                name={e.name}
-                poster={e.posterImagen}
-              />
-            );
+            return <CardSeries key={e.id} id={e.id} name={e.name} poster={e.posterImagen} />;
           })}
         </div>
       </div>

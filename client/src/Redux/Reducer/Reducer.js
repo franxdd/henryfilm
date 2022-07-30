@@ -30,7 +30,6 @@ import {
 import { filterGenres } from "../../util/filter.js";
 import { toast } from "react-toastify";
 
-
 function a() {
   return toast.error("Ya se encuentra en el carro", {
     position: "bottom-left",
@@ -54,6 +53,21 @@ function b() {
   });
 }
 
+let cartStorage;
+try {
+  let local = localStorage.getItem("cart") || [];
+  if (local !== "undefined") {
+    console.log(local);
+    cartStorage = JSON.parse(local);
+  }
+} catch (error) {
+  console.log(error);
+}
+
+if (!cartStorage) {
+  cartStorage = [];
+}
+
 const initialState = {
   allMovies: [],
   allSeries: [],
@@ -67,14 +81,12 @@ const initialState = {
   all: [],
   todo: [],
   backupTodo: [],
-  cart: [],
+  cart: cartStorage,
   current: null,
   idioma: [],
   idiomaDefault: "es/ES",
   isos: [],
 };
-
-
 
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
@@ -120,7 +132,7 @@ const rootRouter = (state = initialState, action) => {
     case WILLUNMOUNT:
       return {
         ...state,
-        seriesDetail: {},
+        lenguaje: {},
       };
     case WILLUNMOUNT2:
       return {
@@ -322,14 +334,11 @@ const rootRouter = (state = initialState, action) => {
     //   }
 
     case ADD_TO_CART:
-
       const item = state.todo.find((e) => e.id === action.payload);
-      console.log(item)
-
       let cartStorage = localStorage.getItem("cart");
-      console.log("cartStorage", cartStorage)
+      console.log(typeof cartStorage);
 
-      if (!cartStorage) {
+      if (cartStorage === "undefined") {
         b();
         localStorage.setItem("cart", JSON.stringify([item]));
       } else {
@@ -346,6 +355,13 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         cart: datoCart,
+      };
+    case REMOVE_TO_CART:
+      let filter = state.cart.filter((e) => e.id !== action.payload);
+      localStorage.setItem("cart", JSON.stringify(filter));
+      return {
+        ...state,
+        cart: filter,
       };
 
     case GET_LENGUAJE:
