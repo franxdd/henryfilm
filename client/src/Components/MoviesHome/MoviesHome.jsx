@@ -7,7 +7,7 @@ import {
   orderNameDES,
   orderVoteAvgASC,
   orderVoteAvgDES,
-  // clear,
+  getGenerosMovies
 } from "../../Redux/Actions/Actions";
 import { 
   useEffect, 
@@ -27,7 +27,7 @@ import { FaWindowClose } from "react-icons/fa";
 
 function MoviesHome() {
   useEffect(() => {
-    if (!allMovies.length) dispatch(getAllMovies());
+    dispatch(getGenerosMovies());
   }, []);
   const dispatch = useDispatch();
 
@@ -74,7 +74,7 @@ function MoviesHome() {
     dispatch(orderVoteAvgDES(allMovies));
   };
 
-  return allMovies.length === 0 ? (
+  return allMovies.length === 0 || generos.length === 0? (
     <div className="momentum"></div>
   ) : (
     <div className="filter">

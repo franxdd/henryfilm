@@ -14,6 +14,7 @@ import SeriesHome from "./Components/SeriesHome/SeriesHome";
 import Context from "./contexto/Context";
 import { useState } from "react";
 import Search from "./Components/Search/Search";
+import Profile from "./Components/Profile/Profile.jsx";
 import Carro from "./Components/Carro/Carro";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -49,6 +50,7 @@ const App = () => {
             <Route path="Register" element={<LoginRegister />} />
             <Route path="Login" element={<Login />} />
             <Route path="Search" element={<Search />}></Route>
+            <Route path="Profile" element={<Profile />}></Route>
             <Route path="Carro" element={<Carro />}></Route>
           </Route>
         </Routes>
