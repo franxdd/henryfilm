@@ -1,11 +1,15 @@
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
+import {PostUsuario} from '../../Redux/Actions/Actions.js'
 function LoginRegister() {
+
+
+
   const dispatch = useDispatch();
   const [input, setInput] = useState({
-    usuario: "",
+    username: "",
     email: "",
-    contraseña: "",
+    password: "",
   });
   function handdleChange(e) {
     setInput({
@@ -15,11 +19,11 @@ function LoginRegister() {
   }
   function handdleSubmit(e) {
     e.preventDefault();
-    dispatch(input);
+    dispatch(PostUsuario(input));
     setInput({
-      usuario: "",
+      username: "",
       email: "",
-      contraseña: "",
+      password: "",
     });
   }
 
@@ -27,15 +31,15 @@ function LoginRegister() {
     <div>
       <form onSubmit={(e) => handdleSubmit(e)}>
         <label>Usuario</label>
-        <input autoComplete="off" type={"text"} value={input.usuario} name="usuario" onChange={handdleChange} />
+        <input autoComplete="off" type={"text"} value={input.username} name="username" onChange={handdleChange} />
         <label>Email</label>
         <input autoComplete="off" type={"email"} value={input.email} name="email" onChange={handdleChange} />
         <label>Contraseña</label>
         <input
           autoComplete="off"
           type={"password"}
-          value={input.contraseña}
-          name="contraseña"
+          value={input.password}
+          name="password"
           onChange={handdleChange}
         />
         <button type="submit"> Registrarse</button>

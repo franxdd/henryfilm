@@ -1,8 +1,16 @@
 const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
+[1,2,3,3,1,3,1,3,1,2,1,2,]
 
-const parseador = (data, urlImg, generosData) => {
+const parseador = (
+  data,
+  urlImg,
+  generosData,
+  cast,
+  videosAEnviar,
+  urlVideos
+) => {
   var num;
   let generos = {};
   var resultado = [];
@@ -30,13 +38,37 @@ const parseador = (data, urlImg, generosData) => {
       }
     }
 
+    if (cast) {
+      data[index].cast = [];
+
+      for (let c = 0; c < cast.length; c++) {
+        if (cast[c].known_for_department === "Acting") {
+          data[index].cast = [...data[index].cast, cast[c].name];
+        }
+      }
+    }
+
+    if (videosAEnviar) {
+      data[index].videosAMostrar = [];
+      for (let v = 0; v < videosAEnviar.length; v++) {
+        if (videosAEnviar[v].site === "YouTube") {
+          data[index].videosAMostrar = [
+            ...data[index].videosAMostrar,
+            urlVideos + videosAEnviar[v].key,
+          ];
+        }
+      }
+    }
+
     resultado = [...resultado, data[index]];
   }
   for (let img = 0; img < resultado.length; img++) {
     if (resultado[img].hasOwnProperty("title")) {
       resultado[img].name = resultado[img].title;
       resultado[img].tipo = "pelicula";
+      resultado[img].price = Math.floor(Math.random() * (30 - 10) + 10); //max - min
     } else {
+      resultado[img].price = Math.floor(Math.random() * (30 - 10) + 10);
       resultado[img].tipo = "serie";
     }
 
@@ -124,7 +156,7 @@ const validate = ({
   } else if (!tipo) {
     error.tipo = "Se debe seleccionar un tipo";
   }
-  
+
   if (tipo && tipo === "serie") {
     if (!number_of_episodes) {
       error.number_of_episodes = "Debe existir un numero de episodio";

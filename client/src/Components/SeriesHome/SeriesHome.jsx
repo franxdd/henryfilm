@@ -9,20 +9,21 @@ import {
   orderVoteAvgDES,
   filtradoGeneroSeries,
   filtradoGeneroSeriesReversa,
-  getAllSeries,
-  clear,
+  getGenerosSeries
 } from "../../Redux/Actions/Actions";
 import NavBar from "../NavBar/NavBar.jsx";
 import Paginacion from "./PaginadoSeries";
-import "./_SeriesHome.scss";
-import "../MoviesHome/_Filter.scss"
-import {AiOutlineClear as ClearIcon} from "react-icons/ai";
+import "../../Styles/components/_SeriesHome.scss";
+import "../../Styles/components/_Filter.scss";
+import { AiOutlineClear as ClearIcon } from "react-icons/ai";
+import { FaWindowClose } from "react-icons/fa";
 
 function SeriesHome() {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getAllSeries());
-  // }, []);
+  useEffect(() => {
+    dispatch(getGenerosSeries());
+  }, []);
+  
   let allSeries = useSelector((state) => state.allSeries);
   const generos = useSelector((state) => state.generosSeries);
 
@@ -68,22 +69,22 @@ function SeriesHome() {
     dispatch(orderVoteAvgDES(allSeries));
   };
 
-  return allSeries.length === 0 ? (
+  return allSeries.length === 0 || generos.length === 0 ? (
     <h1>LOADER</h1>
   ) : (
     <div className="filter">
-    <span>Ordenar por:</span>
-    <button class="cta" onClick={(e) => HandleClickASC(e)}>
-    <span class="hover-underline-animation"> A - Z </span>
-    </button>
-    <button class="cta" onClick={(e) => HandleClickDES(e)} > 
-    <span class="hover-underline-animation"> Z - A </span>
-    </button>
-      <button class="cta" onClick={(e) => HandleClickVoteASC(e)}>
-      <span class="hover-underline-animation"> + Puntuación</span>
+      <span>Ordenar por:</span>
+      <button className="cta" onClick={(e) => HandleClickASC(e)}>
+        <span className="hover-underline-animation"> A - Z </span>
       </button>
-      <button class="cta" onClick={(e) => HandleClickVoteDES(e)}>
-      <span class="hover-underline-animation"> - Puntuación </span>
+      <button className="cta" onClick={(e) => HandleClickDES(e)}>
+        <span className="hover-underline-animation"> Z - A </span>
+      </button>
+      <button className="cta" onClick={(e) => HandleClickVoteASC(e)}>
+        <span className="hover-underline-animation"> + Puntuación</span>
+      </button>
+      <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
+        <span className="hover-underline-animation"> - Puntuación </span>
       </button>
       <span>Filtrar por:</span>
       <div className="Selects">
@@ -103,28 +104,23 @@ function SeriesHome() {
           </select>
         </div>
       </div>
-      <span onClick={() => HandleClickClear()}><ClearIcon className="icono-clear" /></span>
+      <span onClick={() => HandleClickClear()}>
+        <ClearIcon className="icono-clear" />
+      </span>
 
       {generosCache?.map((g) => {
         return (
-          <div style={{ color: "white" }} onClick={() => FiltradoReversa(g)}>
+          <button onClick={() => FiltradoReversa(g)}>
             {" "}
-            {g}
-          </div>
+            {g} <FaWindowClose />
+          </button>
         );
       })}
 
       <div className="contenedor-seccion">
         <div className="contenedor-resultados">
           {allpSeries.map((e) => {
-            return (
-              <CardSeries
-                key={e.id}
-                id={e.id}
-                name={e.name}
-                poster={e.posterImagen}
-              />
-            );
+            return <CardSeries key={e.id} id={e.id} name={e.name} poster={e.posterImagen} />;
           })}
         </div>
       </div>

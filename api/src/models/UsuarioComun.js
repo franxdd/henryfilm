@@ -22,13 +22,13 @@ module.exports = (sequelize) => {
          allowNull: false,
          primaryKey: true,
       },
-      authorization:{
-         roles:{
-            type: DataTypes.STRING,
-            enum: ['comun', 'comprador', 'admin'],
-            default: ['comun']
-         }
-      },
+      // authorization:{
+      //    roles:{
+      //       type: DataTypes.STRING,
+      //       enum: ['comun', 'comprador', 'admin'],
+      //       default: ['comun']
+      //    }
+      // },
       tarjetaDeCredito:{
          type: DataTypes.STRING
       },

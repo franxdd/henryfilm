@@ -1,18 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import {   
-  FaAngleDoubleLeft,
-  FaAngleLeft,
-  FaAngleRight,
-  FaAngleDoubleRight,} 
-  from "react-icons/fa";
-import "./_Paginado.scss";
-export default function PaginadoMovies({
-  pelisPerPage,
-  todasLasMovies,
-  setCurrentPage,
-  currentPage,
-}) {
+import { FaAngleDoubleLeft, FaAngleLeft, FaAngleRight, FaAngleDoubleRight } from "react-icons/fa";
+import "../../Styles/components/_Paginado.scss";
+export default function PaginadoMovies({ pelisPerPage, todasLasMovies, setCurrentPage, currentPage }) {
   const maximo = todasLasMovies / pelisPerPage;
 
   const onKeyDown = (e) => {
@@ -32,10 +22,16 @@ export default function PaginadoMovies({
   };
   const [input, setInput] = useState(1);
   const previousPage = () => {
+    if (currentPage === 1 || currentPage < 1) {
+      return;
+    }
     setCurrentPage(currentPage - 1);
     setInput(parseInt(input) - 1);
   };
   const nextPage = () => {
+    if (currentPage >= maximo) {
+      return;
+    }
     setCurrentPage(currentPage + 1);
     setInput(parseInt(input) + 1);
   };
@@ -56,23 +52,14 @@ export default function PaginadoMovies({
       <span className="buttonClass" disabled={currentPage === 1 || currentPage < 1} onClick={priPage}>
         <FaAngleDoubleLeft />
       </span>
-      <span className="buttonClass"
-        disabled={currentPage === 1 || currentPage < 1}
-        onClick={previousPage}
-      >
+      <span className="buttonClass" onClick={previousPage}>
         <FaAngleLeft />
       </span>
       <p>Página {currentPage}</p>
-      <span className="buttonClass"
-        disabled={currentPage === maximo || currentPage > maximo}
-        onClick={nextPage}
-      >
+      <span className="buttonClass" onClick={nextPage}>
         <FaAngleRight />
       </span>
-      <span className="buttonClass"
-        disabled={currentPage === maximo || currentPage > maximo}
-        onClick={ultPage}
-      >
+      <span className="buttonClass" disabled={currentPage === maximo || currentPage > maximo} onClick={ultPage}>
         <FaAngleDoubleRight />
       </span>
     </div>

@@ -1,18 +1,19 @@
 import { React, useState } from "react";
-import {   
-  FaAngleDoubleLeft,
-  FaAngleLeft,
-  FaAngleRight,
-  FaAngleDoubleRight,} 
-  from "react-icons/fa";
+import { FaAngleDoubleLeft, FaAngleLeft, FaAngleRight, FaAngleDoubleRight } from "react-icons/fa";
 
 function Paginacion({ pagina, setPagina, maximo }) {
   const [input, setInput] = useState(1);
   const previousPage = () => {
+    if (pagina === 1 || pagina < 1) {
+      return;
+    }
     setPagina(pagina - 1);
     setInput(parseInt(input) - 1);
   };
   const nextPage = () => {
+    if (pagina >= maximo) {
+      return;
+    }
     setPagina(pagina + 1);
     setInput(parseInt(input) + 1);
   };
@@ -47,7 +48,7 @@ function Paginacion({ pagina, setPagina, maximo }) {
       <span style={{ color: "white" }} disabled={pagina === 1 || pagina < 1} onClick={priPage}>
         <FaAngleDoubleLeft />
       </span>
-      <span style={{ color: "white" }} disabled={pagina === 1 || pagina < 1} onClick={previousPage}>
+      <span style={{ color: "white" }} onClick={previousPage}>
         <FaAngleLeft />
       </span>
       {/* <input
@@ -58,11 +59,8 @@ function Paginacion({ pagina, setPagina, maximo }) {
         value={input}
         min="1"
       /> */}
-       <p>Página {pagina}</p>
-      <span style={{ color: "white" }}
-        disabled={pagina === maximo || pagina > maximo}
-        onClick={nextPage}
-      >
+      <p>Página {pagina}</p>
+      <span style={{ color: "white" }} onClick={nextPage}>
         <FaAngleRight />
       </span>
       <span style={{ color: "white" }} disabled={pagina === maximo || pagina > maximo} onClick={ultPage}>

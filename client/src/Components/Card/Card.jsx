@@ -1,5 +1,5 @@
-import "../Card/_Card.scss";
-import { mostrarImagen } from "../../auxiliares/Funciones";
+import "../../Styles/components/card.scss";
+import { mostrarImagen } from "../../Auxiliares/Funciones";
 import { Link } from "react-router-dom";
 
 const Card = ({ resultado, clase, id }) => {
@@ -12,9 +12,9 @@ const Card = ({ resultado, clase, id }) => {
           <img src={src}></img>
         </div>
       </Link>
-      <h3 className="titulo-resultado">
+      {/* <h3 className="titulo-resultado">
         {resultado.title ? resultado.title : resultado.name}
-      </h3>
+      </h3> */}
     </article>
   );
 };
