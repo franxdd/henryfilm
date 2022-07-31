@@ -37,20 +37,21 @@ function getToken() {
 const Nav = () => {
   const dispatch = useDispatch();
   const userReducer = useSelector((state) => state.user);
-  const isLogged = useSelector((state)=>state.isLogged)
+  const token = useSelector((state) => state.token);
   const contexto = useContext(Context);
   const tokenString = getToken();
 
   useEffect(() => {
     dispatch(getIso(parseInt(94605)));
     dispatch(getIdioma("a"));
-    dispatch(getUser(tokenString));
-    console.log(isLogged)
-  }, [dispatch, isLogged]);
+  }, [dispatch]);
 
   useEffect(() => {
-    // console.log();
-  }, [dispatch, userReducer]);
+    if (tokenString) {
+      console.log("entro al segundo useEffect");
+      dispatch(getUser(tokenString));
+    }
+  }, [dispatch, token]);
 
   const handleChangeLenguaje = (e) => {
     contexto.setLenguaje(e.target.value);
@@ -115,7 +116,7 @@ const Nav = () => {
                 <option value="ch">Chino</option>
               </select>
             </div>
-
+            {console.log(userReducer)}
             {userReducer.username ? (
               <Link to="/home/Register">
                 <button>
@@ -135,6 +136,18 @@ const Nav = () => {
             ) : (
               <button style={{ color: "white" }}>NO ES ADMIN</button>
             )}
+
+            <Link to="/home/Login">
+              <button>
+                <b>Login</b>
+              </button>
+            </Link>
+
+            <Link to="/home/Profile">
+              <button>
+                <b>Log Out</b>
+              </button>
+            </Link>
 
             <Link to="/home/carro">
               <button>

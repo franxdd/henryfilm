@@ -37,6 +37,7 @@ export const POST_USUARIOS = "POST_USUARIOS";
 export const POST_LOGIN = "POST_LOGIN";
 export const GET_USER = "GET_USER";
 export const CHECK_STATE = "CHECK_STATE";
+export const LOG_OUT = 'LOG_OUT'
 
 export const getAllSeries = () => {
   return (dispatch) => {
@@ -106,21 +107,14 @@ export const getSeriesDetail = (id) => {
 };
 
 
-export const checkState = ()=>{
-  return {
-    type: CHECK_STATE,
-  };
-
-
-}
 
 export const getMoviesDetail = (id) => {
   return (dispatch) => {
     return fetch(`http://localhost:3001/peliculas/${id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        dispatch({
-          type: GET_MOVIES_DETAIL,
+    .then((r) => r.json())
+    .then((data) => {
+      dispatch({
+        type: GET_MOVIES_DETAIL,
           payload: data,
         });
       });
@@ -139,12 +133,19 @@ export const PostUsuario = (payload) => {
     let created = await axios.post(
       "http://localhost:3001/usuarios/register",
       payload
-    );
-    // console.log(created.data)
-    return dispatch({ type: POST_USUARIOS });
+      );
+      // console.log(created.data)
+      return dispatch({ type: POST_USUARIOS });
+    };
   };
-};
-
+  export const checkState = ()=>{
+    return {
+      type: CHECK_STATE,
+    };
+  
+  
+  }
+  
 export const PostLogin = (payload) => {
   return async function (dispatch) {
 
@@ -159,6 +160,16 @@ export const PostLogin = (payload) => {
     return dispatch({ type: POST_LOGIN , payload: created.data});
   };
 };
+
+
+export const logOut = () => {
+  return {
+    type: LOG_OUT,
+   
+  };
+};
+
+
 
 export const getUser = (token) => {
   return async function (dispatch) {

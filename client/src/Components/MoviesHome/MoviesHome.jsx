@@ -7,7 +7,7 @@ import {
   orderNameDES,
   orderVoteAvgASC,
   orderVoteAvgDES,
-  clear,
+  getGenerosMovies
 } from "../../Redux/Actions/Actions";
 import { useEffect, useState } from "react";
 import { filtradoGeneroMovies, filtradoGeneroMoviesReversa } from "../../Redux/Actions/Actions.js";
@@ -19,9 +19,9 @@ import { AiOutlineClear as ClearIcon } from "react-icons/ai";
 import { FaWindowClose } from "react-icons/fa";
 
 function MoviesHome() {
-  // useEffect(() => {
-  //   dispatch(getAllMovies());
-  // }, []);
+  useEffect(() => {
+    dispatch(getGenerosMovies());
+  }, []);
   const dispatch = useDispatch();
 
   const allMovies = useSelector((state) => state.allMovies);
@@ -66,7 +66,7 @@ function MoviesHome() {
     dispatch(orderVoteAvgDES(allMovies));
   };
 
-  return allMovies.length === 0 ? (
+  return allMovies.length === 0 || generos.length === 0? (
     <div className="momentum"></div>
   ) : (
     <div className="filter">

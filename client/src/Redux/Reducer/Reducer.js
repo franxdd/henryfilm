@@ -28,7 +28,8 @@ import {
   POST_USUARIOS,
   POST_LOGIN,
   GET_USER,
-  CHECK_STATE
+  CHECK_STATE,
+  LOG_OUT
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -82,7 +83,7 @@ const initialState = {
   idiomaDefault: "es/ES",
   isos: [],
   user:[],
-  isLogged: '',
+  token: '',
 };
 
 const rootRouter = (state = initialState, action) => {
@@ -93,6 +94,13 @@ const rootRouter = (state = initialState, action) => {
         allSeries: action.payload,
         backupSeries: action.payload,
       };
+    case LOG_OUT:
+      return {
+        ...state,
+        user: [], 
+        token: ''
+
+      }
     
     case POST_USUARIOS:
       return{
@@ -103,7 +111,7 @@ const rootRouter = (state = initialState, action) => {
 
       return{
         ...state,
-        isLogged: true
+        token: action.payload
       }
     case CHECK_STATE:
       return{
@@ -259,28 +267,31 @@ const rootRouter = (state = initialState, action) => {
       };
 
     case FILTRO_GENERO_MOVIES:
+
+      
       const arrAuxMovies = filterGenres(state.allMovies, action.payload);
       if (arrAuxMovies.length === 0) {
         alert("No se encontraron coincidencias");
 
         return {
           ...state,
-          allMovies: state.backupMovies,
+          allMovies: state.backupTodo.slice(0,100),
         };
       } else {
         return {
           ...state,
-          allMovies: arrAuxMovies,
+          allMovies: arrAuxMovies ,
         };
       }
 
     case FILTRO_GENERO_SERIES:
+
       const arrAuxSeries = filterGenres(state.allSeries, action.payload);
       if (arrAuxSeries.length === 0) {
         alert("No se encontraron coincidencias");
         return {
           ...state,
-          allSeries: state.backupSeries,
+          allSeries: state.backupTodo.slice(100,200),
         };
       } else {
         return {
@@ -290,11 +301,12 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_MOVIES_REVERSA:
-      const arrMovie = filterGenres(state.backupMovies, action.payload);
+   
+      const arrMovie = filterGenres(state.backupTodo.slice(0,100), action.payload);
       if (arrMovie.length === 0) {
         return {
           ...state,
-          allMovies: state.backupMovies,
+          allMovies: state.backupTodo.slice(0,100),
         };
       } else {
         return {
@@ -304,11 +316,11 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_SERIES_REVERSA:
-      const arrSeries = filterGenres(state.backupSeries, action.payload);
+      const arrSeries = filterGenres(state.backupTodo.slice(100,200), action.payload);
       if (arrSeries.length === 0) {
         return {
           ...state,
-          allSeries: state.backupSeries,
+          allSeries: state.backupTodo.slice(100,200),
         };
       } else {
         return {
@@ -321,6 +333,10 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         todo: action.payload,
         backupTodo: action.payload,
+        allMovies: action.payload.slice(0,100),
+        allSeries : action.payload.slice(100,200)
+
+
       };
     case FILTER_NAME:
       if (action.payload.length === 0) {

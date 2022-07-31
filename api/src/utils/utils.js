@@ -49,7 +49,6 @@ const parseador = (
     }
 
     if (videosAEnviar) {
-      console.log(videosAEnviar);
       data[index].videosAMostrar = [];
       for (let v = 0; v < videosAEnviar.length; v++) {
         if (videosAEnviar[v].site === "YouTube") {

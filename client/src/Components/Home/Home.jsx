@@ -20,12 +20,12 @@ const Home = () => {
 
 
   useEffect(() => {
-    dispatch(getAllSeries());
-    dispatch(getAllMovies());
-    dispatch(getGenerosSeries());
-    dispatch(getGenerosMovies());
+    // dispatch(getAllSeries());
+    // dispatch(getAllMovies());
+    // dispatch(getGenerosSeries());
+    // dispatch(getGenerosMovies());
     dispatch(getTodo());
-    dispatch(getUser(tokenString))
+    // dispatch(getUser(tokenString))
 
   }, []);
 
