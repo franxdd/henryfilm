@@ -179,7 +179,7 @@ const postPeliculas = async (req, res) => {
     tipo,
   } = req.body;
 
-  var errores = validate(
+  var errores = validate({
     name,
     genre_ids,
     overview,
@@ -190,8 +190,8 @@ const postPeliculas = async (req, res) => {
     backDropImagen,
     vote_average,
     popularity,
-    tipo
-  );
+    tipo,
+  });
 
   if (errores) res.json(errores);
 
