@@ -5,6 +5,10 @@ const { Comentarios, Usuarios, Peliculas } = require("../DB/db.js");
 const { API_KEY } = process.env;
 
 const getComentario = async (req, res) => {
+   
+    
+
+
     
 
 }
