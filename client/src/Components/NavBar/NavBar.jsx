@@ -9,6 +9,8 @@ import {
   orderVoteAvgDES,
   getIso,
   getIdioma,
+  getUser,
+  checkState,
 } from "../../Redux/Actions/Actions";
 import { useSelector, useDispatch } from "react-redux";
 import "../../Styles/components/_NavBar.scss";
@@ -25,11 +27,31 @@ import { useContext } from "react";
 import Context from "../../contexto/Context";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+function getToken() {
+  const tokenString = sessionStorage.getItem("token");
+
+  const userToken = JSON.parse(tokenString);
+  return userToken;
+}
+
 const Nav = () => {
   const dispatch = useDispatch();
-  const allMovies = useSelector((state) => state.allMovies);
+  const userReducer = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
   const contexto = useContext(Context);
-  let location = useLocation();
+  const tokenString = getToken();
+
+  useEffect(() => {
+    dispatch(getIso(parseInt(94605)));
+    dispatch(getIdioma("a"));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (tokenString) {
+      console.log("entro al segundo useEffect");
+      dispatch(getUser(tokenString));
+    }
+  }, [dispatch, token]);
 
   const handleChangeLenguaje = (e) => {
     contexto.setLenguaje(e.target.value);
@@ -37,13 +59,6 @@ const Nav = () => {
   const [extendNavbar, setExtendNavbar] = useState(false);
   const b = useSelector((state) => state.idioma);
   const c = useSelector((state) => state.isos);
-  // const handleChangeLenguaje = (e) => {
-  //   contexto.setLenguaje(e.target.value);
-  // };
-  useEffect(() => {
-    dispatch(getIso(parseInt(94605)));
-    dispatch(getIdioma("a"));
-  }, [dispatch]);
 
   function handleLenguage(e) {
     e.preventDefault();
@@ -101,11 +116,39 @@ const Nav = () => {
                 <option value="ch">Chino</option>
               </select>
             </div>
-            <Link to="/home/Register">
+            {console.log(userReducer)}
+            {userReducer.username ? (
+              <Link to="/home/Register">
+                <button>
+                  <b>{userReducer.username}</b>
+                </button>
+              </Link>
+            ) : (
+              <Link to="/home/Register">
+                <button>
+                  <b>Registrate</b>
+                </button>
+              </Link>
+            )}
+
+            {userReducer.isAdmin ? (
+              <button style={{ color: "white" }}>ES ADMIN</button>
+            ) : (
+              <button style={{ color: "white" }}>NO ES ADMIN</button>
+            )}
+
+            <Link to="/home/Login">
               <button>
-                <b>Registrate</b>
+                <b>Login</b>
               </button>
             </Link>
+
+            <Link to="/home/Profile">
+              <button>
+                <b>Log Out</b>
+              </button>
+            </Link>
+
             <Link to="/home/carro">
               <button>
                 <ShopIcon className="iconoShop" />
@@ -132,14 +175,27 @@ const Nav = () => {
             <Link to="/home/series" className="NavbarLinkExtended">
               <MonitorIcon className="icono-nav" /> Series
             </Link>
-            <Link to="/home/Register">
-              <button>
-                <b>Registrate</b>
-              </button>
-              <button>
-                <LockIcon className="icono-nav" />
-              </button>
-            </Link>
+            {/* 
+            {userReducer.username ? (
+              <Link to="/home/Register">
+                <button>
+                  <b>CAPO</b>
+                </button>
+                <button>
+                  <LockIcon className="icono-nav" />
+                </button>
+              </Link>
+            ) : (
+              <Link to="/home/Register">
+                <button>
+                  <b>Registrate</b>
+                </button>
+                <button>
+                  <LockIcon className="icono-nav" />
+                </button>
+              </Link>
+            )} */}
+
             <Link to="/home/carro">
               <button>
                 <ShopIcon className="iconoShop" />

@@ -9,8 +9,7 @@ import {
   orderVoteAvgDES,
   filtradoGeneroSeries,
   filtradoGeneroSeriesReversa,
-  getAllSeries,
-  clear,
+  getGenerosSeries
 } from "../../Redux/Actions/Actions";
 import NavBar from "../NavBar/NavBar.jsx";
 import Paginacion from "./PaginadoSeries";
@@ -22,8 +21,9 @@ import { FaWindowClose } from "react-icons/fa";
 function SeriesHome() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllSeries());
+    dispatch(getGenerosSeries());
   }, []);
+  
   let allSeries = useSelector((state) => state.allSeries);
   const generos = useSelector((state) => state.generosSeries);
 
@@ -69,7 +69,7 @@ function SeriesHome() {
     dispatch(orderVoteAvgDES(allSeries));
   };
 
-  return allSeries.length === 0 ? (
+  return allSeries.length === 0 || generos.length === 0 ? (
     <h1>LOADER</h1>
   ) : (
     <div className="filter">
