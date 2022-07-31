@@ -132,7 +132,7 @@ const Nav = () => {
             )}
 
             {userReducer.isAdmin ? (
-              <button style={{ color: "white" }}>ES ADMIN</button>
+              <button style={{ color: "white" }}>DASHBOARD</button>
             ) : (
               <button style={{ color: "white" }}>NO ES ADMIN</button>
             )}
