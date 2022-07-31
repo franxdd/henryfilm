@@ -4,12 +4,31 @@ const { parseador } = require("../utils/utils.js");
 const { Comentarios, Usuarios, Peliculas } = require("../DB/db.js");
 const { API_KEY } = process.env;
 
-const getComentario = async (req, res) => {
+
+
+
+
+const getComentarios = async (req, res) => {
    
+    let {id } = req.params
+    // console.log(id)
+    // console.log(idSerie)
     
 
+    if(id){
 
+        var comentarios = await Comentarios.findAll({where: {PeliculaId : id }})
+    }
+    //  else if(id){
+        
+        
+    //     var comentarios = await Comentarios.findAll({where: {SerieId : idSerie }}) 
+    // }
     
+    
+    res.status(200).json(comentarios)
+
+
 
 }
 
@@ -23,7 +42,6 @@ const postComentario = async (req, res) => {
             !username ||
             !contenido ||
             !puntuacion 
-
           )
             return res.status(404).send("Falta completar un dato..");
 
@@ -48,7 +66,7 @@ const postComentario = async (req, res) => {
 }
 
 module.exports = {
-    getComentario,
+    getComentarios,
     postComentario
  
   };
