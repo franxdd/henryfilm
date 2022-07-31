@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const route = Router();
-const { getComentario, postComentario } = require("../servicies/comentarios.js");
+const { getComentarios, postComentario } = require("../servicies/comentarios.js");
 require("dotenv").config();
 
-route.get("/devolver", getComentario);
+route.get("/:id", getComentarios);
 route.post("/agregar", postComentario);
 
 

@@ -90,6 +90,10 @@ Comentarios.belongsTo(Usuarios);
 Peliculas.hasMany(Comentarios);
 Comentarios.belongsTo(Peliculas);
 
+// Series.hasMany(Comentarios);
+// Comentarios.belongsTo(Series);
+
+
 Series.belongsToMany(Usuarios, { through: "series-Usuario" });
 Usuarios.belongsToMany(Series, { through: "series-Usuario" });
 
