@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Router } from "react-router-dom";
 function Login() {
   const dispatch = useDispatch();
   const [input, setInput] = useState({
@@ -20,6 +21,7 @@ function Login() {
       usuario: "",
       contraseña: "",
     });
+    Router.push('/home')
   }
 
   return (

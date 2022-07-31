@@ -86,6 +86,8 @@ const initialState = {
   idioma: [],
   idiomaDefault: "es/ES",
   isos: [],
+
+  user: null,
 };
 
 const rootRouter = (state = initialState, action) => {
