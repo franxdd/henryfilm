@@ -17,6 +17,7 @@ import Search from "./Components/Search/Search";
 import Carro from "./Components/Carro/Carro";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "./Components/Footer/Footer"
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
 
@@ -45,6 +46,9 @@ const App = () => {
             <Route path="Search" element={<Search />}></Route>
             <Route path="Carro" element={<Carro />}></Route>
           </Route>
+        </Routes>
+        <Routes>
+            <Route path="home/*" element={<Footer />}></Route>
         </Routes>
       </Context.Provider>
     </div>

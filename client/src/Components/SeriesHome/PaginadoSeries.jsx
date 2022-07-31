@@ -44,10 +44,10 @@ function Paginacion({ pagina, setPagina, maximo }) {
   };
   return (
     <div className="contenedor-paginado">
-      <span style={{ color: "white" }} disabled={pagina === 1 || pagina < 1} onClick={priPage}>
+      <span className="buttonClass" disabled={pagina === 1 || pagina < 1} onClick={priPage}>
         <FaAngleDoubleLeft />
       </span>
-      <span style={{ color: "white" }} disabled={pagina === 1 || pagina < 1} onClick={previousPage}>
+      <span className="buttonClass" disabled={pagina === 1 || pagina < 1} onClick={previousPage}>
         <FaAngleLeft />
       </span>
       {/* <input
@@ -59,13 +59,14 @@ function Paginacion({ pagina, setPagina, maximo }) {
         min="1"
       /> */}
        <p>Página {pagina}</p>
-      <span style={{ color: "white" }}
+      <span className="buttonClass"
         disabled={pagina === maximo || pagina > maximo}
         onClick={nextPage}
       >
         <FaAngleRight />
       </span>
-      <span style={{ color: "white" }} disabled={pagina === maximo || pagina > maximo} onClick={ultPage}>
+      <span className="buttonClass"
+        disabled={pagina === maximo || pagina > maximo} onClick={ultPage}>
         <FaAngleDoubleRight />
       </span>
     </div>

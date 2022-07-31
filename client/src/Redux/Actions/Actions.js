@@ -226,7 +226,7 @@ export const orderVoteAvgDES = (array) => {
 
 export const getGenerosMovies = (payload) => {
   return async function (dispatch){
-    let getGenerosMovies = await axios('getGenerosMovies')
+    let getGenerosMovies = await axios('/generos/peliculas')
     return dispatch({
       type: GET_GENEROS_MOVIES,
       payload: getGenerosMovies.data,

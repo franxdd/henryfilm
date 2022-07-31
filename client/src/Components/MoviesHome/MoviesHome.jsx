@@ -70,7 +70,9 @@ function MoviesHome() {
   };
 
   return allMovies.length === 0 ? (
-    <div className="momentum"></div>
+    <div className="Loading">
+    <div className="loader"></div>
+    </div>
   ) : (
     <div className="filter">
       <span>Ordenar por:</span>
@@ -84,7 +86,7 @@ function MoviesHome() {
       <span className="hover-underline-animation"><strong> + </strong> Puntuación</span>
       </button>
       <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
-      <span className="hover-underline-animation"> <strong> - </strong>  Puntuación </span>
+      <span className="hover-underline-animation"><strong> - </strong> Puntuación </span>
       </button>
       <span>Filtrar por:</span>
       

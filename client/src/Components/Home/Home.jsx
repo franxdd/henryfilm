@@ -7,7 +7,7 @@ import { seriesName, moviesName, urlBase, apiKey } from "../../Auxiliares/Variab
 import "../../Styles/components/_Home.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllSeries, getAllMovies, getGenerosMovies, getGenerosSeries, getTodo } from "../../Redux/Actions/Actions";
-import Footer from "../Footer/Footer";
+
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const Home = () => {
         titulo={seriesName[idioma].tendencia}
         clase="series"
       />
-      <Footer />
+      {/* <Footer /> */}
     </section>
   );
 };

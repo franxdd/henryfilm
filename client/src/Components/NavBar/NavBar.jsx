@@ -47,6 +47,29 @@ const Nav = () => {
                 <SearchBar />
               </div>
             </div>
+          </div>
+          <div className="RightContainer">
+            {/* <div className="select">
+              <select className="select-lenguaje" onChange={handleChangeLenguaje}>
+              <option value="es">Español</option>
+              <option value="in">Ingles</option>
+              <option value="fr">Français</option>
+              <option value="pt">Português</option>
+              </select>
+            </div> */}
+            <Link to="/home/Register">
+              <button>
+                <b>Registrate</b>
+              </button>
+            </Link>
+            <Link to="/home/formPeliculas" className="link-nav">
+              <button>
+                <LockIcon className="icono-nav" />
+              </button>
+            <Link to="/home/carro">
+                <ShopIcon className="iconoShop" />
+            </Link>
+            </Link>
             <button
               className="OpenLinksButton"
               onClick={() => {
@@ -55,31 +78,6 @@ const Nav = () => {
             >
               {extendNavbar ? <>&#10005;</> : <> &#8801;</>}
             </button>
-          </div>
-          <div className="RightContainer">
-            <div className="select">
-              <select className="select-lenguaje" onChange={handleChangeLenguaje}>
-                <option value="es">Español</option>
-                <option value="in">Ingles</option>
-                <option value="fr">Français</option>
-                <option value="pt">Português</option>
-              </select>
-            </div>
-            <Link to="/home/Register">
-              <button>
-                <b>Registrate</b>
-              </button>
-            </Link>
-            <Link to="/home/carro">
-              <button>
-                <ShopIcon className="iconoShop" />
-              </button>
-            </Link>
-            <Link to="/home/formPeliculas" className="link-nav">
-              <button>
-                <LockIcon className="icono-nav" />
-              </button>
-            </Link>
           </div>
         </div>
         {extendNavbar && (
@@ -100,13 +98,11 @@ const Nav = () => {
               <button>
                 <b>Registrate</b>
               </button>
+            <Link to="/home/carro">
+                <ShopIcon className="iconoShop"/>
+            </Link>
               <button>
                 <LockIcon className="icono-nav" />
-              </button>
-            </Link>
-            <Link to="/home/carro">
-              <button>
-                <ShopIcon className="iconoShop" />
               </button>
             </Link>
           </div>
