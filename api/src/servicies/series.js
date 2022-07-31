@@ -164,10 +164,10 @@ const seriePorId = async (req, res) => {
 const seriePorIdParms = async (req, res) => {
   try {
     // console.log('Hola?')
-    const { id } = req.params;
+    const { id, iso1, iso2 } = req.params;
 
     const allSeries = await axios(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=es-SP`
+      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=${iso1}-${iso2}`
     );
     var imagenesConfig = await axios.get(
       `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
@@ -175,16 +175,16 @@ const seriePorIdParms = async (req, res) => {
     urlImg = imagenesConfig.data.images.base_url + "original";
 
     var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=${iso1}-${iso2}`
     );
     var cast = await axios.get(
-      `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${API_KEY}&language=es-SP`
+      `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${API_KEY}&language=${iso1}-${iso2}`
     );
 
     var castAEnviar = cast.data.cast;
 
     var videos = await axios.get(
-      `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=es-SP`
+      `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=${iso1}-${iso2}`
     );
 
     var videosAEnviar = videos.data.results;

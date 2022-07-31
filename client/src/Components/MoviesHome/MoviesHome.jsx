@@ -1,4 +1,4 @@
-import React from "react";
+import { React} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardMovies from "../CardMovies/CardMovies";
 import {
@@ -9,8 +9,15 @@ import {
   orderVoteAvgDES,
   getGenerosMovies
 } from "../../Redux/Actions/Actions";
-import { useEffect, useState } from "react";
-import { filtradoGeneroMovies, filtradoGeneroMoviesReversa } from "../../Redux/Actions/Actions.js";
+import { 
+  useEffect, 
+  useState 
+} from "react";
+
+import {
+  filtradoGeneroMovies,
+  filtradoGeneroMoviesReversa,
+} from "../../Redux/Actions/Actions.js";
 import PaginadoMovies from "./PaginadoMovies";
 import "../../Styles/components/_MoviesHome.scss";
 import "../../Styles/components/_Filter.scss";
@@ -26,6 +33,7 @@ function MoviesHome() {
 
   const allMovies = useSelector((state) => state.allMovies);
   const generos = useSelector((state) => state.generosMovies);
+  console.log(generos)
 
   const [generosCache, setgenerosCache] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -93,7 +101,12 @@ function MoviesHome() {
       {/* <div className="Selects">
         <div className="select-genero"> */}
 
-      <select className="select" name="FiltroGenero" onChange={(e) => FiltradoGenero(e)} defaultValue={"Default"}>
+      <select
+        className="select"
+        name="FiltroGenero"
+        onChange={(e) => FiltradoGenero(e)}
+        defaultValue={"Default"}
+      >
         <option value={"Default"}>Generos..</option>
         {generos?.map((t) => (
           <option key={t.id} value={t.name}>
@@ -118,7 +131,14 @@ function MoviesHome() {
       <div className="contenedor-seccion">
         <div className="contenedor-resultados">
           {currentMovies?.map((r) => {
-            return <CardMovies key={r.id} id={r.id} name={r.title} poster={r.posterImagen} />;
+            return (
+              <CardMovies
+                key={r.id}
+                id={r.id}
+                name={r.title}
+                poster={r.posterImagen}
+              />
+            );
           })}
         </div>
       </div>
