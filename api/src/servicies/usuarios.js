@@ -1,14 +1,14 @@
 const axios = require("axios");
-const express =require("express")
+const express = require("express");
+const { verify } = require("jsonwebtoken");
 const app = express();
 require("dotenv").config();
 const { API_KEY } = process.env;
 const { Usuarios } = require("../DB/db");
 
-
 const bcrypt = require("bcrypt");
-const cookieParser = require("cookie-parser")
-const { createTokens} = require("../utils/JWT.js")
+const cookieParser = require("cookie-parser");
+const { createTokens } = require("../utils/JWT.js");
 
 // app.use(express.json());
 // app.use(cookieParser());
@@ -24,11 +24,11 @@ const getAllUsers = async (req, res) => {
 
 const postUser = async (req, res) => {
   try {
-    /* const { telefono, nombre, apellido, email, pass } = req.body */
-    const { username, email, password } = req.body;
-    /* if (!telefono || !nombre || !apellido || !email || !pass) return res.status(404).send("Falta completar un dato..") */
+    const { username, email, password, isAdmin } = req.body;
+
     if (!username || !email || !password)
       return res.status(404).send("Falta completar un dato..");
+
     bcrypt
       .hash(password, 10)
 
@@ -37,12 +37,13 @@ const postUser = async (req, res) => {
           username: username,
           password: hash,
           email: email,
+          isAdmin,
         });
 
         return response;
       })
       .then((response) => {
-        res.status(200).send(response);
+        res.status(200).send("Usuario creado con exito");
       })
       .catch((err) => {
         console.log(err);
@@ -57,8 +58,9 @@ const postUser = async (req, res) => {
 
 const postLogin = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    
 
+    const { username, password } = req.body;
     const user = await Usuarios.findOne({
       where: {
         username: username,
@@ -78,32 +80,33 @@ const postLogin = async (req, res) => {
             .status(400)
             .json({ error: "Combinacions de usuario y password erroneo" });
         } else {
-
-          const accessToken = createTokens(user)
+          const accessToken = createTokens(user);
 
           res.cookie("access-token", accessToken, {
-            maxAge: 60*60*60
-          })
+            maxAge: 60 * 60 * 60,
+          });
 
-          res.send("postLogin");
+          res.json(accessToken);
         }
       })
       .catch((err) => {
         res.json(err);
       });
-
-
-
-
   } catch (error) {
-    res.json(error);
+    res.json('error en postlogin',error);
   }
 };
 
-const getProfile = (req, res) => {
-  try {
+const getProfile = async (req, res) => {
 
-    res.send("getProfile");
+  const data = JSON.parse(req.headers.cookies);
+  const accessToken = data["access-token"];
+  const dataUser = verify(accessToken, "jwtsecretcambiar");
+  const users = await Usuarios.findOne({ where: { username: dataUser.username } });
+  console.log('recien termia del get')
+
+  try {
+    res.send(users.dataValues);
   } catch (error) {}
 };
 

@@ -21,8 +21,12 @@ const todos = async (req, res) => {
     );
     urlImg = imagenesConfig.data.images.base_url + "original";
 
-    var generosData = await axios.get(
+    var generosDataMovie = await axios.get(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
+    );
+
+    var generosDataSerie = await axios.get(
+      `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=es-SP`
     );
 
     for (let i = 0; i < cantidad; i++) {
@@ -50,8 +54,8 @@ const todos = async (req, res) => {
     const peliculasBd = await Peliculas.findAll();
     const seriesBd = await Series.findAll();
 
-    datosParseadosMovies = parseador(newGetMovies, urlImg, generosData);
-    datosParseadosSeries = parseador(newGetSeries, urlImg, generosData);
+    datosParseadosMovies = parseador(newGetMovies, urlImg, generosDataMovie);
+    datosParseadosSeries = parseador(newGetSeries, urlImg, generosDataSerie);
 
     var datosAEnviar = [
       ...datosParseadosMovies,

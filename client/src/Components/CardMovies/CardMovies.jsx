@@ -9,6 +9,7 @@ function CardMovies({ id, name, poster }) {
   const dispatch = useDispatch();
 
   function addCart(id) {
+    
     dispatch(addToCart(id));
   }
   function getRandomArbitrary(min, max) {
@@ -19,7 +20,7 @@ function CardMovies({ id, name, poster }) {
     <div className="Cardmovies">
     <div className="card">
       <div className="card-img">
-        <img src={poster} />
+        <img src={poster} alt="poster"/>
       </div>
       <div className="card-info">
         <span onClick={() => addCart(id)}>

@@ -22,17 +22,57 @@ import {
   POST_PELICULAS,
   ADD_TO_CART,
   REMOVE_TO_CART,
+  GET_LENGUAJE,
+  ENGLISH,
+  GET_ISOS,
+  POST_USUARIOS,
+  POST_LOGIN,
+  GET_USER,
+  CHECK_STATE,
+  LOG_OUT
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
 import { toast } from "react-toastify";
-// let cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
-console.log(cartFromLocalStorage);
-if (cartFromLocalStorage && !cartFromLocalStorage.length) {
-  cartFromLocalStorage = [];
-} else {
-  var cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+
+function a() {
+  return toast.error("Ya se encuentra en el carro", {
+    position: "bottom-left",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
 }
+function b() {
+  return toast.success("Fue añadida al carro", {
+    position: "bottom-left",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+}
+
+let cartStorage;
+try {
+  let local = localStorage.getItem("cart") || [];
+  if (local !== "undefined") {
+    console.log(local);
+    cartStorage = JSON.parse(local);
+  }
+} catch (error) {
+  console.log(error);
+}
+
+if (!cartStorage) {
+  cartStorage = [];
+}
+
 const initialState = {
   allMovies: [],
   allSeries: [],
@@ -46,13 +86,14 @@ const initialState = {
   all: [],
   todo: [],
   backupTodo: [],
-  cart: cartFromLocalStorage,
+  cart: cartStorage,
   current: null,
   idioma: [],
   idiomaDefault: "es/ES",
+  isos: [],
+  user:[],
+  token: '',
 };
-// if (!state.cart.length) {
-// }
 
 const rootRouter = (state = initialState, action) => {
   switch (action.type) {
@@ -62,6 +103,36 @@ const rootRouter = (state = initialState, action) => {
         allSeries: action.payload,
         backupSeries: action.payload,
       };
+    case LOG_OUT:
+      return {
+        ...state,
+        user: [], 
+        token: ''
+
+      }
+    
+    case POST_USUARIOS:
+      return{
+        ...state,
+
+      }
+    case POST_LOGIN:
+
+      return{
+        ...state,
+        token: action.payload
+      }
+    case CHECK_STATE:
+      return{
+
+        ...state,
+      }
+    
+      case GET_USER:
+        return{
+          ...state,
+          user: action.payload
+        }
 
     case GET_ALL_MOVIES:
       return {
@@ -85,7 +156,6 @@ const rootRouter = (state = initialState, action) => {
         seriesDetail: action.payload,
       };
     case GET_MOVIES_DETAIL:
-      // console.log(state.movieDetail);
       return {
         ...state,
         movieDetail: action.payload,
@@ -99,7 +169,7 @@ const rootRouter = (state = initialState, action) => {
     case WILLUNMOUNT:
       return {
         ...state,
-        seriesDetail: {},
+        lenguaje: {},
       };
     case WILLUNMOUNT2:
       return {
@@ -128,7 +198,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayAsc],
         };
       }
-
+      break;
     case ORDER_NAME_DES:
       let new_arrayDes = action.payload.sort((a, b) => {
         if (a.name > b.name) {
@@ -150,7 +220,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayDes],
         };
       }
-
+      break;
     case ORDER_VOTE_AVG_ASC:
       let new_arrayVoteDes = action.payload.sort((a, b) => {
         if (a.vote_average > b.vote_average) {
@@ -172,7 +242,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayVoteDes],
         };
       }
-
+      break;
     case ORDER_VOTE_AVG_DES:
       let new_arrayVoteAsc = action.payload.sort((a, b) => {
         if (a.vote_average > b.vote_average) {
@@ -194,6 +264,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayVoteAsc],
         };
       }
+      break;
     case GET_GENEROS_MOVIES:
       return {
         ...state,
@@ -206,28 +277,31 @@ const rootRouter = (state = initialState, action) => {
       };
 
     case FILTRO_GENERO_MOVIES:
+
+      
       const arrAuxMovies = filterGenres(state.allMovies, action.payload);
       if (arrAuxMovies.length === 0) {
         alert("No se encontraron coincidencias");
 
         return {
           ...state,
-          allMovies: state.backupMovies,
+          allMovies: state.backupTodo.slice(0,100),
         };
       } else {
         return {
           ...state,
-          allMovies: arrAuxMovies,
+          allMovies: arrAuxMovies ,
         };
       }
 
     case FILTRO_GENERO_SERIES:
+
       const arrAuxSeries = filterGenres(state.allSeries, action.payload);
       if (arrAuxSeries.length === 0) {
         alert("No se encontraron coincidencias");
         return {
           ...state,
-          allSeries: state.backupSeries,
+          allSeries: state.backupTodo.slice(100,200),
         };
       } else {
         return {
@@ -237,11 +311,12 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_MOVIES_REVERSA:
-      const arrMovie = filterGenres(state.backupMovies, action.payload);
+   
+      const arrMovie = filterGenres(state.backupTodo.slice(0,100), action.payload);
       if (arrMovie.length === 0) {
         return {
           ...state,
-          allMovies: state.backupMovies,
+          allMovies: state.backupTodo.slice(0,100),
         };
       } else {
         return {
@@ -251,11 +326,11 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_SERIES_REVERSA:
-      const arrSeries = filterGenres(state.backupSeries, action.payload);
+      const arrSeries = filterGenres(state.backupTodo.slice(100,200), action.payload);
       if (arrSeries.length === 0) {
         return {
           ...state,
-          allSeries: state.backupSeries,
+          allSeries: state.backupTodo.slice(100,200),
         };
       } else {
         return {
@@ -268,6 +343,10 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         todo: action.payload,
         backupTodo: action.payload,
+        allMovies: action.payload.slice(0,100),
+        allSeries : action.payload.slice(100,200)
+
+
       };
     case FILTER_NAME:
       if (action.payload.length === 0) {
@@ -300,92 +379,82 @@ const rootRouter = (state = initialState, action) => {
     //   }
 
     case ADD_TO_CART:
-      console.log(typeof action.payload);
       const item = state.todo.find((e) => e.id === action.payload);
-      console.log(state.cart, "soy el carro");
-      console.log(state.todo, "asd");
-      const incart = state.cart.find((i) =>
-        i.id === action.payload ? true : false
-      );
-      function a() {
-        return toast.error("Ya se encuentra en el carro", {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+      let cartStorage = localStorage.getItem("cart");
+      console.log(typeof cartStorage);
+
+      if (cartStorage === "undefined") {
+        b();
+        localStorage.setItem("cart", JSON.stringify([item]));
+      } else {
+        let data = JSON.parse(cartStorage);
+
+        data.find((dato) => dato.id === item.id) ? a() : b();
+        if (!data.find((dato) => dato.id === item.id)) {
+          data.push(item);
+          localStorage.setItem("cart", JSON.stringify(data));
+        }
       }
-      function b() {
-        return toast.success("Fue añadida al carro", {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
-      incart ? a() : b();
+      let datoCart = JSON.parse(localStorage.getItem("cart"));
+
       return {
         ...state,
-        cart: incart ? state.cart : [...state.cart, { ...item, qty: 1 }],
+        cart: datoCart,
       };
-
     case REMOVE_TO_CART:
+      let filter = state.cart.filter((e) => e.id !== action.payload);
+      localStorage.setItem("cart", JSON.stringify(filter));
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload),
+        cart: filter,
       };
-    // case GET_LENGUAJE:
-    //   return {
-    //     ...state,
-    //     lenguaje: action.payload,
-    //   };
-    // case ENGLISH:
-    //   const iso1 = state.isos.map((t) => t.iso_639_1);
-    //   const iso2 = state.isos.map((r) => r.iso_3166_1);
-    //   const isosconcat = iso1.concat(iso2);
-    //   console.log(isosconcat);
-    //   console.log(action.payload);
-    //   if (action.payload === "en") {
-    //     let english = `${isosconcat[6]}/${isosconcat[38]}`;
-    //     console.log(english);
-    //     return {
-    //       ...state,
-    //       idioma: english,
-    //     };
-    //   } else if (action.payload === "fr") {
-    //     let frances = `${isosconcat[10]}/${isosconcat[42]}`;
-    //     return {
-    //       ...state,
-    //       idioma: frances,
-    //     };
-    //   } else if (action.payload === "pt") {
-    //     let portugues = `${isosconcat[19]}/${isosconcat[51]}`;
-    //     return {
-    //       ...state,
-    //       idioma: portugues,
-    //     };
-    //   } else if (action.payload === "ch") {
-    //     let chino = `${isosconcat[30]}/${isosconcat[62]}`;
-    //     return {
-    //       ...state,
-    //       idioma: chino,
-    //     };
-    //   } else
-    //     return {
-    //       idioma: state.idiomaDefault,
-    //     };
 
-    // case GET_ISOS:
-    //   return {
-    //     ...state,
-    //     isos: action.payload,
-    //   };
+    case GET_LENGUAJE:
+      return {
+        ...state,
+        lenguaje: action.payload,
+      };
+    case ENGLISH:
+      const iso1 = state.isos.map((t) => t.iso_639_1);
+      const iso2 = state.isos.map((r) => r.iso_3166_1);
+      const isosconcat = iso1.concat(iso2);
+
+      if (action.payload === "en") {
+        let english = `${isosconcat[6]}/${isosconcat[38]}`;
+        console.log(english);
+        return {
+          ...state,
+          idioma: english,
+        };
+      } else if (action.payload === "fr") {
+        let frances = `${isosconcat[10]}/${isosconcat[42]}`;
+        return {
+          ...state,
+          idioma: frances,
+        };
+      } else if (action.payload === "pt") {
+        let portugues = `${isosconcat[19]}/${isosconcat[51]}`;
+        return {
+          ...state,
+          idioma: portugues,
+        };
+      } else if (action.payload === "ch") {
+        let chino = `${isosconcat[30]}/${isosconcat[62]}`;
+        return {
+          ...state,
+          idioma: chino,
+        };
+      } else
+        return {
+          ...state,
+          idioma: state.idiomaDefault,
+        };
+
+    case GET_ISOS:
+      return {
+        ...state,
+        isos: action.payload,
+      };
 
     default:
       return { ...state };

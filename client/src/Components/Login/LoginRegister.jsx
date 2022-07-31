@@ -3,12 +3,16 @@ import { useDispatch } from "react-redux";
 import "../../Styles/components/_Form.scss";
 import "../../Styles/components/_Login.scss"
 
+import {PostUsuario} from '../../Redux/Actions/Actions.js'
 function LoginRegister() {
+
+
+
   const dispatch = useDispatch();
   const [input, setInput] = useState({
-    usuario: "",
+    username: "",
     email: "",
-    contraseña: "",
+    password: "",
   });
   function handdleChange(e) {
     setInput({
@@ -18,11 +22,11 @@ function LoginRegister() {
   }
   function handdleSubmit(e) {
     e.preventDefault();
-    dispatch(input);
+    dispatch(PostUsuario(input));
     setInput({
-      usuario: "",
+      username: "",
       email: "",
-      contraseña: "",
+      password: "",
     });
   }
 

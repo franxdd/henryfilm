@@ -4,40 +4,35 @@ import CarritoCard from "../CarritoCard/CarritoCard";
 function Carro() {
   const dispatch = useDispatch();
   const [totalPrecio, settotalPrecio] = useState(0);
-  const [totalItems, settotalItems] = useState(0);
-  const carrito = useSelector((state) => state.cart);
+  const [totalItems, settotalItems] = useState([]);
+  const { cart } = useSelector((state) => state);
 
   useEffect(() => {
-    let items = 0;
-    let price = 0;
+    if (cart) {
+      cart &&
+        cart.forEach((e) => {
+          settotalPrecio(totalPrecio + e.price);
+        });
+      settotalItems(cart.length);
+    }
+  }, [cart]);
 
-    carrito.forEach((e) => {
-      items += e.qty;
-      price += e.price;
-    });
-    settotalItems(items);
-    settotalPrecio(price);
-  }, [carrito, totalItems, totalPrecio, settotalItems, settotalPrecio]);
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(carrito));
-  }, [carrito]);
-  console.log(carrito);
   return (
     <div>
       <div>
-        {carrito.map((e) => {
-          return (
-            <CarritoCard
-              key={e.id}
-              id={e.id}
-              nombre={e.name}
-              image={e.backDropImagen}
-              qty={e.qty}
-              tipo={e.tipo}
-              precio={e.price}
-            />
-          );
-        })}
+        {cart &&
+          cart.map((e) => {
+            return (
+              <CarritoCard
+                key={e.id}
+                id={e.id}
+                nombre={e.name}
+                image={e.backDropImagen}
+                tipo={e.tipo}
+                precio={e.price}
+              />
+            );
+          })}
       </div>
       <div>
         <h1>Carro</h1>

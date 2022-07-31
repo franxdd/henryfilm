@@ -3,20 +3,35 @@ import Carousel from "../Carousel/Carousel";
 import Header from "../Header/Header";
 import { useContext, useEffect } from "react";
 import Context from "../../contexto/Context";
-import { seriesName, moviesName, urlBase, apiKey } from "../../Auxiliares/Variables";
+import {
+  seriesName,
+  moviesName,
+  urlBase,
+  apiKey,
+} from "../../Auxiliares/Variables";
 import "../../Styles/components/_Home.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllSeries, getAllMovies, getGenerosMovies, getGenerosSeries, getTodo } from "../../Redux/Actions/Actions";
-
+import { getAllSeries, getAllMovies, getGenerosMovies, getGenerosSeries, getTodo, getUser } from "../../Redux/Actions/Actions";
+import Footer from "../Footer/Footer";
+function getToken() {
+  const tokenString = sessionStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
+  return userToken
+}
 
 const Home = () => {
+  const tokenString = getToken()
   const dispatch = useDispatch();
+
+
   useEffect(() => {
-    dispatch(getAllSeries());
-    dispatch(getAllMovies());
-    dispatch(getGenerosSeries());
-    dispatch(getGenerosMovies());
+    // dispatch(getAllSeries());
+    // dispatch(getAllMovies());
+    // dispatch(getGenerosSeries());
+    // dispatch(getGenerosMovies());
     dispatch(getTodo());
+    // dispatch(getUser(tokenString))
+
   }, []);
 
   //let movies = useSelector((state)=> state.allMovies)

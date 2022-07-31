@@ -1,4 +1,4 @@
-import React from "react";
+import { React} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardMovies from "../CardMovies/CardMovies";
 import {
@@ -7,9 +7,13 @@ import {
   orderNameDES,
   orderVoteAvgASC,
   orderVoteAvgDES,
-  clear,
+  getGenerosMovies
 } from "../../Redux/Actions/Actions";
-import { useEffect, useState } from "react";
+import { 
+  useEffect, 
+  useState 
+} from "react";
+
 import {
   filtradoGeneroMovies,
   filtradoGeneroMoviesReversa,
@@ -18,17 +22,18 @@ import PaginadoMovies from "./PaginadoMovies";
 import "../../Styles/components/_MoviesHome.scss";
 import "../../Styles/components/_Filter.scss";
 import "../../Styles/components/_Loading.scss";
-import {AiOutlineClear as ClearIcon} from "react-icons/ai";
-import {FaWindowClose} from "react-icons/fa";
+import { AiOutlineClear as ClearIcon } from "react-icons/ai";
+import { FaWindowClose } from "react-icons/fa";
 
 function MoviesHome() {
-  // useEffect(() => {
-  //   dispatch(getAllMovies());
-  // }, []);
+  useEffect(() => {
+    dispatch(getGenerosMovies());
+  }, []);
   const dispatch = useDispatch();
 
   const allMovies = useSelector((state) => state.allMovies);
   const generos = useSelector((state) => state.generosMovies);
+  console.log(generos)
 
   const [generosCache, setgenerosCache] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -83,37 +88,41 @@ function MoviesHome() {
         <span className="hover-underline-animation"> Z - A </span>
       </button>
       <button className="cta" onClick={(e) => HandleClickVoteASC(e)}>
-      <span className="hover-underline-animation"><strong> + </strong> Puntuación</span>
+        <span className="hover-underline-animation">
+          <strong> + </strong> Puntuación
+        </span>
       </button>
       <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
       <span className="hover-underline-animation"><strong> - </strong> Puntuación </span>
       </button>
       <span>Filtrar por:</span>
-      
+
       {/* <div className="Selects">
         <div className="select-genero"> */}
-  
-          <select 
-            className="select"
-            name="FiltroGenero"
-            onChange={(e) => FiltradoGenero(e)}
-            defaultValue={"Default"}
-          >
-            <option value={"Default"}>Generos..</option>
-            {generos?.map((t) => (
-              <option key={t.id} value={t.name}>
-                {t.name}
-              </option>
-            ))}
-          </select>
-        {/* </div>
+
+      <select
+        className="select"
+        name="FiltroGenero"
+        onChange={(e) => FiltradoGenero(e)}
+        defaultValue={"Default"}
+      >
+        <option value={"Default"}>Generos..</option>
+        {generos?.map((t) => (
+          <option key={t.id} value={t.name}>
+            {t.name}
+          </option>
+        ))}
+      </select>
+      {/* </div>
       </div> */}
-      <span onClick={() => HandleClickClear()}><ClearIcon className="icono-clear" /></span>
+      <span onClick={() => HandleClickClear()}>
+        <ClearIcon className="icono-clear" />
+      </span>
       {generosCache?.map((g) => {
         return (
           <button onClick={() => FiltradoReversa(g)}>
             {" "}
-            {g} <FaWindowClose/>
+            {g} <FaWindowClose />
           </button>
         );
       })}

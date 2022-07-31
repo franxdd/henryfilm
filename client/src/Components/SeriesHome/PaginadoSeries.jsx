@@ -1,18 +1,19 @@
 import { React, useState } from "react";
-import {   
-  FaAngleDoubleLeft,
-  FaAngleLeft,
-  FaAngleRight,
-  FaAngleDoubleRight,} 
-  from "react-icons/fa";
+import { FaAngleDoubleLeft, FaAngleLeft, FaAngleRight, FaAngleDoubleRight } from "react-icons/fa";
 
 function Paginacion({ pagina, setPagina, maximo }) {
   const [input, setInput] = useState(1);
   const previousPage = () => {
+    if (pagina === 1 || pagina < 1) {
+      return;
+    }
     setPagina(pagina - 1);
     setInput(parseInt(input) - 1);
   };
   const nextPage = () => {
+    if (pagina >= maximo) {
+      return;
+    }
     setPagina(pagina + 1);
     setInput(parseInt(input) + 1);
   };

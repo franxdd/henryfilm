@@ -9,8 +9,7 @@ import {
   orderVoteAvgDES,
   filtradoGeneroSeries,
   filtradoGeneroSeriesReversa,
-  getAllSeries,
-  clear,
+  getGenerosSeries
 } from "../../Redux/Actions/Actions";
 import Paginacion from "./PaginadoSeries";
 import "../../Styles/components/_SeriesHome.scss";
@@ -22,8 +21,9 @@ import {FaWindowClose} from "react-icons/fa";
 function SeriesHome() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllSeries());
+    dispatch(getGenerosSeries());
   }, []);
+  
   let allSeries = useSelector((state) => state.allSeries);
   const generos = useSelector((state) => state.generosSeries);
 
@@ -113,23 +113,16 @@ function SeriesHome() {
       {generosCache?.map((g) => {
         return (
           <button onClick={() => FiltradoReversa(g)}>
-          {" "}
-          {g} <FaWindowClose/>
-        </button>
+            {" "}
+            {g} <FaWindowClose />
+          </button>
         );
       })}
 
       <div className="contenedor-seccion">
         <div className="contenedor-resultados">
           {allpSeries.map((e) => {
-            return (
-              <CardSeries
-                key={e.id}
-                id={e.id}
-                name={e.name}
-                poster={e.posterImagen}
-              />
-            );
+            return <CardSeries key={e.id} id={e.id} name={e.name} poster={e.posterImagen} />;
           })}
         </div>
       </div>
