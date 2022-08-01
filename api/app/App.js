@@ -12,7 +12,7 @@ const server = express();
 server.name = "API";
 server.use(
   cors({
-    origin: "https://henry-film.herokuapp.com",
+    origin: "*",
     credentials: true,
   })
 );
