@@ -1,4 +1,4 @@
-import { React} from "react";
+import { React } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardMovies from "../CardMovies/CardMovies";
 import {
@@ -7,12 +7,9 @@ import {
   orderNameDES,
   orderVoteAvgASC,
   orderVoteAvgDES,
-  getGenerosMovies
+  getGenerosMovies,
 } from "../../Redux/Actions/Actions";
-import { 
-  useEffect, 
-  useState 
-} from "react";
+import { useEffect, useState } from "react";
 
 import {
   filtradoGeneroMovies,
@@ -33,7 +30,7 @@ function MoviesHome() {
 
   const allMovies = useSelector((state) => state.allMovies);
   const generos = useSelector((state) => state.generosMovies);
-  console.log(generos)
+  console.log(allMovies);
 
   const [generosCache, setgenerosCache] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -74,7 +71,7 @@ function MoviesHome() {
     dispatch(orderVoteAvgDES(allMovies));
   };
 
-  return allMovies.length === 0 || generos.length === 0? (
+  return allMovies.length === 0 || generos.length === 0 ? (
     <div className="momentum"></div>
   ) : (
     <div className="filter">
