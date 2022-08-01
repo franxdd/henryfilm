@@ -38,6 +38,7 @@ export const POST_LOGIN = "POST_LOGIN";
 export const GET_USER = "GET_USER";
 export const CHECK_STATE = "CHECK_STATE";
 export const LOG_OUT = "LOG_OUT";
+export const PUT_PELICULA = "PUT_PELICULA";
 
 // export const getAllSeries = () => {
 //   return (dispatch) => {
@@ -380,4 +381,18 @@ export const loadCurren = (payload) => {
       type: LOAD_CURRENT_ITEM,
       payload: payload,
     });
+};
+
+export const putPeliculas = (payload) => {
+  console.log(payload);
+  return async (dispatch) => {
+    let created = await axios.put(
+      `/peliculas/modificarPeli/${payload.id}`,
+      payload
+    );
+    dispatch({
+      type: PUT_PELICULA,
+      payload: created,
+    });
+  };
 };
