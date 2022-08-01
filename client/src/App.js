@@ -25,7 +25,7 @@ const App = () => {
   // if(!token) {
   //   return <Login setToken={setToken} />
   // }
-
+  localStorage.setItem("cart", JSON.stringify([]));
   const contexto = {
     lenguaje: lenguaje,
     setLenguaje: setLenguaje,
@@ -41,7 +41,7 @@ const App = () => {
         <Routes>
           <Route path="home" element={<NavBar />}>
             <Route index element={<Home />} />
-            <Route path="formPeliculas" element={<FormPeliculas/>}/>
+            <Route path="agregar" element={<FormPeliculas/>}/>
             <Route path="dashboard" element={<Dashboard />}/>
             <Route path="series" element={<SeriesHome />} />
             <Route path="series/:id" element={<DetailsSeries />} />

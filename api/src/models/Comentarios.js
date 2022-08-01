@@ -3,42 +3,25 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Usuarios",
+    "Comentarios",
     {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true,
-        
       },
-      /* telefono:{
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    nombre:{
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    apellido:{
-      type: DataTypes.STRING,
-      allowNull: false
-    }, */
       username: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      email: {
-        type: DataTypes.STRING,
+      contenido: {
+        type: DataTypes.TEXT,
         allowNull: false,
       },
-      password: {
-        type: DataTypes.STRING,
+      puntuacion: {
+        type: DataTypes.INTEGER,
         allowNull: false,
-      },
-      isAdmin: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
       },
     }, 
     {
