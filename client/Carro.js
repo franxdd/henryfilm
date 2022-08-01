@@ -28,7 +28,7 @@ function Carro() {
                 key={e.id}
                 id={e.id}
                 nombre={e.name}
-                image={e.posterImagen}
+                image={e.backDropImagen}
                 tipo={e.tipo}
                 precio={e.price}
               />
@@ -36,22 +36,11 @@ function Carro() {
           })}
       </div>
       <div>
-        <div className="containerTotal">
+        <h1>Carro</h1>
         <div>
-          <h4>Resumen</h4>
-          <p>
-            <h5>Cantidad: </h5>
-            <h6>{totalItems}</h6>
-          </p>
-          <p>
-            <h5>Total: </h5>
-            <h6>${totalPrecio}.00</h6>
-          </p>
-          <button className="submit formEntry2">
-            COMPRAR
-          </button>
+          <span>Total: {totalItems} </span>
+          <span>Precio: ${totalPrecio}</span>
         </div>
-       </div>
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ import Search from "./Components/Search/Search";
 import Profile from "./Components/Profile/Profile.jsx";
 import Carro from "./Components/Carro/Carro";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "./Styles/ReactToastify.css";
 import Footer from "./Components/Footer/Footer"
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
@@ -26,7 +26,7 @@ const App = () => {
   // if(!token) {
   //   return <Login setToken={setToken} />
   // }
-
+  localStorage.setItem("cart", JSON.stringify([]));
   const contexto = {
     lenguaje: lenguaje,
     setLenguaje: setLenguaje,

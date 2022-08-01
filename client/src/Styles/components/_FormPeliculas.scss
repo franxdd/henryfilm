@@ -1,12 +1,12 @@
 @import "../Utilidades/_Variables.scss";
 
-.ContainerLogin{
-  background-image: url("../../img/Landing3.png");
+.ContainerForm2{
   display: flex;
   width: 100%;
-  background-size: cover;
+  background-size:contain;
+ justify-content: center;
   height: 100%;
- .form {
+ .form2 {
     margin-top: 35px;
     background: black;
     box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
@@ -14,8 +14,8 @@
     max-width: 480px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     left: 0;
     right: 0;
     //=position: absolute;
@@ -30,7 +30,7 @@
   .title{
     display: block;
     font-family: sans-serif;
-    margin: 10px auto 5px;
+    margin: 15px auto 5px;
     width: 300px;
     color: $blanco
   }
@@ -70,8 +70,8 @@
     transition: ease 0.5s;
   }
   
-  .formEntry {
-    // display: block;
+  .formEntry2 {
+    display: block;
     margin: 20px auto;
     min-width: 300px;
     padding: 10px;
@@ -91,7 +91,7 @@
     box-shadow: 15px 15px 15px 5px rgba(78, 72, 77, 0.219);
     transform: translateY(-3px);
     width: 300px;
-    background-color:rgb(144, 144, 144);
+    background-color: $background-intermedio;
     // border-top: 5px solid $blanco;
     border-radius: 0%;
     color:$detalles;

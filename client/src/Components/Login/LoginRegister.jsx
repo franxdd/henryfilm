@@ -2,7 +2,6 @@ import { React, useState } from "react";
 import { useDispatch } from "react-redux";
 import "../../Styles/components/_Form.scss";
 import "../../Styles/components/_Login.scss"
-
 import {PostUsuario} from '../../Redux/Actions/Actions.js'
 function LoginRegister() {
 
@@ -31,15 +30,16 @@ function LoginRegister() {
   }
 
   return (
+    <div className="ContainerLogin">
     <div className="Login-register">
       <div className="FormPeliculas2">
-      <form className ="form"onSubmit={(e) => handdleSubmit(e)}>
+      <form className ="form" onSubmit={(e) => handdleSubmit(e)}>
       <div className="pageTitle title"> Registra tus Datos: </div>
         <input 
         autoComplete="off" 
         type={"text"} 
-        value={input.usuario} 
-        name="usuario" 
+        value={input.username} 
+        name="username" 
         placeholder="Usuario: "
         className="name formEntry"
         onChange={handdleChange} 
@@ -56,8 +56,8 @@ function LoginRegister() {
         <input
           autoComplete="off"
           type={"password"}
-          value={input.contraseña}
-          name="contraseña"
+          value={input.password}
+          name="password"
           placeholder="Contraseña:"
           className="name formEntry"
           onChange={handdleChange}
@@ -66,6 +66,7 @@ function LoginRegister() {
         button class="submit formEntry" 
         type="submit"> Registrarse</button>
       </form>
+    </div>
     </div>
     </div>
   );

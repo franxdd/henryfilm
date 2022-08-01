@@ -5,7 +5,7 @@ import { postPeliculas } from "../../Redux/Actions/Actions";
 import validate from "../../util/validate.js";
 import poster from "../../img/poster.jpg";
 import back from "../../img/backdrop.jpg";
-import "../../Styles/components/_Form.scss"
+import "../../Styles/components/_FormPeliculas.scss"
 
 const FormPeliculas = () => {
   let dispatch = useDispatch();
@@ -116,15 +116,16 @@ const FormPeliculas = () => {
 
   return (
     <>
+    <div className="ContainerForm2">
     <div className="FormPeliculas">
-      <form className ="form" onSubmit={HandleSubmit}>
+      <form className ="form2" onSubmit={HandleSubmit}>
       <div className="pageTitle title"> Agregar nuevo: </div>
         <div className="nombreconteiner">
           <input
             id="name"
             type="text"
             placeholder="Nombre:"
-            className="name formEntry"
+            className="name formEntry2"
             onChange={(e) => HandleInput(e)}
           />
         </div>
@@ -134,7 +135,7 @@ const FormPeliculas = () => {
             name="overview"
             rows="5"
             maxLength="140"
-            className="message formEntry"
+            className="message formEntry2"
             placeholder="Descripción:"
             onChange={(e) => HandleInput(e)}
           />
@@ -145,7 +146,7 @@ const FormPeliculas = () => {
             type="text"
             name="release_date"
             placeholder="Released:"
-            className="name formEntry"
+            className="name formEntry2"
             onChange={(e) => HandleInput(e)}
           />
         </div>
@@ -156,7 +157,7 @@ const FormPeliculas = () => {
             type="text"
             name="vote_average"
             placeholder="Rating:"
-            className="name formEntry"
+            className="name formEntry2"
             onChange={(e) => HandleInput(e)}
           />
         </div>
@@ -167,7 +168,7 @@ const FormPeliculas = () => {
             type="text"
             name="popularity"
             placeholder="Popularidad:"
-            className="name formEntry"
+            className="name formEntry2"
             onChange={(e) => HandleInput(e)}
           />
         </div>
@@ -178,7 +179,7 @@ const FormPeliculas = () => {
             type="text"
             name="runtime"
             placeholder="Duración:"
-            className="name formEntry"
+            className="name formEntry2"
             onChange={(e) => HandleInput(e)}
           />
         </div>
@@ -188,9 +189,9 @@ const FormPeliculas = () => {
             type="text"
             name="elenco"
             placeholder="Elenco:"
-            className="name formEntry"
+            className="name formEntry2"
           />
-          <button class="submit formEntry" 
+          <button class="submit formEntry2" 
             id="elencobutton"
             value="Agregar"
             type="button"
@@ -205,7 +206,7 @@ const FormPeliculas = () => {
             name="backDropImagen"
             onChange={(e) => HandleInput(e)}
             placeholder="Imagen back-drop:"
-            className="name formEntry"
+            className="name formEntry2"
           />
         </div>
 
@@ -216,7 +217,7 @@ const FormPeliculas = () => {
             name="posterImagen"
             onChange={(e) => HandleInput(e)}
             placeholder="Imagen poster:"
-            className="name formEntry"
+            className="name formEntry2"
           />
         </div>
 
@@ -252,7 +253,7 @@ const FormPeliculas = () => {
             <option value="pelicula">pelicula</option>
           </select>
         </div>
-          <button class="submit formEntry" 
+          <button class="submit formEntry2" 
             type="submit"
             value="Enviar"
             disabled={Object.keys(error).length}
@@ -335,6 +336,7 @@ const FormPeliculas = () => {
             />
           </>
         )}
+      </div>
       </div>
       </div>
     </>

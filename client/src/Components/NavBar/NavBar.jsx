@@ -104,11 +104,11 @@ const Nav = () => {
               <option value="pt">Português</option>
               </select>
             </div> */}
-            <Link to="/home/Register">
+            {/* <Link to="/home/Register">
               <button>
                 <b>Registrate</b>
               </button>
-            </Link>
+            </Link> */}
             <Link to="/home/formPeliculas" className="link-nav">
               <button>
                 <LockIcon className="icono-nav" />
@@ -128,16 +128,7 @@ const Nav = () => {
           </div>
           <div className="RightContainer">
             <div className="select">
-              <select
-                className="select-lenguaje"
-                onChange={(e) => handleLenguage(e)}
-              >
-                <option value="es">Español</option>
-                <option value="en">Ingles</option>
-                <option value="fr">Français</option>
-                <option value="pt">Português</option>
-                <option value="ch">Chino</option>
-              </select>
+              
             </div>
             {console.log(userReducer)}
             {userReducer.username ? (
@@ -148,9 +139,9 @@ const Nav = () => {
               </Link>
             ) : (
               <Link to="/home/Register">
-                <button>
+                {/* <button>
                   <b>Registrate</b>
-                </button>
+                </button> */}
               </Link>
             )}
 
@@ -171,16 +162,9 @@ const Nav = () => {
                 <b>Log Out</b>
               </button>
             </Link>
-
             <Link to="/home/carro">
-              <button>
-                <ShopIcon className="iconoShop" />
-              </button>
             </Link>
             <Link to="/home/formPeliculas" className="link-nav">
-              <button>
-                <LockIcon className="icono-nav" />
-              </button>
             </Link>
           </div>
         </div>

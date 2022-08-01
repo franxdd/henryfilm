@@ -1,0 +1,84 @@
+@import "../Utilidades/_Variables.scss";
+
+.cardCarrito {
+    width: 210px;
+    height: 314px;
+    padding: .8em;
+    align-items: center;
+   background:$background-claro;
+    // position: relative;
+    // overflow: visible;
+    // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+   border-radius: .7rem;
+    // border-right: 2px solid rgb(57, 57, 57);
+
+   }
+   
+   .cardImg2 {
+    height: 40%;
+    width: 100%;
+    border-radius: .5rem;
+    transition: .3s ease;
+    .cardImg2 img{
+    border-radius: .5rem;
+    }
+   }
+   
+   .cardInfo2 {
+     padding-top: 0%;
+   }
+   .cardCarrito svg {
+    width: 20px;
+    height: 20px;
+   }
+   .textDetalle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    margin-top: -10%;
+    color:$blanco
+   }
+   .cardAbajo {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+   }
+   
+   /*Text*/
+   .textNameCarrito {
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1.5;
+    color:$blanco
+   }
+   
+   .textDetalle {
+    font-size: .9em;
+    // padding-bottom: 10px;
+   }
+   
+   /*Button*/
+   .cardButton2 {
+    display: flex;
+    padding: .3em;
+    cursor: pointer;
+    border-radius: 60px;
+    transition: .3s ease-in-out;
+   }
+   
+   /*Hover*/
+   .cardImg2 :hover {
+    transform: translateY(-25%);
+   
+   }
+   
+   .cardButton2:hover {
+    border: 1px solid $detalles;
+    background-color: $detalles
+   }
+   
