@@ -138,6 +138,8 @@ export const PostUsuario = (payload) => {
       return dispatch({ type: POST_USUARIOS });
     };
   };
+
+  
   export const checkState = ()=>{
     return {
       type: CHECK_STATE,
