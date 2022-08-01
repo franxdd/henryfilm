@@ -4,10 +4,10 @@ const fs = require("fs");
 const path = require("path");
 const { PassThrough } = require("stream");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
-const modelUsuario = require("../Models/Usuarios.js");
-const modelPeliculas = require("../Models/Peliculas.js");
-const modelSeries = require("../Models/Series.js");
-const modelComentarios = require("../Models/Comentarios.js");
+const modelUsuario = require("../models/Usuarios.js");
+const modelPeliculas = require("../models/Peliculas.js");
+const modelSeries = require("../models/Series.js");
+const modelComentarios = require("../models/Comentarios.js");
 
 let sequelize =
   process.env.NODE_ENV === "production"
@@ -92,7 +92,6 @@ Comentarios.belongsTo(Peliculas);
 
 // Series.hasMany(Comentarios);
 // Comentarios.belongsTo(Series);
-
 
 Series.belongsToMany(Usuarios, { through: "series-Usuario" });
 Usuarios.belongsToMany(Series, { through: "series-Usuario" });
