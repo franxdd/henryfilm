@@ -8,21 +8,27 @@ import {
   moviesName,
   urlBase,
   apiKey,
-} from "../../Auxiliares/Variables";
+} from "../../auxiliares/Variables";
 import "../../Styles/components/_Home.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllSeries, getAllMovies, getGenerosMovies, getGenerosSeries, getTodo, getUser } from "../../Redux/Actions/Actions";
+import {
+  getAllSeries,
+  getAllMovies,
+  getGenerosMovies,
+  getGenerosSeries,
+  getTodo,
+  getUser,
+} from "../../Redux/Actions/Actions";
 import Footer from "../Footer/Footer";
 function getToken() {
-  const tokenString = sessionStorage.getItem('token');
+  const tokenString = sessionStorage.getItem("token");
   const userToken = JSON.parse(tokenString);
-  return userToken
+  return userToken;
 }
 
 const Home = () => {
-  const tokenString = getToken()
+  const tokenString = getToken();
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     // dispatch(getAllSeries());
@@ -31,7 +37,6 @@ const Home = () => {
     // dispatch(getGenerosMovies());
     dispatch(getTodo());
     // dispatch(getUser(tokenString))
-
   }, []);
 
   //let movies = useSelector((state)=> state.allMovies)

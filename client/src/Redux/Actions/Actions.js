@@ -37,18 +37,28 @@ export const POST_USUARIOS = "POST_USUARIOS";
 export const POST_LOGIN = "POST_LOGIN";
 export const GET_USER = "GET_USER";
 export const CHECK_STATE = "CHECK_STATE";
-export const LOG_OUT = 'LOG_OUT'
+export const LOG_OUT = "LOG_OUT";
+export const PUT_PELICULA = "PUT_PELICULA";
 
+// export const getAllSeries = () => {
+//   return (dispatch) => {
+//     return fetch("http://localhost:3001/series")
+//       .then((r) => r.json())
+//       .then((series) => {
+//         dispatch({
+//           type: GET_ALL_SERIES,
+//           payload: series,
+//         });
+//       });
+//   };
+// };
 export const getAllSeries = () => {
-  return (dispatch) => {
-    return fetch("http://localhost:3001/series")
-      .then((r) => r.json())
-      .then((series) => {
-        dispatch({
-          type: GET_ALL_SERIES,
-          payload: series,
-        });
-      });
+  return async function (dispatch) {
+    let getAllSeries = await axios(`/series`);
+    return dispatch({
+      type: GET_ALL_SERIES,
+      payload: getAllSeries.data,
+    });
   };
 };
 
@@ -65,9 +75,7 @@ export const getAllMovies = () => {
 export const getnameSeries = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "http://localhost:3001/series/detalleDeSerie?name=" + name
-      );
+      let json = await axios.get("/series/detalleDeSerie?name=" + name);
       return dispatch({
         type: GET_NAME_SERIES,
         payload: json.data,
@@ -80,9 +88,7 @@ export const getnameSeries = (name) => {
 export const getnameMovies = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "http://localhost:3001/peliculas?name=" + name
-      );
+      let json = await axios.get("/peliculas?name=" + name);
       return dispatch({
         type: GET_NAME_MOVIES,
         payload: json.data,
@@ -93,28 +99,22 @@ export const getnameMovies = (name) => {
   };
 };
 export const getSeriesDetail = (id) => {
-  return (dispatch) => {
-    return fetch(`http://localhost:3001/series/seriePorId/${id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        dispatch({
-          type: GET_SERIES_DETAIL,
-          payload: data,
-        });
-      });
+  return async function (dispatch) {
+    let getSeriesDetail = await axios(`/series/seriePorId/${id}`);
+    return dispatch({
+      type: GET_SERIES_DETAIL,
+      payload: getSeriesDetail.data,
+    });
   };
 };
 
 export const getMoviesDetail = (id) => {
-  return (dispatch) => {
-    return fetch(`http://localhost:3001/peliculas/${id}`)
-    .then((r) => r.json())
-    .then((data) => {
-      dispatch({
-        type: GET_MOVIES_DETAIL,
-          payload: data,
-        });
-      });
+  return async function (dispatch) {
+    let getMoviesDetail = await axios(`/peliculas/${id}`);
+    return dispatch({
+      type: GET_MOVIES_DETAIL,
+      payload: getMoviesDetail.data,
+    });
   };
 };
 export const willunmont = () => {
@@ -127,57 +127,47 @@ export const willunmont = () => {
 
 export const PostUsuario = (payload) => {
   return async function (dispatch) {
-    let created = await axios.post(
-      "http://localhost:3001/usuarios/register",
-      payload
-      );
-      // console.log(created.data)
-      return dispatch({ type: POST_USUARIOS });
-    };
-  };
-  export const checkState = ()=>{
-    return {
-      type: CHECK_STATE,
-    };
-  
-  
-  }
-  
-export const PostLogin = (payload) => {
-  return async function (dispatch) {
-
-    let created = await axios.post(
-      "http://localhost:3001/usuarios/login",
-      payload,
-      { withCredentials: true }
-    );
-
-    sessionStorage.setItem("token", JSON.stringify(created.data));
-
-    return dispatch({ type: POST_LOGIN , payload: created.data});
+    let created = await axios.post("/usuarios/register", payload);
+    // console.log(created.data)
+    return dispatch({ type: POST_USUARIOS });
   };
 };
 
+export const checkState = () => {
+  return {
+    type: CHECK_STATE,
+  };
+};
+
+export const PostLogin = (payload) => {
+  console.log(payload);
+  return async function (dispatch) {
+    let created = await axios.post("/usuarios/login", payload);
+    // {
+    //   // withCredentials: true,
+    // });
+
+    sessionStorage.setItem("token", JSON.stringify(created.data));
+
+    return dispatch({ type: POST_LOGIN, payload: created.data });
+  };
+};
 
 export const logOut = () => {
   return {
     type: LOG_OUT,
-   
   };
 };
-
-
 
 export const getUser = (token) => {
   return async function (dispatch) {
     // console.log("access-token=" + token);
     var obj = {
-      'access-token':  token
-    }
-
+      "access-token": token,
+    };
 
     let created = await axios.get(
-      "http://localhost:3001/usuarios/profile",
+      "/usuarios/profile",
 
       {
         headers: {
@@ -231,15 +221,12 @@ export const orderVoteAvgDES = (array) => {
 };
 
 export const getGenerosMovies = () => {
-  return function (dispatch) {
-    return fetch("http://localhost:3001/generos/peliculas")
-      .then((r) => r.json())
-      .then((rjson) =>
-        dispatch({
-          type: GET_GENEROS_MOVIES,
-          payload: rjson,
-        })
-      );
+  return async function (dispatch) {
+    let getGenerosMovies = await axios("/generos/peliculas");
+    return dispatch({
+      type: GET_GENEROS_MOVIES,
+      payload: getGenerosMovies.data,
+    });
   };
 };
 
@@ -255,10 +242,7 @@ export const getGenerosSeries = (payload) => {
 
 export const postPeliculas = (payload) => {
   return async function (dispatch) {
-    let created = await axios.post(
-      "/peliculas/postPelicula",
-      payload
-    );
+    let created = await axios.post("/peliculas/postPelicula", payload);
     return dispatch({ type: POST_PELICULAS, payload: created.data });
   };
 };
@@ -299,16 +283,13 @@ export const willunmont2 = () => {
   };
 };
 
-export function getTodo() {
-  return function (dispatch) {
-    return fetch("http://localhost:3001/todos")
-      .then((r) => r.json())
-      .then((rjson) =>
-        dispatch({
-          type: GET_TODO,
-          payload: rjson,
-        })
-      );
+export const getTodo = () => {
+  return async function (dispatch) {
+    let getTodo = await axios("/todos");
+    return dispatch({
+      type: GET_TODO,
+      payload: getTodo.data,
+    });
   };
 };
 
@@ -348,9 +329,7 @@ export const setdetailLenguage = (id, string) => {
   console.log(string);
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        `/series/traductor/${id}/${string} `
-      );
+      let json = await axios.get(`/series/traductor/${id}/${string} `);
       return dispatch({
         type: GET_LENGUAJE,
         payload: json.data,
@@ -361,15 +340,12 @@ export const setdetailLenguage = (id, string) => {
   };
 };
 export const getIso = (id) => {
-  return (dispatch) => {
-    return fetch(`/languages/${id} `)
-      .then((r) => r.json())
-      .then((data) => {
-        dispatch({
-          type: GET_ISOS,
-          payload: data,
-        });
-      });
+  return async function (dispatch) {
+    let getIso = await axios(`/languages/${id}`);
+    return dispatch({
+      type: GET_ISOS,
+      payload: getIso.data,
+    });
   };
 };
 export const getIdioma = (payload) => {
@@ -386,4 +362,18 @@ export const loadCurren = (payload) => {
       type: LOAD_CURRENT_ITEM,
       payload: payload,
     });
+};
+
+export const putPeliculas = (payload) => {
+  console.log(payload);
+  return async (dispatch) => {
+    let created = await axios.put(
+      `/peliculas/modificarPeli/${payload.id}`,
+      payload
+    );
+    dispatch({
+      type: PUT_PELICULA,
+      payload: created,
+    });
+  };
 };

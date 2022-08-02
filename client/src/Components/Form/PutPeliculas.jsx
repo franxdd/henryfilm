@@ -1,19 +1,16 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { postPeliculas,getGenerosMovies } from "../../Redux/Actions/Actions";
+import { postPeliculas, putPeliculas } from "../../Redux/Actions/Actions";
 import validate from "../../util/validate.js";
 import joystick from "../Img/joystick.jpg";
 
-const FormPeliculas = () => {
+const PutPeliculas = () => {
   let dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getGenerosMovies());
-  },[]);
-
   const generos = useSelector((state) => state.generosMovies);
   const [error, setError] = useState({ " ": " " });
   const [data, setdata] = useState({
+    id: "",
     name: "",
     genre_ids: [],
     overview: "",
@@ -36,9 +33,10 @@ const FormPeliculas = () => {
       data.posterImagen = joystick;
     }
 
-    dispatch(postPeliculas(data));
-    alert("Pelicula creada");
+    dispatch(putPeliculas(data));
+    alert("Pelicula Modificada");
     setdata({
+      id: "",
       name: "",
       genre_ids: [],
       overview: "",
@@ -119,6 +117,18 @@ const FormPeliculas = () => {
   return (
     <>
       <form onSubmit={HandleSubmit}>
+        <div className="nombreconteiner">
+          <label style={{ color: "white" }} className="label">
+            id:
+          </label>
+          <input
+            id="id"
+            type="text"
+            name="id"
+            className="inputconteiner"
+            onChange={(e) => HandleInput(e)}
+          />
+        </div>
         <div className="nombreconteiner">
           <label style={{ color: "white" }} className="label">
             Nombre:
@@ -365,4 +375,4 @@ const FormPeliculas = () => {
   );
 };
 
-export default FormPeliculas;
+export default PutPeliculas;
