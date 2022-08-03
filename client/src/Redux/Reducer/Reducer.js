@@ -37,7 +37,7 @@ import { filterGenres } from "../../util/filter.js";
 import { toast } from "react-toastify";
 
 function a() {
-  return toast.error("Ya se encuentra en el carro", {
+  return toast.error("Ya esta en el carrito", {
     position: "bottom-left",
     autoClose: 5000,
     hideProgressBar: false,
@@ -48,7 +48,7 @@ function a() {
   });
 }
 function b() {
-  return toast.success("Fue añadida al carro", {
+  return toast.success("Se añadio al carrito", {
     position: "bottom-left",
     autoClose: 5000,
     hideProgressBar: false,

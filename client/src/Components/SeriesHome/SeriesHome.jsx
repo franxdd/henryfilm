@@ -11,12 +11,12 @@ import {
   filtradoGeneroSeriesReversa,
   getGenerosSeries
 } from "../../Redux/Actions/Actions";
-import NavBar from "../NavBar/NavBar.jsx";
 import Paginacion from "./PaginadoSeries";
 import "../../Styles/components/_SeriesHome.scss";
-import "../../Styles/components/_Filter.scss";
-import { AiOutlineClear as ClearIcon } from "react-icons/ai";
-import { FaWindowClose } from "react-icons/fa";
+import "../../Styles/components/_Filter.scss"
+import "../../Styles/components/_Loading.scss";
+import {AiOutlineClear as ClearIcon} from "react-icons/ai";
+import {FaWindowClose} from "react-icons/fa";
 
 function SeriesHome() {
   const dispatch = useDispatch();
@@ -69,8 +69,10 @@ function SeriesHome() {
     dispatch(orderVoteAvgDES(allSeries));
   };
 
-  return allSeries.length === 0 || generos.length === 0 ? (
-    <h1>LOADER</h1>
+  return allSeries.length === 0 ? (
+    <div className="Loading">
+    <div className="loader"></div>
+    </div>
   ) : (
     <div className="filter">
       <span>Ordenar por:</span>
@@ -81,10 +83,10 @@ function SeriesHome() {
         <span className="hover-underline-animation"> Z - A </span>
       </button>
       <button className="cta" onClick={(e) => HandleClickVoteASC(e)}>
-        <span className="hover-underline-animation"> + Puntuación</span>
+        <span className="hover-underline-animation"> <strong> + </strong> Puntuación</span>
       </button>
       <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
-        <span className="hover-underline-animation"> - Puntuación </span>
+        <span className="hover-underline-animation"> <strong> - </strong>Puntuación </span>
       </button>
       <span>Filtrar por:</span>
       <div className="Selects">

@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "./Redux/Store/Store.js";
 // import dotenv from "dotenv";
+// // const dotenv = require ("dotenv");
 // const dotenv = require ("dotenv");
 
 // dotenv.config();

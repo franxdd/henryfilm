@@ -59,7 +59,7 @@ const Home = () => {
         titulo={seriesName[idioma].tendencia}
         clase="series"
       />
-      <Footer />
+      {/* <Footer /> */}
     </section>
   );
 };

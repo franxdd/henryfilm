@@ -1,66 +1,41 @@
-.momentum {
-    --uib-size: 40px;
-    --uib-speed: 1s;
-    --uib-color: rgb(221, 255, 242);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: var(--uib-size);
-    width: var(--uib-size);
-    animation: rotate01561 var(--uib-speed) linear infinite;
+@import "../Utilidades/_Variables.scss";
+.Loading{
+      padding:19%;
+       display: flex;
+       flex-direction: column-reverse;
+       align-items: center;
    }
-   
-   .momentum::before,
-   .momentum::after {
-    content: '';
-    height: 25%;
-    width: 25%;
+ .loader {
+    width: 12rem;
+    height: 12rem;
     border-radius: 50%;
-    background-color: var(--uib-color);
-   }
-   
-   .momentum::before {
-    animation: wobble290123 calc(var(--uib-speed) * 1.25) ease-in-out infinite;
-   }
-   
-   .momentum::after {
-    animation: wobble9123 calc(var(--uib-speed) * 1.25) ease-in-out infinite;
-   }
-   
-   .momentum::before {
-    margin-right: 10%;
-   }
-   
-   @keyframes wobble9123 {
-    0%,
-     100% {
-     transform: translateX(0);
-    }
-   
-    50% {
-     transform: translateX(calc(var(--uib-size) * 0.2)) scale(1.1);
-    }
-   }
-   
-   @keyframes wobble290123 {
-    0%,
-     100% {
-     transform: translateX(0);
-    }
-   
-    50% {
-     transform: translateX(calc(var(--uib-size) * -0.2)) scale(1.1);
-    }
-   }
-   
-   @keyframes rotate01561 {
-    0% {
-     transform: rotate(0deg);
-    }
-   
-    100% {
-     transform: rotate(360deg);
-    }
-   }
-   
+    position: relative;
+    animation: rotate 1s linear infinite;
+  }
+  .loader::before , .loader::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 5px solid $detalles;
+    animation: prixClipFix 2s linear infinite ;
+  }
+  .loader::after{
+    border-color: $blanco;
+    animation: prixClipFix 2s linear infinite , rotate 0.5s linear infinite reverse;
+    inset: 6px;
+  }
+
+  @keyframes rotate {
+    0%   {transform: rotate(0deg)}
+    100%   {transform: rotate(360deg)}
+  }
+
+  @keyframes prixClipFix {
+      0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+      25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+      50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+      75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+      100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+  }
