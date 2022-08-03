@@ -1,10 +1,10 @@
 @import "../Utilidades/_Variables.scss";
 
-.formulario{
-form {
+
+  .formulario form {
   display: flex;
-  margin-left: -7%;
-  // width: 30%;
+  margin-top:20px;
+  margin-left: 10px;
   input,
   button {
     background-color:  #191919;
@@ -14,7 +14,7 @@ form {
   input {
     font-size: 12px;
     padding: 8px;
-    width: 60%;
+   width: 180px;
   }
   input::placeholder {
     font-size: 15px;
@@ -38,4 +38,4 @@ form {
     }
   }
 };
-}
+

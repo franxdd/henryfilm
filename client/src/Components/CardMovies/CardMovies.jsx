@@ -17,6 +17,7 @@ function CardMovies({ id, name, poster }) {
   }
   // console.log(Math.ceil(getRandomArbitrary(1, 50)))
   return (
+    <div className="Cardmovies">
     <div className="card">
       <div className="card-img">
         <img src={poster} alt="poster"/>
@@ -32,6 +33,7 @@ function CardMovies({ id, name, poster }) {
           <button className="card-button"> + Info</button>
         </Link>
       </div>
+    </div>
     </div>
   );
 }

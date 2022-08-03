@@ -71,8 +71,10 @@ function MoviesHome() {
     dispatch(orderVoteAvgDES(allMovies));
   };
 
-  return allMovies.length === 0 || generos.length === 0 ? (
-    <div className="momentum"></div>
+  return allMovies.length === 0 ? (
+    <div className="Loading">
+    <div className="loader"></div>
+    </div>
   ) : (
     <div className="filter">
       <span>Ordenar por:</span>
@@ -88,10 +90,7 @@ function MoviesHome() {
         </span>
       </button>
       <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
-        <span className="hover-underline-animation">
-          {" "}
-          <strong> - </strong> Puntuación{" "}
-        </span>
+      <span className="hover-underline-animation"><strong> - </strong> Puntuación </span>
       </button>
       <span>Filtrar por:</span>
 
