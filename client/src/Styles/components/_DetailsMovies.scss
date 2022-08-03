@@ -3,8 +3,7 @@
 
 section {
   .header-info {
-    height: 750px;
-    overflow: scroll;
+    height: 100%;
     -webkit-box-shadow: inset 450px -7px 120px 106px rgba(0,0,0,0.91);
     -moz-box-shadow: inset 450px -7px 120px 106px rgba(0,0,0,0.91);
     box-shadow: inset 450px -7px 120px 106px rgba(0,0,0,0.91);
@@ -74,11 +73,12 @@ section {
       }
     }
     .contenedor-links {
-      display: flex;
-      height: 80px;
-      justify-content: center;
-      background-color: rgba(0, 0, 0, 0);
-      
+     margin-top: 30px;
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+     align-content: stretch;
+     align-items: center;
       button {
         margin: 20px 20px;
         width: 80px;
@@ -114,11 +114,25 @@ section {
         color: black;
         font-weight: 700;
       }
-      
       button:active:before {
-        background: #b9b9b9;
-        
+       background: #b9b9b9;
       }
+    .spanCompras{
+      border: 1px solid #252525;
+      display: flex;
+      padding: .3em;
+      cursor: pointer;
+      border-radius: 50px;
+      transition: .3s ease-in-out;
+      background-color:$background-intermedio;
+      color:$detalles;
+      :hover{
+      border: 1px solid $detalles;
+      background-color: $detalles;
+      color:$background-intermedio;
+      border-radius: 50px;
+      }
+    }
     }
   }
 }
@@ -166,44 +180,4 @@ section {
       }
     }
   }
-
-
-// @media screen and (max-width: 500px) {
-//   .seccion-detalle {
-//     .contenedor-info {
-//       width: 90%;
-//       flex-direction: column;
-//       margin: auto;
-//       .poster {
-//         width: 70%;
-//         margin: 15px;
-//       }
-//       .contenedor-descripcion {
-//         width: 100%;
-//         color: $blanco;
-//         letter-spacing: 1px;
-//         margin-top: 15px;
-//         margin-left: 15px;
-//         h3 {
-//           font-size: 2rem;
-//       }
-//       .contenedor-estrellas {
-//         width: 240px;
-//         display: flex;
-//         justify-content: space-around;
-//         svg {
-//           color: $detalles;
-//           font-size: 20px;
-//         }
-//       }
-//       .descripcion {
-//         width: 90%;
-//       }
-//       ul {
-//         width: 90%;
-//       }
-//     }
-//   }
-// }
-// }
 

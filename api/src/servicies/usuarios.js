@@ -61,6 +61,7 @@ const postLogin = async (req, res) => {
     
 
     const { username, password } = req.body;
+    console.log("matiduerme")
     const user = await Usuarios.findOne({
       where: {
         username: username,

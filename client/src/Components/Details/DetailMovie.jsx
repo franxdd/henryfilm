@@ -72,7 +72,7 @@ function DetailMovie() {
               <Link to={`/videos`}>
                 <button>Reparto</button>
               </Link>
-              <span onClick={() => addCart(id)}>
+              <span className="spanCompras" onClick={() => addCart(id)}>
                 <ShopIcon className="iconoShop" />
               </span>
             </div>
