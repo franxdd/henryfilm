@@ -122,15 +122,14 @@ const getMovieDetailParams = async (req, res) => {
 
   try {
     if (isNaN(idPelicula)) {
-      console.log("IsNAN");
+
       const peliculasDb = await Peliculas.findOne({
         where: {
           id: idPelicula,
         },
       });
 
-      console.log(peliculasDb);
-
+    
       var datosAEnviar = [peliculasDb];
     } else {
       let movie = await axios.get(
@@ -170,7 +169,7 @@ const getMovieDetailParams = async (req, res) => {
       );
     }
 
-    console.log(datosAEnviar)
+   
 
     res.status(200).json(datosAEnviar);
   } catch (error) {

@@ -9,7 +9,9 @@ function CardMovies({ id, name, poster }) {
   const dispatch = useDispatch();
 
   function addCart(id) {
-    
+
+    // console.log(id)
+
     dispatch(addToCart(id));
   }
   function getRandomArbitrary(min, max) {

@@ -25,7 +25,7 @@ function DetailMovie() {
     return () => dispatch(willunmont2());
   }, []);
 
-  console.log(movieDetail)
+
 
 
   return movieDetail.length === 0 ? (

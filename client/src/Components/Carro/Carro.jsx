@@ -17,11 +17,13 @@ function Carro() {
     }
   }, [cart]);
 
+
   return (
     <div>
       <div>
         {cart &&
           cart.map((e) => {
+
             return (
               <CarritoCard
                 key={e.id}

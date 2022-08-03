@@ -19,8 +19,7 @@ function DetailsSeries() {
   let seriesDetail = useSelector((state) => state.seriesDetail);
 
 
-  console.log(id)
-  console.log(seriesDetail)
+
 
   function addCart(id) {
     let idParseado = parseInt(id);

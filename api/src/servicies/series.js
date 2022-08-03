@@ -15,8 +15,7 @@ const getSeriesInfo = async (req, res) => {
   try {
     let generosApi = await axios(API_GENRES);
     let generos = generosApi.data.genres;
-    console.log("Hola");
-    console.log("generos", generos);
+
 
     var imagenesConfig = await axios.get(
       "https://api.themoviedb.org/3/configuration?api_key=3832b93c32749d817ba7fc39076d3398"
@@ -24,7 +23,7 @@ const getSeriesInfo = async (req, res) => {
     urlImg = imagenesConfig.data.images.base_url + "original";
 
     for (let i = 0; i < generos.length; i++) {
-      // console.log(generos)
+ 
       for (const key in generos[i]) {
         if (typeof generos[i][key] === "number") {
           idGenero = generos[i][key];
@@ -33,21 +32,21 @@ const getSeriesInfo = async (req, res) => {
         }
       }
     }
-    // console.log("Generos a Enviar", generosAEnviar)
+
 
     for (let o = 0; o < paginas; o++) {
       let seriesApi = await axios(`${API_URL_SERIES}${o + 1}`);
-      // console.log("Series:", seriesApi.data.results.slice(0,1))
+   
       let series = seriesApi.data.results;
       for (let s = 0; s < series.length; s++) {
         for (let a = 0; a < series[s].genre_ids.length; a++) {
           series[s].genre_ids[a] = generosAEnviar[series[s].genre_ids[a]];
         }
-        // console.log("Quedo?:", series)
+  
         seriesAEnviar = [...seriesAEnviar, series[s]];
       }
     }
-    // console.log("Series a enviar:", seriesAEnviar)
+
 
     for (let img = 0; img < seriesAEnviar.length; img++) {
       seriesAEnviar[img].tipo = "serie";
@@ -98,7 +97,7 @@ const allInfo = async (req, res) => {
 const infoQuery = async (req, res) => {
   const { name } = req.query;
   let allSeries = await allInfo();
-  // console.log("aaaaaaaaaaaaaaaaaaaaaa", allSeries)
+
   if (name) {
     const serie = allSeries.filter((s) =>
       s.name.toLowerCase().includes(name.toLowerCase())
@@ -114,7 +113,7 @@ const infoQuery = async (req, res) => {
 
 const seriePorId = async (req, res) => {
   try {
-    // console.log('Hola?')
+
     const { id } = req.query;
 
     const allSeries = await axios(
@@ -205,6 +204,7 @@ const seriePorIdParms = async (req, res) => {
     res.status(200).json(datosAEnviar);
   } catch (error) {
     console.log(error);
+    res.status(400).json(error)
   }
 };
 
@@ -229,20 +229,19 @@ const seriePorIdParmsTrad = async (req, res) => {
   try {
     const { id, iso1, iso2 } = req.params;
 
-    console.log('entro a fun')
+  
     if(isNaN(id)){
-      console.log('IsNAN')
+  
       const seriesBd = await Series.findOne({where:{
         id : id,
       }});
 
 
-      console.log(seriesBd)
-      
+
       var datosAEnviar = seriesBd
 
     }else{
-      console.log('isntNAN')
+ 
       const allSeries = await axios(
         `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=${iso1}-${iso2}`
       );
@@ -266,6 +265,7 @@ const seriePorIdParmsTrad = async (req, res) => {
     res.status(200).json(datosAEnviar);
   } catch (error) {
     console.log(error);
+    res.status(400).json(error);
   }
 };
 

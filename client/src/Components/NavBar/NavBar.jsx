@@ -48,7 +48,7 @@ const Nav = () => {
 
   useEffect(() => {
     if (tokenString) {
-      console.log("entro al segundo useEffect");
+   
       dispatch(getUser(tokenString));
     }
   }, [dispatch, token]);
@@ -116,7 +116,7 @@ const Nav = () => {
                 <option value="ch">Chino</option>
               </select>
             </div>
-            {console.log(userReducer)}
+         
             {userReducer.username ? (
               <Link to="/home/Register">
                 <button>

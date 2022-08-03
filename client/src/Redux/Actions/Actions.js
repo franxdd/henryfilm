@@ -152,7 +152,7 @@ export const checkState = () => {
 };
 
 export const PostLogin = (payload) => {
-  console.log(payload);
+
   return async function (dispatch) {
     let created = await axios.post("/usuarios/login", payload);
     // {

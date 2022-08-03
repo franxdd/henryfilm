@@ -5,7 +5,7 @@ import { removeCart } from "../../Redux/Actions/Actions";
 function CarritoCard({ id, nombre, image, qty, tipo, precio }) {
   const dispatch = useDispatch();
   function handleDelete(id) {
-    console.log(id);
+
     dispatch(removeCart(id));
   }
 

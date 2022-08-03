@@ -15,7 +15,7 @@ function CardSeries({ id, name, poster }) {
     dispatch(addToCart(id));
   }
   
- console.log(id)
+
 
 
 

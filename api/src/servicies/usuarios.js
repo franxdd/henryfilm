@@ -104,7 +104,7 @@ const getProfile = async (req, res) => {
   const accessToken = data["access-token"];
   const dataUser = verify(accessToken, "jwtsecretcambiar");
   const users = await Usuarios.findOne({ where: { username: dataUser.username } });
-  console.log('recien termia del get')
+
 
   try {
     res.status(200).json(users.dataValues);
