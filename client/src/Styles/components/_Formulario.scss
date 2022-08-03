@@ -3,7 +3,8 @@
 
   .formulario form {
   display: flex;
-  margin-left: -7%;
+  margin-top:20px;
+  margin-left: 10px;
   input,
   button {
     background-color:  #191919;
@@ -13,7 +14,7 @@
   input {
     font-size: 12px;
     padding: 8px;
-    width: 60%;
+   width: 180px;
   }
   input::placeholder {
     font-size: 15px;

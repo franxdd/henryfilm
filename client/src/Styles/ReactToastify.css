@@ -2,8 +2,8 @@
   --toastify-color-light: rgb(45, 45, 45);
   --toastify-color-dark: #121212;
   --toastify-color-info: #3498db;
-  --toastify-color-success: #f1ed0f;
-  --toastify-color-warning: #07bc0c;
+  --toastify-color-success: #07bc0c;
+  --toastify-color-warning: #f1ed0f;
   --toastify-color-error: #b6291a;
   --toastify-color-transparent: rgba(255, 255, 255, 0.7);
   --toastify-icon-color-info: var(--toastify-color-info);
@@ -42,7 +42,7 @@
 
 .Toastify__toast-container {
   z-index: var(--toastify-z-index);
-  -webkit-transform: translate3d(0, 0, var(--toastify-z-index) px);
+  /* -webkit-transform: translate3d(0, 0, var(--toastify-z-index) px); */
   position: fixed;
   padding: 4px;
   width: var(--toastify-toast-width);

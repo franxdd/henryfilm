@@ -3,7 +3,6 @@ import "./Styles/App.scss";
 import DetailMovie from "./Components/Details/DetailMovie";
 import DetailsSeries from "./Components/Details/DetailsSeries";
 import FormPeliculas from "./Components/Form/FormPeliculas";
-import Dashboard from './Components/Dashboard/DashBoard.jsx'
 import Home from "./Components/Home/Home";
 import LandingPage from "./Components/LandingPage/LandingPage.jsx";
 import Login from "./Components/Login/Login";
@@ -43,7 +42,6 @@ const App = () => {
           <Route path="home" element={<NavBar />}>
             <Route index element={<Home />} />
             <Route path="agregar" element={<FormPeliculas/>}/>
-            <Route path="dashboard" element={<Dashboard />}/>
             <Route path="series" element={<SeriesHome />} />
             <Route path="series/:id" element={<DetailsSeries />} />
             <Route path="peliculas" element={<MoviesHome />} />
