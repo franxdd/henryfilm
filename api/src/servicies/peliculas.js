@@ -227,10 +227,48 @@ const postPeliculas = async (req, res) => {
   }
 }; // TERMINADO
 
+const modificarPeli = async (req, res) => {
+  let {
+    name,
+    genre_ids,
+    overview,
+    cast,
+    runtime,
+    release_date,
+    posterImagen,
+    backDropImagen,
+    vote_average,
+    popularity,
+    tipo,
+  } = req.body;
+  let { id } = req.params;
+  try {
+    let peliActualizada = await Peliculas.findByPk(id);
+    let peliculitas = {
+      name,
+      genre_ids,
+      overview,
+      cast,
+      runtime,
+      release_date,
+      posterImagen,
+      backDropImagen,
+      vote_average,
+      popularity,
+      tipo,
+    };
+    let nuevaPeli = await peliActualizada.update(peliculitas);
+    return res.send(nuevaPeli);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getAllMovies,
   infoMovie,
   getMovieDetail,
   getMovieDetailParams,
   postPeliculas,
+  modificarPeli,
 };

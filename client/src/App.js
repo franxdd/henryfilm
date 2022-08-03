@@ -18,6 +18,8 @@ import Carro from "./Components/Carro/Carro";
 import { ToastContainer } from "react-toastify";
 import "./Styles/ReactToastify.css";
 import Footer from "./Components/Footer/Footer"
+import "./Styles/ReactToastify.css";
+import PutPeliculas from "./Components/Form/PutPeliculas";
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
   const [token, setToken] = useState();
@@ -31,7 +33,6 @@ const App = () => {
     setLenguaje: setLenguaje,
   };
   return (
-    
     <div className="App">
       <Context.Provider value={contexto}>
         <ToastContainer />
@@ -51,6 +52,7 @@ const App = () => {
             <Route path="Search" element={<Search />}></Route>
             <Route path="Profile" element={<Profile />}></Route>
             <Route path="Carro" element={<Carro />}></Route>
+            <Route path="modificar" element={<PutPeliculas />}></Route>
           </Route>
         </Routes>
         <Routes>

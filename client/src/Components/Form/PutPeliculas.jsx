@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { postPeliculas } from "../../Redux/Actions/Actions";
+import { postPeliculas, putPeliculas } from "../../Redux/Actions/Actions";
 import validate from "../../util/validate.js";
-import joystick from "../Img/joystick.jpg";
+import poster from "../../img/poster.jpg";
 
-const FormPeliculas = () => {
+const PutPeliculas = () => {
   let dispatch = useDispatch();
   const generos = useSelector((state) => state.generosMovies);
   const [error, setError] = useState({ " ": " " });
   const [data, setdata] = useState({
+    id: "",
     name: "",
     genre_ids: [],
     overview: "",
@@ -26,15 +27,16 @@ const FormPeliculas = () => {
   const HandleSubmit = (e) => {
     e.preventDefault();
     if (data.backDropImagen === "Alt") {
-      data.backDropImagen = joystick;
+      data.backDropImagen = poster;
     }
     if (data.posterImagen === "Alt") {
-      data.posterImagen = joystick;
+      data.posterImagen = poster;
     }
 
-    dispatch(postPeliculas(data));
-    alert("Pelicula creada");
+    dispatch(putPeliculas(data));
+    alert("Pelicula Modificada");
     setdata({
+      id: "",
       name: "",
       genre_ids: [],
       overview: "",
@@ -115,6 +117,18 @@ const FormPeliculas = () => {
   return (
     <>
       <form onSubmit={HandleSubmit}>
+        <div className="nombreconteiner">
+          <label style={{ color: "white" }} className="label">
+            id:
+          </label>
+          <input
+            id="id"
+            type="text"
+            name="id"
+            className="inputconteiner"
+            onChange={(e) => HandleInput(e)}
+          />
+        </div>
         <div className="nombreconteiner">
           <label style={{ color: "white" }} className="label">
             Nombre:
@@ -303,7 +317,7 @@ const FormPeliculas = () => {
           <>
             <img
               className="imgconteinerbackDropImagen"
-              src={joystick}
+              src={poster}
               alt="img"
             />
           </>
@@ -311,7 +325,7 @@ const FormPeliculas = () => {
           <>
             <img
               className="imgconteinerbackDropImagen"
-              src={joystick}
+              src={poster}
               alt="Debe ingresar una URL"
             />
           </>
@@ -335,7 +349,7 @@ const FormPeliculas = () => {
           <>
             <img
               className="imgconteinerposterImagen"
-              src={joystick}
+              src={poster}
               alt="img"
             />
           </>
@@ -343,7 +357,7 @@ const FormPeliculas = () => {
           <>
             <img
               className="imgconteinerposterImagen"
-              src={joystick}
+              src={poster}
               alt="Debe ingresar una URL"
             />
           </>
@@ -361,4 +375,4 @@ const FormPeliculas = () => {
   );
 };
 
-export default FormPeliculas;
+export default PutPeliculas;
