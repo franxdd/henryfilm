@@ -8,6 +8,8 @@ const modelUsuario = require("../models/Usuarios.js");
 const modelPeliculas = require("../models/Peliculas.js");
 const modelSeries = require("../models/Series.js");
 const modelComentarios = require("../models/Comentarios.js");
+const modelCarro = require("../models/Carro.js");
+const modelDeseados = require("../models/Deseados.js");
 
 let sequelize =
   process.env.NODE_ENV === "production"
@@ -76,8 +78,10 @@ modelUsuario(sequelize);
 modelPeliculas(sequelize);
 modelSeries(sequelize);
 modelComentarios(sequelize);
+modelCarro(sequelize)
+modelDeseados(sequelize)
 
-const { Peliculas, Usuarios, Series, Comentarios } = sequelize.models;
+const { Peliculas, Usuarios, Series, Comentarios, Carro, Deseados } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -89,6 +93,11 @@ Comentarios.belongsTo(Usuarios);
 
 Peliculas.hasMany(Comentarios);
 Comentarios.belongsTo(Peliculas);
+
+// Carro.hasOne(Usuarios);
+
+// Usuarios.hasMany(Deseados)
+// Deseados.belongsTo(Usuarios);
 
 // Series.hasMany(Comentarios);
 // Comentarios.belongsTo(Series);

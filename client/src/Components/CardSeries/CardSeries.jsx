@@ -14,6 +14,10 @@ function CardSeries({ id, name, poster }) {
   function addCart(id) {
     dispatch(addToCart(id));
   }
+  
+ console.log(id)
+
+
 
   return (
     <div className="card">

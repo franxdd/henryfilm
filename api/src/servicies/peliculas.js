@@ -121,41 +121,56 @@ const getMovieDetailParams = async (req, res) => {
   let { idPelicula } = req.params;
 
   try {
-    let movie = await axios.get(
-      `https://api.themoviedb.org/3/movie/${idPelicula}?api_key=${API_KEY}&language=es-SP`
-    );
-    var imagenesConfig = await axios.get(
-      `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
-    );
-    urlImg = imagenesConfig.data.images.base_url + "original";
+    if (isNaN(idPelicula)) {
+      console.log("IsNAN");
+      const peliculasDb = await Peliculas.findOne({
+        where: {
+          id: idPelicula,
+        },
+      });
 
-    var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
-    );
-    var cast = await axios.get(
-      `https://api.themoviedb.org/3/movie/${idPelicula}/credits?api_key=${API_KEY}&language=es-SP`
-    );
+      console.log(peliculasDb);
 
-    var castAEnviar = cast.data.cast;
+      var datosAEnviar = [peliculasDb];
+    } else {
+      let movie = await axios.get(
+        `https://api.themoviedb.org/3/movie/${idPelicula}?api_key=${API_KEY}&language=es-SP`
+      );
+      var imagenesConfig = await axios.get(
+        `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
+      );
+      urlImg = imagenesConfig.data.images.base_url + "original";
 
-    var videos = await axios.get(
-      `https://api.themoviedb.org/3/movie/${idPelicula}/videos?api_key=${API_KEY}&language=en-US`
-    );
+      var generosData = await axios.get(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
+      );
+      var cast = await axios.get(
+        `https://api.themoviedb.org/3/movie/${idPelicula}/credits?api_key=${API_KEY}&language=es-SP`
+      );
 
-    var videosAEnviar = videos.data.results;
+      var castAEnviar = cast.data.cast;
 
-    var urlVideos = `https://www.youtube.com/watch?v=`;
+      var videos = await axios.get(
+        `https://api.themoviedb.org/3/movie/${idPelicula}/videos?api_key=${API_KEY}&language=en-US`
+      );
 
-    var data_parseado = [movie.data];
+      var videosAEnviar = videos.data.results;
 
-    var datosAEnviar = parseador(
-      data_parseado,
-      urlImg,
-      generosData,
-      castAEnviar,
-      videosAEnviar,
-      urlVideos
-    );
+      var urlVideos = `https://www.youtube.com/watch?v=`;
+
+      var data_parseado = [movie.data];
+
+      var datosAEnviar = parseador(
+        data_parseado,
+        urlImg,
+        generosData,
+        castAEnviar,
+        videosAEnviar,
+        urlVideos
+      );
+    }
+
+    console.log(datosAEnviar)
 
     res.status(200).json(datosAEnviar);
   } catch (error) {
@@ -193,7 +208,7 @@ const postPeliculas = async (req, res) => {
     tipo,
   });
 
-  if (errores) res.json(errores);
+  if (errores) res.status(400).json(errores);
 
   try {
     if (
@@ -258,9 +273,11 @@ const modificarPeli = async (req, res) => {
       tipo,
     };
     let nuevaPeli = await peliActualizada.update(peliculitas);
-    return res.send(nuevaPeli);
+    return res.status(200).send(nuevaPeli);
   } catch (error) {
+
     console.log(error);
+    res.status(400).json(error)
   }
 };
 

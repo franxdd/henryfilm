@@ -338,12 +338,15 @@ const rootRouter = (state = initialState, action) => {
         };
       }
     case GET_TODO:
+      var arrAuxpeli = action.payload.filter((fil) => fil.tipo === 'pelicula')
+      var arrAuxserie = action.payload.filter((fil) => fil.tipo === 'serie')
+
       return {
         ...state,
         todo: action.payload,
         backupTodo: action.payload,
-        allMovies: action.payload.slice(0, 100),
-        allSeries: action.payload.slice(100, 200),
+        allMovies: arrAuxpeli,
+        allSeries : arrAuxserie
       };
     case FILTER_NAME:
       if (action.payload.length === 0) {

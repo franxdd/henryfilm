@@ -345,8 +345,9 @@ export const adjusq = (id, value) => {
 };
 
 export const setdetailLenguage = (id, string) => {
-  console.log(string);
+
   return async function (dispatch) {
+    
     try {
       let json = await axios.get(`/series/traductor/${id}/${string} `);
       return dispatch({

@@ -82,18 +82,19 @@ const postLogin = async (req, res) => {
         } else {
           const accessToken = createTokens(user);
 
-          res.cookie("access-token", accessToken, {
+          res.status(200).cookie("access-token", accessToken, {
             maxAge: 60 * 60 * 60,
           });
 
-          res.json(accessToken);
+          res.status(200).json(accessToken);
         }
       })
       .catch((err) => {
-        res.json(err);
+        res.status(400).json(err);
       });
   } catch (error) {
-    res.json('error en postlogin',error);
+    console.log(error);
+    res.status(400).json(error);
   }
 };
 
@@ -106,8 +107,10 @@ const getProfile = async (req, res) => {
   console.log('recien termia del get')
 
   try {
-    res.send(users.dataValues);
-  } catch (error) {}
+    res.status(200).json(users.dataValues);
+  } catch (error) {
+    res.status(400).json(error)
+  }
 };
 
 module.exports = {

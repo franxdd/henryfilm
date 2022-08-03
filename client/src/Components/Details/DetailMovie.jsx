@@ -19,12 +19,21 @@ function DetailMovie() {
     dispatch(addToCart(idParseado));
   }
   let movieDetail = useSelector((state) => state.movieDetail);
+
   useEffect(() => {
     dispatch(getMoviesDetail(id));
     return () => dispatch(willunmont2());
   }, []);
 
-  return (
+  console.log(movieDetail)
+
+
+  return movieDetail.length === 0 ? (
+
+    <h1>LOADER</h1>
+
+
+  ) :(
     <section>
       <header
         className="header-info"
@@ -46,13 +55,13 @@ function DetailMovie() {
             </p>
             <ul className="item-descripcion">
               Producción:{" "}
-              {movieDetail[0]?.production_companies.map((e) => {
+              {movieDetail[0]?.production_companies?.map((e) => {
                 return <div>{e.name}</div>;
               })}
             </ul>
             <ul className="lista-generos">
               Géneros:{" "}
-              {movieDetail[0]?.genres.map((e) => {
+              {movieDetail[0]?.genres?.map((e) => {
                 return <div>{e.name}</div>;
               })}
             </ul>

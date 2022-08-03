@@ -229,19 +229,40 @@ const seriePorIdParmsTrad = async (req, res) => {
   try {
     const { id, iso1, iso2 } = req.params;
 
-    const allSeries = await axios(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=${iso1}-${iso2}`
-    );
-    var imagenesConfig = await axios.get(
-      `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
-    );
-    urlImg = imagenesConfig.data.images.base_url + "original";
-    var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=${iso1}-${iso2}`
-    );
-    var data_parseado = [allSeries.data];
-    var datosAEnviar = parseador(data_parseado, urlImg, generosData);
-    console.log(datosAEnviar);
+    console.log('entro a fun')
+    if(isNaN(id)){
+      console.log('IsNAN')
+      const seriesBd = await Series.findOne({where:{
+        id : id,
+      }});
+
+
+      console.log(seriesBd)
+      
+      var datosAEnviar = seriesBd
+
+    }else{
+      console.log('isntNAN')
+      const allSeries = await axios(
+        `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=${iso1}-${iso2}`
+      );
+      var imagenesConfig = await axios.get(
+        `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
+      );
+      urlImg = imagenesConfig.data.images.base_url + "original";
+      var generosData = await axios.get(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=${iso1}-${iso2}`
+      );
+      var data_parseado = [allSeries.data];
+      var datosAEnviar = parseador(data_parseado, urlImg, generosData);
+      // console.log(datosAEnviar);.
+
+
+
+    }
+
+
+
     res.status(200).json(datosAEnviar);
   } catch (error) {
     console.log(error);

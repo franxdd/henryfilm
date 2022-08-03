@@ -16,6 +16,7 @@ function CardMovies({ id, name, poster }) {
     return Math.random() * (max - min) + min;
   }
   // console.log(Math.ceil(getRandomArbitrary(1, 50)))
+
   return (
     <div className="card">
       <div className="card-img">
@@ -28,7 +29,9 @@ function CardMovies({ id, name, poster }) {
 
         <p className="text-title">{name}</p>
         <p className="text-body">${Math.ceil(getRandomArbitrary(15, 30))}</p>
+        
         <Link to={`/home/peliculas/${id}`}>
+        
           <button className="card-button"> + Info</button>
         </Link>
       </div>
