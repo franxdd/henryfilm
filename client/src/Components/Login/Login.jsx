@@ -1,11 +1,7 @@
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
-<<<<<<< HEAD
-import { Router } from "react-router-dom";
-=======
 import { useNavigate} from "react-router-dom";
 import { PostLogin} from '../../Redux/Actions/Actions.js'
->>>>>>> 3aed25286300d6a63841d8d900612aeed75af5a9
 function Login() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,12 +22,8 @@ function Login() {
       username: "",
       password: "",
     });
-<<<<<<< HEAD
-    Router.push('/home')
-=======
    
     navigate('/home', {replace: true});
->>>>>>> 3aed25286300d6a63841d8d900612aeed75af5a9
   }
 
   return (
