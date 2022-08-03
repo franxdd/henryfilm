@@ -15,8 +15,8 @@ const getSeriesInfo = async (req, res) => {
   try {
     let generosApi = await axios(API_GENRES);
     let generos = generosApi.data.genres;
-    console.log("Hola");
-    console.log("generos", generos);
+    // console.log("Hola");
+    // console.log("generos", generos);
 
     var imagenesConfig = await axios.get(
       "https://api.themoviedb.org/3/configuration?api_key=3832b93c32749d817ba7fc39076d3398"
