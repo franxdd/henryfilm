@@ -4,6 +4,7 @@ import {
   addToCart,
   getMoviesDetail,
   willunmont2,
+  addToWishlist
 } from "../../Redux/Actions/Actions";
 import { useParams } from "react-router-dom";
 import "../../Styles/components/_DetailsMovies.scss";
@@ -17,6 +18,10 @@ function DetailMovie() {
   function addCart(id) {
     let idParseado = parseInt(id);
     dispatch(addToCart(idParseado));
+  }
+  function addWishlist(id) {
+    let idParseado2 = parseInt(id);
+    dispatch(addToWishlist(idParseado2));
   }
   let movieDetail = useSelector((state) => state.movieDetail);
   useEffect(() => {
@@ -66,6 +71,7 @@ function DetailMovie() {
               <span className="spanCompras" onClick={() => addCart(id)}>
                 <ShopIcon className="iconoShop" />
               </span>
+              <button onClick={() => addWishlist(id)}>Wishlist</button>
             </div>
           </div>
         </div>
