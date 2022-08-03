@@ -5,6 +5,7 @@ import {
   getSeriesDetail,
   willunmont,
   setdetailLenguage,
+  addToWishlist
 } from "../../Redux/Actions/Actions";
 import { useParams } from "react-router-dom";
 import "../../Styles/components/_DetailsMovies.scss";
@@ -21,6 +22,10 @@ function DetailsSeries() {
   function addCart(id) {
     let idParseado = parseInt(id);
     dispatch(addToCart(idParseado));
+  }
+  function addWishlist(id) {
+    let idParseado2 = parseInt(id);
+    dispatch(addToWishlist(idParseado2));
   }
 
   useEffect(() => {
@@ -83,6 +88,7 @@ function DetailsSeries() {
               <span className="spanCompras" onClick={() => addCart(id)}>
                 <ShopIcon className="iconoShop" />
               </span>
+              <button onClick={() => addWishlist(id)}>Wishlist</button>
             </div>
           </div>
         </div>
