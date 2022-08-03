@@ -1,21 +1,16 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { postPeliculas,getGenerosMovies } from "../../Redux/Actions/Actions";
+import { postPeliculas, putPeliculas } from "../../Redux/Actions/Actions";
 import validate from "../../util/validate.js";
 import poster from "../../img/poster.jpg";
-import back from "../../img/backdrop.jpg";
-import "../../Styles/components/_FormPeliculas.scss"
 
-const FormPeliculas = () => {
+const PutPeliculas = () => {
   let dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getGenerosMovies());
-  },[]);
-
   const generos = useSelector((state) => state.generosMovies);
   const [error, setError] = useState({ " ": " " });
   const [data, setdata] = useState({
+    id: "",
     name: "",
     genre_ids: [],
     overview: "",
@@ -31,16 +26,17 @@ const FormPeliculas = () => {
 
   const HandleSubmit = (e) => {
     e.preventDefault();
-    if (data.backDropImagen === "Alt"){
-      data.backDropImagen = back;
+    if (data.backDropImagen === "Alt") {
+      data.backDropImagen = poster;
     }
     if (data.posterImagen === "Alt") {
       data.posterImagen = poster;
     }
 
-    dispatch(postPeliculas(data));
-    alert("Pelicula creada");
+    dispatch(putPeliculas(data));
+    alert("Pelicula Modificada");
     setdata({
+      id: "",
       name: "",
       genre_ids: [],
       overview: "",
@@ -120,108 +116,140 @@ const FormPeliculas = () => {
 
   return (
     <>
-    <div className="ContainerForm2">
-    <div className="FormPeliculas">
-      <form className ="form2" onSubmit={HandleSubmit}>
-      <div className="pageTitle title"> Agregar nuevo: </div>
+      <form onSubmit={HandleSubmit}>
         <div className="nombreconteiner">
+          <label style={{ color: "white" }} className="label">
+            id:
+          </label>
           <input
-            id="name"
+            id="id"
             type="text"
-            placeholder="Nombre:"
-            className="name formEntry2"
+            name="id"
+            className="inputconteiner"
             onChange={(e) => HandleInput(e)}
           />
         </div>
+        <div className="nombreconteiner">
+          <label style={{ color: "white" }} className="label">
+            Nombre:
+          </label>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            className="inputconteiner"
+            onChange={(e) => HandleInput(e)}
+          />
+        </div>
+
+        <div className="descripcionconteiner">
+          <label style={{ color: "white" }} className="label">
+            Description:
+          </label>
           <textarea
             id="Overview"
             type="text"
             name="overview"
             rows="5"
             maxLength="140"
-            className="message formEntry2"
-            placeholder="Descripción:"
+            className="textareaconteiner"
             onChange={(e) => HandleInput(e)}
           />
-    
-        <div className="nombreconteiner">
+        </div>
+
+        <div className="relasedconteiner">
+          <label style={{ color: "white" }} className="label">
+            Released:
+          </label>
           <input
             id="release_date"
             type="text"
             name="release_date"
-            placeholder="Released:"
-            className="name formEntry2"
+            className="inputconteiner"
             onChange={(e) => HandleInput(e)}
           />
         </div>
 
-        <div className="nombreconteiner">
+        <div className="vote_averageconteiner">
+          <label style={{ color: "white" }} className="label">
+            Rating:
+          </label>
           <input
             id="vote_average"
             type="text"
             name="vote_average"
-            placeholder="Rating:"
-            className="name formEntry2"
+            className="inputconteiner"
             onChange={(e) => HandleInput(e)}
           />
         </div>
 
-        <div className="nombreconteiner">
+        <div className="popularityconteiner">
+          <label style={{ color: "white" }} className="label">
+            Popularidad:
+          </label>
           <input
             id="popularity"
             type="text"
             name="popularity"
-            placeholder="Popularidad:"
-            className="name formEntry2"
+            className="inputconteiner"
             onChange={(e) => HandleInput(e)}
           />
         </div>
 
-        <div className="nombreconteiner">
+        <div className="duracionconteiner">
+          <label style={{ color: "white" }} className="label">
+            Duracion:
+          </label>
           <input
             id="runtime"
             type="text"
             name="runtime"
-            placeholder="Duración:"
-            className="name formEntry2"
+            className="inputconteiner"
             onChange={(e) => HandleInput(e)}
           />
         </div>
-        <div className="nombreconteiner">
+
+        <div className="elencoconteiner">
+          <label style={{ color: "white" }} className="label">
+            Elenco:
+          </label>
           <input
             id="elenco"
             type="text"
             name="elenco"
-            placeholder="Elenco:"
-            className="name formEntry2"
+            className="inputconteiner"
           />
-          <button class="submit formEntry2" 
+          <input
             id="elencobutton"
             value="Agregar"
             type="button"
             onClick={() => HandleElenco(document.getElementById("elenco"))}
-          >Agregar </button>
+          />
         </div>
 
-        <div className="nombreconteiner">
+        <div className="imagenbackdropconteiner">
+          <label style={{ color: "white" }} className="label">
+            Imagen back-drop:
+          </label>
           <input
             id="backDropImagen"
             type="text"
             name="backDropImagen"
             onChange={(e) => HandleInput(e)}
-            placeholder="Imagen back-drop:"
-            className="name formEntry2"
+            className="inputconteiner"
           />
         </div>
 
-        <div className="nombreconteiner">
+        <div className="posterconteiner">
+          <label style={{ color: "white" }} className="label">
+            Imagen poster:
+          </label>
           <input
             id="posterImagen"
             type="text"
             name="posterImagen"
             onChange={(e) => HandleInput(e)}
-            placeholder="Imagen poster:"
-            className="name formEntry2"
+            className="inputconteiner"
           />
         </div>
 
@@ -257,12 +285,14 @@ const FormPeliculas = () => {
             <option value="pelicula">pelicula</option>
           </select>
         </div>
-          <button class="submit formEntry2" 
+
+        <div className="conteinerbutton">
+          <input
             type="submit"
             value="Enviar"
             disabled={Object.keys(error).length}
-            >Enviar</button>
-       
+          />
+        </div>
       </form>
 
       <div className="erroresconteiner">
@@ -287,7 +317,7 @@ const FormPeliculas = () => {
           <>
             <img
               className="imgconteinerbackDropImagen"
-              src={back}
+              src={poster}
               alt="img"
             />
           </>
@@ -295,7 +325,7 @@ const FormPeliculas = () => {
           <>
             <img
               className="imgconteinerbackDropImagen"
-              src={back}
+              src={poster}
               alt="Debe ingresar una URL"
             />
           </>
@@ -341,10 +371,8 @@ const FormPeliculas = () => {
           </>
         )}
       </div>
-      </div>
-      </div>
     </>
   );
 };
 
-export default FormPeliculas;
+export default PutPeliculas;

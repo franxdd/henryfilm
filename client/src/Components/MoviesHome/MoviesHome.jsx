@@ -1,4 +1,4 @@
-import { React} from "react";
+import { React } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardMovies from "../CardMovies/CardMovies";
 import {
@@ -7,12 +7,9 @@ import {
   orderNameDES,
   orderVoteAvgASC,
   orderVoteAvgDES,
-  getGenerosMovies
+  getGenerosMovies,
 } from "../../Redux/Actions/Actions";
-import { 
-  useEffect, 
-  useState 
-} from "react";
+import { useEffect, useState } from "react";
 
 import {
   filtradoGeneroMovies,
@@ -33,7 +30,7 @@ function MoviesHome() {
 
   const allMovies = useSelector((state) => state.allMovies);
   const generos = useSelector((state) => state.generosMovies);
-  console.log(generos)
+  console.log(allMovies);
 
   const [generosCache, setgenerosCache] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -74,8 +71,10 @@ function MoviesHome() {
     dispatch(orderVoteAvgDES(allMovies));
   };
 
-  return allMovies.length === 0 || generos.length === 0? (
-    <div className="momentum"></div>
+  return allMovies.length === 0 ? (
+    <div className="Loading">
+    <div className="loader"></div>
+    </div>
   ) : (
     <div className="filter">
       <span>Ordenar por:</span>
@@ -91,10 +90,7 @@ function MoviesHome() {
         </span>
       </button>
       <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
-        <span className="hover-underline-animation">
-          {" "}
-          <strong> - </strong> Puntuación{" "}
-        </span>
+      <span className="hover-underline-animation"><strong> - </strong> Puntuación </span>
       </button>
       <span>Filtrar por:</span>
 

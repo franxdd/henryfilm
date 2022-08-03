@@ -1,5 +1,5 @@
 import "../../Styles/components/card.scss";
-import { mostrarImagen } from "../../Auxiliares/Funciones";
+import { mostrarImagen } from "../../auxiliares/Funciones";
 import { Link } from "react-router-dom";
 
 const Card = ({ resultado, clase, id }) => {
