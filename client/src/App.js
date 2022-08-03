@@ -27,7 +27,10 @@ const App = () => {
   // if(!token) {
   //   return <Login setToken={setToken} />
   // }
-  localStorage.setItem("cart", JSON.stringify([]));
+  if(!localStorage.getItem("cart")){
+
+    localStorage.setItem("cart", JSON.stringify([]));
+  }
   const contexto = {
     lenguaje: lenguaje,
     setLenguaje: setLenguaje,

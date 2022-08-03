@@ -2,7 +2,9 @@ import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CarritoCard from "../CarritoCard/CarritoCard";
 import "../../Styles/components/_Carrito.scss"
+import { useNavigate} from "react-router-dom";
 function Carro() {
+  let navigate = useNavigate();
   const dispatch = useDispatch();
   const [totalPrecio, settotalPrecio] = useState(0);
   const [totalItems, settotalItems] = useState([]);
@@ -18,6 +20,22 @@ function Carro() {
     }
   }, [cart]);
 
+
+  const HandleClickComprar = ()=>{
+    
+    const token= sessionStorage.getItem("token");
+    if(token){
+
+      console.log("COMPRADISIMO BRO")
+
+    }else{
+
+      navigate('/home/login');
+
+    }
+
+
+  }
 
   return (
     <div className="container">
@@ -49,7 +67,7 @@ function Carro() {
             <h5>Total: </h5>
             <h6>${totalPrecio}.00</h6>
           </p>
-          <button className="submit formEntry2">
+          <button className="submit formEntry2" onClick={()=>HandleClickComprar()}>
             COMPRAR
           </button>
         </div>

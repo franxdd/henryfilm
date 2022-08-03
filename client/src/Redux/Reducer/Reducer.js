@@ -61,6 +61,8 @@ function b() {
 
 let cartStorage;
 try {
+
+
   let local = localStorage.getItem("cart") || [];
   if (local !== "undefined") {
    
@@ -109,6 +111,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         user: [],
         token: "",
+        cart: [],
       };
 
     case POST_USUARIOS:

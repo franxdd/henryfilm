@@ -7,9 +7,10 @@ import { addToCart } from "../../Redux/Actions/Actions";
 
 function CardMovies({ id, name, poster }) {
   const dispatch = useDispatch();
+  
 
   function addCart(id) {
-
+    
     // console.log(id)
 
     dispatch(addToCart(id));

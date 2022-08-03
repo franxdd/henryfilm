@@ -37,7 +37,7 @@ const FormPeliculas = () => {
     if (data.posterImagen === "Alt") {
       data.posterImagen = poster;
     }
-
+    console.log(data)
     dispatch(postPeliculas(data));
     alert("Pelicula creada");
     setdata({
@@ -128,6 +128,7 @@ const FormPeliculas = () => {
           <input
             id="name"
             type="text"
+            name="name"
             placeholder="Nombre:"
             className="name formEntry2"
             onChange={(e) => HandleInput(e)}

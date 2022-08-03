@@ -165,10 +165,19 @@ export const PostLogin = (payload) => {
   };
 };
 
-export const logOut = () => {
-  return {
-    type: LOG_OUT,
+export const logOut = (payload) => {
+  return async function (dispatch) {
+    let created = await axios.post("/carro/post", payload);
+    // {
+    //   // withCredentials: true,
+    // });
+
+    // sessionStorage.setItem("token", JSON.stringify(created.data));
+
+    return dispatch({ type: LOG_OUT, payload: created.data });
   };
+
+
 };
 
 export const getUser = (token) => {
