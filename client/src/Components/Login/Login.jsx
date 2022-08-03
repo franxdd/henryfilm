@@ -1,42 +1,68 @@
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate} from "react-router-dom";
+import { PostLogin} from '../../Redux/Actions/Actions.js';
+import { Link }from "react-router-dom";
+import "../../Styles/components/_Form.scss"
+import "../../Styles/components/_Login.scss"
 function Login() {
+  let navigate = useNavigate();
   const dispatch = useDispatch();
   const [input, setInput] = useState({
-    usuario: "",
-    contraseña: "",
+    username: "",
+    password: "",
   });
   function handdleChange(e) {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
-    console.log(input);
   }
   function handdleSubmit(e) {
     e.preventDefault();
-    dispatch(input);
+    dispatch(PostLogin(input));
     setInput({
-      usuario: "",
-      contraseña: "",
+      username: "",
+      password: "",
     });
+   
+    navigate('/home', {replace: true});
   }
 
   return (
-    <div>
-      <form onSubmit={(e) => handdleSubmit(e)}>
-        <label>Usuario: </label>
-        <input autoComplete="off" type={"text"} value={input.usuario} name="usuario" onChange={handdleChange} />
-        <label>Contraseña</label>
+    <div className="ContainerLogin">
+    <div className="Login">
+      <form className ="form" onSubmit={(e) => handdleSubmit(e)}>
+      <div className="pageTitle title"> Login </div>
+        <input 
+        autoComplete="off" 
+        type={"text"} 
+        value={input.username} 
+        name="username" 
+         placeholder="Usuario: "
+        className="name formEntry"
+        onChange={handdleChange} 
+        />
+
         <input
           autoComplete="off"
           type={"password"}
-          value={input.contraseña}
-          name="contraseña"
+          value={input.password}
+          name="password"
+          placeholder="Contraseña:"
+          className="name formEntry"
           onChange={handdleChange}
         />
-        <button type="submit">Iniciar Sesion</button>
+        <button button class="submit formEntry" 
+        type="submit">Iniciar Sesion</button>
+        <div className="pageTitle2"> ¿No tienes una cuenta?</div>
+        <Link to="/home/Register">
+          <button button class="submit formEntry" >
+            <b>Registrate</b>
+          </button>
+        </Link>
       </form>
+    </div>
     </div>
   );
 }

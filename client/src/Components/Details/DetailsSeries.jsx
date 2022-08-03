@@ -8,7 +8,7 @@ import {
 } from "../../Redux/Actions/Actions";
 import { useParams } from "react-router-dom";
 import "../../Styles/components/_DetailsMovies.scss";
-import { estrellas } from "../../Auxiliares/Funciones";
+import { estrellas } from "../../auxiliares/Funciones.js";
 import { Link } from "react-router-dom";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 function DetailsSeries() {
@@ -80,7 +80,7 @@ function DetailsSeries() {
               <Link to={`/videos`}>
                 <button>Reparto</button>
               </Link>
-              <span onClick={() => addCart(id)}>
+              <span className="spanCompras" onClick={() => addCart(id)}>
                 <ShopIcon className="iconoShop" />
               </span>
             </div>

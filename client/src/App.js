@@ -3,7 +3,6 @@ import "./Styles/App.scss";
 import DetailMovie from "./Components/Details/DetailMovie";
 import DetailsSeries from "./Components/Details/DetailsSeries";
 import FormPeliculas from "./Components/Form/FormPeliculas";
-import Dashboard from './Components/Dashboard/DashBoard.jsx'
 import Home from "./Components/Home/Home";
 import LandingPage from "./Components/LandingPage/LandingPage.jsx";
 import Login from "./Components/Login/Login";
@@ -14,9 +13,13 @@ import SeriesHome from "./Components/SeriesHome/SeriesHome";
 import Context from "./contexto/Context";
 import { useState } from "react";
 import Search from "./Components/Search/Search";
+import Profile from "./Components/Profile/Profile.jsx";
 import Carro from "./Components/Carro/Carro";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "./Styles/ReactToastify.css";
+import Footer from "./Components/Footer/Footer"
+import "./Styles/ReactToastify.css";
+import PutPeliculas from "./Components/Form/PutPeliculas";
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
   const [token, setToken] = useState();
@@ -24,13 +27,12 @@ const App = () => {
   // if(!token) {
   //   return <Login setToken={setToken} />
   // }
-
+  localStorage.setItem("cart", JSON.stringify([]));
   const contexto = {
     lenguaje: lenguaje,
     setLenguaje: setLenguaje,
   };
   return (
-    
     <div className="App">
       <Context.Provider value={contexto}>
         <ToastContainer />
@@ -40,8 +42,7 @@ const App = () => {
         <Routes>
           <Route path="home" element={<NavBar />}>
             <Route index element={<Home />} />
-            <Route path="formPeliculas" element={<FormPeliculas/>}/>
-            <Route path="dashboard" element={<Dashboard />}/>
+            <Route path="agregar" element={<FormPeliculas/>}/>
             <Route path="series" element={<SeriesHome />} />
             <Route path="series/:id" element={<DetailsSeries />} />
             <Route path="peliculas" element={<MoviesHome />} />
@@ -49,8 +50,13 @@ const App = () => {
             <Route path="Register" element={<LoginRegister />} />
             <Route path="Login" element={<Login />} />
             <Route path="Search" element={<Search />}></Route>
+            <Route path="Profile" element={<Profile />}></Route>
             <Route path="Carro" element={<Carro />}></Route>
+            <Route path="modificar" element={<PutPeliculas />}></Route>
           </Route>
+        </Routes>
+        <Routes>
+            <Route path="home/*" element={<Footer />}></Route>
         </Routes>
       </Context.Provider>
     </div>

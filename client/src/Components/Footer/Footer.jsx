@@ -1,114 +1,101 @@
-import React from "react";
+import logo from "../../img/logo.png"
+import "../../Styles/components/_Footer.scss"
 import { Link } from "react-router-dom";
-import logo from "../../img/logo.png";
-import "./Footer.scss";
+export default function Footer(){
 
-export default function Footer() {
-  return (
-    <div className="container">
-      <footer className="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5">
-        <div className="col mb-3">
-          <a href="/" className="d-flex align-items-center mb-3 link-dark text-decoration-none">
-            <img className="logo" src={logo} alt="Logo" width="200px" height="100px" />
-          </a>
-          <p className="text-muted">&copy; 2022</p>
+    return (
+      <footer className="footerDistributed">
+        <div className= "footerLeft">
+          <h3>
+            SOBRE<span>NOSOTROS</span>
+          </h3>
+            <p>
+            Somos un grupo de estudiantes de soyHenry
+            y este es nuestro proyecto final.
+            </p>
         </div>
 
-        <div className="col mb-3"></div>
-
-        <div className="col mb-3">
-          <h5>Section</h5>
-          <ul className="nav flex-column">
-            <li className="nav-item mb-3">
-              <a href="#" className="nav-link p-0 text-muted">
-                Home
+        <div className="footerCenter">
+        <p className="footerAbout">
+            <span>EQUIPO DE DESARROLLO</span>
+          </p>
+            <ul className="Fotos">
+            <li>
+            <div className="userPicture">
+            <a href="https://github.com/aleframirez" target="_blank">
+            <img
+              src="https://avatars.githubusercontent.com/u/96086242?v=4"
+              alt="Person"
+              className="cardImage"
+            />
               </a>
-            </li>
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Features
+          </div>
+          </li>
+          <li>
+            <div className="userPicture">
+            <a href="https://github.com/EdgarRossi" target="_blank">
+            <img
+              src="https://avatars.githubusercontent.com/u/51724649?v=4"
+              alt="Person"
+              className="cardImage"
+            />
+            </a>
+          </div>
+          </li>
+          <li>
+            <div className="userPicture">
+            <a href="https://github.com/matiasstr" target="_blank">
+            <img
+              src="https://avatars.githubusercontent.com/u/40149380?v=4"
+              alt="Person"
+              className="cardImage"
+            />
               </a>
-            </li>
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Pricing
+          </div>
+          </li>
+          <li>
+            <div className="userPicture">
+            <a href="https://github.com/Darikita" target="_blank">
+            <img
+              src="https://avatars.githubusercontent.com/u/102616109?v=4"
+              alt="Person"
+              className="cardImage"
+            />
               </a>
-            </li>
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                FAQs
+          </div>
+          </li>
+          <li>
+            <div className="userPicture">
+            <a href="https://github.com/franxdd" target="_blank">
+            <img
+              src="https://avatars.githubusercontent.com/u/99943249?v=4"
+              alt="Person"
+              className="cardImage"
+            />
               </a>
-            </li>
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                About
-              </a>
-            </li>
+          </div>
+          </li>
           </ul>
+          <p className="footerAbout">Soy Henry Bootcamp © 2022</p>
         </div>
-
-        <div className="col mb-3">
-          <h5>Section</h5>
-          <ul className="nav flex-column">
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Home
-              </a>
-            </li>
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Features
-              </a>
-            </li>
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Pricing
-              </a>
-            </li>
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                FAQs
-              </a>
-            </li>
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                About
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div className="col mb-3">
-          <h5>Section</h5>
-          <ul className="nav flex-column">
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Home
-              </a>
-            </li>
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Features
-              </a>
-            </li>
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                Pricing
-              </a>
-            </li>
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                FAQs
-              </a>
-            </li>
-            <li className="nav-item mb-2">
-              <a href="#" className="nav-link p-0 text-muted">
-                About
-              </a>
-            </li>
-          </ul>
+        <div className="footerRight">
+        <div>
+            <a>
+              <img src={logo} alt="logo" className="img"/>
+            </a>
+          <div className="footerLinks">
+            <Link to={"/"}>
+              <h4 className="linkOne">Inicio</h4>
+            </Link>
+            <Link to={"/home/peliculas"}>
+              <h4>Películas</h4>
+            </Link>
+            <Link to={"/home/series"}>
+              <h4>Series</h4>
+            </Link>
+          </div>
+          </div>
         </div>
       </footer>
-    </div>
-  );
+    );
 }

@@ -6,9 +6,9 @@ import "../../Styles/components/_Search.scss"
 
 function Search() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getTodo());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getTodo());
+  // }, [dispatch]);
   const allF = useSelector((state) => state.todo);
   const all = useSelector((state) => state.all);
   console.log(allF);

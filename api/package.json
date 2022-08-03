@@ -2,7 +2,7 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "../api/src/Servidor/index.js",
+  "main": "./app/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon"
@@ -21,14 +21,12 @@
     "jsonwebtoken": "^8.5.1",
     "mercadopago": "^1.5.14",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.19",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "pg": "^8.7.3",
     "sass": "^1.54.0",
     "sass-loader": "^13.0.2",
     "sequelize": "^6.21.3"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.19"
   }
 }

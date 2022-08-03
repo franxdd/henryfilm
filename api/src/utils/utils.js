@@ -1,7 +1,7 @@
 const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
-[1,2,3,3,1,3,1,3,1,2,1,2,]
+[1, 2, 3, 3, 1, 3, 1, 3, 1, 2, 1, 2];
 
 const parseador = (
   data,
@@ -14,8 +14,6 @@ const parseador = (
   var num;
   let generos = {};
   var resultado = [];
-
-  // console.log(cast.length)
 
   for (let j = 0; j < generosData.data.genres.length; j++) {
     for (const prop in generosData.data.genres[j]) {
@@ -51,7 +49,6 @@ const parseador = (
     }
 
     if (videosAEnviar) {
-      console.log(videosAEnviar);
       data[index].videosAMostrar = [];
       for (let v = 0; v < videosAEnviar.length; v++) {
         if (videosAEnviar[v].site === "YouTube") {
@@ -105,8 +102,7 @@ const validate = ({
   let regRelease = new RegExp(
     /[0-9]{0,2}-[0-9]{0,2}-[2]{1,1}[0]{1,1}[2-9]{1,1}[0-9]{1,1}$/
   );
-  console.log(backDropImagen);
-  console.log(backDropImagen !== "Alt");
+
 
   if (!name) {
     error.name = "Falta ingresar un nombre";
@@ -177,5 +173,5 @@ const validate = ({
 
 module.exports = {
   parseador,
-  // validate,
+  validate,
 };

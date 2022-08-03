@@ -25,13 +25,19 @@ import {
   GET_LENGUAJE,
   ENGLISH,
   GET_ISOS,
+  POST_USUARIOS,
+  POST_LOGIN,
+  GET_USER,
+  CHECK_STATE,
+  LOG_OUT,
+  PUT_PELICULA,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
 import { toast } from "react-toastify";
 
 function a() {
-  return toast.error("Ya se encuentra en el carro", {
+  return toast.error("Ya esta en el carrito", {
     position: "bottom-left",
     autoClose: 5000,
     hideProgressBar: false,
@@ -42,7 +48,7 @@ function a() {
   });
 }
 function b() {
-  return toast.success("Fue añadida al carro", {
+  return toast.success("Se añadio al carrito", {
     position: "bottom-left",
     autoClose: 5000,
     hideProgressBar: false,
@@ -86,6 +92,8 @@ const initialState = {
   idioma: [],
   idiomaDefault: "es/ES",
   isos: [],
+  user: [],
+  token: "",
 };
 
 const rootRouter = (state = initialState, action) => {
@@ -95,6 +103,32 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         allSeries: action.payload,
         backupSeries: action.payload,
+      };
+    case LOG_OUT:
+      return {
+        ...state,
+        user: [],
+        token: "",
+      };
+
+    case POST_USUARIOS:
+      return {
+        ...state,
+      };
+    case POST_LOGIN:
+      return {
+        ...state,
+        token: action.payload,
+      };
+    case CHECK_STATE:
+      return {
+        ...state,
+      };
+
+    case GET_USER:
+      return {
+        ...state,
+        user: action.payload,
       };
 
     case GET_ALL_MOVIES:
@@ -161,7 +195,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayAsc],
         };
       }
-
+      break;
     case ORDER_NAME_DES:
       let new_arrayDes = action.payload.sort((a, b) => {
         if (a.name > b.name) {
@@ -183,7 +217,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayDes],
         };
       }
-
+      break;
     case ORDER_VOTE_AVG_ASC:
       let new_arrayVoteDes = action.payload.sort((a, b) => {
         if (a.vote_average > b.vote_average) {
@@ -205,7 +239,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayVoteDes],
         };
       }
-
+      break;
     case ORDER_VOTE_AVG_DES:
       let new_arrayVoteAsc = action.payload.sort((a, b) => {
         if (a.vote_average > b.vote_average) {
@@ -227,6 +261,7 @@ const rootRouter = (state = initialState, action) => {
           allSeries: [...new_arrayVoteAsc],
         };
       }
+      break;
     case GET_GENEROS_MOVIES:
       return {
         ...state,
@@ -245,7 +280,7 @@ const rootRouter = (state = initialState, action) => {
 
         return {
           ...state,
-          allMovies: state.backupMovies,
+          allMovies: state.backupTodo.slice(0, 100),
         };
       } else {
         return {
@@ -260,7 +295,7 @@ const rootRouter = (state = initialState, action) => {
         alert("No se encontraron coincidencias");
         return {
           ...state,
-          allSeries: state.backupSeries,
+          allSeries: state.backupTodo.slice(100, 200),
         };
       } else {
         return {
@@ -270,11 +305,14 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_MOVIES_REVERSA:
-      const arrMovie = filterGenres(state.backupMovies, action.payload);
+      const arrMovie = filterGenres(
+        state.backupTodo.slice(0, 100),
+        action.payload
+      );
       if (arrMovie.length === 0) {
         return {
           ...state,
-          allMovies: state.backupMovies,
+          allMovies: state.backupTodo.slice(0, 100),
         };
       } else {
         return {
@@ -284,11 +322,14 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_SERIES_REVERSA:
-      const arrSeries = filterGenres(state.backupSeries, action.payload);
+      const arrSeries = filterGenres(
+        state.backupTodo.slice(100, 200),
+        action.payload
+      );
       if (arrSeries.length === 0) {
         return {
           ...state,
-          allSeries: state.backupSeries,
+          allSeries: state.backupTodo.slice(100, 200),
         };
       } else {
         return {
@@ -301,6 +342,8 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         todo: action.payload,
         backupTodo: action.payload,
+        allMovies: action.payload.slice(0, 100),
+        allSeries: action.payload.slice(100, 200),
       };
     case FILTER_NAME:
       if (action.payload.length === 0) {
@@ -408,6 +451,10 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         isos: action.payload,
+      };
+    case PUT_PELICULA:
+      return {
+        ...state,
       };
 
     default:
