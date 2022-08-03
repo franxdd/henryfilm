@@ -18,6 +18,13 @@ function Carro() {
     }
   }, [cart]);
 
+  var totalPrice = 0;
+
+  for (let i = 0; i < cart.length; i++) {
+    console.log(cart[i].price);
+    totalPrice = totalPrice + cart[i].price
+  }
+
   return (
     <div className="container">
       <div className = "containerCarrito">
@@ -45,7 +52,7 @@ function Carro() {
           </p>
           <p>
             <h5>Total: </h5>
-            <h6>${totalPrecio}.00</h6>
+            <h6>${totalPrice}.00</h6>
           </p>
           <button className="submit formEntry2">
             COMPRAR

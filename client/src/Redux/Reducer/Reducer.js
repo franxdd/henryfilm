@@ -29,8 +29,7 @@ import {
   POST_LOGIN,
   GET_USER,
   CHECK_STATE,
-  LOG_OUT,
-  PUT_PELICULA,
+  LOG_OUT
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -92,8 +91,8 @@ const initialState = {
   idioma: [],
   idiomaDefault: "es/ES",
   isos: [],
-  user: [],
-  token: "",
+  user:[],
+  token: '',
 };
 
 const rootRouter = (state = initialState, action) => {
@@ -107,29 +106,33 @@ const rootRouter = (state = initialState, action) => {
     case LOG_OUT:
       return {
         ...state,
-        user: [],
-        token: "",
-      };
+        user: [], 
+        token: ''
 
+      }
+    
     case POST_USUARIOS:
-      return {
+      return{
         ...state,
-      };
-    case POST_LOGIN:
-      return {
-        ...state,
-        token: action.payload,
-      };
-    case CHECK_STATE:
-      return {
-        ...state,
-      };
 
-    case GET_USER:
-      return {
+      }
+    case POST_LOGIN:
+
+      return{
         ...state,
-        user: action.payload,
-      };
+        token: action.payload
+      }
+    case CHECK_STATE:
+      return{
+
+        ...state,
+      }
+    
+      case GET_USER:
+        return{
+          ...state,
+          user: action.payload
+        }
 
     case GET_ALL_MOVIES:
       return {
@@ -274,28 +277,31 @@ const rootRouter = (state = initialState, action) => {
       };
 
     case FILTRO_GENERO_MOVIES:
+
+      
       const arrAuxMovies = filterGenres(state.allMovies, action.payload);
       if (arrAuxMovies.length === 0) {
         alert("No se encontraron coincidencias");
 
         return {
           ...state,
-          allMovies: state.backupTodo.slice(0, 100),
+          allMovies: state.backupTodo.slice(0,100),
         };
       } else {
         return {
           ...state,
-          allMovies: arrAuxMovies,
+          allMovies: arrAuxMovies ,
         };
       }
 
     case FILTRO_GENERO_SERIES:
+
       const arrAuxSeries = filterGenres(state.allSeries, action.payload);
       if (arrAuxSeries.length === 0) {
         alert("No se encontraron coincidencias");
         return {
           ...state,
-          allSeries: state.backupTodo.slice(100, 200),
+          allSeries: state.backupTodo.slice(100,200),
         };
       } else {
         return {
@@ -305,14 +311,12 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_MOVIES_REVERSA:
-      const arrMovie = filterGenres(
-        state.backupTodo.slice(0, 100),
-        action.payload
-      );
+   
+      const arrMovie = filterGenres(state.backupTodo.slice(0,100), action.payload);
       if (arrMovie.length === 0) {
         return {
           ...state,
-          allMovies: state.backupTodo.slice(0, 100),
+          allMovies: state.backupTodo.slice(0,100),
         };
       } else {
         return {
@@ -322,14 +326,11 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_SERIES_REVERSA:
-      const arrSeries = filterGenres(
-        state.backupTodo.slice(100, 200),
-        action.payload
-      );
+      const arrSeries = filterGenres(state.backupTodo.slice(100,200), action.payload);
       if (arrSeries.length === 0) {
         return {
           ...state,
-          allSeries: state.backupTodo.slice(100, 200),
+          allSeries: state.backupTodo.slice(100,200),
         };
       } else {
         return {
@@ -342,8 +343,10 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         todo: action.payload,
         backupTodo: action.payload,
-        allMovies: action.payload.slice(0, 100),
-        allSeries: action.payload.slice(100, 200),
+        allMovies: action.payload.slice(0,100),
+        allSeries : action.payload.slice(100,200)
+
+
       };
     case FILTER_NAME:
       if (action.payload.length === 0) {
@@ -451,10 +454,6 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         isos: action.payload,
-      };
-    case PUT_PELICULA:
-      return {
-        ...state,
       };
 
     default:

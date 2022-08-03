@@ -62,18 +62,6 @@ export const getAllSeries = () => {
   };
 };
 
-// export function getAllMovies() {
-//   return function (dispatch) {
-//     return fetch("http://localhost:3001/peliculas")
-//       .then((r) => r.json())
-//       .then((rjson) =>
-//         dispatch({
-//           type: GET_ALL_MOVIES,
-//           payload: rjson,
-//         })
-//       );
-//   };
-// }
 export const getAllMovies = () => {
   return async function (dispatch) {
     let getAllMovies = await axios(`/peliculas`);
@@ -242,7 +230,7 @@ export const getGenerosMovies = () => {
   };
 };
 
-export const getGenerosSeries = () => {
+export const getGenerosSeries = (payload) => {
   return async function (dispatch) {
     let getGenerosSeries = await axios("/generos/series");
     return dispatch({
@@ -286,13 +274,6 @@ export const filtradoGeneroSeriesReversa = (arrGenerosSeries) => {
     payload: arrGenerosSeries,
   };
 };
-
-// export const clear = (tipo) => {
-//   return {
-//     type: CLEAR,
-//     payload: tipo,
-//   };
-// };
 
 export const willunmont2 = () => {
   return function (dispatch) {
