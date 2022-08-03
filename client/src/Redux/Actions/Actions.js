@@ -37,7 +37,7 @@ export const POST_USUARIOS = "POST_USUARIOS";
 export const POST_LOGIN = "POST_LOGIN";
 export const GET_USER = "GET_USER";
 export const CHECK_STATE = "CHECK_STATE";
-export const LOG_OUT = 'LOG_OUT'
+export const LOG_OUT = "LOG_OUT";
 
 export const getAllSeries = () => {
   return (dispatch) => {
@@ -66,9 +66,7 @@ export function getAllMovies() {
 export const getnameSeries = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "http://localhost:3001/series/detalleDeSerie?name=" + name
-      );
+      let json = await axios.get("http://localhost:3001/series/detalleDeSerie?name=" + name);
       return dispatch({
         type: GET_NAME_SERIES,
         payload: json.data,
@@ -81,9 +79,7 @@ export const getnameSeries = (name) => {
 export const getnameMovies = (name) => {
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        "http://localhost:3001/peliculas?name=" + name
-      );
+      let json = await axios.get("http://localhost:3001/peliculas?name=" + name);
       return dispatch({
         type: GET_NAME_MOVIES,
         payload: json.data,
@@ -106,15 +102,13 @@ export const getSeriesDetail = (id) => {
   };
 };
 
-
-
 export const getMoviesDetail = (id) => {
   return (dispatch) => {
     return fetch(`http://localhost:3001/peliculas/${id}`)
-    .then((r) => r.json())
-    .then((data) => {
-      dispatch({
-        type: GET_MOVIES_DETAIL,
+      .then((r) => r.json())
+      .then((data) => {
+        dispatch({
+          type: GET_MOVIES_DETAIL,
           payload: data,
         });
       });
@@ -130,54 +124,40 @@ export const willunmont = () => {
 
 export const PostUsuario = (payload) => {
   return async function (dispatch) {
-    let created = await axios.post(
-      "http://localhost:3001/usuarios/register",
-      payload
-      );
-      // console.log(created.data)
-      return dispatch({ type: POST_USUARIOS });
-    };
+    let created = await axios.post("http://localhost:3001/usuarios/register", payload);
+    // console.log(created.data)
+    return dispatch({ type: POST_USUARIOS });
   };
-  export const checkState = ()=>{
-    return {
-      type: CHECK_STATE,
-    };
-  
-  
-  }
-  
-export const PostLogin = (payload) => {
-  return async function (dispatch) {
-
-    let created = await axios.post(
-      "http://localhost:3001/usuarios/login",
-      payload,
-      { withCredentials: true }
-    );
-
-    sessionStorage.setItem("token", JSON.stringify(created.data));
-
-    return dispatch({ type: POST_LOGIN , payload: created.data});
+};
+export const checkState = () => {
+  return {
+    type: CHECK_STATE,
   };
 };
 
+export const PostLogin = (payload) => {
+  return async function (dispatch) {
+    let created = await axios.post("http://localhost:3001/usuarios/login", payload, { withCredentials: true });
+
+    sessionStorage.setItem("token", JSON.stringify(created.data));
+    console.log(created.data);
+
+    return dispatch({ type: POST_LOGIN, payload: created.data });
+  };
+};
 
 export const logOut = () => {
   return {
     type: LOG_OUT,
-   
   };
 };
-
-
 
 export const getUser = (token) => {
   return async function (dispatch) {
     // console.log("access-token=" + token);
     var obj = {
-      'access-token':  token
-    }
-
+      "access-token": token,
+    };
 
     let created = await axios.get(
       "http://localhost:3001/usuarios/profile",
@@ -261,10 +241,7 @@ export const getGenerosSeries = () => {
 
 export const postPeliculas = (payload) => {
   return async function (dispatch) {
-    let created = await axios.post(
-      "http://localhost:3001/peliculas/postPelicula",
-      payload
-    );
+    let created = await axios.post("http://localhost:3001/peliculas/postPelicula", payload);
     return dispatch({ type: POST_PELICULAS, payload: created.data });
   };
 };
@@ -361,9 +338,7 @@ export const setdetailLenguage = (id, string) => {
   console.log(string);
   return async function (dispatch) {
     try {
-      let json = await axios.get(
-        `http://localhost:3001/series/traductor/${id}/${string} `
-      );
+      let json = await axios.get(`http://localhost:3001/series/traductor/${id}/${string} `);
       return dispatch({
         type: GET_LENGUAJE,
         payload: json.data,
