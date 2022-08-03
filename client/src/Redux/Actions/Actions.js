@@ -39,6 +39,8 @@ export const GET_USER = "GET_USER";
 export const CHECK_STATE = "CHECK_STATE";
 export const LOG_OUT = "LOG_OUT";
 export const PUT_PELICULA = "PUT_PELICULA";
+export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
+export const REMOVE_TO_WISHLIST = "REMOVE_TO_WISHLIST";
 
 // export const getAllSeries = () => {
 //   return (dispatch) => {
@@ -376,4 +378,20 @@ export const putPeliculas = (payload) => {
       payload: created,
     });
   };
+};
+
+export const addToWishlist = (payload) => {
+  return (dispatch) =>
+    dispatch({
+      type: ADD_TO_WISHLIST,
+      payload: payload,
+    });
+};
+
+export const removeToWishlist = (id) => {
+  return (dispatch) =>
+    dispatch({
+      type: REMOVE_TO_WISHLIST,
+      payload: id,
+    });
 };
