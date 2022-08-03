@@ -1,6 +1,5 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
-
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Redux/Actions/Actions";

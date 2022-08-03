@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CarritoCard from "../CarritoCard/CarritoCard";
+import "../../Styles/components/_Carrito.scss"
 function Carro() {
   const dispatch = useDispatch();
   const [totalPrecio, settotalPrecio] = useState(0);
@@ -18,8 +19,8 @@ function Carro() {
   }, [cart]);
 
   return (
-    <div>
-      <div>
+    <div className="container">
+      <div className = "containerCarrito">
         {cart &&
           cart.map((e) => {
             return (
@@ -27,7 +28,7 @@ function Carro() {
                 key={e.id}
                 id={e.id}
                 nombre={e.name}
-                image={e.backDropImagen}
+                image={e.posterImagen}
                 tipo={e.tipo}
                 precio={e.price}
               />
@@ -35,11 +36,22 @@ function Carro() {
           })}
       </div>
       <div>
-        <h1>Carro</h1>
+        <div className="containerTotal">
         <div>
-          <span>Total: {totalItems} </span>
-          <span>Precio: ${totalPrecio}</span>
+          <h4>Resumen</h4>
+          <p>
+            <h5>Cantidad: </h5>
+            <h6>{totalItems}</h6>
+          </p>
+          <p>
+            <h5>Total: </h5>
+            <h6>${totalPrecio}.00</h6>
+          </p>
+          <button className="submit formEntry2">
+            COMPRAR
+          </button>
         </div>
+       </div>
       </div>
     </div>
   );
