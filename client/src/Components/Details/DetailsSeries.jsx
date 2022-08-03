@@ -1,10 +1,11 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
   getSeriesDetail,
   willunmont,
   setdetailLenguage,
+  createReview,
 } from "../../Redux/Actions/Actions";
 import { useParams } from "react-router-dom";
 import "../../Styles/components/_DetailsMovies.scss";
@@ -27,6 +28,19 @@ function DetailsSeries() {
     dispatch(setdetailLenguage(id, asd));
     return () => dispatch(willunmont());
   }, [dispatch]);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  let token = sessionStorage.getItem("token");
+  console.log(token);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(
+      createReview(id, {
+        rating,
+        comment,
+      })
+    );
+  };
 
   return (
     <section>
@@ -84,6 +98,28 @@ function DetailsSeries() {
                 <ShopIcon className="iconoShop" />
               </span>
             </div>
+            <form onSubmit={submitHandler}>
+              <label>Escribe tu comentario</label>
+              <textarea
+                id="comment"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              ></textarea>
+              <label>Rating</label>
+              <select
+                id="rating"
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+              >
+                <option value="">Select</option>
+                <option value="1">1- Bad</option>
+                <option value="2">2- Fair</option>
+                <option value="3">3- Good</option>
+                <option value="4">4- Very good</option>
+                <option value="5">5- Excelent</option>
+              </select>
+            </form>
+            <h2>comentarios:</h2>
           </div>
         </div>
       </header>

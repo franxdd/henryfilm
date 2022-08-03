@@ -39,6 +39,7 @@ export const GET_USER = "GET_USER";
 export const CHECK_STATE = "CHECK_STATE";
 export const LOG_OUT = "LOG_OUT";
 export const PUT_PELICULA = "PUT_PELICULA";
+export const CREATE_REVIEW = "CREATE_REVIEW";
 
 // export const getAllSeries = () => {
 //   return (dispatch) => {
@@ -394,5 +395,10 @@ export const putPeliculas = (payload) => {
       type: PUT_PELICULA,
       payload: created,
     });
+  };
+};
+export const createReview = () => {
+  return async (dispatch) => {
+    let creado = await axios.post("/comentarios/agregar");
   };
 };
