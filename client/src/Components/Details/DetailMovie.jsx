@@ -5,6 +5,7 @@ import {
   createReview,
   getMoviesDetail,
   willunmont2,
+  addToWishlist,
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_DetailsMovies.scss";
 import { estrellas } from "../../auxiliares/Funciones";
@@ -51,6 +52,11 @@ function DetailMovie() {
     alert("debes registrarte");
     navigate("/home/Login");
   }
+  function addWishlist(id) {
+    let idParseado2 = parseInt(id);
+    dispatch(addToWishlist(idParseado2));
+  }
+
   useEffect(() => {
     dispatch(getMoviesDetail(id));
     return () => dispatch(willunmont2());
@@ -112,6 +118,7 @@ function DetailMovie() {
               <span className="spanCompras" onClick={() => addCart(id)}>
                 <ShopIcon className="iconoShop" />
               </span>
+              <button onClick={() => addWishlist(id)}>Wishlist</button>
             </div>
             <form onSubmit={submitHandler}>
               <label>Escribe tu comentario</label>

@@ -40,6 +40,8 @@ export const CHECK_STATE = "CHECK_STATE";
 export const LOG_OUT = "LOG_OUT";
 export const PUT_PELICULA = "PUT_PELICULA";
 export const POST_COMENTARIO = "POST_COMENTARIO";
+export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
+export const REMOVE_TO_WISHLIST = "REMOVE_TO_WISHLIST";
 
 // export const getAllSeries = () => {
 //   return (dispatch) => {
@@ -63,18 +65,6 @@ export const getAllSeries = () => {
   };
 };
 
-// export function getAllMovies() {
-//   return function (dispatch) {
-//     return fetch("http://localhost:3001/peliculas")
-//       .then((r) => r.json())
-//       .then((rjson) =>
-//         dispatch({
-//           type: GET_ALL_MOVIES,
-//           payload: rjson,
-//         })
-//       );
-//   };
-// }
 export const getAllMovies = () => {
   return async function (dispatch) {
     let getAllMovies = await axios(`/peliculas`);
@@ -243,7 +233,7 @@ export const getGenerosMovies = () => {
   };
 };
 
-export const getGenerosSeries = () => {
+export const getGenerosSeries = (payload) => {
   return async function (dispatch) {
     let getGenerosSeries = await axios("/generos/series");
     return dispatch({
@@ -287,13 +277,6 @@ export const filtradoGeneroSeriesReversa = (arrGenerosSeries) => {
     payload: arrGenerosSeries,
   };
 };
-
-// export const clear = (tipo) => {
-//   return {
-//     type: CLEAR,
-//     payload: tipo,
-//   };
-// };
 
 export const willunmont2 = () => {
   return function (dispatch) {
@@ -402,8 +385,21 @@ export const createReview = (payload) => {
   return async (dispatch) => {
     let creado = await axios.post("/comentarios/agregar", payload);
     return creado;
-    dispatch({
-      type: POST_COMENTARIO,
-    });
   };
+};
+
+export const addToWishlist = (payload) => {
+  return (dispatch) =>
+    dispatch({
+      type: ADD_TO_WISHLIST,
+      payload: payload,
+    });
+};
+
+export const removeToWishlist = (id) => {
+  return (dispatch) =>
+    dispatch({
+      type: REMOVE_TO_WISHLIST,
+      payload: id,
+    });
 };

@@ -6,6 +6,7 @@ import {
   willunmont,
   setdetailLenguage,
   createReview,
+  addToWishlist,
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_DetailsMovies.scss";
 import { estrellas } from "../../auxiliares/Funciones.js";
@@ -25,6 +26,10 @@ function DetailsSeries() {
   function addCart(id) {
     let idParseado = parseInt(id);
     dispatch(addToCart(idParseado));
+  }
+  function addWishlist(id) {
+    let idParseado2 = parseInt(id);
+    dispatch(addToWishlist(idParseado2));
   }
 
   useEffect(() => {
@@ -139,6 +144,7 @@ function DetailsSeries() {
               <span className="spanCompras" onClick={() => addCart(id)}>
                 <ShopIcon className="iconoShop" />
               </span>
+              <button onClick={() => addWishlist(id)}>Wishlist</button>
             </div>
             <form onSubmit={submitHandler}>
               <label>Escribe tu comentario</label>

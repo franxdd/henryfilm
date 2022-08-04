@@ -303,7 +303,7 @@ function getToken() {
                   ):(
                     <MenuItem>
                     <Link
-                       to="/home/favoritos"
+                       to="/home/wishlist"
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       <Typography textaling="center">Favoritos</Typography>
