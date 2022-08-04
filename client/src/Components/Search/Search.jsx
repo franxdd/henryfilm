@@ -11,7 +11,7 @@ function Search() {
   // }, [dispatch]);
   const allF = useSelector((state) => state.todo);
   const all = useSelector((state) => state.all);
-  console.log(allF);
+
   return (
     <div className="contenedorSearch">
       <div className="contenedorCards">

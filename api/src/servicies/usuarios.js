@@ -4,7 +4,7 @@ const { verify } = require("jsonwebtoken");
 const app = express();
 require("dotenv").config();
 const { API_KEY } = process.env;
-const { Usuarios } = require("../DB/db");
+const { Usuarios, Carros } = require("../DB/db");
 
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
@@ -24,10 +24,12 @@ const getAllUsers = async (req, res) => {
 };
 
 const postUser = async (req, res) => {
+  var arrAux = [];
   try {
     const { username, email, password, isAdmin } = req.body;
 
-    if (!username || !email || !password) return res.status(404).send("Falta completar un dato..");
+    if (!username || !email || !password)
+      return res.status(404).send("Falta completar un dato..");
     bcrypt
       .hash(password, 10)
 
@@ -57,14 +59,28 @@ const postUser = async (req, res) => {
 const postLogin = async (req, res) => {
   try {
     const { username, password } = req.body;
-    console.log("matiduerme");
     const user = await Usuarios.findOne({
       where: {
         username: username,
       },
     });
 
-    if (user.length === 0) res.status(400).json({ error: "El usuario no existe" });
+    // console.log(user)
+
+    if (!user) {
+      return res.status(400).send("Usuario no existente");
+    }
+
+    const carrito = await Carros.findOne({
+      where: {
+        UsuarioId: user.dataValues.id,
+      },
+    });
+
+    // console.log("carrito.dataValues.contenido")
+
+    if (user.length === 0)
+      res.status(400).json({ error: "El usuario no existe" });
 
     const dbPass = user.dataValues.password;
 
@@ -72,7 +88,9 @@ const postLogin = async (req, res) => {
       .compare(password, dbPass)
       .then((match) => {
         if (!match) {
-          res.status(400).json({ error: "Combinacions de usuario y password erroneo" });
+          res
+            .status(400)
+            .json({ error: "Combinacions de usuario y password erroneo" });
         } else {
           const accessToken = createTokens(user);
 
@@ -80,14 +98,21 @@ const postLogin = async (req, res) => {
             maxAge: 60 * 60 * 60,
           });
 
-          res.status(200).json(accessToken);
+          if (carrito) {
+            arrAux = [accessToken, carrito.dataValues.contenido];
+          } else {
+            arrAux = [accessToken, []];
+          }
+
+          res.status(200).json(arrAux);
         }
       })
       .catch((err) => {
         res.status(400).json(err);
       });
   } catch (error) {
-    res.status(400).json("error en postlogin", error);
+    console.log(error);
+    res.status(400).json(error);
   }
 };
 
@@ -95,12 +120,15 @@ const getProfile = async (req, res) => {
   const data = JSON.parse(req.headers.cookies);
   const accessToken = data["access-token"];
   const dataUser = verify(accessToken, "jwtsecretcambiar");
-  const users = await Usuarios.findOne({ where: { username: dataUser.username } });
-  console.log("recien termia del get");
+  const users = await Usuarios.findOne({
+    where: { username: dataUser.username },
+  });
 
   try {
-    res.send(users.dataValues);
-  } catch (error) {}
+    res.status(200).json(users.dataValues);
+  } catch (error) {
+    res.status(400).json(error);
+  }
 };
 
 module.exports = {
