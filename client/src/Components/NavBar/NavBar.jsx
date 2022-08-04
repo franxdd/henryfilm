@@ -28,6 +28,7 @@ import {
   getIdioma,
   getUser,
   checkState,
+  logOut,
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_NavBar.scss";
 import { BiHomeHeart as HomeIcon, BiCameraMovie as CamaraIcon } from "react-icons/bi";
@@ -48,6 +49,9 @@ function getToken() {
 const Nav2 = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  let navigate = useNavigate();
+  let cart = useSelector((state) => state.cart);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -90,10 +94,32 @@ const Nav2 = () => {
 
   function handleLenguage(e) {
     e.preventDefault();
-    if (e.target.value === "en" || e.target.value === "pt" || e.target.value === "fr" || e.target.value === "ch") {
+    if (
+      e.target.value === "en" ||
+      e.target.value === "pt" ||
+      e.target.value === "fr" ||
+      e.target.value === "ch"
+    ) {
       dispatch(getIdioma(e.target.value));
     }
   }
+
+  const HandleClick = (e) => {
+    e.preventDefault();
+    console.log("entro a logout");
+
+    const token = sessionStorage.getItem("token");
+    const carro = cart.slice();
+    const arrAux = [token, carro];
+
+    dispatch(logOut(arrAux));
+
+    sessionStorage.removeItem("token");
+    localStorage.setItem("cart", JSON.stringify([]));
+
+    navigate("/home");
+  };
+
   // return userReducer.isAdmin ? (
   return (
     <main>
@@ -282,7 +308,8 @@ const Nav2 = () => {
                       }}
                       logOut
                     >
-                      Logout <LogoutIcon sx={{ ml: "5px" }} />
+                      <span onClick={(e) => HandleClick(e)}>Logout</span>{" "}
+                      <LogoutIcon sx={{ ml: "5px" }} />
                     </Typography>
                   </MenuItem>
                 </Menu>

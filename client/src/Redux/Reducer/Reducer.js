@@ -87,8 +87,11 @@ function d() {
 
 let cartStorage;
 try {
+
+
   let local = localStorage.getItem("cart") || [];
   if (local !== "undefined") {
+   
     cartStorage = JSON.parse(local);
   }
 } catch (error) {
@@ -150,6 +153,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         user: [],
         token: "",
+        cart: [],
       };
 
     case POST_USUARIOS:
@@ -157,9 +161,14 @@ const rootRouter = (state = initialState, action) => {
         ...state,
       };
     case POST_LOGIN:
+      console.log(action.payload[0])
+      console.log(action.payload[1])
+      localStorage.setItem("cart", JSON.stringify(action.payload[1]));
+      
       return {
         ...state,
-        token: action.payload,
+        token: action.payload[0],
+        cart: action.payload[1]
       };
     case CHECK_STATE:
       return {
@@ -379,13 +388,20 @@ const rootRouter = (state = initialState, action) => {
         };
       }
     case GET_TODO:
+      var arrAuxpeli = action.payload.filter((fil) => fil.tipo === 'pelicula')
+      var arrAuxserie = action.payload.filter((fil) => fil.tipo === 'serie')
+
       return {
         ...state,
         todo: action.payload,
         backupTodo: action.payload,
-        allMovies: action.payload.slice(0, 100),
-        allSeries: action.payload.slice(100, 200),
+        allMovies: arrAuxpeli,
+        allSeries : arrAuxserie
+
       };
+
+
+
     case FILTER_NAME:
       if (action.payload.length === 0) {
         return {
@@ -393,7 +409,7 @@ const rootRouter = (state = initialState, action) => {
           todo: state.backupTodo,
         };
       } else {
-        console.log(action.payload);
+        
         const filter = state.todo.filter((e) =>
           e.name.toLowerCase().includes(action.payload.toLowerCase())
         );
@@ -417,14 +433,16 @@ const rootRouter = (state = initialState, action) => {
     //   }
 
     case ADD_TO_CART:
+
       const item = state.todo.find((e) => e.id === action.payload);
       let cartStorage = localStorage.getItem("cart");
-      console.log(typeof cartStorage);
+
 
       if (cartStorage === "undefined") {
         b();
         localStorage.setItem("cart", JSON.stringify([item]));
       } else {
+
         let data = JSON.parse(cartStorage);
 
         data.find((dato) => dato.id === item.id) ? a() : b();
@@ -439,6 +457,8 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         cart: datoCart,
       };
+
+
 
     case REMOVE_TO_CART:
       let filter = state.cart.filter((e) => e.id !== action.payload);
@@ -460,7 +480,7 @@ const rootRouter = (state = initialState, action) => {
 
       if (action.payload === "en") {
         let english = `${isosconcat[6]}/${isosconcat[38]}`;
-        console.log(english);
+   
         return {
           ...state,
           idioma: english,

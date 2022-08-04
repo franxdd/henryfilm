@@ -85,13 +85,13 @@ function DetailMovie() {
             </p>
             <ul className="item-descripcion">
               Producción:{" "}
-              {movieDetail[0]?.production_companies.map((e) => {
+              {movieDetail[0]?.production_companies?.map((e) => {
                 return <div>{e.name}</div>;
               })}
             </ul>
             <ul className="lista-generos">
               Géneros:{" "}
-              {movieDetail[0]?.genres.map((e) => {
+              {movieDetail[0]?.genres?.map((e) => {
                 return <div>{e.name}</div>;
               })}
             </ul>
