@@ -31,6 +31,7 @@ import {
   CHECK_STATE,
   LOG_OUT,
   PUT_PELICULA,
+  POST_COMENTARIO,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -63,7 +64,6 @@ let cartStorage;
 try {
   let local = localStorage.getItem("cart") || [];
   if (local !== "undefined") {
-    console.log(local);
     cartStorage = JSON.parse(local);
   }
 } catch (error) {
@@ -166,7 +166,7 @@ const rootRouter = (state = initialState, action) => {
     case WILLUNMOUNT:
       return {
         ...state,
-        lenguaje: {},
+        seriesDetail: {},
       };
     case WILLUNMOUNT2:
       return {
@@ -456,7 +456,10 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
       };
-
+    case POST_COMENTARIO:
+      return {
+        ...state,
+      };
     default:
       return { ...state };
   }
