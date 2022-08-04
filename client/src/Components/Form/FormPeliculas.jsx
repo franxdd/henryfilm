@@ -207,147 +207,133 @@ const FormPeliculas = () => {
               </button>
             </div>
 
-            <div className="nombreconteiner">
-              <input
-                id="backDropImagen"
-                type="text"
-                name="backDropImagen"
-                onChange={(e) => HandleInput(e)}
-                placeholder="Imagen back-drop:"
-                className="name formEntry2"
-              />
-            </div>
-
-            <div className="nombreconteiner">
-              <input
-                id="posterImagen"
-                type="text"
-                name="posterImagen"
-                onChange={(e) => HandleInput(e)}
-                placeholder="Imagen poster:"
-                className="name formEntry2"
-              />
-            </div>
-
-            <div className="generos-select">
-              <select
-                name="generos"
-                onChange={(e) => HandleChangeGeneros(e)}
-                className="generosconteiner"
-              >
-                <option value=" ">Generos..</option>
-                {generos?.map((t) => (
-                  <option key={t.id} value={t.name}>
-                    {t.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {data.genre_ids?.map((g) => (
-              <div style={{ color: "white" }} onClick={() => eliminarGenero(g)}>
-                {g}
-              </div>
-            ))}
-
-            <div className="tipo-select">
-              <select
-                name="tipo"
-                onChange={(e) => HandleChangeTipos(e)}
-                className="generosconteiner"
-              >
-                <option value=" ">Tipos..</option>
-                <option value="serie">serie</option>
-                <option value="pelicula">pelicula</option>
-              </select>
-            </div>
-            <button
-              class="submit formEntry2"
-              type="submit"
-              value="Enviar"
-              disabled={Object.keys(error).length}
-            >
-              Enviar
-            </button>
-          </form>
-
-          <div className="erroresconteiner">
-            <h2 style={{ color: "white" }}>{error.name}</h2>
-            <h2 style={{ color: "white" }}>{error.genre_ids}</h2>
-            <h2 style={{ color: "white" }}>{error.overview}</h2>
-            <h2 style={{ color: "white" }}>{error.release_date}</h2>
-            <h2 style={{ color: "white" }}>{error.vote_average}</h2>
-            <h2 style={{ color: "white" }}>{error.cast}</h2>
-            <h2 style={{ color: "white" }}>{error.posterImagen}</h2>
-            <h2 style={{ color: "white" }}>{error.backDropImagen}</h2>
-            <h2 style={{ color: "white" }}>{error.popularity}</h2>
-            <h2 style={{ color: "white" }}>{error.tipo}</h2>
-          </div>
-
-          <div className="conteinerbackDropImagen">
-            <div className="backDropImagen" style={{ color: "white" }}>
-              Image back-drop
-            </div>
-
-            {data.backDropImagen.length === 0 ? (
-              <>
-                <img
-                  className="imgconteinerbackDropImagen"
-                  src={back}
-                  alt="img"
-                />
-              </>
-            ) : data.backDropImagen === "Alt" ? (
-              <>
-                <img
-                  className="imgconteinerbackDropImagen"
-                  src={back}
-                  alt="Debe ingresar una URL"
-                />
-              </>
-            ) : (
-              <>
-                <img
-                  className="imgconteinerbackDropImagen"
-                  src={data.backDropImagen}
-                  alt="Debe ingresar una URL"
-                />
-              </>
-            )}
-          </div>
-
-          <div className="conteinerposterImagen">
-            <div className="posterImagen" style={{ color: "white" }}>
-              Image poster
-            </div>
-
-            {data.posterImagen.length === 0 ? (
-              <>
-                <img
-                  className="imgconteinerposterImagen"
-                  src={poster}
-                  alt="img"
-                />
-              </>
-            ) : data.posterImagen === "Alt" ? (
-              <>
-                <img
-                  className="imgconteinerposterImagen"
-                  src={poster}
-                  alt="Debe ingresar una URL"
-                />
-              </>
-            ) : (
-              <>
-                <img
-                  className="imgconteinerposterImagen"
-                  src={data.posterImagen}
-                  alt="Debe ingresar una URL"
-                />
-              </>
-            )}
-          </div>
+        <div className="nombreconteiner">
+          <input
+            id="posterImagen"
+            type="text"
+            name="posterImagen"
+            onChange={(e) => HandleInput(e)}
+            placeholder="Imagen poster:"
+            className="name formEntry2"
+          />
         </div>
+        <section class="containerSelect">
+        <div class="dropdown">
+          <select
+            name="generos"
+            onChange={(e) => HandleChangeGeneros(e)}
+            className="dropdown-select"
+          >
+            <option value=" ">Generos..</option>
+            {generos?.map((t) => (
+              <option key={t.id} value={t.name}>
+                {t.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        </section>
+        {data.genre_ids?.map((g) => (
+          <div style={{ color: "white" }} onClick={() => eliminarGenero(g)}>
+            {g}
+          </div>
+        ))}
+      <section class="containerSelect">
+          <div class="dropdown">
+            <select name="tipo"
+            onChange={(e) => HandleChangeTipos(e)}
+            className="dropdown-select">
+              <option value=" ">Tipos..</option>
+            <option value="serie">serie</option>
+            <option value="pelicula">pelicula</option>
+          </select>
+          </div>
+        </section>
+          <button class="submit formEntry2" 
+            type="submit"
+            value="Enviar"
+            disabled={Object.keys(error).length}
+            >Enviar</button>
+       
+      </form>
+
+      <div className="erroresconteiner">
+        <h2 style={{ color: "white" }}>{error.name}</h2>
+        <h2 style={{ color: "white" }}>{error.genre_ids}</h2>
+        <h2 style={{ color: "white" }}>{error.overview}</h2>
+        <h2 style={{ color: "white" }}>{error.release_date}</h2>
+        <h2 style={{ color: "white" }}>{error.vote_average}</h2>
+        <h2 style={{ color: "white" }}>{error.cast}</h2>
+        <h2 style={{ color: "white" }}>{error.posterImagen}</h2>
+        <h2 style={{ color: "white" }}>{error.backDropImagen}</h2>
+        <h2 style={{ color: "white" }}>{error.popularity}</h2>
+        <h2 style={{ color: "white" }}>{error.tipo}</h2>
+      </div>
+
+      <div className="conteinerbackDropImagen">
+        <div className="backDropImagen" style={{ color: "white" }}>
+          Image back-drop
+        </div>
+
+        {data.backDropImagen.length === 0 ? (
+          <>
+            <img
+              className="imgconteinerbackDropImagen"
+              src={back}
+              alt="img"
+            />
+          </>
+        ) : data.backDropImagen === "Alt" ? (
+          <>
+            <img
+              className="imgconteinerbackDropImagen"
+              src={back}
+              alt="Debe ingresar una URL"
+            />
+          </>
+        ) : (
+          <>
+            <img
+              className="imgconteinerbackDropImagen"
+              src={data.backDropImagen}
+              alt="Debe ingresar una URL"
+            />
+          </>
+        )}
+      </div>
+
+      <div className="conteinerposterImagen">
+        <div className="posterImagen" style={{ color: "white" }}>
+          Image poster
+        </div>
+
+        {data.posterImagen.length === 0 ? (
+          <>
+            <img
+              className="imgconteinerposterImagen"
+              src={poster}
+              alt="img"
+            />
+          </>
+        ) : data.posterImagen === "Alt" ? (
+          <>
+            <img
+              className="imgconteinerposterImagen"
+              src={poster}
+              alt="Debe ingresar una URL"
+            />
+          </>
+        ) : (
+          <>
+            <img
+              className="imgconteinerposterImagen"
+              src={data.posterImagen}
+              alt="Debe ingresar una URL"
+            />
+          </>
+        )}
+      </div>
+      </div>
       </div>
     </>
   );

@@ -21,6 +21,7 @@ import "./Styles/ReactToastify.css";
 import Footer from "./Components/Footer/Footer";
 import "./Styles/ReactToastify.css";
 import PutPeliculas from "./Components/Form/PutPeliculas";
+import UserProfile from "./Components/Profile/UserProfile";
 
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
@@ -56,6 +57,7 @@ const App = () => {
             <Route path="Profile" element={<Profile />}></Route>
             <Route path="Carro" element={<Carro />}></Route>
             <Route path="modificar" element={<PutPeliculas />}></Route>
+            <Route path="userProfile" element={<UserProfile />}></Route>
             <Route path="wishlist" element={<Wishlist />}></Route>
           </Route>
         </Routes>

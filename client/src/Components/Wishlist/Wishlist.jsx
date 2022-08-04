@@ -1,7 +1,8 @@
 import { React, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import WishlistCard from "./WishlistCard";
-import "../../Styles/components/_Carrito.scss"
+import "../../Styles/components/_Carrito.scss";
+import tusFavoritos from "../../img/tusfavoritos.png"
 
 function Wishlist() {
   const [totalItems, settotalItems] = useState([]);
@@ -13,6 +14,7 @@ function Wishlist() {
 
   return (
     <div className="container">
+       <h3> <img className="logo" src={tusFavoritos} alt="Logo" height="auto" width="280px" /> </h3>
       <div className = "containerCarrito">
         {wishlist &&
           wishlist.map((w) => {
@@ -29,17 +31,6 @@ function Wishlist() {
           })}
       </div>
       <div>
-        <div className="containerTotal">
-        <div>
-          <p>
-            <h5>Cantidad agregadas: </h5>
-            <h6>{totalItems}</h6>
-          </p>
-          <button className="submit formEntry2">
-            Agregar al carrito
-          </button>
-        </div>
-       </div>
       </div>
     </div>
   );

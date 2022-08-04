@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { addToCart, addToWishlist } from "../../Redux/Actions/Actions";
+import {TiHeart as HeartIcon} from "react-icons/ti";
 
 function CardSeries({ id, name, poster }) {
   function getRandomArbitrary(min, max) {
@@ -23,10 +24,14 @@ function CardSeries({ id, name, poster }) {
         <img src={poster} />
       </div>
       <div className="card-info">
+      <div className="Iconos">
+        <span onClick={() => addWishlist(id)}>
+          <HeartIcon className="iconoHeart" />
+        </span>
         <span onClick={() => addCart(id)}>
           <ShopIcon className="iconoShop" />
         </span>
-        <button onClick={() => addWishlist(id)}>Add</button>
+        </div>
         {/* ^^^^^^^Este es el boton de la wishlist para cambiar^^^^ */}
         <p className="text-title">{name}</p>
         <p className="text-body">${Math.ceil(getRandomArbitrary(15, 30))}</p>

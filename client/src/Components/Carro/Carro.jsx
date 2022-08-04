@@ -1,7 +1,8 @@
 import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CarritoCard from "../CarritoCard/CarritoCard";
-import "../../Styles/components/_Carrito.scss"
+import "../../Styles/components/_Carrito.scss";
+import tuCarrito from "../../img/tucarrito.png"
 function Carro() {
   const dispatch = useDispatch();
   const [totalPrecio, settotalPrecio] = useState(0);
@@ -27,6 +28,7 @@ function Carro() {
 
   return (
     <div className="container">
+      <h3> <img className="logo" src={tuCarrito} alt="Logo" height="auto" width="250px" /> </h3>
       <div className = "containerCarrito">
         {cart &&
           cart.map((e) => {

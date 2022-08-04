@@ -63,7 +63,7 @@ function b() {
 }
 
 function c() {
-  return toast.error("Ya se encuentra un su Wishlist", {
+  return toast.error("Ya se encuentra en Favoritos", {
     position: "bottom-left",
     autoClose: 5000,
     hideProgressBar: false,
@@ -74,7 +74,7 @@ function c() {
   });
 }
 function d() {
-  return toast.success("Agregada a su Wishlist", {
+  return toast.success("Agregada a Favoritos", {
     position: "bottom-left",
     autoClose: 5000,
     hideProgressBar: false,
