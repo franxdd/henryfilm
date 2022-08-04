@@ -119,9 +119,14 @@ const rootRouter = (state = initialState, action) => {
         ...state,
       };
     case POST_LOGIN:
+      console.log(action.payload[0])
+      console.log(action.payload[1])
+      localStorage.setItem("cart", JSON.stringify(action.payload[1]));
+      
       return {
         ...state,
-        token: action.payload,
+        token: action.payload[0],
+        cart: action.payload[1]
       };
     case CHECK_STATE:
       return {

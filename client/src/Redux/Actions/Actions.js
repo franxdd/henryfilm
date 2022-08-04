@@ -154,14 +154,29 @@ export const checkState = () => {
 export const PostLogin = (payload) => {
 
   return async function (dispatch) {
-    let created = await axios.post("/usuarios/login", payload);
-    // {
-    //   // withCredentials: true,
-    // });
+    
+    
+    try {
+      
 
-    sessionStorage.setItem("token", JSON.stringify(created.data));
+      let created = await axios.post("/usuarios/login", payload);
+      // {
+      //   // withCredentials: true,
+      // });
+      console.log(created.data)
+  
+      sessionStorage.setItem("token", JSON.stringify(created.data[0]));
+  
+      return dispatch({ type: POST_LOGIN, payload: created.data });
 
-    return dispatch({ type: POST_LOGIN, payload: created.data });
+
+    } catch (error) {
+
+      alert("Usuario inexistente")
+      console.log(error)
+      return error
+
+    }
   };
 };
 

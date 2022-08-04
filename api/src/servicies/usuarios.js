@@ -4,7 +4,7 @@ const { verify } = require("jsonwebtoken");
 const app = express();
 require("dotenv").config();
 const { API_KEY } = process.env;
-const { Usuarios } = require("../DB/db");
+const { Usuarios, Carros } = require("../DB/db");
 
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
@@ -23,6 +23,7 @@ const getAllUsers = async (req, res) => {
 };
 
 const postUser = async (req, res) => {
+  var arrAux =[]
   try {
     const { username, email, password, isAdmin } = req.body;
 
@@ -61,13 +62,27 @@ const postLogin = async (req, res) => {
     
 
     const { username, password } = req.body;
-    console.log("matiduerme")
+
     const user = await Usuarios.findOne({
       where: {
         username: username,
       },
     });
 
+    // console.log(user)
+
+    if(!user) {
+      
+      return res.status(400).send("Usuario no existente");}
+
+    const carrito = await Carros.findOne({
+      where:{
+        UsuarioId : user.dataValues.id
+      }
+    })  
+    
+    // console.log("carrito.dataValues.contenido")
+    
     if (user.length === 0)
       res.status(400).json({ error: "El usuario no existe" });
 
@@ -87,7 +102,16 @@ const postLogin = async (req, res) => {
             maxAge: 60 * 60 * 60,
           });
 
-          res.status(200).json(accessToken);
+          if(carrito){
+
+            arrAux = [accessToken , carrito.dataValues.contenido]
+
+          }else{
+
+            arrAux = [accessToken, []]
+          }
+
+          res.status(200).json(arrAux);
         }
       })
       .catch((err) => {
