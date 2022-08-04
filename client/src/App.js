@@ -15,9 +15,10 @@ import { useState } from "react";
 import Search from "./Components/Search/Search";
 import Profile from "./Components/Profile/Profile.jsx";
 import Carro from "./Components/Carro/Carro";
+import Wishlist from "./Components/Wishlist/Wishlist"
 import { ToastContainer } from "react-toastify";
 import "./Styles/ReactToastify.css";
-import Footer from "./Components/Footer/Footer"
+import Footer from "./Components/Footer/Footer";
 import "./Styles/ReactToastify.css";
 import PutPeliculas from "./Components/Form/PutPeliculas";
 import UserProfile from "./Components/Profile/UserProfile";
@@ -30,6 +31,7 @@ const App = () => {
   //   return <Login setToken={setToken} />
   // }
   localStorage.setItem("cart", JSON.stringify([]));
+  localStorage.setItem("wishlist", JSON.stringify([]));
   const contexto = {
     lenguaje: lenguaje,
     setLenguaje: setLenguaje,
@@ -44,7 +46,7 @@ const App = () => {
         <Routes>
           <Route path="home" element={<NavBar />}>
             <Route index element={<Home />} />
-            <Route path="agregar" element={<FormPeliculas/>}/>
+            <Route path="agregar" element={<FormPeliculas />} />
             <Route path="series" element={<SeriesHome />} />
             <Route path="series/:id" element={<DetailsSeries />} />
             <Route path="peliculas" element={<MoviesHome />} />
@@ -56,10 +58,11 @@ const App = () => {
             <Route path="Carro" element={<Carro />}></Route>
             <Route path="modificar" element={<PutPeliculas />}></Route>
             <Route path="userProfile" element={<UserProfile />}></Route>
+            <Route path="wishlist" element={<Wishlist />}></Route>
           </Route>
         </Routes>
         <Routes>
-            <Route path="home/*" element={<Footer />}></Route>
+          <Route path="home/*" element={<Footer />}></Route>
         </Routes>
       </Context.Provider>
     </div>
