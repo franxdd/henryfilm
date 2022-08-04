@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,31 +13,9 @@ import Avatar from "@mui/material/Avatar";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import DashBoard from "../Dashboard/DashBoard";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-// import authService from '../services/auth-service';
-// import DashboardNav from "./DashBoardNav";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import NoiseControlOffIcon from "@mui/icons-material/NoiseControlOff";
-
-=======
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Avatar from '@mui/material/Avatar';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
->>>>>>> developer
 import { Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../Styles/components/_NavBar.scss";
@@ -171,19 +148,12 @@ const Nav2 = () => {
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: "block", md: "none" }
+                  display: { xs: "block", md: "none" },
                 }}
               >
-<<<<<<< HEAD
-                <MenuItem>
-                  <SearchBar style={{ color: "grey" }} />
-                </MenuItem>
-                <MenuItem>
-=======
-                    {/* <SearchBar style={{ color: "grey" }}/> */}
+                {/* <SearchBar style={{ color: "grey" }}/> */}
 
-                <MenuItem >
->>>>>>> developer
+                <MenuItem>
                   <Link to="/home" style={{ textDecoration: "none" }}>
                     <Button sx={{ color: "black" }}>Inicio</Button>
                   </Link>
@@ -251,17 +221,13 @@ const Nav2 = () => {
                   <ShopIcon className="iconoShop" />
                 </Link>
               </IconButton>
-            </Box>  
+            </Box>
             {userReducer.username ? (
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-<<<<<<< HEAD
-                    <Avatar src={userReducer.username?.img || "/broken-image.jpg"} />
-=======
                     {/* <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} /> */}
                     <img src={perfil} alt="Logo" height="auto" width="40px" />
->>>>>>> developer
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -281,14 +247,7 @@ const Nav2 = () => {
                   onClose={handleCloseUserMenu}
                 >
                   <MenuItem onClick={handleCloseUserMenu}>
-<<<<<<< HEAD
-                    <Link to="/userProfile" style={{ textDecoration: "none", color: "black" }}>
-=======
-                    <Link
-                      to="/home/userProfile"
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
->>>>>>> developer
+                    <Link to="/home/userProfile" style={{ textDecoration: "none", color: "black" }}>
                       <Typography textalign="center">Perfil</Typography>
                     </Link>
                   </MenuItem>
@@ -300,7 +259,6 @@ const Nav2 = () => {
                         <Link to="/home/agregar" style={{ textDecoration: "none", color: "black" }}>
                           <Typography textaling="center">Agregar Producto</Typography>
                         </Link>
-<<<<<<< HEAD
                       </MenuItem>
                       <MenuItem>
                         <Link to="/home/modificar" style={{ textDecoration: "none", color: "black" }}>
@@ -310,30 +268,10 @@ const Nav2 = () => {
                     </>
                   ) : (
                     <MenuItem>
-                      <Link to="/home/favoritos" style={{ textDecoration: "none", color: "black" }}>
+                      <Link to="/home/wishlist" style={{ textDecoration: "none", color: "black" }}>
                         <Typography textaling="center">Favoritos</Typography>
                       </Link>
                     </MenuItem>
-=======
-                      </MenuItem><MenuItem>
-                          <Link
-                            to="/home/modificar"
-                            style={{ textDecoration: "none", color: "black" }}
-                          >
-                            <Typography textaling="center">Modificar</Typography>
-                          </Link>
-                        </MenuItem></>
-                  
-                  ):(
-                    <MenuItem>
-                    <Link
-                       to="/home/wishlist"
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      <Typography textaling="center">Favoritos</Typography>
-                    </Link>
-                  </MenuItem>
->>>>>>> developer
                   )}
                   <MenuItem>
                     <Typography
