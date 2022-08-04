@@ -28,7 +28,7 @@ function DetailMovie() {
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: "",
-    idPelicula: id,
+    idpelicula: id,
     token: token,
   });
 
@@ -146,6 +146,9 @@ function DetailMovie() {
             </form>
             <h2>comentarios:</h2>
           </div>
+          <br></br>
+          <br></br>
+          <br></br>
         </div>
       </header>
     </section>

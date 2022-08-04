@@ -42,6 +42,7 @@ export const PUT_PELICULA = "PUT_PELICULA";
 export const POST_COMENTARIO = "POST_COMENTARIO";
 export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 export const REMOVE_TO_WISHLIST = "REMOVE_TO_WISHLIST";
+export const GET_REVIEW= "GET_REVIEW";
 
 // export const getAllSeries = () => {
 //   return (dispatch) => {
@@ -408,6 +409,20 @@ export const createReview = (payload) => {
     return creado;
   };
 };
+
+
+export const getReview = (payload) => {
+  console.log(payload);
+  return async (dispatch) => {
+    let creado = await axios.get(`/comentarios?id=${payload.id}&tipo=${payload.tipo}`);
+    return (dispatch) =>
+    dispatch({
+      type: GET_REVIEW,
+      payload: creado.data,
+    });
+  };
+};
+
 
 export const addToWishlist = (payload) => {
   return (dispatch) =>
