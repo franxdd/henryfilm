@@ -13,13 +13,10 @@ import Avatar from '@mui/material/Avatar';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
-import DashBoard from '../Dashboard/DashBoard';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-// import authService from '../services/auth-service';
-// import DashboardNav from "./DashBoardNav";
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
-import NoiseControlOffIcon from '@mui/icons-material/NoiseControlOff';
+
 
 import { Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
@@ -125,7 +122,7 @@ function getToken() {
                   fontFamily: "Open Sans",
                   fontWeight: 700,
                   letterSpacing: ".3rem",
-                  color: "white",
+                  color: "black",
                   boxShadow: "10px 10px #f000000",
                   textDecoration: "none",
                   paddingTop: "15px"
@@ -162,14 +159,11 @@ function getToken() {
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: "block", md: "none" },
+                  display: { xs: "block", md: "none" }
                 }}
               >
-                <MenuItem>
-                  
-                    <SearchBar style={{ color: "grey" }}/>
-                 
-                </MenuItem>
+                    {/* <SearchBar style={{ color: "grey" }}/> */}
+
                 <MenuItem >
                   <Link to="/home" style={{ textDecoration: "none" }}>
                     <Button sx={{color: "black" }}>Inicio</Button>
@@ -248,7 +242,7 @@ function getToken() {
                 <ShopIcon className="iconoShop" />
             </Link>
               </IconButton>
-            </Box>
+            </Box>  
             {userReducer.username ? (
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
@@ -274,7 +268,7 @@ function getToken() {
                 >
                   <MenuItem onClick={handleCloseUserMenu}>
                     <Link
-                      to="/userProfile"
+                      to="/home/userProfile"
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       <Typography textalign="center">Perfil</Typography>
@@ -299,7 +293,6 @@ function getToken() {
                           </Link>
                         </MenuItem></>
                   
-
                   ):(
                     <MenuItem>
                     <Link

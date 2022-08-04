@@ -20,6 +20,7 @@ function Carro() {
 
   return (
     <div className="container">
+      <h3> Tu Carrito </h3>
       <div className = "containerCarrito">
         {cart &&
           cart.map((e) => {

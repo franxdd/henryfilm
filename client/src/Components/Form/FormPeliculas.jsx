@@ -224,12 +224,12 @@ const FormPeliculas = () => {
             className="name formEntry2"
           />
         </div>
-
-        <div className="generos-select">
+        <section class="containerSelect">
+        <div class="dropdown">
           <select
             name="generos"
             onChange={(e) => HandleChangeGeneros(e)}
-            className="generosconteiner"
+            className="dropdown-select"
           >
             <option value=" ">Generos..</option>
             {generos?.map((t) => (
@@ -239,24 +239,23 @@ const FormPeliculas = () => {
             ))}
           </select>
         </div>
-
+        </section>
         {data.genre_ids?.map((g) => (
           <div style={{ color: "white" }} onClick={() => eliminarGenero(g)}>
             {g}
           </div>
         ))}
-
-        <div className="tipo-select">
-          <select
-            name="tipo"
+      <section class="containerSelect">
+          <div class="dropdown">
+            <select name="tipo"
             onChange={(e) => HandleChangeTipos(e)}
-            className="generosconteiner"
-          >
-            <option value=" ">Tipos..</option>
+            className="dropdown-select">
+              <option value=" ">Tipos..</option>
             <option value="serie">serie</option>
             <option value="pelicula">pelicula</option>
           </select>
-        </div>
+          </div>
+        </section>
           <button class="submit formEntry2" 
             type="submit"
             value="Enviar"
