@@ -43,7 +43,7 @@ function DetailsSeries() {
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: "",
-    idPelicula: id,
+    idserie: id,
     token: token,
   });
 

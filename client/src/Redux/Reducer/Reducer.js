@@ -34,6 +34,7 @@ import {
   POST_COMENTARIO,
   ADD_TO_WISHLIST,
   REMOVE_TO_WISHLIST,
+  GET_REVIEW
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -136,6 +137,7 @@ const initialState = {
   idiomaDefault: "es/ES",
   isos: [],
   user: [],
+  comentarios: [],
   token: "",
   wishlist: wishlistStorage,
 };
@@ -174,6 +176,13 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
       };
+      
+    case GET_REVIEW:
+      return {
+
+        ...state,
+        comentarios: action.payload
+      }
 
     case GET_USER:
       return {
