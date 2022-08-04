@@ -18,9 +18,10 @@ import Carro from "./Components/Carro/Carro";
 import Wishlist from "./Components/Wishlist/Wishlist"
 import { ToastContainer } from "react-toastify";
 import "./Styles/ReactToastify.css";
-import Footer from "./Components/Footer/Footer"
+import Footer from "./Components/Footer/Footer";
 import "./Styles/ReactToastify.css";
 import PutPeliculas from "./Components/Form/PutPeliculas";
+
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
   const [token, setToken] = useState();
@@ -44,7 +45,7 @@ const App = () => {
         <Routes>
           <Route path="home" element={<NavBar />}>
             <Route index element={<Home />} />
-            <Route path="agregar" element={<FormPeliculas/>}/>
+            <Route path="agregar" element={<FormPeliculas />} />
             <Route path="series" element={<SeriesHome />} />
             <Route path="series/:id" element={<DetailsSeries />} />
             <Route path="peliculas" element={<MoviesHome />} />
@@ -59,7 +60,7 @@ const App = () => {
           </Route>
         </Routes>
         <Routes>
-            <Route path="home/*" element={<Footer />}></Route>
+          <Route path="home/*" element={<Footer />}></Route>
         </Routes>
       </Context.Provider>
     </div>

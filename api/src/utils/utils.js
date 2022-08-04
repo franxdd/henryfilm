@@ -14,7 +14,7 @@ const parseador = (
   var num;
   let generos = {};
   var resultado = [];
-
+  console.log(urlVideos);
   for (let j = 0; j < generosData.data.genres.length; j++) {
     for (const prop in generosData.data.genres[j]) {
       if (typeof generosData.data.genres[j][prop] === "number") {
@@ -102,7 +102,6 @@ const validate = ({
   let regRelease = new RegExp(
     /[0-9]{0,2}-[0-9]{0,2}-[2]{1,1}[0]{1,1}[2-9]{1,1}[0-9]{1,1}$/
   );
-
 
   if (!name) {
     error.name = "Falta ingresar un nombre";

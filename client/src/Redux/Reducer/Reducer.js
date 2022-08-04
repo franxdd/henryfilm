@@ -30,6 +30,8 @@ import {
   GET_USER,
   CHECK_STATE,
   LOG_OUT,
+  PUT_PELICULA,
+  POST_COMENTARIO,
   ADD_TO_WISHLIST,
   REMOVE_TO_WISHLIST,
 } from "../Actions/Actions.js";
@@ -87,7 +89,6 @@ let cartStorage;
 try {
   let local = localStorage.getItem("cart") || [];
   if (local !== "undefined") {
-    console.log(local);
     cartStorage = JSON.parse(local);
   }
 } catch (error) {
@@ -131,9 +132,9 @@ const initialState = {
   idioma: [],
   idiomaDefault: "es/ES",
   isos: [],
-  user:[],
-  token: '',
-  wishlist: wishlistStorage
+  user: [],
+  token: "",
+  wishlist: wishlistStorage,
 };
 
 const rootRouter = (state = initialState, action) => {
@@ -147,33 +148,29 @@ const rootRouter = (state = initialState, action) => {
     case LOG_OUT:
       return {
         ...state,
-        user: [], 
-        token: ''
+        user: [],
+        token: "",
+      };
 
-      }
-    
     case POST_USUARIOS:
-      return{
+      return {
         ...state,
-
-      }
+      };
     case POST_LOGIN:
-
-      return{
+      return {
         ...state,
-        token: action.payload
-      }
+        token: action.payload,
+      };
     case CHECK_STATE:
-      return{
-
+      return {
         ...state,
-      }
-    
-      case GET_USER:
-        return{
-          ...state,
-          user: action.payload
-        }
+      };
+
+    case GET_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
 
     case GET_ALL_MOVIES:
       return {
@@ -210,7 +207,7 @@ const rootRouter = (state = initialState, action) => {
     case WILLUNMOUNT:
       return {
         ...state,
-        lenguaje: {},
+        seriesDetail: {},
       };
     case WILLUNMOUNT2:
       return {
@@ -318,31 +315,28 @@ const rootRouter = (state = initialState, action) => {
       };
 
     case FILTRO_GENERO_MOVIES:
-
-      
       const arrAuxMovies = filterGenres(state.allMovies, action.payload);
       if (arrAuxMovies.length === 0) {
         alert("No se encontraron coincidencias");
 
         return {
           ...state,
-          allMovies: state.backupTodo.slice(0,100),
+          allMovies: state.backupTodo.slice(0, 100),
         };
       } else {
         return {
           ...state,
-          allMovies: arrAuxMovies ,
+          allMovies: arrAuxMovies,
         };
       }
 
     case FILTRO_GENERO_SERIES:
-
       const arrAuxSeries = filterGenres(state.allSeries, action.payload);
       if (arrAuxSeries.length === 0) {
         alert("No se encontraron coincidencias");
         return {
           ...state,
-          allSeries: state.backupTodo.slice(100,200),
+          allSeries: state.backupTodo.slice(100, 200),
         };
       } else {
         return {
@@ -352,12 +346,14 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_MOVIES_REVERSA:
-   
-      const arrMovie = filterGenres(state.backupTodo.slice(0,100), action.payload);
+      const arrMovie = filterGenres(
+        state.backupTodo.slice(0, 100),
+        action.payload
+      );
       if (arrMovie.length === 0) {
         return {
           ...state,
-          allMovies: state.backupTodo.slice(0,100),
+          allMovies: state.backupTodo.slice(0, 100),
         };
       } else {
         return {
@@ -367,11 +363,14 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_SERIES_REVERSA:
-      const arrSeries = filterGenres(state.backupTodo.slice(100,200), action.payload);
+      const arrSeries = filterGenres(
+        state.backupTodo.slice(100, 200),
+        action.payload
+      );
       if (arrSeries.length === 0) {
         return {
           ...state,
-          allSeries: state.backupTodo.slice(100,200),
+          allSeries: state.backupTodo.slice(100, 200),
         };
       } else {
         return {
@@ -384,10 +383,8 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         todo: action.payload,
         backupTodo: action.payload,
-        allMovies: action.payload.slice(0,100),
-        allSeries : action.payload.slice(100,200)
-
-
+        allMovies: action.payload.slice(0, 100),
+        allSeries: action.payload.slice(100, 200),
       };
     case FILTER_NAME:
       if (action.payload.length === 0) {
@@ -497,38 +494,48 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         isos: action.payload,
       };
+    case PUT_PELICULA:
+      return {
+        ...state,
+      };
+    case POST_COMENTARIO:
+      return {
+        ...state,
+      };
 
-      case ADD_TO_WISHLIST:
-        const itemFromWishlist = state.todo.find((e) => e.id === action.payload);
-        let wishlistStorage = localStorage.getItem("wishlist");
-        console.log(typeof wishlistStorage);
-  
-        if (wishlistStorage === "undefined") {
-          d();
-          localStorage.setItem("wishlist", JSON.stringify([itemFromWishlist]));
-        } else {
-          let data = JSON.parse(wishlistStorage);
-  
-          data.find((dato) => dato.id === itemFromWishlist.id) ? c() : d();
-          if (!data.find((dato) => dato.id === itemFromWishlist.id)) {
-            data.push(itemFromWishlist);
-            localStorage.setItem("wishlist", JSON.stringify(data));
-          }
+    case ADD_TO_WISHLIST:
+      const itemFromWishlist = state.todo.find((e) => e.id === action.payload);
+      let wishlistStorage = localStorage.getItem("wishlist");
+      console.log(typeof wishlistStorage);
+
+      if (wishlistStorage === "undefined") {
+        d();
+        localStorage.setItem("wishlist", JSON.stringify([itemFromWishlist]));
+      } else {
+        let data = JSON.parse(wishlistStorage);
+
+        data.find((dato) => dato.id === itemFromWishlist.id) ? c() : d();
+        if (!data.find((dato) => dato.id === itemFromWishlist.id)) {
+          data.push(itemFromWishlist);
+          localStorage.setItem("wishlist", JSON.stringify(data));
         }
-        let wishlistData = JSON.parse(localStorage.getItem("wishlist"));
-  
-        return {
-          ...state,
-          wishlist: wishlistData,
-        };
-  
-      case REMOVE_TO_WISHLIST:
-        let wishlistFilter = state.wishlist.filter((e) => e.id !== action.payload);
-        localStorage.setItem("wishlist", JSON.stringify(wishlistFilter));
-        return {
-          ...state,
-          wishlist: wishlistFilter,
-        };
+      }
+      let wishlistData = JSON.parse(localStorage.getItem("wishlist"));
+
+      return {
+        ...state,
+        wishlist: wishlistData,
+      };
+
+    case REMOVE_TO_WISHLIST:
+      let wishlistFilter = state.wishlist.filter(
+        (e) => e.id !== action.payload
+      );
+      localStorage.setItem("wishlist", JSON.stringify(wishlistFilter));
+      return {
+        ...state,
+        wishlist: wishlistFilter,
+      };
 
     default:
       return { ...state };
