@@ -140,7 +140,7 @@ const seriePorId = async (req, res) => {
 
     var videosAEnviar = videos.data.results;
 
-    var urlVideos = `https://www.youtube.com/watch?v=`;
+    var urlVideos = `https://www.youtube.com/embed/`;
 
     var data_parseado = [allSeries.data];
 
@@ -166,7 +166,7 @@ const seriePorIdParms = async (req, res) => {
     const { id, iso1, iso2 } = req.params;
 
     const allSeries = await axios(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=${iso1}-${iso2}`
+      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=es-SP`
     );
     var imagenesConfig = await axios.get(
       `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
@@ -174,21 +174,21 @@ const seriePorIdParms = async (req, res) => {
     urlImg = imagenesConfig.data.images.base_url + "original";
 
     var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=${iso1}-${iso2}`
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
     );
     var cast = await axios.get(
-      `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${API_KEY}&language=${iso1}-${iso2}`
+      `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${API_KEY}&language=es-SP`
     );
 
     var castAEnviar = cast.data.cast;
 
     var videos = await axios.get(
-      `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=${iso1}-${iso2}`
+      `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=es-SP`
     );
 
     var videosAEnviar = videos.data.results;
 
-    var urlVideos = `https://www.youtube.com/watch?v=`;
+    var urlVideos = `https://www.youtube.com/embed/`;
 
     var data_parseado = [allSeries.data];
 

@@ -52,6 +52,15 @@
       transform:scale(1.1);
     }
   }
+  .spanDelete {
+    font-size: 50px;
+    color: $detalles;
+    cursor: pointer;
+    :hover{
+      color: $blanco;
+      transform:scale(1.1);
+    }
+  }
    .cardCarrito svg {
     width: 30px;
     height: 40px;

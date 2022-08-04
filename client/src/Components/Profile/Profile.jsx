@@ -9,14 +9,15 @@ const Profile = () => {
   let navigate = useNavigate();
   let cart = useSelector((state)=> state.cart)
 
-  const HandleClick = () => {
-
+  const HandleClick = (e) => {
+    // e.preventDefault()
+    console.log('entro a logout')
 
     const token = sessionStorage.getItem("token");
     const carro = cart.slice()
     const arrAux = [token,carro]
 
-    dispatch(logOut(arrAux));
+    dispatch(logOut(arrAux)); 
 
     sessionStorage.removeItem("token");
     localStorage.setItem("cart", JSON.stringify([]));
@@ -26,7 +27,7 @@ const Profile = () => {
   };
 
   return (
-    <button style={{ color: "white" }} onClick={() => HandleClick()}>
+    <button style={{ color: "white" }} onClick={(e) => HandleClick(e)}>
       UnLogged
     </button>
   );

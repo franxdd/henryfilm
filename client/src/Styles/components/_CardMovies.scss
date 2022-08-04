@@ -130,8 +130,8 @@
   .text-body {
     text-decoration: none;
     letter-spacing: 1px;
-    font-size: 0.9rem;
-    margin: 5px 0 15px 0;
+    font-size:20px;
+ 
   }
 
   /*Button*/
@@ -145,7 +145,11 @@
     font-weight: bold;
     transition: 0.4s ease;
   }
+  .Iconos{
+    display:flex ;
+    gap: 20px;
   .iconoShop {
+    margin-top: 9px;
     font-size: 30px;
     color: $detalles;
     cursor: pointer;
@@ -154,7 +158,18 @@
       transform:scale(1.1);
     }
   }
-
+  .iconoHeart {
+    margin-top: 2%;
+    font-size: 40px;
+    color: $detalles;
+    cursor: pointer;
+    :hover{
+      color:rgb(215, 59, 59);
+      transform:scale(1.1);
+    }
+  }
+  }
+  
   /*Image*/
   .card-img {
     width: 100%;

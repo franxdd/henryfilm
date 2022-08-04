@@ -3,71 +3,52 @@ require("dotenv").config();
 const { parseador } = require("../utils/utils.js");
 const { Comentarios, Usuarios, Peliculas } = require("../DB/db.js");
 const { API_KEY } = process.env;
-
-
-
-
+const { sign, verify, decode } = require("jsonwebtoken");
 
 const getComentarios = async (req, res) => {
-   
-    let {id } = req.params
-    // console.log(id)
-    // console.log(idSerie)
-    
+  let { id } = req.params;
+  // console.log(id)
+  // console.log(idSerie)
 
-    if(id){
+  if (id) {
+    var comentarios = await Comentarios.findAll({ where: { PeliculaId: id } });
+  }
+  //  else if(id){
 
-        var comentarios = await Comentarios.findAll({where: {PeliculaId : id }})
-    }
-    //  else if(id){
-        
-        
-    //     var comentarios = await Comentarios.findAll({where: {SerieId : idSerie }}) 
-    // }
-    
-    
-    res.status(200).json(comentarios)
+  //     var comentarios = await Comentarios.findAll({where: {SerieId : idSerie }})
+  // }
 
-
-
-}
-
+  res.status(200).json(comentarios);
+};
 
 const postComentario = async (req, res) => {
+  let { contenido, puntuacion, idPelicula, token } = req.body;
+  console.log(typeof idPelicula);
+  try {
+    if (!token || !contenido || !puntuacion)
+      return res.status(404).send("Falta completar un dato..");
 
-    let {username, contenido, puntuacion, idPelicula, idUsuario } = req.body
+    let tokenParsado = JSON.parse(token);
 
-    try {
-        if (
-            !username ||
-            !contenido ||
-            !puntuacion 
-          )
-            return res.status(404).send("Falta completar un dato..");
+    const validToken = verify(tokenParsado, "jwtsecretcambiar");
+    console.log(contenido);
+    console.log("paso el verify, ale puto");
+    const comentario = await Comentarios.create({
+      username: validToken.username,
+      contenido,
+      puntuacion,
+    });
 
-            const comentario = await Comentarios.create({
-                username,
-                contenido,
-                puntuacion
-                
-              });
+    comentario.setUsuario(validToken.id);
+    comentario.setPelicula(idPelicula);
 
-            comentario.setUsuario(idUsuario)
-            comentario.setPelicula(idPelicula)
-
-            res.status(200).json(comentario)
-
-    } catch (error) {
-
-        console.log("hubo un error con la API", error)
-    }
-
-
-}
+    res.status(200).json(comentario);
+  } catch (error) {
+    console.log("hubo un error con la API", error);
+  }
+};
 
 module.exports = {
-    getComentarios,
-    postComentario
- 
-  };
-  
+  getComentarios,
+  postComentario,
+};

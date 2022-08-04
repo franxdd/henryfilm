@@ -23,5 +23,5 @@ const getLanguages = async (req, res) => {
  };
 
 module.exports = {
-   getLanguages,
+  getLanguages,
 };

@@ -93,12 +93,12 @@ const getMovieDetail = async (req, res) => {
     var castAEnviar = cast.data.cast;
 
     var videos = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=es-SP`
     );
 
     var videosAEnviar = videos.data.results;
 
-    var urlVideos = `https://www.youtube.com/watch?v=`;
+    var urlVideos = `https://www.youtube.com/embed/`;
 
     var data_parseado = [movie.data];
 
@@ -146,12 +146,13 @@ const getMovieDetailParams = async (req, res) => {
       var cast = await axios.get(
         `https://api.themoviedb.org/3/movie/${idPelicula}/credits?api_key=${API_KEY}&language=es-SP`
       );
+    var videos = await axios.get(
+      `https://api.themoviedb.org/3/movie/${idPelicula}/videos?api_key=${API_KEY}&language=es-SP`
+    );
 
       var castAEnviar = cast.data.cast;
 
-      var videos = await axios.get(
-        `https://api.themoviedb.org/3/movie/${idPelicula}/videos?api_key=${API_KEY}&language=en-US`
-      );
+    var urlVideos = `https://www.youtube.com/embed/`;
 
       var videosAEnviar = videos.data.results;
 
