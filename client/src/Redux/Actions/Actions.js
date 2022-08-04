@@ -135,7 +135,6 @@ export const PostUsuario = (payload) => {
     return dispatch({ type: POST_USUARIOS });
   };
 };
-
 export const checkState = () => {
   return {
     type: CHECK_STATE,
@@ -395,10 +394,7 @@ export const loadCurren = (payload) => {
 export const putPeliculas = (payload) => {
   // console.log(payload);
   return async (dispatch) => {
-    let created = await axios.put(
-      `/peliculas/modificarPeli/${payload.id}`,
-      payload
-    );
+    let created = await axios.put(`/peliculas/modificarPeli/${payload.id}`, payload);
     dispatch({
       type: PUT_PELICULA,
       payload: created,

@@ -13,11 +13,10 @@ const carro = require("./carro")
 router.use("/peliculas", peliculas);
 router.use("/series", series);
 router.use("/usuarios", usuarios);
-router.use("/todos", todos)
+router.use("/todos", todos);
 router.use("/generos", generos);
 router.use("/languages", languages);
 router.use("/comentarios", comentarios);
 router.use("/carro", carro);
-
 
 module.exports = router;

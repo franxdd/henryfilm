@@ -9,6 +9,7 @@ const { Usuarios, Carros } = require("../DB/db");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 const { createTokens } = require("../utils/JWT.js");
+const { mandarEmail } = require("../utils/sendEmail");
 
 // app.use(express.json());
 // app.use(cookieParser());
@@ -23,13 +24,12 @@ const getAllUsers = async (req, res) => {
 };
 
 const postUser = async (req, res) => {
-  var arrAux =[]
+  var arrAux = [];
   try {
     const { username, email, password, isAdmin } = req.body;
 
     if (!username || !email || !password)
       return res.status(404).send("Falta completar un dato..");
-
     bcrypt
       .hash(password, 10)
 
@@ -39,12 +39,11 @@ const postUser = async (req, res) => {
           password: hash,
           email: email,
           isAdmin,
-        });
-
-        return response;
-      })
-      .then((response) => {
-        res.status(200).send("Usuario creado con exito");
+        })
+          .then((response) => {
+            res.status(200).send("Usuario creado con exito");
+          })
+          .then(mandarEmail(username, email, password));
       })
       .catch((err) => {
         console.log(err);
@@ -59,10 +58,7 @@ const postUser = async (req, res) => {
 
 const postLogin = async (req, res) => {
   try {
-    
-
     const { username, password } = req.body;
-
     const user = await Usuarios.findOne({
       where: {
         username: username,
@@ -71,18 +67,18 @@ const postLogin = async (req, res) => {
 
     // console.log(user)
 
-    if(!user) {
-      
-      return res.status(400).send("Usuario no existente");}
+    if (!user) {
+      return res.status(400).send("Usuario no existente");
+    }
 
     const carrito = await Carros.findOne({
-      where:{
-        UsuarioId : user.dataValues.id
-      }
-    })  
-    
+      where: {
+        UsuarioId: user.dataValues.id,
+      },
+    });
+
     // console.log("carrito.dataValues.contenido")
-    
+
     if (user.length === 0)
       res.status(400).json({ error: "El usuario no existe" });
 
@@ -102,13 +98,10 @@ const postLogin = async (req, res) => {
             maxAge: 60 * 60 * 60,
           });
 
-          if(carrito){
-
-            arrAux = [accessToken , carrito.dataValues.contenido]
-
-          }else{
-
-            arrAux = [accessToken, []]
+          if (carrito) {
+            arrAux = [accessToken, carrito.dataValues.contenido];
+          } else {
+            arrAux = [accessToken, []];
           }
 
           res.status(200).json(arrAux);
@@ -124,17 +117,17 @@ const postLogin = async (req, res) => {
 };
 
 const getProfile = async (req, res) => {
-
   const data = JSON.parse(req.headers.cookies);
   const accessToken = data["access-token"];
   const dataUser = verify(accessToken, "jwtsecretcambiar");
-  const users = await Usuarios.findOne({ where: { username: dataUser.username } });
-
+  const users = await Usuarios.findOne({
+    where: { username: dataUser.username },
+  });
 
   try {
     res.status(200).json(users.dataValues);
   } catch (error) {
-    res.status(400).json(error)
+    res.status(400).json(error);
   }
 };
 

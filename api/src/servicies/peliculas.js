@@ -152,12 +152,10 @@ const getMovieDetailParams = async (req, res) => {
 
       var castAEnviar = cast.data.cast;
 
-    var urlVideos = `https://www.youtube.com/embed/`;
+      var urlVideos = `https://www.youtube.com/embed/`;
 
       var videosAEnviar = videos.data.results;
-
-      var urlVideos = `https://www.youtube.com/watch?v=`;
-
+      
       var data_parseado = [movie.data];
 
       var datosAEnviar = parseador(
