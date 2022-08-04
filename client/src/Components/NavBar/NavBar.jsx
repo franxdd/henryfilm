@@ -13,14 +13,9 @@ import Avatar from '@mui/material/Avatar';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
-import DashBoard from '../Dashboard/DashBoard';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-// import authService from '../services/auth-service';
-// import DashboardNav from "./DashBoardNav";
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
-import NoiseControlOffIcon from '@mui/icons-material/NoiseControlOff';
-
 import { Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../Styles/components/_NavBar.scss";
@@ -45,6 +40,7 @@ import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import { useContext } from "react";
 import Context from "../../contexto/Context";
+import perfil from "../../img/perfil2.png";
 
 function getToken() {
     const tokenString = sessionStorage.getItem("token");
@@ -125,7 +121,7 @@ function getToken() {
                   fontFamily: "Open Sans",
                   fontWeight: 700,
                   letterSpacing: ".3rem",
-                  color: "white",
+                  color: "black",
                   boxShadow: "10px 10px #f000000",
                   textDecoration: "none",
                   paddingTop: "15px"
@@ -162,14 +158,11 @@ function getToken() {
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: "block", md: "none" },
+                  display: { xs: "block", md: "none" }
                 }}
               >
-                <MenuItem>
-                  
-                    <SearchBar style={{ color: "grey" }}/>
-                 
-                </MenuItem>
+                    {/* <SearchBar style={{ color: "grey" }}/> */}
+
                 <MenuItem >
                   <Link to="/home" style={{ textDecoration: "none" }}>
                     <Button sx={{color: "black" }}>Inicio</Button>
@@ -248,12 +241,13 @@ function getToken() {
                 <ShopIcon className="iconoShop" />
             </Link>
               </IconButton>
-            </Box>
+            </Box>  
             {userReducer.username ? (
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} />
+                    {/* <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} /> */}
+                    <img src={perfil} alt="Logo" height="auto" width="40px" />
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -274,7 +268,7 @@ function getToken() {
                 >
                   <MenuItem onClick={handleCloseUserMenu}>
                     <Link
-                      to="/userProfile"
+                      to="/home/userProfile"
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       <Typography textalign="center">Perfil</Typography>
@@ -299,11 +293,10 @@ function getToken() {
                           </Link>
                         </MenuItem></>
                   
-
                   ):(
                     <MenuItem>
                     <Link
-                       to="/home/favoritos"
+                       to="/home/wishlist"
                       style={{ textDecoration: "none", color: "black" }}
                     >
                       <Typography textaling="center">Favoritos</Typography>
