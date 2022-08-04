@@ -3,7 +3,7 @@
 
 .contenedor-seccion {
   min-height: calc(100vh - 60px - 245px);
-  width: 100%;
+  max-width: 1500px;
   display: flex;
   justify-content: center;
   align-items: center;

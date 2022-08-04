@@ -16,8 +16,6 @@ import Tooltip from '@mui/material/Tooltip';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
-
-
 import { Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../Styles/components/_NavBar.scss";
@@ -42,6 +40,7 @@ import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import { useContext } from "react";
 import Context from "../../contexto/Context";
+import perfil from "../../img/perfil2.png";
 
 function getToken() {
     const tokenString = sessionStorage.getItem("token");
@@ -247,7 +246,8 @@ function getToken() {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} />
+                    {/* <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} /> */}
+                    <img src={perfil} alt="Logo" height="auto" width="40px" />
                   </IconButton>
                 </Tooltip>
                 <Menu
