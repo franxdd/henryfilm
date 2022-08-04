@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -21,6 +22,23 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import NoiseControlOffIcon from "@mui/icons-material/NoiseControlOff";
 
+=======
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Avatar from '@mui/material/Avatar';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
+>>>>>>> developer
 import { Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../Styles/components/_NavBar.scss";
@@ -42,6 +60,7 @@ import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import { useContext } from "react";
 import Context from "../../contexto/Context";
+import perfil from "../../img/perfil2.png";
 
 function getToken() {
   const tokenString = sessionStorage.getItem("token");
@@ -115,7 +134,7 @@ const Nav2 = () => {
                   fontFamily: "Open Sans",
                   fontWeight: 700,
                   letterSpacing: ".3rem",
-                  color: "white",
+                  color: "black",
                   boxShadow: "10px 10px #f000000",
                   textDecoration: "none",
                   paddingTop: "15px",
@@ -152,13 +171,19 @@ const Nav2 = () => {
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: "block", md: "none" },
+                  display: { xs: "block", md: "none" }
                 }}
               >
+<<<<<<< HEAD
                 <MenuItem>
                   <SearchBar style={{ color: "grey" }} />
                 </MenuItem>
                 <MenuItem>
+=======
+                    {/* <SearchBar style={{ color: "grey" }}/> */}
+
+                <MenuItem >
+>>>>>>> developer
                   <Link to="/home" style={{ textDecoration: "none" }}>
                     <Button sx={{ color: "black" }}>Inicio</Button>
                   </Link>
@@ -226,12 +251,17 @@ const Nav2 = () => {
                   <ShopIcon className="iconoShop" />
                 </Link>
               </IconButton>
-            </Box>
+            </Box>  
             {userReducer.username ? (
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+<<<<<<< HEAD
                     <Avatar src={userReducer.username?.img || "/broken-image.jpg"} />
+=======
+                    {/* <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} /> */}
+                    <img src={perfil} alt="Logo" height="auto" width="40px" />
+>>>>>>> developer
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -251,7 +281,14 @@ const Nav2 = () => {
                   onClose={handleCloseUserMenu}
                 >
                   <MenuItem onClick={handleCloseUserMenu}>
+<<<<<<< HEAD
                     <Link to="/userProfile" style={{ textDecoration: "none", color: "black" }}>
+=======
+                    <Link
+                      to="/home/userProfile"
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+>>>>>>> developer
                       <Typography textalign="center">Perfil</Typography>
                     </Link>
                   </MenuItem>
@@ -263,6 +300,7 @@ const Nav2 = () => {
                         <Link to="/home/agregar" style={{ textDecoration: "none", color: "black" }}>
                           <Typography textaling="center">Agregar Producto</Typography>
                         </Link>
+<<<<<<< HEAD
                       </MenuItem>
                       <MenuItem>
                         <Link to="/home/modificar" style={{ textDecoration: "none", color: "black" }}>
@@ -276,6 +314,26 @@ const Nav2 = () => {
                         <Typography textaling="center">Favoritos</Typography>
                       </Link>
                     </MenuItem>
+=======
+                      </MenuItem><MenuItem>
+                          <Link
+                            to="/home/modificar"
+                            style={{ textDecoration: "none", color: "black" }}
+                          >
+                            <Typography textaling="center">Modificar</Typography>
+                          </Link>
+                        </MenuItem></>
+                  
+                  ):(
+                    <MenuItem>
+                    <Link
+                       to="/home/wishlist"
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+                      <Typography textaling="center">Favoritos</Typography>
+                    </Link>
+                  </MenuItem>
+>>>>>>> developer
                   )}
                   <MenuItem>
                     <Typography

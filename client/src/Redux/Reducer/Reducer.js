@@ -31,6 +31,9 @@ import {
   CHECK_STATE,
   LOG_OUT,
   PUT_PELICULA,
+  POST_COMENTARIO,
+  ADD_TO_WISHLIST,
+  REMOVE_TO_WISHLIST,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -59,11 +62,33 @@ function b() {
   });
 }
 
+function c() {
+  return toast.error("Ya se encuentra en Favoritos", {
+    position: "bottom-left",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+}
+function d() {
+  return toast.success("Agregada a Favoritos", {
+    position: "bottom-left",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+}
+
 let cartStorage;
 try {
   let local = localStorage.getItem("cart") || [];
   if (local !== "undefined") {
-    console.log(local);
     cartStorage = JSON.parse(local);
   }
 } catch (error) {
@@ -72,6 +97,21 @@ try {
 
 if (!cartStorage) {
   cartStorage = [];
+}
+
+let wishlistStorage;
+try {
+  let local2 = localStorage.getItem("wishlist") || [];
+  if (local2 !== "undefined") {
+    console.log(local2);
+    wishlistStorage = JSON.parse(local2);
+  }
+} catch (error) {
+  console.log(error);
+}
+
+if (!wishlistStorage) {
+  wishlistStorage = [];
 }
 
 const initialState = {
@@ -94,6 +134,7 @@ const initialState = {
   isos: [],
   user: [],
   token: "",
+  wishlist: wishlistStorage,
 };
 
 const rootRouter = (state = initialState, action) => {
@@ -166,7 +207,7 @@ const rootRouter = (state = initialState, action) => {
     case WILLUNMOUNT:
       return {
         ...state,
-        lenguaje: {},
+        seriesDetail: {},
       };
     case WILLUNMOUNT2:
       return {
@@ -398,6 +439,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         cart: datoCart,
       };
+
     case REMOVE_TO_CART:
       let filter = state.cart.filter((e) => e.id !== action.payload);
       localStorage.setItem("cart", JSON.stringify(filter));
@@ -455,6 +497,44 @@ const rootRouter = (state = initialState, action) => {
     case PUT_PELICULA:
       return {
         ...state,
+      };
+    case POST_COMENTARIO:
+      return {
+        ...state,
+      };
+
+    case ADD_TO_WISHLIST:
+      const itemFromWishlist = state.todo.find((e) => e.id === action.payload);
+      let wishlistStorage = localStorage.getItem("wishlist");
+      console.log(typeof wishlistStorage);
+
+      if (wishlistStorage === "undefined") {
+        d();
+        localStorage.setItem("wishlist", JSON.stringify([itemFromWishlist]));
+      } else {
+        let data = JSON.parse(wishlistStorage);
+
+        data.find((dato) => dato.id === itemFromWishlist.id) ? c() : d();
+        if (!data.find((dato) => dato.id === itemFromWishlist.id)) {
+          data.push(itemFromWishlist);
+          localStorage.setItem("wishlist", JSON.stringify(data));
+        }
+      }
+      let wishlistData = JSON.parse(localStorage.getItem("wishlist"));
+
+      return {
+        ...state,
+        wishlist: wishlistData,
+      };
+
+    case REMOVE_TO_WISHLIST:
+      let wishlistFilter = state.wishlist.filter(
+        (e) => e.id !== action.payload
+      );
+      localStorage.setItem("wishlist", JSON.stringify(wishlistFilter));
+      return {
+        ...state,
+        wishlist: wishlistFilter,
       };
 
     default:

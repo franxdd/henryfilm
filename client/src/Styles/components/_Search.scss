@@ -3,6 +3,7 @@
 
 .contenedorSearch {
   width: 100%;
+  min-height: calc(100vh - 60px - 40px);
   display: flex;
   justify-content: center;
   align-items: center;

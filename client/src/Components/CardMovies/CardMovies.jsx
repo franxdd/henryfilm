@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import "../../Styles/components/_CardMovies.scss";
 import {MdAddShoppingCart as ShopIcon} from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../Redux/Actions/Actions";
+import { addToCart, addToWishlist } from "../../Redux/Actions/Actions";
+import {TiHeart as HeartIcon} from "react-icons/ti";
+
 
 function CardMovies({ id, name, poster }) {
   const dispatch = useDispatch();
@@ -12,6 +14,11 @@ function CardMovies({ id, name, poster }) {
     
     dispatch(addToCart(id));
   }
+
+  function addWishlist(id) {
+    dispatch(addToWishlist(id));
+  }
+
   function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
   }
@@ -23,10 +30,15 @@ function CardMovies({ id, name, poster }) {
         <img src={poster} alt="poster"/>
       </div>
       <div className="card-info">
+        <div className="Iconos">
+        <span onClick={() => addWishlist(id)}>
+          <HeartIcon className="iconoHeart" />
+        </span>
         <span onClick={() => addCart(id)}>
           <ShopIcon className="iconoShop" />
         </span>
-
+        </div>
+        {/* ^^^^^^^Este es el boton de la wishlist para cambiar^^^^ */}
         <p className="text-title">{name}</p>
         <p className="text-body">${Math.ceil(getRandomArbitrary(15, 30))}</p>
         <Link to={`/home/peliculas/${id}`}>

@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { postPeliculas,getGenerosMovies } from "../../Redux/Actions/Actions";
+import { postPeliculas, getGenerosMovies } from "../../Redux/Actions/Actions";
 import validate from "../../util/validate.js";
 import poster from "../../img/poster.jpg";
 import back from "../../img/backdrop.jpg";
-import "../../Styles/components/_FormPeliculas.scss"
+import "../../Styles/components/_FormPeliculas.scss";
 
 const FormPeliculas = () => {
   let dispatch = useDispatch();
   useEffect(() => {
     dispatch(getGenerosMovies());
-  },[]);
+  }, []);
 
   const generos = useSelector((state) => state.generosMovies);
   const [error, setError] = useState({ " ": " " });
@@ -31,7 +31,7 @@ const FormPeliculas = () => {
 
   const HandleSubmit = (e) => {
     e.preventDefault();
-    if (data.backDropImagen === "Alt"){
+    if (data.backDropImagen === "Alt") {
       data.backDropImagen = back;
     }
     if (data.posterImagen === "Alt") {
@@ -120,99 +120,92 @@ const FormPeliculas = () => {
 
   return (
     <>
-    <div className="ContainerForm2">
-    <div className="FormPeliculas">
-      <form className ="form2" onSubmit={HandleSubmit}>
-      <div className="pageTitle title"> Agregar nuevo: </div>
-        <div className="nombreconteiner">
-          <input
-            id="name"
-            type="text"
-            placeholder="Nombre:"
-            className="name formEntry2"
-            onChange={(e) => HandleInput(e)}
-          />
-        </div>
-          <textarea
-            id="Overview"
-            type="text"
-            name="overview"
-            rows="5"
-            maxLength="140"
-            className="message formEntry2"
-            placeholder="Descripción:"
-            onChange={(e) => HandleInput(e)}
-          />
-    
-        <div className="nombreconteiner">
-          <input
-            id="release_date"
-            type="text"
-            name="release_date"
-            placeholder="Released:"
-            className="name formEntry2"
-            onChange={(e) => HandleInput(e)}
-          />
-        </div>
+      <div className="ContainerForm2">
+        <div className="FormPeliculas">
+          <form className="form2" onSubmit={HandleSubmit}>
+            <div className="pageTitle title"> Agregar nuevo: </div>
+            <div className="nombreconteiner">
+              <input
+                id="name"
+                type="text"
+                name="name"
+                placeholder="Nombre:"
+                className="name formEntry2"
+                onChange={(e) => HandleInput(e)}
+              />
+            </div>
+            <textarea
+              id="Overview"
+              type="text"
+              name="overview"
+              rows="5"
+              maxLength="140"
+              className="message formEntry2"
+              placeholder="Descripción:"
+              onChange={(e) => HandleInput(e)}
+            />
 
-        <div className="nombreconteiner">
-          <input
-            id="vote_average"
-            type="text"
-            name="vote_average"
-            placeholder="Rating:"
-            className="name formEntry2"
-            onChange={(e) => HandleInput(e)}
-          />
-        </div>
+            <div className="nombreconteiner">
+              <input
+                id="release_date"
+                type="text"
+                name="release_date"
+                placeholder="Released:"
+                className="name formEntry2"
+                onChange={(e) => HandleInput(e)}
+              />
+            </div>
 
-        <div className="nombreconteiner">
-          <input
-            id="popularity"
-            type="text"
-            name="popularity"
-            placeholder="Popularidad:"
-            className="name formEntry2"
-            onChange={(e) => HandleInput(e)}
-          />
-        </div>
+            <div className="nombreconteiner">
+              <input
+                id="vote_average"
+                type="text"
+                name="vote_average"
+                placeholder="Rating:"
+                className="name formEntry2"
+                onChange={(e) => HandleInput(e)}
+              />
+            </div>
 
-        <div className="nombreconteiner">
-          <input
-            id="runtime"
-            type="text"
-            name="runtime"
-            placeholder="Duración:"
-            className="name formEntry2"
-            onChange={(e) => HandleInput(e)}
-          />
-        </div>
-        <div className="nombreconteiner">
-          <input
-            id="elenco"
-            type="text"
-            name="elenco"
-            placeholder="Elenco:"
-            className="name formEntry2"
-          />
-          <button class="submit formEntry2" 
-            id="elencobutton"
-            value="Agregar"
-            type="button"
-            onClick={() => HandleElenco(document.getElementById("elenco"))}
-          >Agregar </button>
-        </div>
+            <div className="nombreconteiner">
+              <input
+                id="popularity"
+                type="text"
+                name="popularity"
+                placeholder="Popularidad:"
+                className="name formEntry2"
+                onChange={(e) => HandleInput(e)}
+              />
+            </div>
 
-        <div className="nombreconteiner">
-          <input
-            id="backDropImagen"
-            type="text"
-            name="backDropImagen"
-            onChange={(e) => HandleInput(e)}
-            placeholder="Imagen back-drop:"
-            className="name formEntry2"
-          />
-        </div>
+            <div className="nombreconteiner">
+              <input
+                id="runtime"
+                type="text"
+                name="runtime"
+                placeholder="Duración:"
+                className="name formEntry2"
+                onChange={(e) => HandleInput(e)}
+              />
+            </div>
+            <div className="nombreconteiner">
+              <input
+                id="elenco"
+                type="text"
+                name="elenco"
+                placeholder="Elenco:"
+                className="name formEntry2"
+              />
+              <button
+                class="submit formEntry2"
+                id="elencobutton"
+                value="Agregar"
+                type="button"
+                onClick={() => HandleElenco(document.getElementById("elenco"))}
+              >
+                Agregar{" "}
+              </button>
+            </div>
 
         <div className="nombreconteiner">
           <input
@@ -224,12 +217,12 @@ const FormPeliculas = () => {
             className="name formEntry2"
           />
         </div>
-
-        <div className="generos-select">
+        <section class="containerSelect">
+        <div class="dropdown">
           <select
             name="generos"
             onChange={(e) => HandleChangeGeneros(e)}
-            className="generosconteiner"
+            className="dropdown-select"
           >
             <option value=" ">Generos..</option>
             {generos?.map((t) => (
@@ -239,24 +232,23 @@ const FormPeliculas = () => {
             ))}
           </select>
         </div>
-
+        </section>
         {data.genre_ids?.map((g) => (
           <div style={{ color: "white" }} onClick={() => eliminarGenero(g)}>
             {g}
           </div>
         ))}
-
-        <div className="tipo-select">
-          <select
-            name="tipo"
+      <section class="containerSelect">
+          <div class="dropdown">
+            <select name="tipo"
             onChange={(e) => HandleChangeTipos(e)}
-            className="generosconteiner"
-          >
-            <option value=" ">Tipos..</option>
+            className="dropdown-select">
+              <option value=" ">Tipos..</option>
             <option value="serie">serie</option>
             <option value="pelicula">pelicula</option>
           </select>
-        </div>
+          </div>
+        </section>
           <button class="submit formEntry2" 
             type="submit"
             value="Enviar"

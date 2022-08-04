@@ -1,23 +1,22 @@
 @import "../Utilidades/_Variables.scss";
 .containerTotal{
     width: 300px;
-    height: 304px;
+    height: 344px;
     margin: 0 2em ;
-    border-left: 1px solid $background-claro;
-    border-right: 1px solid $background-claro;
+    border-left: 2px solid $background-claro;
+    border-right: 2px solid $background-claro;
     position: sticky;
-    top: 8em;
-    
-
+    top: 8em;   
 }
 
 .containerTotal h4{
     text-align: center;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
     background-color:$background-claro;
-    padding: .16em;
+    padding: .4em;
     color:$detalles
+    
 }
 
 .containerTotal p{
@@ -44,13 +43,14 @@
     color:white;
 }
 .formEntry2 {
-    margin-top: -5%;
+    margin-top: -7%;
     display: block;
     min-width: 300px;
     padding: 10px;
     border-radius: 2px;
     border: none;
     transition: all 0.5s ease 0s;
+    
   }
   .submit {
     width: 200px;
