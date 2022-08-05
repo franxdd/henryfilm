@@ -6,11 +6,16 @@ import {
   getMoviesDetail,
   willunmont2,
   addToWishlist,
+  getReview,
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_DetailsMovies.scss";
 import { estrellas } from "../../auxiliares/Funciones";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
+import "../../Styles/components/_ComentariosForm.scss";
+import Rating from "../Details/Rating.jsx";
+import { TiHeart as HeartIcon } from "react-icons/ti";
+import Rating2 from "./Rating2";
 
 function DetailMovie() {
   const userReducer = useSelector((state) => state.user);
@@ -18,6 +23,7 @@ function DetailMovie() {
   const dispatch = useDispatch();
   let { id } = useParams();
   let movieDetail = useSelector((state) => state.movieDetail);
+  let { comentarios } = useSelector((state) => state);
   let token = sessionStorage.getItem("token");
   let video = movieDetail[0]?.videosAMostrar[0];
   // .replace("watch?v=", "embed/")
@@ -28,9 +34,13 @@ function DetailMovie() {
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: "",
-    idpelicula: id,
+    idPelicula: id,
     token: token,
   });
+  const input2 = {
+    id: id,
+    tipo: "pelicula",
+  };
 
   function handdleChange(e) {
     setInput({
@@ -59,10 +69,12 @@ function DetailMovie() {
 
   useEffect(() => {
     dispatch(getMoviesDetail(id));
+    dispatch(getReview(input2));
     return () => dispatch(willunmont2());
-  }, []);
+  }, [dispatch]);
+  console.log(comentarios);
 
-  // console.log(movieDetail);
+  // console.log(input);
   return (
     <section>
       <header
@@ -95,6 +107,7 @@ function DetailMovie() {
                 return <div>{e.name}</div>;
               })}
             </ul>
+
             {/* <div className="contenedor-links">
               <button>Trailer</button>
               <div>
@@ -115,42 +128,66 @@ function DetailMovie() {
               <Link to={`/home/videos`}>
                 <button>Reparto</button>
               </Link>
-              <span className="spanCompras" onClick={() => addCart(id)}>
-                <ShopIcon className="iconoShop" />
-              </span>
-              <button onClick={() => addWishlist(id)}>Wishlist</button>
+              <div className="Iconos">
+                <abbr title="Añade al carrito">
+                  <span onClick={() => addCart(id)}>
+                    <ShopIcon className="iconoShop" />
+                  </span>
+                </abbr>
+                <abbr title="Agrega a Favoritos">
+                  <span onClick={() => addWishlist(id)}>
+                    <HeartIcon className="iconoHeart" />
+                  </span>
+                </abbr>
+              </div>
             </div>
-            <form onSubmit={submitHandler}>
-              <label>Escribe tu comentario</label>
-              <textarea
-                id="comment"
-                value={input.contenido}
-                onChange={(e) => handdleChange(e)}
-                name="contenido"
-              ></textarea>
-              <label>Rating</label>
+          </div>
+        </div>
+      </header>
+      {/* <form className="form3" onSubmit={submitHandler}>
+        <textarea
+          id="comment"
+          value={input.contenido}
+          onChange={(e) => handdleChange(e)}
+          name="contenido"
+          placeholder="Escribe tu comentario:"
+          className="name formEntry3"
+        ></textarea> */}
+        <Rating2 className="ratingStyle" id={id} token={token}/>
+        {/* <Rating className="ratingStyle" /> */}
+        <br></br>
+        {/* <label>Rating</label>
               <select
                 id="puntuacion"
                 value={input.puntuacion}
                 name="puntuacion"
                 onChange={(e) => handdleChange(e)}
               >
-                <option value="1">Select</option>
+                <option>Select</option>
                 <option value="1">1- Bad</option>
+                <option value="1">Select</option>
+                <option value="1">1- Malo</option>
                 <option value="2">2- Fair</option>
                 <option value="3">3- Good</option>
                 <option value="4">4- Very good</option>
                 <option value="5">5- Excelent</option>
-              </select>
-              <button type="submit">Comentar</button>
-            </form>
-            <h2>comentarios:</h2>
-          </div>
-          <br></br>
-          <br></br>
-          <br></br>
-        </div>
-      </header>
+              </select> */}
+        {/* <button className="submit formEntry3" type="submit" value="Enviar">
+          Comentar
+        </button>
+      </form> */}
+      <h2>comentarios:</h2>
+      {comentarios &&
+        comentarios.map((e) => {
+          return (
+            <div>
+              <div>Usuario: {e.username}</div>
+              <div>Puntuacion: {e.puntuacion}</div>
+              <div>Comentario: {e.contenido}</div>
+              <br />
+            </div>
+          );
+        })}
     </section>
   );
 }

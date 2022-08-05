@@ -34,7 +34,8 @@ import {
   POST_COMENTARIO,
   ADD_TO_WISHLIST,
   REMOVE_TO_WISHLIST,
-  GET_REVIEW
+  GET_REVIEW,
+  POST_REVIEW,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -43,7 +44,7 @@ import { toast } from "react-toastify";
 function a() {
   return toast.error("Ya esta en el carrito", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -54,7 +55,7 @@ function a() {
 function b() {
   return toast.success("Se añadio al carrito", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -66,7 +67,7 @@ function b() {
 function c() {
   return toast.error("Ya se encuentra en Favoritos", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -77,7 +78,7 @@ function c() {
 function d() {
   return toast.success("Agregada a Favoritos", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -88,11 +89,8 @@ function d() {
 
 let cartStorage;
 try {
-
-
   let local = localStorage.getItem("cart") || [];
   if (local !== "undefined") {
-   
     cartStorage = JSON.parse(local);
   }
 } catch (error) {
@@ -164,10 +162,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
       };
     case POST_LOGIN:
-      // console.log(action.payload[0])
-      // console.log(action.payload[1])
-      // console.log(action.payload[2])
-
+   
       sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
       localStorage.setItem("cart", JSON.stringify(action.payload[1]));
       localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
@@ -183,12 +178,18 @@ const rootRouter = (state = initialState, action) => {
         ...state,
       };
 
-    case GET_REVIEW:
+    case POST_REVIEW:
+      console.log(action.payload);
       return {
-
         ...state,
-        comentarios: action.payload
-      }
+        comentarios: [...state.comentarios, action.payload],
+      };
+    case GET_REVIEW:
+      console.log(action.payload);
+      return {
+        ...state,
+        comentarios: action.payload,
+      };
 
     case GET_USER:
       return {
@@ -403,19 +404,16 @@ const rootRouter = (state = initialState, action) => {
         };
       }
     case GET_TODO:
-      var arrAuxpeli = action.payload.filter((fil) => fil.tipo === 'pelicula')
-      var arrAuxserie = action.payload.filter((fil) => fil.tipo === 'serie')
+      var arrAuxpeli = action.payload.filter((fil) => fil.tipo === "pelicula");
+      var arrAuxserie = action.payload.filter((fil) => fil.tipo === "serie");
 
       return {
         ...state,
         todo: action.payload,
         backupTodo: action.payload,
         allMovies: arrAuxpeli,
-        allSeries : arrAuxserie
-
+        allSeries: arrAuxserie,
       };
-
-
 
     case FILTER_NAME:
       if (action.payload.length === 0) {
@@ -424,7 +422,6 @@ const rootRouter = (state = initialState, action) => {
           todo: state.backupTodo,
         };
       } else {
-        
         const filter = state.todo.filter((e) =>
           e.name.toLowerCase().includes(action.payload.toLowerCase())
         );
@@ -448,16 +445,13 @@ const rootRouter = (state = initialState, action) => {
     //   }
 
     case ADD_TO_CART:
-
       const item = state.todo.find((e) => e.id === action.payload);
       let cartStorage = localStorage.getItem("cart");
-
 
       if (cartStorage === "undefined") {
         b();
         localStorage.setItem("cart", JSON.stringify([item]));
       } else {
-
         let data = JSON.parse(cartStorage);
 
         data.find((dato) => dato.id === item.id) ? a() : b();
@@ -472,8 +466,6 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         cart: datoCart,
       };
-
-
 
     case REMOVE_TO_CART:
       let filter = state.cart.filter((e) => e.id !== action.payload);
@@ -495,7 +487,7 @@ const rootRouter = (state = initialState, action) => {
 
       if (action.payload === "en") {
         let english = `${isosconcat[6]}/${isosconcat[38]}`;
-   
+
         return {
           ...state,
           idioma: english,

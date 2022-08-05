@@ -20,5 +20,6 @@ router.use("/languages", languages);
 router.use("/comentarios", comentarios);
 router.use("/carro", carro);
 router.use("/deseados", deseados);
+router.use("/pagos", deseados);
 
 module.exports = router;
