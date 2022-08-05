@@ -8,6 +8,7 @@ const generos = require("./generos")
 const languages = require("./languages")
 const comentarios = require("./comentarios")
 const carro = require("./carro")
+const deseados = require("./deseados")
 
 
 router.use("/peliculas", peliculas);
@@ -18,5 +19,6 @@ router.use("/generos", generos);
 router.use("/languages", languages);
 router.use("/comentarios", comentarios);
 router.use("/carro", carro);
+router.use("/deseados", deseados);
 
 module.exports = router;

@@ -146,7 +146,7 @@ function DetailMovie() {
                 placeholder="Escribe tu comentario:"
                 className="name formEntry3"
               ></textarea>
-              <Rating/>
+              <Rating className="ratingStyle"/>
               <br></br>
               {/* <label>Rating</label>
               <select
@@ -168,6 +168,7 @@ function DetailMovie() {
               value="Enviar">Comentar</button>
             </form>
             <h4>Comentarios:</h4>
+
     </section>
   );
 }
