@@ -13,11 +13,13 @@ import { estrellas } from "../../auxiliares/Funciones";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import "../../Styles/components/_ComentariosForm.scss";
-import Rating from "../Details/Rating.jsx";
 import {TiHeart as HeartIcon} from "react-icons/ti";
 import "../../Styles/components/_Modal.scss";
 import {AiFillCloseSquare as CloseIcon} from "react-icons/ai";
-import Rating2 from "../Details/Rating2.jsx"
+import Rating2 from "../Details/Rating2.jsx";
+import Rating from '@mui/material/Rating';
+import "../../Styles/components/_CardComentarios.scss";
+import {FaCommentDots as ComentIcon} from "react-icons/fa"
 
 function DetailMovie() {
   const userReducer = useSelector((state) => state.user);
@@ -177,38 +179,22 @@ function DetailMovie() {
         <Rating2 className="ratingStyle" id={id} token={token}/>
         {/* <Rating className="ratingStyle" /> */}
         <br></br>
-        {/* <label>Rating</label>
-              <select
-                id="puntuacion"
-                value={input.puntuacion}
-                name="puntuacion"
-                onChange={(e) => handdleChange(e)}
-              >
-                <option>Select</option>
-                <option value="1">1- Bad</option>
-                <option value="1">Select</option>
-                <option value="1">1- Malo</option>
-                <option value="2">2- Fair</option>
-                <option value="3">3- Good</option>
-                <option value="4">4- Very good</option>
-                <option value="5">5- Excelent</option>
-              </select> */}
-        {/* <button className="submit formEntry3" type="submit" value="Enviar">
-          Comentar
-        </button>
-      </form> */}
-      <h2>comentarios:</h2>
-      {comentarios &&
-        comentarios.map((e) => {
+
+      <div className="ComentariosCard">
+        <h2>Comentarios:</h2>
+        {comentarios &&
+           comentarios.map((e) => {
           return (
-            <div>
-              <div>Usuario: {e.username}</div>
-              <div>Puntuacion: {e.puntuacion}</div>
-              <div>Comentario: {e.contenido}</div>
+            <div className= "review">
+              <div className="email" >Usuario: {e.username}</div>
+             <div className="infoRev"><Rating 
+             name="read-only" value={e.puntuacion} /></div>
+              <div className="p">Comentario: {e.contenido}</div>
               <br />
             </div>
           );
         })}
+        </div>
     </section>
   );
 }
