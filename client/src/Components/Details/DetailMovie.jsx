@@ -17,6 +17,7 @@ import Rating from "../Details/Rating.jsx";
 import {TiHeart as HeartIcon} from "react-icons/ti";
 import "../../Styles/components/_Modal.scss";
 import {AiFillCloseSquare as CloseIcon} from "react-icons/ai";
+import Rating2 from "../Details/Rating2.jsx"
 
 function DetailMovie() {
   const userReducer = useSelector((state) => state.user);
