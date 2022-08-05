@@ -4,7 +4,7 @@ const { verify } = require("jsonwebtoken");
 const app = express();
 require("dotenv").config();
 const { API_KEY } = process.env;
-const { Usuarios, Carros } = require("../DB/db");
+const { Usuarios, Carros, Deseados } = require("../DB/db");
 
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
@@ -77,6 +77,12 @@ const postLogin = async (req, res) => {
       },
     });
 
+    const deseados = await Deseados.findOne({
+      where: {
+        UsuarioId: user.dataValues.id,
+      },
+    });
+
     // console.log("carrito.dataValues.contenido")
 
     if (user.length === 0)
@@ -98,10 +104,18 @@ const postLogin = async (req, res) => {
             maxAge: 60 * 60 * 60,
           });
 
-          if (carrito) {
-            arrAux = [accessToken, carrito.dataValues.contenido];
+          if (carrito && deseados) {
+            arrAux = [
+              accessToken,
+              carrito.dataValues.contenido,
+              deseados.dataValues.contenido,
+            ];
+          } else if (carrito) {
+            arrAux = [accessToken, carrito.dataValues.contenido, []];
+          } else if (deseados) {
+            arrAux = [accessToken, [], deseados.dataValues.contenido];
           } else {
-            arrAux = [accessToken, []];
+            arrAux = [accessToken, [], []];
           }
 
           res.status(200).json(arrAux);

@@ -34,6 +34,7 @@ import {
   POST_COMENTARIO,
   ADD_TO_WISHLIST,
   REMOVE_TO_WISHLIST,
+  GET_REVIEW
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -42,7 +43,7 @@ import { toast } from "react-toastify";
 function a() {
   return toast.error("Ya esta en el carrito", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -53,7 +54,7 @@ function a() {
 function b() {
   return toast.success("Se añadio al carrito", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -65,7 +66,7 @@ function b() {
 function c() {
   return toast.error("Ya se encuentra en Favoritos", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -76,7 +77,7 @@ function c() {
 function d() {
   return toast.success("Agregada a Favoritos", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -95,7 +96,7 @@ try {
     cartStorage = JSON.parse(local);
   }
 } catch (error) {
-  console.log(error);
+  // console.log({error});
 }
 
 if (!cartStorage) {
@@ -106,11 +107,11 @@ let wishlistStorage;
 try {
   let local2 = localStorage.getItem("wishlist") || [];
   if (local2 !== "undefined") {
-    console.log(local2);
+    // console.log(local2);
     wishlistStorage = JSON.parse(local2);
   }
 } catch (error) {
-  console.log(error);
+  // console.log({error});
 }
 
 if (!wishlistStorage) {
@@ -136,6 +137,7 @@ const initialState = {
   idiomaDefault: "es/ES",
   isos: [],
   user: [],
+  comentarios: [],
   token: "",
   wishlist: wishlistStorage,
 };
@@ -154,6 +156,7 @@ const rootRouter = (state = initialState, action) => {
         user: [],
         token: "",
         cart: [],
+        wishlist: [],
       };
 
     case POST_USUARIOS:
@@ -161,19 +164,31 @@ const rootRouter = (state = initialState, action) => {
         ...state,
       };
     case POST_LOGIN:
-      console.log(action.payload[0])
-      console.log(action.payload[1])
+      // console.log(action.payload[0])
+      // console.log(action.payload[1])
+      // console.log(action.payload[2])
+
+      sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
       localStorage.setItem("cart", JSON.stringify(action.payload[1]));
+      localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
       
       return {
         ...state,
         token: action.payload[0],
-        cart: action.payload[1]
+        cart: action.payload[1],
+        wishlist: action.payload[2]
       };
     case CHECK_STATE:
       return {
         ...state,
       };
+
+    case GET_REVIEW:
+      return {
+
+        ...state,
+        comentarios: action.payload
+      }
 
     case GET_USER:
       return {
@@ -526,7 +541,7 @@ const rootRouter = (state = initialState, action) => {
     case ADD_TO_WISHLIST:
       const itemFromWishlist = state.todo.find((e) => e.id === action.payload);
       let wishlistStorage = localStorage.getItem("wishlist");
-      console.log(typeof wishlistStorage);
+      console.log( wishlistStorage);
 
       if (wishlistStorage === "undefined") {
         d();
@@ -540,6 +555,7 @@ const rootRouter = (state = initialState, action) => {
           localStorage.setItem("wishlist", JSON.stringify(data));
         }
       }
+
       let wishlistData = JSON.parse(localStorage.getItem("wishlist"));
 
       return {

@@ -11,10 +11,10 @@ const postCarrito = async (req, res) => {
 
   let token = body[0];
   let contenido = body[1];
-  console.log(contenido.length);
+  // console.log(contenido.length);
   try {
     if (!token || !contenido) return res.status(404).send("Falta un dato..");
-    if (contenido.length === 0) return res.status(200).send("Carro vacio");
+    // if (contenido.length === 0) return res.status(200).send("Carro vacio");
 
     let tokenParseado = JSON.parse(token);
     const dataUser = verify(tokenParseado, "jwtsecretcambiar");
@@ -26,7 +26,8 @@ const postCarrito = async (req, res) => {
     });
     // console.log(verificacionCarro)
     if (verificacionCarro.length !== 0) {
-      console.log("entro al ya creado");
+      
+      // console.log("entro al ya creado");
 
       // const user = await Usuarios.findAll({
       //   where: {
@@ -52,7 +53,7 @@ const postCarrito = async (req, res) => {
       return res.status(200).json(carro);
       
     } else {
-      console.log("entro al crear");
+      // console.log("entro al crear");
       const user = await Usuarios.findAll({
         where: {
           id: dataUser.id,

@@ -26,10 +26,11 @@ function CarritoCard({ id, nombre, image, qty, tipo, precio }) {
 
        <div class="cardAbajo">
        <p className="textNameCarrito">${precio}</p>
-    
+       <abbr title="Eliminar del Carrito">
        <span className="spanCompras" onClick={() => handleDelete(id)}>
         <MdDeleteForever className="iconoDelete" />
         </span>
+        </abbr>
      
         {/* <div className="cardButton2">
         <svg class="svg-icon" viewBox="0 0 20 20">

@@ -35,13 +35,18 @@ function CardMovies({ id, name, poster }) {
       </div>
       <div className="card-info">
         <div className="Iconos">
+      <abbr title="Agrega a Favoritos">
         <span onClick={() => addWishlist(id)}>
           <HeartIcon className="iconoHeart" />
         </span>
+        </abbr>
+        <abbr title="Añade al carrito">
         <span onClick={() => addCart(id)}>
           <ShopIcon className="iconoShop" />
         </span>
+        </abbr>
         </div>
+        
         {/* ^^^^^^^Este es el boton de la wishlist para cambiar^^^^ */}
         <p className="text-title">{name}</p>
         <p className="text-body">${Math.ceil(getRandomArbitrary(15, 30))}</p>

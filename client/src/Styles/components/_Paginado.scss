@@ -1,11 +1,12 @@
 @import "../Utilidades/_Variables";
 
 .contenedor-paginado {
-  width: 300px;
+  width: 100%;
   display: flex;
   justify-content:space-between;
   margin: auto;
   margin-bottom: 50px;
+  gap: 30px;
 
   p {
     margin-top: -1px;
