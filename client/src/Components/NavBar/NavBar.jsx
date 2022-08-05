@@ -277,9 +277,10 @@ const Nav2 = () => {
             </abbr>
               </IconButton>
             </Box>
+            {/* {userReducer.username ? ( */}
             {userReducer.username ? (
               <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
+                <Tooltip title="Abrir las opciones">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     {/* <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} /> */}
                     <img src={perfil} alt="Logo" height="auto" width="40px" />
@@ -352,13 +353,13 @@ const Nav2 = () => {
                       logOut
                     > */}
                     
-                      {/* <span onClick={(e) => HandleClick(e)}>Logout<LogoutIcon /></span> */}
-                      <Link to={"/home/Profile"}>
+                      <span onClick={(e) => HandleClick(e)}>Logout<LogoutIcon /></span>
+                      {/* <Link to={"/home/Profile"}>
                  <Button sx={{ color: "black" }}>
                   {" "}
                   Logout <LogoutIcon sx={{ ml: "5px" }} />
                 </Button>
-              </Link>
+              </Link> */}
                     {/* </Typography> */}
                   </MenuItem>
                 </Menu>

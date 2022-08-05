@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
 import { createReview } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_ComentariosForm.scss";
+
 function Rating2({ id, token }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -45,22 +46,23 @@ function Rating2({ id, token }) {
   };
   console.log(input);
   return (
-    <div>
-      <form className="form3" onSubmit={submitHandler}>
+    <div className="RatingCard">
+      <form className="formulario3" onSubmit={submitHandler}>
         <textarea
           id="comment"
           value={input.contenido}
           onChange={(e) => handdleChange(e)}
           name="contenido"
           placeholder="Escribe tu comentario:"
-          className="name formEntry3"
+          className="name2 formularioEntry3"
         ></textarea>
 
-        <Box
+        <Box className="Stars"
           sx={{
-            width: 200,
+            width: 500,
             display: "flex",
             alignItems: "center",
+            color:"white"
           }}
         >
           <Rating
@@ -69,13 +71,13 @@ function Rating2({ id, token }) {
             value={input.puntuacion}
             precision={1}
             getLabelText={getLabelText}
-            emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="small" />}
+            emptyIcon={<StarIcon style={{ opacity: 0.55, color:"white" }} fontSize="medium" />}
           />
           {input.puntuacion !== null && (
             <Box sx={{ ml: 5 }}>{labels[hover !== -1 ? hover : input.puntuacion]}</Box>
           )}
         </Box>
-        <button className="submit formEntry3" type="submit" value="Enviar">
+        <button className="submit2 formularioEntry3" type="submit" value="Enviar">
           Comentar
         </button>
       </form>
