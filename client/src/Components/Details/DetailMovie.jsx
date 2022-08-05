@@ -123,11 +123,6 @@ function DetailMovie() {
               })}
             </ul>
 
-            {/* <div className="contenedor-links">
-              <button>Trailer</button>
-              <div>
-                <iframe width="420" height="315" src={video}></iframe>
-              </div> */}
             <div className="contenedor-links">
               {userReducer.username ? (
                 <div>
