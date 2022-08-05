@@ -35,6 +35,7 @@ import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import perfil from "../../img/perfil2.png";
+import perfiladmin from "../../img/perfil3.png";
 
 
 function getToken() {
@@ -145,7 +146,13 @@ const Nav2 = () => {
                 }}
               >
                 <Link className="logo" to={"/"}>
-                  <img className="logo" src={logo} alt="Logo" height="auto" width="130px" />
+                  <img
+                    className="logo"
+                    src={logo}
+                    alt="Logo"
+                    height="auto"
+                    width="130px"
+                  />
                 </Link>
               </Typography>
             </Link>
@@ -215,25 +222,45 @@ const Nav2 = () => {
                 }}
               >
                 <Link className="logo" to={"/"}>
-                  <img className="logo" src={logo} alt="Logo" height="auto" width="130px" />
+                  <img
+                    className="logo"
+                    src={logo}
+                    alt="Logo"
+                    height="auto"
+                    width="130px"
+                  />
                 </Link>
               </Typography>
             </Link>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex", color: "white" } }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex", color: "white" },
+              }}
+            >
               <Link style={{ textDecoration: "none" }} to="/home">
-                <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white" }}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white" }}
+                >
                   {" "}
                   <HomeIcon fontSize="x-large" /> Inicio
                 </Button>
               </Link>
               <Link style={{ textDecoration: "none" }} to="/home/peliculas">
-                <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white" }}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white" }}
+                >
                   <CamaraIcon fontSize="x-large" />
                   Peliculas
                 </Button>
               </Link>
               <Link style={{ textDecoration: "none" }} to="/home/series">
-                <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white" }}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white" }}
+                >
                   <MonitorIcon fontSize="x-large" />
                   Series
                 </Button>
@@ -275,7 +302,10 @@ const Nav2 = () => {
                   onClose={handleCloseUserMenu}
                 >
                   <MenuItem onClick={handleCloseUserMenu}>
-                    <Link to="/home/userProfile" style={{ textDecoration: "none", color: "black" }}>
+                    <Link
+                      to="/home/userProfile"
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
                       <Typography textalign="center">Perfil</Typography>
                     </Link>
                   </MenuItem>
@@ -284,19 +314,30 @@ const Nav2 = () => {
                   ) : userReducer.isAdmin ? (
                     <>
                       <MenuItem>
-                        <Link to="/home/agregar" style={{ textDecoration: "none", color: "black" }}>
-                          <Typography textaling="center">Agregar Producto</Typography>
+                        <Link
+                          to="/home/agregar"
+                          style={{ textDecoration: "none", color: "black" }}
+                        >
+                          <Typography textaling="center">
+                            Agregar Producto
+                          </Typography>
                         </Link>
                       </MenuItem>
                       <MenuItem>
-                        <Link to="/home/modificar" style={{ textDecoration: "none", color: "black" }}>
+                        <Link
+                          to="/home/modificar"
+                          style={{ textDecoration: "none", color: "black" }}
+                        >
                           <Typography textaling="center">Modificar</Typography>
                         </Link>
                       </MenuItem>
                     </>
                   ) : (
                     <MenuItem>
-                      <Link to="/home/wishlist" style={{ textDecoration: "none", color: "black" }}>
+                      <Link
+                        to="/home/wishlist"
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
                         <Typography textaling="center">Favoritos</Typography>
                       </Link>
                     </MenuItem>
@@ -323,7 +364,10 @@ const Nav2 = () => {
                 </Menu>
               </Box>
             ) : (
-              <Link style={{ textDecoration: "none", color: "white" }} to={"/home/Login"}>
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                to={"/home/Login"}
+              >
                 <Button sx={{ color: "white" }}>
                   {" "}
                   Login <LoginIcon sx={{ ml: "5px" }} />
