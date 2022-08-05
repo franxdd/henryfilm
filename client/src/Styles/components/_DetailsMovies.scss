@@ -9,7 +9,7 @@ section {
     box-shadow: inset 450px -7px 120px 106px rgba(0,0,0,0.91);
   }
   .contenedor-info{
-    width: 80%;
+    width: 100%;
     // position: fixed;
   }
   .contenedor-descripcion {
@@ -106,10 +106,8 @@ section {
         transition: all 0.5s;
       }
       button:hover::before {
-        width: 100%;
-        
+        width: 100%;  
       }
-      
       button:hover {
         color: black;
         font-weight: 700;
@@ -133,7 +131,33 @@ section {
       border-radius: 50px;
       }
     }
+    .Iconos{
+      display:flex ;
+      gap: 20px;
+    .iconoShop {
+      margin-top: 9px;
+      font-size: 30px;
+      color: $detalles;
+      cursor: pointer;
+      :hover{
+        color: $blanco;
+        transform:scale(1.1);
+      }
     }
+    .iconoHeart {
+      margin-top: 2%;
+      font-size: 40px;
+      color: $detalles;
+      cursor: pointer;
+      :hover{
+        color:rgb(215, 59, 59);
+        transform:scale(1.1);
+      }
+    }
+    }
+    
+    }
+    
   }
 }
   
@@ -151,26 +175,26 @@ section {
               h3 {
                 margin-left: 3%;
                 font-size: 1.5rem;
-                width: 100%;
+                width: 80%;
                 text-shadow: 2px 2px 2px rgb(0, 0, 0);
               }
               .descripcion{
                 margin-left: -3%;
-                width: 100%;
+                width: 80%;
                 font-size: 11px;
                 letter-spacing: 0px;
                 text-shadow: 2px 2px 2px rgb(0, 0, 0);
               }
               .item-descripcion{
                 margin-left: 3%;
-                width: 100%;
+                width: 80%;
                 font-size: 15px;
                 letter-spacing: 0px;
                 text-shadow: 2px 2px 2px rgb(0, 0, 0);
               }
               .lista-generos{
                 margin-left: 3%;
-                width: 100%;
+                width: 80%;
                 font-size: 15px;
                 letter-spacing: 0px;
                 text-shadow: 2px 2px 2px rgb(0, 0, 0);

@@ -106,10 +106,11 @@ function SeriesHome() {
           </select>
         </div>
       </div>
+      <abbr title="Limpiar Filtros">
       <span onClick={() => HandleClickClear()}>
         <ClearIcon className="icono-clear" />
       </span>
-
+      </abbr>
       {generosCache?.map((g) => {
         return (
           <button onClick={() => FiltradoReversa(g)}>

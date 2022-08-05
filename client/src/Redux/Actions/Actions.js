@@ -142,24 +142,47 @@ export const checkState = () => {
 };
 
 export const PostLogin = (payload) => {
-  console.log(payload);
+
   return async function (dispatch) {
-    let created = await axios.post("/usuarios/login", payload);
+    
+    
+    try {
+      
+
+      let created = await axios.post("/usuarios/login", payload);
+      // {
+      //   // withCredentials: true,
+      // });
+      console.log(created.data)
+  
+      sessionStorage.setItem("token", JSON.stringify(created.data[0]));
+  
+      return dispatch({ type: POST_LOGIN, payload: created.data });
+
+
+    } catch (error) {
+
+      alert("Usuario inexistente")
+      console.log(error)
+      return error
+
+    }
+  };
+};
+
+export const logOut = (payload) => {
+  return async function (dispatch) {
+    let created = await axios.post("/carro/post", payload);
     // {
     //   // withCredentials: true,
     // });
 
-    sessionStorage.setItem("token", JSON.stringify(created.data));
-    console.log(created.data);
+    // sessionStorage.setItem("token", JSON.stringify(created.data));
 
-    return dispatch({ type: POST_LOGIN, payload: created.data });
+    return dispatch({ type: LOG_OUT, payload: created.data });
   };
-};
 
-export const logOut = () => {
-  return {
-    type: LOG_OUT,
-  };
+
 };
 
 export const getUser = (token) => {
@@ -329,8 +352,9 @@ export const adjusq = (id, value) => {
 };
 
 export const setdetailLenguage = (id, string) => {
-  console.log(string);
+
   return async function (dispatch) {
+    
     try {
       let json = await axios.get(`/series/traductor/${id}/${string} `);
       return dispatch({
@@ -368,7 +392,7 @@ export const loadCurren = (payload) => {
 };
 
 export const putPeliculas = (payload) => {
-  console.log(payload);
+  // console.log(payload);
   return async (dispatch) => {
     let created = await axios.put(`/peliculas/modificarPeli/${payload.id}`, payload);
     dispatch({

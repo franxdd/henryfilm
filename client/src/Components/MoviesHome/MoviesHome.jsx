@@ -30,7 +30,7 @@ function MoviesHome() {
 
   const allMovies = useSelector((state) => state.allMovies);
   const generos = useSelector((state) => state.generosMovies);
-  console.log(allMovies);
+
 
   const [generosCache, setgenerosCache] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -112,9 +112,11 @@ function MoviesHome() {
       </select>
       {/* </div>
       </div> */}
+      <abbr title="Limpiar Filtros">
       <span onClick={() => HandleClickClear()}>
         <ClearIcon className="icono-clear" />
       </span>
+      </abbr>
       {generosCache?.map((g) => {
         return (
           <button onClick={() => FiltradoReversa(g)}>
