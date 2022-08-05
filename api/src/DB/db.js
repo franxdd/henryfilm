@@ -91,17 +91,11 @@ Usuarios.belongsToMany(Peliculas, { through: "Peliculas-Usuario" });
 Usuarios.hasMany(Comentarios);
 Comentarios.belongsTo(Usuarios);
 
-Peliculas.hasMany(Comentarios);
-Comentarios.belongsTo(Peliculas);
-
 Usuarios.hasOne(Carros);
 Carros.belongsTo(Usuarios);
 
 Usuarios.hasMany(Deseados)
 Deseados.belongsTo(Usuarios);
-
-Series.hasMany(Comentarios);
-Comentarios.belongsTo(Series);
 
 Series.belongsToMany(Usuarios, { through: "series-Usuario" });
 Usuarios.belongsToMany(Series, { through: "series-Usuario" });

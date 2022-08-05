@@ -3,27 +3,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logOut } from "../../Redux/Actions/Actions.js";
 
-
 const Profile = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
-  let cart = useSelector((state)=> state.cart)
+  let cart = useSelector((state) => state.cart);
+  let deseado = useSelector((state) => state.wishlist);
 
   const HandleClick = (e) => {
-    // e.preventDefault()
-    console.log('entro a logout')
+    e.preventDefault()
+    try {
+      console.log("entro a logout");
 
-    const token = sessionStorage.getItem("token");
-    const carro = cart.slice()
-    const arrAux = [token,carro]
+      const token = sessionStorage.getItem("token");
+      const carro = cart.slice();
+      const deseados = deseado.slice()
+      
+      console.log(deseados)
+      const arrAux = [token, carro, deseados];
 
-    dispatch(logOut(arrAux)); 
+      // console.log("ASDASD", arrAux)
 
-    sessionStorage.removeItem("token");
-    localStorage.setItem("cart", JSON.stringify([]));
+      // dispatch(logOut(arrAux));
 
+      sessionStorage.removeItem("token");
+      localStorage.setItem("cart", JSON.stringify([]));
+      localStorage.setItem("wishlist", JSON.stringify([]));
 
-    navigate("/home");
+      navigate("/home");
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (

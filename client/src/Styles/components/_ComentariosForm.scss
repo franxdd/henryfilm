@@ -1,0 +1,67 @@
+@import "../Utilidades/_Variables.scss";
+ .form3 {
+    margin-left: 105px;
+    background: black;
+    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+    border-radius: 5px;
+    width: 1200px;
+    height: 200px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    left: 0;
+    right: 0;
+    position:relative;
+    border-top: 5px solid $detalles
+  }
+  ::-webkit-input-placeholder {
+    font-size: 1.3em;
+  }
+  
+  .name {
+    background-color: #ebebeb;
+    color: rgb(0, 0, 0);
+  }
+  .name:hover {
+    width: 430px;
+  }
+
+  .formEntry3 {
+    display: block;
+    margin: 10px auto;
+    min-width: 340px;
+    padding: 10px;
+    border-radius: 2px;
+    border: none;
+  }
+  .submit {
+    margin-top: 20px;
+    width: 100px;
+    color: rgb(0, 0, 0);
+    background-color: $detalles;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .submit:hover {
+
+    background-color: $background-intermedio;
+    color:$detalles;
+  }
+.ratingStyle{
+  margin-left: 180px;
+}
+
+
+  @media screen and (max-width: 500px) {
+    .form3 {
+      margin-left: 15px;
+      width: 330px;
+ 
+    }
+    ::-webkit-input-placeholder {
+      font-size: 1.3em;
+    }
+    .formEntry3 {
+      min-width: 240px;
+
+    }
+  }

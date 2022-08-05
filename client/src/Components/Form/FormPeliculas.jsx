@@ -37,7 +37,7 @@ const FormPeliculas = () => {
     if (data.posterImagen === "Alt") {
       data.posterImagen = poster;
     }
-    console.log(data)
+    // console.log(data)
     dispatch(postPeliculas(data));
     alert("Pelicula creada");
     setdata({

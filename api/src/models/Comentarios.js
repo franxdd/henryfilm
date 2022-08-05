@@ -23,6 +23,15 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      idserie: {
+        type: DataTypes.STRING,
+        
+      },
+      idpelicula:{
+        type: DataTypes.STRING,
+       
+
+      }
     },
     {
       timestamps: false,

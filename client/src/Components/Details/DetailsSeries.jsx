@@ -43,7 +43,7 @@ function DetailsSeries() {
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: "",
-    idPelicula: id,
+    idserie: id,
     token: token,
   });
 
@@ -53,7 +53,7 @@ function DetailsSeries() {
       [e.target.name]: e.target.value,
     });
   }
-  console.log(input);
+  // console.log(input);
   const submitHandler = (e) => {
     e.preventDefault();
     if (!input.token) {
@@ -69,7 +69,7 @@ function DetailsSeries() {
     navigate("/home/Login");
   }
 
-  console.log(seriesDetail);
+  // console.log(seriesDetail);
   return (
     <section>
       <header
