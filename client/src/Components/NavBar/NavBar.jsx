@@ -52,6 +52,7 @@ const Nav2 = () => {
 
   let navigate = useNavigate();
   let cart = useSelector((state) => state.cart);
+  let deseado = useSelector((state) => state.wishlist);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -81,7 +82,7 @@ const Nav2 = () => {
 
   useEffect(() => {
     if (tokenString) {
-      console.log("entro al segundo useEffect");
+      // console.log("entro al segundo useEffect");
       dispatch(getUser(tokenString));
     }
   }, [dispatch, token]);
@@ -106,16 +107,20 @@ const Nav2 = () => {
 
   const HandleClick = (e) => {
     e.preventDefault();
-    console.log("entro a logout");
+    // console.log("entro a logout");
 
     const token = sessionStorage.getItem("token");
     const carro = cart.slice();
-    const arrAux = [token, carro];
+    const deseados = deseado.slice()
+    const arrAux = [token, carro, deseados];
+
+    // console.log("ASDASD", arrAux)
 
     dispatch(logOut(arrAux));
 
     sessionStorage.removeItem("token");
     localStorage.setItem("cart", JSON.stringify([]));
+    localStorage.setItem("wishlist", JSON.stringify([]));
 
     navigate("/home");
   };
