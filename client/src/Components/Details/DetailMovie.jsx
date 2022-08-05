@@ -62,7 +62,7 @@ function DetailMovie() {
     return () => dispatch(willunmont2());
   }, []);
 
-  console.log(movieDetail);
+  // console.log(movieDetail);
   return (
     <section>
       <header

@@ -8,7 +8,7 @@ import {MdAddShoppingCart as ShopIcon} from "react-icons/md";
 function WishlistCard({ id, nombre, image, qty, tipo, precio }) {
   const dispatch = useDispatch();
   function handleDelete(id) {
-    console.log(id);
+    // console.log(id);
     dispatch(removeToWishlist(id));
   }
   function addCart(id) {

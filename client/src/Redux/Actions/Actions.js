@@ -154,9 +154,9 @@ export const PostLogin = (payload) => {
       // {
       //   // withCredentials: true,
       // });
-      console.log(created.data)
+      // console.log(created.data)
   
-      sessionStorage.setItem("token", JSON.stringify(created.data[0]));
+     
   
       return dispatch({ type: POST_LOGIN, payload: created.data });
 
@@ -164,7 +164,7 @@ export const PostLogin = (payload) => {
     } catch (error) {
 
       alert("Usuario inexistente")
-      console.log(error)
+      // console.log(error)
       return error
 
     }
@@ -173,16 +173,25 @@ export const PostLogin = (payload) => {
 
 export const logOut = (payload) => {
   return async function (dispatch) {
-    let created = await axios.post("/carro/post", payload);
+    
+    try {
+      
+      // console.log(payload)
+      await axios.post("/carro/post", payload);
+      await axios.post("/deseados/agregar", payload)
+
+
+    } catch (error) {
+      console.log(error)
+    }
     // {
     //   // withCredentials: true,
     // });
 
     // sessionStorage.setItem("token", JSON.stringify(created.data));
 
-    return dispatch({ type: LOG_OUT, payload: created.data });
+    return dispatch({ type: LOG_OUT});
   };
-
 
 };
 
@@ -403,7 +412,7 @@ export const putPeliculas = (payload) => {
   };
 };
 export const createReview = (payload) => {
-  console.log(payload);
+  // console.log(payload);
   return async (dispatch) => {
     let creado = await axios.post("/comentarios/agregar", payload);
     return creado;
@@ -412,7 +421,7 @@ export const createReview = (payload) => {
 
 
 export const getReview = (payload) => {
-  console.log(payload);
+  // console.log(payload);
   return async (dispatch) => {
     let creado = await axios.get(`/comentarios?id=${payload.id}&tipo=${payload.tipo}`);
     return (dispatch) =>
