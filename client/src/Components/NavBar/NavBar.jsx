@@ -13,7 +13,6 @@ import Avatar from "@mui/material/Avatar";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Outlet } from "react-router-dom";
@@ -31,18 +30,13 @@ import {
   logOut,
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_NavBar.scss";
-import {
-  BiHomeHeart as HomeIcon,
-  BiCameraMovie as CamaraIcon,
-} from "react-icons/bi";
-import { MdLock as LockIcon } from "react-icons/md";
+import { BiHomeHeart as HomeIcon, BiCameraMovie as CamaraIcon } from "react-icons/bi";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
-import { useContext } from "react";
-import Context from "../../contexto/Context";
 import perfil from "../../img/perfil2.png";
 import perfiladmin from "../../img/perfil3.png";
+
 
 function getToken() {
   const tokenString = sessionStorage.getItem("token");
@@ -56,6 +50,7 @@ const Nav2 = () => {
 
   let navigate = useNavigate();
   let cart = useSelector((state) => state.cart);
+  let deseado = useSelector((state) => state.wishlist);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -75,51 +70,54 @@ const Nav2 = () => {
   const dispatch = useDispatch();
   const userReducer = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
-  const contexto = useContext(Context);
+  // const contexto = useContext(Context);
   const tokenString = getToken();
 
-  useEffect(() => {
-    dispatch(getIso(parseInt(94605)));
-    dispatch(getIdioma("a"));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getIso(parseInt(94605)));
+  //   dispatch(getIdioma("a"));
+  // }, [dispatch]);
 
   useEffect(() => {
     if (tokenString) {
-      console.log("entro al segundo useEffect");
+      // console.log("entro al segundo useEffect");
       dispatch(getUser(tokenString));
     }
   }, [dispatch, token]);
 
-  const handleChangeLenguaje = (e) => {
-    contexto.setLenguaje(e.target.value);
-  };
-  const b = useSelector((state) => state.idioma);
-  const c = useSelector((state) => state.isos);
+  // const handleChangeLenguaje = (e) => {
+  //   contexto.setLenguaje(e.target.value);
+  // };
+  // const b = useSelector((state) => state.idioma);
+  // const c = useSelector((state) => state.isos);
 
-  function handleLenguage(e) {
-    e.preventDefault();
-    if (
-      e.target.value === "en" ||
-      e.target.value === "pt" ||
-      e.target.value === "fr" ||
-      e.target.value === "ch"
-    ) {
-      dispatch(getIdioma(e.target.value));
-    }
-  }
+  // function handleLenguage(e) {
+  //   e.preventDefault();
+  //   if (
+  //     e.target.value === "en" ||
+  //     e.target.value === "pt" ||
+  //     e.target.value === "fr" ||
+  //     e.target.value === "ch"
+  //   ) {
+  //     dispatch(getIdioma(e.target.value));
+  //   }
+  // }
 
   const HandleClick = (e) => {
     e.preventDefault();
-    console.log("entro a logout");
+    // console.log("entro a logout");
 
     const token = sessionStorage.getItem("token");
     const carro = cart.slice();
-    const arrAux = [token, carro];
+    const deseados = deseado.slice()
+    const arrAux = [token, carro, deseados];
+
+    // console.log("ASDASD", arrAux)
 
     dispatch(logOut(arrAux));
-
     sessionStorage.removeItem("token");
     localStorage.setItem("cart", JSON.stringify([]));
+    localStorage.setItem("wishlist", JSON.stringify([]));
 
     navigate("/home");
   };
@@ -270,12 +268,13 @@ const Nav2 = () => {
 
               <SearchBar sx={{ my: 2, color: "white" }} />
             </Box>
-
             <Box>
               <IconButton sx={{ mr: "6px", mt: "4px", p: "9px 6px 8px 6px" }}>
+              <abbr title="Ver el carrito">
                 <Link to="/home/carro" style={{ color: "grey" }}>
                   <ShopIcon className="iconoShop" />
                 </Link>
+            </abbr>
               </IconButton>
             </Box>
             {userReducer.username ? (
@@ -344,17 +343,23 @@ const Nav2 = () => {
                     </MenuItem>
                   )}
                   <MenuItem>
-                    <Typography
+                    {/* <Typography
                       sx={{
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
                       }}
                       logOut
-                    >
-                      <span onClick={(e) => HandleClick(e)}>Logout</span>{" "}
-                      <LogoutIcon sx={{ ml: "5px" }} />
-                    </Typography>
+                    > */}
+                    
+                      {/* <span onClick={(e) => HandleClick(e)}>Logout<LogoutIcon /></span> */}
+                      <Link to={"/home/Profile"}>
+                 <Button sx={{ color: "black" }}>
+                  {" "}
+                  Logout <LogoutIcon sx={{ ml: "5px" }} />
+                </Button>
+              </Link>
+                    {/* </Typography> */}
                   </MenuItem>
                 </Menu>
               </Box>

@@ -24,15 +24,15 @@ const getComentarios = async (req, res) => {
 
 const postComentario = async (req, res) => {
   let { contenido, puntuacion, idpelicula, token, idserie } = req.body;
-  console.log(typeof token);
+  console.log(idpelicula);
   try {
     if (!token || !contenido || !puntuacion)
-      return res.status(404).send("Falta completar un dato..");
-
+    return res.status(404).send("Falta completar un dato..");
+    
     let tokenParsado = JSON.parse(token);
-
+    
     const validToken = verify(tokenParsado, "jwtsecretcambiar");
-
+    
     if (idpelicula) {
       var comentario = await Comentarios.create({
         username: validToken.username,
@@ -48,10 +48,10 @@ const postComentario = async (req, res) => {
         idserie,
       });
     }
-
+    
+    console.log(validToken.id);
     comentario.setUsuario(validToken.id);
     // comentario.setPelicula(idPelicula);
-
     res.status(200).json(comentario);
   } catch (error) {
     console.log("hubo un error con la API", error);

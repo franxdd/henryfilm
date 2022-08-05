@@ -8,7 +8,7 @@ import {MdAddShoppingCart as ShopIcon} from "react-icons/md";
 function WishlistCard({ id, nombre, image, qty, tipo, precio }) {
   const dispatch = useDispatch();
   function handleDelete(id) {
-    console.log(id);
+    // console.log(id);
     dispatch(removeToWishlist(id));
   }
   function addCart(id) {
@@ -29,13 +29,16 @@ function WishlistCard({ id, nombre, image, qty, tipo, precio }) {
 
        <div class="cardAbajo">
        <p className="textNameCarrito">${precio}</p>
-    
+       <abbr title="Añadir al Carrito">
         <span className="spanCompras" onClick={() => addCart(id)}>
           <ShopIcon className="iconoShop" />
         </span>
+        </abbr>
+        <abbr title="Eliminar de Favoritos">
        <span className="spanDelete" onClick={() => handleDelete(id)}>
         <MdDeleteForever className="iconoDelete" />
         </span>
+        </abbr>
       </div>
       </div>
   );

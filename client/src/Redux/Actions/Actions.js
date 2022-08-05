@@ -157,7 +157,7 @@ export const PostLogin = (payload) => {
       return dispatch({ type: POST_LOGIN, payload: created.data });
     } catch (error) {
       alert("Usuario inexistente");
-      console.log(error);
+      // console.log(error)
       return error;
     }
   };
@@ -165,14 +165,20 @@ export const PostLogin = (payload) => {
 
 export const logOut = (payload) => {
   return async function (dispatch) {
-    let created = await axios.post("/carro/post", payload);
+    try {
+      // console.log(payload)
+      await axios.post("/carro/post", payload);
+      await axios.post("/deseados/agregar", payload);
+    } catch (error) {
+      console.log(error);
+    }
     // {
     //   // withCredentials: true,
     // });
 
     // sessionStorage.setItem("token", JSON.stringify(created.data));
 
-    return dispatch({ type: LOG_OUT, payload: created.data });
+    return dispatch({ type: LOG_OUT });
   };
 };
 
@@ -405,7 +411,6 @@ export const createReview = (payload) => {
 };
 
 export const getReview = (payload) => {
-  console.log(payload.tipo);
   return async (dispatch) => {
     let creado = await axios.get(
       `/comentarios?id=${payload.id}&tipo=${payload.tipo}`
