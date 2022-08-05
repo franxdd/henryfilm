@@ -46,9 +46,9 @@ const postUser = async (req, res) => {
           .then(mandarEmail(username, email, password));
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         if (err) {
-          res.status(400).send(err);
+          res.status(400).send("El usuario ya existe");
         }
       });
   } catch (error) {
@@ -145,9 +145,62 @@ const getProfile = async (req, res) => {
   }
 };
 
+const putModificarAdmin = async (req, res) => {
+  let { id } = req.body;
+
+  try {
+    const userValidate = await Usuarios.findOne({
+      where: { id: id },
+    });
+    console.log(userValidate);
+
+    if (!userValidate.dataValues.isAdmin) {
+      var user = await Usuarios.update(
+        { isAdmin: true },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+    } else {
+      var user = await Usuarios.update(
+        { isAdmin: false },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
+const putElminar = async (req, res) => {
+  let { id } = req.body;
+
+  try {
+    var eliminado = await Usuarios.destroy({
+      where: {
+        id: id,
+      },
+    });
+
+    res.status(200).json(eliminado);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
 module.exports = {
   postUser,
   getAllUsers,
   postLogin,
   getProfile,
+  putModificarAdmin,
+  putElminar,
 };
