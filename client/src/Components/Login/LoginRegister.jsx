@@ -4,6 +4,7 @@ import "../../Styles/components/_Form.scss";
 import "../../Styles/components/_Login.scss";
 import { PostUsuario } from "../../Redux/Actions/Actions.js";
 import { useNavigate } from "react-router-dom";
+
 function LoginRegister() {
   const navigate = useNavigate();
 
@@ -22,7 +23,7 @@ function LoginRegister() {
   function handdleSubmit(e) {
     e.preventDefault();
     dispatch(PostUsuario(input));
-    alert("Tu usuario fue creado");
+   
     setInput({
       username: "",
       email: "",
