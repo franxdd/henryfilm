@@ -42,6 +42,8 @@ export const PUT_PELICULA = "PUT_PELICULA";
 export const POST_COMENTARIO = "POST_COMENTARIO";
 export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 export const REMOVE_TO_WISHLIST = "REMOVE_TO_WISHLIST";
+export const GET_REVIEW = "GET_REVIEW";
+export const POST_REVIEW = "POST_REVIEW";
 
 // export const getAllSeries = () => {
 //   return (dispatch) => {
@@ -142,30 +144,21 @@ export const checkState = () => {
 };
 
 export const PostLogin = (payload) => {
-
   return async function (dispatch) {
-    
-    
     try {
-      
-
       let created = await axios.post("/usuarios/login", payload);
       // {
       //   // withCredentials: true,
       // });
-      console.log(created.data)
-  
+      console.log(created.data);
+
       sessionStorage.setItem("token", JSON.stringify(created.data[0]));
-  
+
       return dispatch({ type: POST_LOGIN, payload: created.data });
-
-
     } catch (error) {
-
-      alert("Usuario inexistente")
-      console.log(error)
-      return error
-
+      alert("Usuario inexistente");
+      console.log(error);
+      return error;
     }
   };
 };
@@ -181,8 +174,6 @@ export const logOut = (payload) => {
 
     return dispatch({ type: LOG_OUT, payload: created.data });
   };
-
-
 };
 
 export const getUser = (token) => {
@@ -352,9 +343,7 @@ export const adjusq = (id, value) => {
 };
 
 export const setdetailLenguage = (id, string) => {
-
   return async function (dispatch) {
-    
     try {
       let json = await axios.get(`/series/traductor/${id}/${string} `);
       return dispatch({
@@ -394,7 +383,10 @@ export const loadCurren = (payload) => {
 export const putPeliculas = (payload) => {
   // console.log(payload);
   return async (dispatch) => {
-    let created = await axios.put(`/peliculas/modificarPeli/${payload.id}`, payload);
+    let created = await axios.put(
+      `/peliculas/modificarPeli/${payload.id}`,
+      payload
+    );
     dispatch({
       type: PUT_PELICULA,
       payload: created,
@@ -405,7 +397,23 @@ export const createReview = (payload) => {
   console.log(payload);
   return async (dispatch) => {
     let creado = await axios.post("/comentarios/agregar", payload);
-    return creado;
+    return dispatch({
+      type: POST_REVIEW,
+      payload: creado.data,
+    });
+  };
+};
+
+export const getReview = (payload) => {
+  console.log(payload.tipo);
+  return async (dispatch) => {
+    let creado = await axios.get(
+      `/comentarios?id=${payload.id}&tipo=${payload.tipo}`
+    );
+    return dispatch({
+      type: GET_REVIEW,
+      payload: creado.data,
+    });
   };
 };
 

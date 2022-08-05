@@ -6,12 +6,13 @@ const { API_KEY } = process.env;
 const { sign, verify, decode } = require("jsonwebtoken");
 
 const getComentarios = async (req, res) => {
-  let { id } = req.params;
-  // console.log(id)
-  // console.log(idSerie)
-
-  if (id) {
-    var comentarios = await Comentarios.findAll({ where: { PeliculaId: id } });
+  let { id, tipo } = req.query;
+  console.log(id);
+  console.log(tipo);
+  if (tipo === "pelicula") {
+    var comentarios = await Comentarios.findAll({ where: { idpelicula: id } });
+  } else if (tipo === "serie") {
+    var comentarios = await Comentarios.findAll({ where: { idserie: id } });
   }
   //  else if(id){
 
@@ -22,8 +23,8 @@ const getComentarios = async (req, res) => {
 };
 
 const postComentario = async (req, res) => {
-  let { contenido, puntuacion, idPelicula, token } = req.body;
-  console.log(typeof idPelicula);
+  let { contenido, puntuacion, idpelicula, token, idserie } = req.body;
+  console.log(typeof token);
   try {
     if (!token || !contenido || !puntuacion)
       return res.status(404).send("Falta completar un dato..");
@@ -31,16 +32,25 @@ const postComentario = async (req, res) => {
     let tokenParsado = JSON.parse(token);
 
     const validToken = verify(tokenParsado, "jwtsecretcambiar");
-    console.log(contenido);
-    console.log("paso el verify, ale puto");
-    const comentario = await Comentarios.create({
-      username: validToken.username,
-      contenido,
-      puntuacion,
-    });
+
+    if (idpelicula) {
+      var comentario = await Comentarios.create({
+        username: validToken.username,
+        contenido,
+        puntuacion,
+        idpelicula,
+      });
+    } else if (idserie) {
+      var comentario = await Comentarios.create({
+        username: validToken.username,
+        contenido,
+        puntuacion,
+        idserie,
+      });
+    }
 
     comentario.setUsuario(validToken.id);
-    comentario.setPelicula(idPelicula);
+    // comentario.setPelicula(idPelicula);
 
     res.status(200).json(comentario);
   } catch (error) {

@@ -6,6 +6,7 @@ import {
   getMoviesDetail,
   willunmont2,
   addToWishlist,
+  getReview,
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_DetailsMovies.scss";
 import { estrellas } from "../../auxiliares/Funciones";
@@ -18,6 +19,7 @@ function DetailMovie() {
   const dispatch = useDispatch();
   let { id } = useParams();
   let movieDetail = useSelector((state) => state.movieDetail);
+  let { comentarios } = useSelector((state) => state);
   let token = sessionStorage.getItem("token");
   let video = movieDetail[0]?.videosAMostrar[0];
   // .replace("watch?v=", "embed/")
@@ -28,9 +30,13 @@ function DetailMovie() {
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: "",
-    idPelicula: id,
+    idpelicula: id,
     token: token,
   });
+  const input2 = {
+    id: id,
+    tipo: "pelicula",
+  };
 
   function handdleChange(e) {
     setInput({
@@ -59,10 +65,12 @@ function DetailMovie() {
 
   useEffect(() => {
     dispatch(getMoviesDetail(id));
+    dispatch(getReview(input2));
     return () => dispatch(willunmont2());
-  }, []);
-
-  console.log(movieDetail);
+  }, [dispatch]);
+  console.log(comentarios);
+  console.log(input2);
+  // console.log(input);
   return (
     <section>
       <header
@@ -135,7 +143,7 @@ function DetailMovie() {
                 name="puntuacion"
                 onChange={(e) => handdleChange(e)}
               >
-                <option value="1">Select</option>
+                <option>Select</option>
                 <option value="1">1- Bad</option>
                 <option value="2">2- Fair</option>
                 <option value="3">3- Good</option>
@@ -145,6 +153,17 @@ function DetailMovie() {
               <button type="submit">Comentar</button>
             </form>
             <h2>comentarios:</h2>
+            {comentarios &&
+              comentarios.map((e) => {
+                return (
+                  <div>
+                    <div>Usuario: {e.username}</div>
+                    <div>Puntuacion: {e.puntuacion}</div>
+                    <div>Comentario: {e.contenido}</div>
+                    <br />
+                  </div>
+                );
+              })}
           </div>
         </div>
       </header>

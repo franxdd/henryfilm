@@ -3,7 +3,7 @@ const route = Router();
 const { getComentarios, postComentario } = require("../servicies/comentarios.js");
 require("dotenv").config();
 
-route.get("/:id", getComentarios);
+route.get("/", getComentarios);
 route.post("/agregar", postComentario);
 
 
