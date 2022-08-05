@@ -43,7 +43,7 @@ import { toast } from "react-toastify";
 function a() {
   return toast.error("Ya esta en el carrito", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -54,7 +54,7 @@ function a() {
 function b() {
   return toast.success("Se añadio al carrito", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -66,7 +66,7 @@ function b() {
 function c() {
   return toast.error("Ya se encuentra en Favoritos", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -77,7 +77,7 @@ function c() {
 function d() {
   return toast.success("Agregada a Favoritos", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

@@ -11,6 +11,10 @@ import "../../Styles/components/_DetailsMovies.scss";
 import { estrellas } from "../../auxiliares/Funciones";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
+import "../../Styles/components/_ComentariosForm.scss";
+import Rating from "../Details/Rating.jsx";
+import {TiHeart as HeartIcon} from "react-icons/ti";
+
 
 function DetailMovie() {
   const userReducer = useSelector((state) => state.user);
@@ -28,7 +32,7 @@ function DetailMovie() {
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: "",
-    idpelicula: id,
+    idPelicula: id,
     token: token,
   });
 
@@ -62,7 +66,7 @@ function DetailMovie() {
     return () => dispatch(willunmont2());
   }, []);
 
-  // console.log(movieDetail);
+  console.log(movieDetail);
   return (
     <section>
       <header
@@ -95,6 +99,7 @@ function DetailMovie() {
                 return <div>{e.name}</div>;
               })}
             </ul>
+    
             {/* <div className="contenedor-links">
               <button>Trailer</button>
               <div>
@@ -115,20 +120,35 @@ function DetailMovie() {
               <Link to={`/home/videos`}>
                 <button>Reparto</button>
               </Link>
-              <span className="spanCompras" onClick={() => addCart(id)}>
-                <ShopIcon className="iconoShop" />
-              </span>
-              <button onClick={() => addWishlist(id)}>Wishlist</button>
+              <div className="Iconos">
+              <abbr title="Añade al carrito">
+              <span onClick={() => addCart(id)}>
+              <ShopIcon className="iconoShop" />
+             </span>
+             </abbr>
+              <abbr title="Agrega a Favoritos">
+             <span onClick={() => addWishlist(id)}>
+              <HeartIcon className="iconoHeart" />
+           </span>
+              </abbr>
+              </div>
             </div>
-            <form onSubmit={submitHandler}>
-              <label>Escribe tu comentario</label>
+          
+          </div>
+        </div>
+        </header>
+        <form className="form3" onSubmit={submitHandler}>
               <textarea
                 id="comment"
                 value={input.contenido}
                 onChange={(e) => handdleChange(e)}
                 name="contenido"
+                placeholder="Escribe tu comentario:"
+                className="name formEntry3"
               ></textarea>
-              <label>Rating</label>
+              <Rating className="ratingStyle"/>
+              <br></br>
+              {/* <label>Rating</label>
               <select
                 id="puntuacion"
                 value={input.puntuacion}
@@ -136,21 +156,19 @@ function DetailMovie() {
                 onChange={(e) => handdleChange(e)}
               >
                 <option value="1">Select</option>
-                <option value="1">1- Bad</option>
+                <option value="1">1- Malo</option>
                 <option value="2">2- Fair</option>
                 <option value="3">3- Good</option>
                 <option value="4">4- Very good</option>
                 <option value="5">5- Excelent</option>
-              </select>
-              <button type="submit">Comentar</button>
+              </select> */}
+              <button 
+              className="submit formEntry3"  
+              type="submit"
+              value="Enviar">Comentar</button>
             </form>
-            <h2>comentarios:</h2>
-          </div>
-          <br></br>
-          <br></br>
-          <br></br>
-        </div>
-      </header>
+            <h4>Comentarios:</h4>
+
     </section>
   );
 }
