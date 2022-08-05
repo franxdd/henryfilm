@@ -14,7 +14,8 @@ import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import "../../Styles/components/_ComentariosForm.scss";
 import Rating from "../Details/Rating.jsx";
 import {TiHeart as HeartIcon} from "react-icons/ti";
-
+import "../../Styles/components/_Modal.scss";
+import {AiFillCloseSquare as CloseIcon} from "react-icons/ai";
 
 function DetailMovie() {
   const userReducer = useSelector((state) => state.user);
@@ -29,6 +30,19 @@ function DetailMovie() {
     let idParseado = parseInt(id);
     dispatch(addToCart(idParseado));
   }
+  function BasicModal() {
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+  }
+  var video2 = document.querySelector("video");
+   function stopVideo(){
+    video.pause();
+    video.currentTime = 0;
+  }  
+    // $("#stop").on('click', function(){
+    //   stopVideo(); });
+
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: "",
@@ -108,10 +122,21 @@ function DetailMovie() {
             <div className="contenedor-links">
               {userReducer.username ? (
                 <div>
-                  <button>Trailer</button>
+                <a href="#miModal"><button>Trailer</button></a>
+                <div id="miModal" className="modal">
+                  <div className="modal-contenido">
+                    <a href="#"> <CloseIcon className="iconoClose"/> </a><br></br>
+                    <div className="iframe-container">
+                    <iframe className="video" width="100%" height="100%" src={video}></iframe>
+                    </div>
+                  </div>  
+                </div>
+        
+                {/* <button>Trailer</button>
                   <div>
                     <iframe width="200" height="200" src={video}></iframe>
                   </div>
+                </div> */}
                 </div>
               ) : (
                 <button onClick={handleRegister}>Trailer</button>
