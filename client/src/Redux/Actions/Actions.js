@@ -43,6 +43,7 @@ export const POST_COMENTARIO = "POST_COMENTARIO";
 export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 export const REMOVE_TO_WISHLIST = "REMOVE_TO_WISHLIST";
 export const GET_REVIEW= "GET_REVIEW";
+// export const POST_PAGOS = "POST_PAGOS"
 
 // export const getAllSeries = () => {
 //   return (dispatch) => {
@@ -448,3 +449,9 @@ export const removeToWishlist = (id) => {
       payload: id,
     });
 };
+
+// export const postPagos = (payload) => {
+//   return async (dispatch) => {
+
+//   }
+// }

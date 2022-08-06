@@ -25,6 +25,7 @@ function Carro() {
   const HandleClickComprar = () => {
     const token = sessionStorage.getItem("token");
     if (token) {
+      navigate("/home/pasarela");
       console.log("COMPRADISIMO BRO");
     } else {
       navigate("/home/login");
