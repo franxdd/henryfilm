@@ -10,6 +10,7 @@ const modelSeries = require("../models/Series.js");
 const modelComentarios = require("../models/Comentarios.js");
 const modelCarros = require("../models/Carros.js");
 const modelDeseados = require("../models/Deseados.js");
+const modelPrecios = require("../models/Precios.js");
 
 let sequelize =
   process.env.NODE_ENV === "production"
@@ -80,8 +81,9 @@ modelSeries(sequelize);
 modelComentarios(sequelize);
 modelCarros(sequelize)
 modelDeseados(sequelize)
+modelPrecios(sequelize)
 
-const { Peliculas, Usuarios, Series, Comentarios, Carros, Deseados } = sequelize.models;
+const { Peliculas, Usuarios, Series, Comentarios, Carros, Deseados, Precios } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -99,6 +101,15 @@ Deseados.belongsTo(Usuarios);
 
 Series.belongsToMany(Usuarios, { through: "series-Usuario" });
 Usuarios.belongsToMany(Series, { through: "series-Usuario" });
+
+
+// Peliculas.hasOne(Precios);
+// Precios.belongsTo(Peliculas);
+
+// Series.hasOne(Precios);
+// Precios.belongsTo(Series);
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

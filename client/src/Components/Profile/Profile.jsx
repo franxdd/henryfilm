@@ -17,13 +17,11 @@ const Profile = () => {
       const token = sessionStorage.getItem("token");
       const carro = cart.slice();
       const deseados = deseado.slice()
-      
-      console.log(deseados)
       const arrAux = [token, carro, deseados];
 
       // console.log("ASDASD", arrAux)
 
-      // dispatch(logOut(arrAux));
+      dispatch(logOut(arrAux));
 
       sessionStorage.removeItem("token");
       localStorage.setItem("cart", JSON.stringify([]));

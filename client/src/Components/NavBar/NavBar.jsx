@@ -103,24 +103,29 @@ const Nav2 = () => {
   //   }
   // }
 
-  const HandleClick = (e) => {
-    e.preventDefault();
-    // console.log("entro a logout");
+  // **************************** ESTA COMENTADO PORQUE EL LOG OUT ESTA EN PROFILE ***********************************
 
-    const token = sessionStorage.getItem("token");
-    const carro = cart.slice();
-    const deseados = deseado.slice()
-    const arrAux = [token, carro, deseados];
 
-    // console.log("ASDASD", arrAux)
+  // const HandleClick = (e) => {
+  //   e.preventDefault();
+  //   // console.log("entro a logout");
 
-    dispatch(logOut(arrAux));
-    sessionStorage.removeItem("token");
-    localStorage.setItem("cart", JSON.stringify([]));
-    localStorage.setItem("wishlist", JSON.stringify([]));
+  //   const token = sessionStorage.getItem("token");
+  //   const carro = cart.slice();
+  //   const deseados = deseado.slice()
+  //   const arrAux = [token, carro, deseados];
 
-    navigate("/home");
-  };
+  //   console.log("ASDASD", arrAux)
+
+  //   dispatch(logOut(arrAux));
+  //   sessionStorage.removeItem("token");
+  //   localStorage.setItem("cart", JSON.stringify([]));
+  //   localStorage.setItem("wishlist", JSON.stringify([]));
+
+  //   navigate("/home");
+  // };
+
+  // **************************** ESTA COMENTADO PORQUE EL LOG OUT ESTA EN PROFILE ***********************************
 
   // return userReducer.isAdmin ? (
   return (

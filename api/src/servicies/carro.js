@@ -24,22 +24,9 @@ const postCarrito = async (req, res) => {
         UsuarioId: dataUser.id,
       },
     });
-    // console.log(verificacionCarro)
+ 
     if (verificacionCarro.length !== 0) {
-      
-      // console.log("entro al ya creado");
 
-      // const user = await Usuarios.findAll({
-      //   where: {
-      //     id: dataUser.id,
-      //   },
-      // });
-
-      // const carrito = await Carros.findAll({
-      //   where: {
-      //     UsuarioId: dataUser.id,
-      //   },
-      // });
 
       const carro = await Carros.update(
         { contenido: contenido },

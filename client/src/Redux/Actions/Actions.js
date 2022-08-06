@@ -44,6 +44,8 @@ export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 export const REMOVE_TO_WISHLIST = "REMOVE_TO_WISHLIST";
 export const GET_REVIEW = "GET_REVIEW";
 export const POST_REVIEW = "POST_REVIEW";
+export const GOOGLE_USER = "GOOGLE_USER";
+export const GOOGLE_LOG_OUT = "GOOGLE_LOG_OUT"
 
 // export const getAllSeries = () => {
 //   return (dispatch) => {
@@ -181,7 +183,40 @@ export const logOut = (payload) => {
     return dispatch({ type: LOG_OUT });
   };
 };
+export const signInUser = (payload)=>{
 
+  return async function (dispatch) {
+    try {
+      console.log('entro a al action')
+      var user = await axios.post("/usuarios/google", payload);
+      
+    } catch (error) {
+
+    }
+    // {
+      //   // withCredentials: true,
+      // });
+      console.log(user)
+    // sessionStorage.setItem("token", JSON.stringify(user.data));
+
+    return dispatch({ type: GOOGLE_USER,  payload: user.data });
+  };
+
+
+}
+
+
+export const googleLogOut = ()=>{
+
+  
+  return {
+    type: GOOGLE_LOG_OUT,
+    
+  };
+
+
+
+}
 export const getUser = (token) => {
   return async function (dispatch) {
     // console.log("access-token=" + token);

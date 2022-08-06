@@ -2,6 +2,7 @@ import React from "react";
 import Carousel from "../Carousel/Carousel";
 import Header from "../Header/Header";
 import { useContext, useEffect } from "react";
+
 import Context from "../../contexto/Context";
 import {
   seriesName,
@@ -27,8 +28,15 @@ function getToken() {
 }
 
 const Home = () => {
+
+
+
   const tokenString = getToken();
   const dispatch = useDispatch();
+
+
+
+
 
   useEffect(() => {
     // dispatch(getAllSeries());
@@ -44,6 +52,7 @@ const Home = () => {
 
   return (
     <section className="contenedor-carousels">
+    <div id="signInDiv"></div>
       <Header />
       <Carousel
         url={`${urlBase}/trending/movie/week?api_key=${apiKey}&language=${idioma}`}
