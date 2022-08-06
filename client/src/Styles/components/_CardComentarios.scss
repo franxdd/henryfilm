@@ -1,0 +1,35 @@
+@import "../Utilidades/_Variables.scss";
+
+.ComentariosCard{
+color:white;
+display: flex;
+flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ h2{
+    padding: 20px;
+ }
+.review{
+    color:white;
+    width: 40%;
+    padding: 2em 0;
+    border-top: 1px solid #ffffff;
+    font-size: 1.1em;
+}
+
+.h3,.email,p {
+    padding: .5em 0;
+}
+
+.h3{
+    font-size: 19px;
+    margin: 0;
+    font-weight: 500;
+}
+}
+
+@media(max-width:900px){
+    .review{
+        width: 80%;
+    }
+}

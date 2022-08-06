@@ -11,16 +11,20 @@ import {
   apiKey,
 } from "../../auxiliares/Variables";
 import "../../Styles/components/_Home.scss";
-import { useSelector, useDispatch } from "react-redux";
+import { 
+  // useSelector, 
+  useDispatch 
+} from "react-redux";
 import {
-  getAllSeries,
-  getAllMovies,
-  getGenerosMovies,
-  getGenerosSeries,
+  // getAllSeries,
+  // getAllMovies,
+  // getGenerosMovies,
+  // getGenerosSeries,
   getTodo,
-  getUser,
+  // getUser,
 } from "../../Redux/Actions/Actions";
-import Footer from "../Footer/Footer";
+// import Footer from "../Footer/Footer";
+
 function getToken() {
   const tokenString = sessionStorage.getItem("token");
   const userToken = JSON.parse(tokenString);

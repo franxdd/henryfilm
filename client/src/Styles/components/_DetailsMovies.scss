@@ -56,9 +56,10 @@ section {
       text-align: left;
       font-size: 15px;
     }
+
     
     ul {
-      width: 80%;
+      width: 50%;
       padding: 0;
       display: flex;
       flex-wrap: wrap;
@@ -155,12 +156,10 @@ section {
       }
     }
     }
-    
-    }
-    
+    } 
   }
 }
-  
+
 @media screen and (max-width: 500px) {
   section {
     .header-info {

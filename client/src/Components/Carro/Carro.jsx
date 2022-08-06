@@ -25,6 +25,7 @@ function Carro() {
   const HandleClickComprar = () => {
     const token = sessionStorage.getItem("token");
     if (token) {
+      navigate("/home/pasarela");
       console.log("COMPRADISIMO BRO");
     } else {
       navigate("/home/login");
@@ -78,7 +79,7 @@ function Carro() {
               <h6>${totalPrice}.00</h6>
             </p>
             <button
-              className="submit formEntry2"
+              className="submit formEntry4"
               onClick={() => HandleClickComprar()}
             >
               COMPRAR
