@@ -108,7 +108,7 @@ const postLogin = async (req, res) => {
             arrAux = [
               accessToken,
               carrito.dataValues.contenido,
-              deseados.dataValues.contenido,
+              deseados.dataValues.contenido,"Te logueaste con exito"
             ];
           } else if (carrito) {
             arrAux = [accessToken, carrito.dataValues.contenido, [], "Te logueaste con exito"];
@@ -117,7 +117,7 @@ const postLogin = async (req, res) => {
           } else {
             arrAux = [accessToken, [], [], "Te logueaste con exito"];
           }
-
+console.log(arrAux)
           res.status(200).json(arrAux);
         }
       })

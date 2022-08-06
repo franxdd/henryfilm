@@ -178,7 +178,7 @@ export const PostLogin = (payload) => {
       // {
       //   // withCredentials: true,
       // });
-      console.log(created.data);
+      console.log(created.data[3]);
 
       sessionStorage.setItem("token", JSON.stringify(created.data[0]));
 
