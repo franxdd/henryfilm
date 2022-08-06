@@ -8,6 +8,7 @@ const stripe = new Stripe(SECRET_KEY);
 
 const pasarelaDePagos = async (req, res) => {
   const { id, amount } = req.body;
+  console.log(req.body)
   try {
     const payment = await stripe.paymentIntents.create({
       amount,
