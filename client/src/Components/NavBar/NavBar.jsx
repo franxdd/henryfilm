@@ -54,9 +54,11 @@ const Nav2 = () => {
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
+    console.log("Estoy haciendo click")
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+    console.log("Estoy haciendo click2")
   };
 
   const handleCloseNavMenu = () => {
