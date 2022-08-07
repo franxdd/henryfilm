@@ -243,7 +243,7 @@ const Nav2 = () => {
                   sx={{ my: 2, color: "white" }}
                 >
                   {" "}
-                  <HomeIcon fontSize="x-large" />
+                  <HomeIcon className="iconoHome" />
                 </Button>
               </Link>
               <Link style={{ textDecoration: "none" }} to="/home/peliculas">
@@ -251,8 +251,7 @@ const Nav2 = () => {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white" }}
                 >
-                  <CamaraIcon fontSize="x-large" />
-        
+                  <CamaraIcon className="iconoHome"/>
                 </Button>
               </Link>
               <Link style={{ textDecoration: "none" }} to="/home/series">
@@ -260,8 +259,7 @@ const Nav2 = () => {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white" }}
                 >
-                  <MonitorIcon fontSize="x-large" />
-              
+                  <MonitorIcon className="iconoHome" />
                 </Button>
               </Link>
               <SearchBar sx={{ my: 2, color: "white" }} />

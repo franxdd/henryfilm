@@ -16,7 +16,7 @@
  ;
 }
 .pageTitle2{
-    font-size: 0.9em;
+    font-size: 1.1em;
     font-weight: 400;
     color:aliceblue
 }
@@ -45,3 +45,12 @@
     transform: translate(0, 8px);
   }
 } 
+@media screen and (max-width: 500px){
+  .ContainerLogin{
+  .pageTitle2{
+    font-size: 0.9em;
+    font-weight: 400;
+    color:aliceblue
+}
+  }
+}
