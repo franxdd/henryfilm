@@ -24,6 +24,7 @@ import {
 } from "../../Redux/Actions/Actions";
 // import Footer from "../Footer/Footer";
 
+
 function getToken() {
   const tokenString = sessionStorage.getItem("token");
   const userToken = JSON.parse(tokenString);
@@ -48,6 +49,7 @@ const Home = () => {
 
   return (
     <section className="contenedor-carousels">
+      <div>
       <Header />
       <Carousel
         url={`${urlBase}/trending/movie/week?api_key=${apiKey}&language=${idioma}`}
@@ -63,7 +65,9 @@ const Home = () => {
         titulo={seriesName[idioma].tendencia}
         clase="series"
       />
-      {/* <Footer /> */}
+      <div>
+      </div>
+      </div>
     </section>
   );
 };

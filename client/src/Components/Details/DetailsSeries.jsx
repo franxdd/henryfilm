@@ -7,11 +7,20 @@ import {
   setdetailLenguage,
   createReview,
   addToWishlist,
+  getReview
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_DetailsMovies.scss";
 import { estrellas } from "../../auxiliares/Funciones.js";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
+import "../../Styles/components/_ComentariosForm.scss";
+import {TiHeart as HeartIcon} from "react-icons/ti";
+import "../../Styles/components/_Modal.scss";
+import {AiFillCloseSquare as CloseIcon} from "react-icons/ai";
+import Rating2 from "../Details/Rating2.jsx";
+import Rating from '@mui/material/Rating';
+import "../../Styles/components/_CardComentarios.scss";
+import {FaCommentDots as ComentIcon} from "react-icons/fa"
 
 function DetailsSeries() {
   const userReducer = useSelector((state) => state.user);
@@ -21,31 +30,30 @@ function DetailsSeries() {
   // let lenguaje = useSelector((state) => state.lenguaje);
   // let asd = useSelector((state) => state.idioma);
   let seriesDetail = useSelector((state) => state.seriesDetail);
+  let { comentarios } = useSelector((state) => state);
+  let token = sessionStorage.getItem("token");
   let video = seriesDetail[0]?.videosAMostrar[0];
   // .replace("watch?v=", "embed/");
   function addCart(id) {
     let idParseado = parseInt(id);
     dispatch(addToCart(idParseado));
   }
-  function addWishlist(id) {
-    let idParseado2 = parseInt(id);
-    dispatch(addToWishlist(idParseado2));
+  function BasicModal() {
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
   }
-
-  useEffect(() => {
-    // dispatch(setdetailLenguage(id, asd));
-    dispatch(getSeriesDetail(id));
-
-    return () => dispatch(willunmont());
-  }, [dispatch]);
-  let token = sessionStorage.getItem("token");
-
+  
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: "",
     idserie: id,
     token: token,
   });
+  const input2 = {
+    id: id,
+    tipo: "serie",
+  };
 
   function handdleChange(e) {
     setInput({
@@ -53,7 +61,6 @@ function DetailsSeries() {
       [e.target.name]: e.target.value,
     });
   }
-  // console.log(input);
   const submitHandler = (e) => {
     e.preventDefault();
     if (!input.token) {
@@ -63,6 +70,28 @@ function DetailsSeries() {
       dispatch(createReview(input));
     }
   };
+  function handleRegister(e) {
+    e.preventDefault();
+    alert("debes registrarte");
+    navigate("/home/Login");
+  }
+  function addWishlist(id) {
+    let idParseado2 = parseInt(id);
+    dispatch(addToWishlist(idParseado2));
+  }
+
+  useEffect(() => {
+    // dispatch(setdetailLenguage(id, asd));
+    dispatch(getSeriesDetail(id));
+    dispatch(getReview(input2));
+    return () => dispatch(willunmont());
+  }, [dispatch]);
+
+
+
+
+  // console.log(input);
+
   function handleRegister(e) {
     e.preventDefault();
     alert("debes registrarte");
@@ -130,10 +159,15 @@ function DetailsSeries() {
             <div className="contenedor-links">
               {userReducer.username ? (
                 <div>
-                  <button>Trailer</button>
-                  <div>
-                    <iframe width="200" height="200" src={video}></iframe>
-                  </div>
+                   <a href="#miModal"><button>Trailer</button></a>
+                   <div id="miModal" className="modal">
+                  <div className="modal-contenido">
+                    <a href="#"> <CloseIcon className="iconoClose"/> </a><br></br>
+                    <div className="iframe-container">
+                    <iframe className="video" width="100%" height="100%" src={video}></iframe>
+                    </div>
+                  </div>  
+                </div>
                 </div>
               ) : (
                 <button onClick={handleRegister}>Trailer</button>
@@ -141,40 +175,43 @@ function DetailsSeries() {
               <Link to={`/videos`}>
                 <button>Reparto</button>
               </Link>
-              <span className="spanCompras" onClick={() => addCart(id)}>
-                <ShopIcon className="iconoShop" />
-              </span>
-              <button onClick={() => addWishlist(id)}>Wishlist</button>
+              <div className="Iconos">
+                <abbr title="Añade al carrito">
+                  <span onClick={() => addCart(id)}>
+                    <ShopIcon className="iconoShop" />
+                  </span>
+                </abbr>
+                <abbr title="Agrega a Favoritos">
+                  <span onClick={() => addWishlist(id)}>
+                    <HeartIcon className="iconoHeart" />
+                  </span>
+                </abbr>
+                </div>
             </div>
-            <form onSubmit={submitHandler}>
-              <label>Escribe tu comentario</label>
-              <textarea
-                id="comment"
-                value={input.contenido}
-                onChange={(e) => handdleChange(e)}
-                name="contenido"
-              ></textarea>
-              <label>Rating</label>
-              <select
-                id="puntuacion"
-                value={input.puntuacion}
-                name="puntuacion"
-                onChange={(e) => handdleChange(e)}
-              >
-                <option value="1">Select</option>
-                <option value="1">1- Bad</option>
-                <option value="2">2- Fair</option>
-                <option value="3">3- Good</option>
-                <option value="4">4- Very good</option>
-                <option value="5">5- Excelent</option>
-              </select>
-              <button type="submit">Comentar</button>
-            </form>
-            <h2>comentarios:</h2>
           </div>
         </div>
       </header>
+        <Rating2 className="ratingStyle" id={id} token={token}/>
+        {/* <Rating className="ratingStyle" /> */}
+        <br></br>
+
+      <div className="ComentariosCard">
+        <h2>Comentarios:</h2>
+        {comentarios &&
+           comentarios.map((e) => {
+          return (
+            <div className= "review">
+              <div className="email" >Usuario: {e.username}</div>
+             <div className="infoRev"><Rating 
+             name="read-only" value={e.puntuacion} /></div>
+              <div className="p">Comentario: {e.contenido}</div>
+              <br />
+            </div>
+          );
+        })}
+        </div>
     </section>
   );
 }
+
 export default DetailsSeries;
