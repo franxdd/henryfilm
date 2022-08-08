@@ -49,14 +49,12 @@ function Login() {
       callback: handleCallbackResponse,
     });
 
-    if(googleUser.length === 0){
-
-      console.log('entro')
+    if (googleUser.length === 0) {
+      console.log("entro");
       google.accounts.id.renderButton(document.getElementById("signInDiv"), {
         theme: "outline",
         size: "large",
       });
-
     }
   }, [googleUser]);
 
@@ -74,9 +72,18 @@ function Login() {
       password: "",
     });
 
-    navigate("/home", { replace: true });
+    setTimeout(() => {
+      const tokenn = sessionStorage.getItem("token");
+      console.log(tokenn);
+      if (tokenn) {
+        navigate("/home", { replace: true });
+      }
+    }, 1500);
   }
-  console.log(googleUser);
+
+  navigate("/home", { replace: true });
+
+  // console.log(googleUser);
   return (
     <div className="ContainerLogin">
       <div className="Login">

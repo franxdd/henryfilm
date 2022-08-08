@@ -191,7 +191,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
       };
     case POST_LOGIN:
-   
+      console.log(action.payload[3])
       sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
       localStorage.setItem("cart", JSON.stringify(action.payload[1]));
       localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
@@ -472,7 +472,6 @@ const rootRouter = (state = initialState, action) => {
     //       allMovies: state.backupMovies.slice(),
     //     };
     //   }
-
     case ADD_TO_CART:
       const item = state.todo.find((e) => e.id === action.payload);
       let cartStorage = localStorage.getItem("cart");

@@ -70,7 +70,20 @@
 .iconoShop {
   font-size: 30px;
   color: $detalles;
-}
+  :hover{
+    color: $blanco;
+  } 
+  }
+  .iconoHome {
+    font-size: 30px;
+    color: $blanco;
+    :hover{
+      color: $detalles;
+    } 
+    }
+  
+
+
 
 // /*Image*/
 // .card-img {
@@ -212,5 +225,5 @@
     background: rgba(242, 229, 229, 0.4);
     color: $detalles;
   }
-// }
+
 

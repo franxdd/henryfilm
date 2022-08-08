@@ -54,9 +54,11 @@ const Nav2 = () => {
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
+    console.log("Estoy haciendo click")
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+    console.log("Estoy haciendo click2")
   };
 
   const handleCloseNavMenu = () => {
@@ -130,7 +132,7 @@ const Nav2 = () => {
   // return userReducer.isAdmin ? (
   return (
     <main>
-      <AppBar position="sticky" sx={{ background: "black" }}>
+      <AppBar position="static" sx={{ background: "black" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Link to="/" style={{ textDecoration: "none" }}>
@@ -141,9 +143,6 @@ const Nav2 = () => {
                   mr: 5,
                   display: { xs: "none", md: "flex" },
                   justifyContent: "center",
-                  fontFamily: "Open Sans",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
                   color: "black",
                   boxShadow: "10px 10px #f000000",
                   textDecoration: "none",
@@ -232,7 +231,7 @@ const Nav2 = () => {
                     src={logo}
                     alt="Logo"
                     height="auto"
-                    width="130px"
+                    width="100px"
                   />
                 </Link>
               </Typography>
@@ -249,7 +248,7 @@ const Nav2 = () => {
                   sx={{ my: 2, color: "white" }}
                 >
                   {" "}
-                  <HomeIcon fontSize="x-large" /> Inicio
+                  <HomeIcon className="iconoHome" />
                 </Button>
               </Link>
               <Link style={{ textDecoration: "none" }} to="/home/peliculas">
@@ -257,8 +256,7 @@ const Nav2 = () => {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white" }}
                 >
-                  <CamaraIcon fontSize="x-large" />
-                  Peliculas
+                  <CamaraIcon className="iconoHome"/>
                 </Button>
               </Link>
               <Link style={{ textDecoration: "none" }} to="/home/series">
@@ -266,14 +264,12 @@ const Nav2 = () => {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white" }}
                 >
-                  <MonitorIcon fontSize="x-large" />
-                  Series
+                  <MonitorIcon className="iconoHome" />
                 </Button>
               </Link>
-
               <SearchBar sx={{ my: 2, color: "white" }} />
             </Box>
-            <Box>
+
               <IconButton sx={{ mr: "6px", mt: "4px", p: "9px 6px 8px 6px" }}>
               <abbr title="Ver el carrito">
                 <Link to="/home/carro" style={{ color: "grey" }}>
@@ -281,14 +277,14 @@ const Nav2 = () => {
                 </Link>
             </abbr>
               </IconButton>
-            </Box>
+        
             {/* {userReducer.username ? ( */}
             {userReducer.username ? (
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Abrir las opciones">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     {/* <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} /> */}
-                    <img src={perfil} alt="Logo" height="auto" width="40px" />
+                    <img src={perfil} height="auto" width="40px" />
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -358,7 +354,7 @@ const Nav2 = () => {
                       logOut
                     > */}
                     
-                      <span onClick={(e) => HandleClick(e)}>Logout<LogoutIcon /></span>
+                      {/* <Button  onClick={(e) => HandleClick(e)}>Logout<LogoutIcon /></Button> */}
                       {/* <Link to={"/home/Profile"}>
                  <Button sx={{ color: "black" }}>
                   {" "}
@@ -368,7 +364,9 @@ const Nav2 = () => {
                     {/* </Typography> */}
                   </MenuItem>
                 </Menu>
+                <Button sx={{ color: "white" }} onClick={(e) => HandleClick(e)}>Logout</Button>
               </Box>
+              
             ) : (
               <Link
                 style={{ textDecoration: "none", color: "white" }}
@@ -376,9 +374,10 @@ const Nav2 = () => {
               >
                 <Button sx={{ color: "white" }}>
                   {" "}
-                  Login <LoginIcon sx={{ ml: "5px" }} />
+                  Login 
                 </Button>
               </Link>
+              
             )}
           </Toolbar>
         </Container>

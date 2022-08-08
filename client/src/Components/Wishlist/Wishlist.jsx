@@ -14,7 +14,7 @@ function Wishlist() {
 
   return (
     <div className="container">
-       <h3> <img className="logo" src={tusFavoritos} alt="Logo" height="auto" width="280px" /> </h3>
+       <h3> <img className="logo" src={tusFavoritos} alt="Logo" height="auto" width="250px" /> </h3>
       <div className = "containerCarrito">
         {wishlist &&
           wishlist.map((w) => {

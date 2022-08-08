@@ -11,9 +11,9 @@ import {
   apiKey,
 } from "../../auxiliares/Variables";
 import "../../Styles/components/_Home.scss";
-import { 
-  // useSelector, 
-  useDispatch 
+import {
+  // useSelector,
+  useDispatch,
 } from "react-redux";
 import {
   // getAllSeries,
@@ -32,15 +32,8 @@ function getToken() {
 }
 
 const Home = () => {
-
-
-
   const tokenString = getToken();
   const dispatch = useDispatch();
-
-
-
-
 
   useEffect(() => {
     // dispatch(getAllSeries());
@@ -56,7 +49,7 @@ const Home = () => {
 
   return (
     <section className="contenedor-carousels">
-    <div id="signInDiv"></div>
+      <div id="signInDiv"></div>
       <Header />
       <Carousel
         url={`${urlBase}/trending/movie/week?api_key=${apiKey}&language=${idioma}`}
@@ -72,7 +65,7 @@ const Home = () => {
         titulo={seriesName[idioma].tendencia}
         clase="series"
       />
-      {/* <Footer /> */}
+      <div></div>
     </section>
   );
 };
