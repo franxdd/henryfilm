@@ -22,7 +22,6 @@ function LoginRegister() {
   function handdleSubmit(e) {
     e.preventDefault();
     dispatch(PostUsuario(input));
-    alert("Tu usuario fue creado");
     setInput({
       username: "",
       email: "",
@@ -64,7 +63,7 @@ function LoginRegister() {
               className="name formEntry"
               onChange={handdleChange}
             />
-            <button button class="submit formEntry" type="submit">
+            <button button className="submit formEntry" type="submit">
               {" "}
               Registrarse
             </button>

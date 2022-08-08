@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
         type: DataTypes.ARRAY(DataTypes.STRING),
       }, //*
       runtime: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       }, // - episode run time
       release_date: {

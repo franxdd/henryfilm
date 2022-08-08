@@ -11,7 +11,6 @@ const carro = require("./carro")
 const deseados = require("./deseados")
 const pasarelaDePagos = require("./pasarelaDePagos")
 
-
 router.use("/peliculas", peliculas);
 router.use("/series", series);
 router.use("/usuarios", usuarios);
