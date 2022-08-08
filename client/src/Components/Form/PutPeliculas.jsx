@@ -208,7 +208,7 @@ const PutPeliculas = () => {
             placeholder="Elenco:"
             className="name formEntry2"
           />
-            <button class="submit formEntry2" 
+            <button className="submit formEntry2" 
             id="elencobutton"
             value="Agregar"
             type="button"
@@ -238,8 +238,8 @@ const PutPeliculas = () => {
           />
         </div>
 
-        <section class="containerSelect">
-        <div class="dropdown">
+        <section className="containerSelect">
+        <div className="dropdown">
           <select
             name="generos"
             onChange={(e) => HandleChangeGeneros(e)}
@@ -259,8 +259,8 @@ const PutPeliculas = () => {
             {g}
           </div>
         ))}
-      <section class="containerSelect">
-          <div class="dropdown">
+      <section className="containerSelect">
+          <div className="dropdown">
             <select name="tipo"
             onChange={(e) => HandleChangeTipos(e)}
             className="dropdown-select">
@@ -271,7 +271,7 @@ const PutPeliculas = () => {
           </div>
         </section>
 
-        <button class="submit formEntry2" 
+        <button className="submit formEntry2" 
             type="submit"
             value="Enviar"
             disabled={Object.keys(error).length}

@@ -1,3 +1,4 @@
+import React from "react";
 import Slider from "react-slick";
 import "../../Styles/slick-carousel/slick/slick.css";
 import "../../Styles/slick-carousel/slick/slick-theme.css";

@@ -27,7 +27,7 @@ function WishlistCard({ id, nombre, image, qty, tipo, precio }) {
         <p className="textDetalle"> Es {tipo} </p>
       </div>
 
-       <div class="cardAbajo">
+       <div className="cardAbajo">
        <p className="textNameCarrito">${precio}</p>
        <abbr title="Añadir al Carrito">
         <span className="spanCompras" onClick={() => addCart(id)}>

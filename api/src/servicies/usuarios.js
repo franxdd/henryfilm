@@ -1,6 +1,6 @@
 const axios = require("axios");
 const express = require("express");
-const { verify } = require("jsonwebtoken");
+const { sign, verify, decode } = require("jsonwebtoken");
 const app = express();
 require("dotenv").config();
 const { API_KEY } = process.env;
@@ -109,15 +109,26 @@ const postLogin = async (req, res) => {
               accessToken,
               carrito.dataValues.contenido,
               deseados.dataValues.contenido,
+              "Te logueaste con exito",
             ];
           } else if (carrito) {
-            arrAux = [accessToken, carrito.dataValues.contenido, []];
+            arrAux = [
+              accessToken,
+              carrito.dataValues.contenido,
+              [],
+              "Te logueaste con exito",
+            ];
           } else if (deseados) {
-            arrAux = [accessToken, [], deseados.dataValues.contenido];
+            arrAux = [
+              accessToken,
+              [],
+              deseados.dataValues.contenido,
+              "Te logueaste con exito",
+            ];
           } else {
-            arrAux = [accessToken, [], []];
+            arrAux = [accessToken, [], [], "Te logueaste con exito"];
           }
-
+          console.log(arrAux)
           res.status(200).json(arrAux);
         }
       })
@@ -125,7 +136,6 @@ const postLogin = async (req, res) => {
         res.status(400).json(err);
       });
   } catch (error) {
-    console.log(error);
     res.status(400).json(error);
   }
 };
@@ -196,6 +206,113 @@ const putElminar = async (req, res) => {
   }
 };
 
+const postgoogleuser = async (req, res) => {
+ 
+
+  try {
+    let { email, name, jti, picture } = req.body;
+
+    const jwtPass = sign(
+      JSON.stringify({
+        username: name,
+        email: email,
+      }),
+      "jwtsecretcambiar"
+      );
+    
+
+    var user = await Usuarios.findOne({
+      where: { username: name },
+    });
+
+  
+
+    if (!user) {
+
+
+
+      var user = await bcrypt
+        .hash(jwtPass, 10)
+
+        .then(async (hash) => {
+          var user = await Usuarios.create({
+            username: name,
+            password: hash,
+            email: email,
+            picture: picture,
+          }).then(mandarEmail(name, email, jti));
+          return user;
+        })
+        .catch((err) => {
+          if (err) {
+            res.status(400).send("El usuario ya existe");
+          }
+        });
+    }
+
+
+
+    const carrito = await Carros.findOne({
+      where: {
+        UsuarioId: user.dataValues.id,
+      },
+    });
+
+    const deseados = await Deseados.findOne({
+      where: {
+        UsuarioId: user.dataValues.id,
+      },
+    });
+
+    if (user.length === 0)
+      res.status(400).json({ error: "El usuario no existe" });
+
+    const dbPass = user.dataValues.password;
+
+    bcrypt
+      .compare(jwtPass, dbPass)
+      .then((match) => {
+        console.log("antes del if del match");
+        if (!match) {
+          console.log('negado del match')
+          res
+            .status(400)
+            .json({ error: "Combinacions de usuario y password erroneo" });
+        } else {
+          console.log('verdad del match')
+          // console.log(user)
+          const accessToken = createTokens(user);
+          res.status(200).cookie("access-token", accessToken, {
+            maxAge: 60 * 60 * 60,
+          });
+
+          if (carrito && deseados) {
+
+            arrAux = [
+              accessToken,
+              carrito.dataValues.contenido,
+              deseados.dataValues.contenido,
+            ];
+          } else if (carrito) {
+            arrAux = [accessToken, carrito.dataValues.contenido, []];
+          } else if (deseados) {
+            arrAux = [accessToken, [], deseados.dataValues.contenido];
+          } else {
+            arrAux = [accessToken, [], []];
+          }
+          console.log(arrAux)
+          return res.status(200).json(arrAux);
+        }
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  } catch (error) {
+    console.log("entro al error api");
+    res.status(400).json(error);
+  }
+};
+
 module.exports = {
   postUser,
   getAllUsers,
@@ -203,4 +320,5 @@ module.exports = {
   getProfile,
   putModificarAdmin,
   putElminar,
+  postgoogleuser,
 };

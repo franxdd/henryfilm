@@ -1,4 +1,4 @@
-import { React } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardMovies from "../CardMovies/CardMovies";
 import {
@@ -30,7 +30,6 @@ function MoviesHome() {
 
   const allMovies = useSelector((state) => state.allMovies);
   const generos = useSelector((state) => state.generosMovies);
-
 
   const [generosCache, setgenerosCache] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -73,7 +72,7 @@ function MoviesHome() {
 
   return allMovies.length === 0 ? (
     <div className="Loading">
-    <div className="loader"></div>
+      <div className="loader"></div>
     </div>
   ) : (
     <div className="filter">
@@ -90,7 +89,9 @@ function MoviesHome() {
         </span>
       </button>
       <button className="cta" onClick={(e) => HandleClickVoteDES(e)}>
-      <span className="hover-underline-animation"><strong> - </strong> Puntuación </span>
+        <span className="hover-underline-animation">
+          <strong> - </strong> Puntuación{" "}
+        </span>
       </button>
       <span>Filtrar por:</span>
 
@@ -113,9 +114,9 @@ function MoviesHome() {
       {/* </div>
       </div> */}
       <abbr title="Limpiar Filtros">
-      <span onClick={() => HandleClickClear()}>
-        <ClearIcon className="icono-clear" />
-      </span>
+        <span onClick={() => HandleClickClear()}>
+          <ClearIcon className="icono-clear" />
+        </span>
       </abbr>
       {generosCache?.map((g) => {
         return (

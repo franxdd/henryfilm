@@ -22,8 +22,8 @@ const FormPeliculas = () => {
     cast: [],
     runtime: "",
     release_date: "",
-    posterImagen: "",
-    backDropImagen: "",
+    posterImagen: null,
+    backDropImagen: null,
     vote_average: "",
     popularity: "",
     tipo: "",
@@ -31,14 +31,18 @@ const FormPeliculas = () => {
 
   const HandleSubmit = (e) => {
     e.preventDefault();
+    console.log("entre al inicio del submit");
     if (data.backDropImagen === "Alt") {
       data.backDropImagen = back;
     }
     if (data.posterImagen === "Alt") {
       data.posterImagen = poster;
     }
-    // console.log(data)
+    // const reader = new FileReader();
+    // reader.readAsDataURL(data.backDropImagen);
+    console.log("entro en el submit");
     dispatch(postPeliculas(data));
+    console.log(data);
     alert("Pelicula creada");
     setdata({
       name: "",
@@ -47,8 +51,10 @@ const FormPeliculas = () => {
       cast: [],
       runtime: "",
       release_date: "",
-      posterImagen: "",
-      backDropImagen: "",
+      number_of_episodes:"",
+      episode_run_time:"",
+      posterImagen: null,
+      backDropImagen: null,
       vote_average: "",
       popularity: "",
       tipo: "",
@@ -105,8 +111,41 @@ const FormPeliculas = () => {
       e.value = "";
     }
   };
-  const HandleInput = (e) => {
-    setdata({ ...data, [e.target.name]: e.target.value });
+   const HandleInput = (e) => {
+    console.log(data);
+    console.log(e.target.files);
+    console.log("entro");
+    if (e.target.id === "posterImagen") {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setdata({
+          ...data,
+          posterImagen: reader.result,
+        });
+        // setImagenformulario({
+        //   ...imagenformulario,
+        // posterImagen: reader.result,
+        // });
+      };
+    } else if (e.target.id === "backDropImagen") {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setdata({
+          ...data,
+          backDropImagen: reader.result,
+        });
+      };
+    } else {
+      setdata({
+        ...data,
+        [e.target.name]: e.target.value,
+      });
+    }
+
     setError(validate({ ...data, [e.target.name]: e.target.value }));
   };
 
@@ -118,6 +157,7 @@ const FormPeliculas = () => {
     });
   };
 
+  console.log(data);
   return (
     <>
       <div className="ContainerForm2">
@@ -144,6 +184,54 @@ const FormPeliculas = () => {
               placeholder="Descripción:"
               onChange={(e) => HandleInput(e)}
             />
+            <section className="containerSelect">
+              <div className="dropdown">
+                <select
+                  name="tipo"
+                  onChange={(e) => HandleChangeTipos(e)}
+                  className="dropdown-select"
+                >
+                  <option value=" ">Tipos..</option>
+                  <option value="serie">serie</option>
+                  <option value="pelicula">pelicula</option>
+                </select>
+              </div>
+            </section>
+            {data && data.tipo === "pelicula" ? (
+              <div className="nombreconteiner">
+                <input
+                  id="runtime"
+                  type="text"
+                  name="runtime"
+                  placeholder="Duración:"
+                  className="name formEntry2"
+                  onChange={(e) => HandleInput(e)}
+                />
+              </div>
+            ) : (
+              <div>
+                <div className="nombreconteiner">
+                  <input
+                    id="number_of_episodes"
+                    type="text"
+                    name="number_of_episodes"
+                    placeholder="Episodios:"
+                    className="name formEntry2"
+                    onChange={(e) => HandleInput(e)}
+                  />
+                </div>
+                <div className="nombreconteiner">
+                  <input
+                    id="episode_run_time"
+                    type="text"
+                    name="episode_run_time"
+                    placeholder="Duración:"
+                    className="name formEntry2"
+                    onChange={(e) => HandleInput(e)}
+                  />
+                </div>
+              </div>
+            )}
 
             <div className="nombreconteiner">
               <input
@@ -180,16 +268,6 @@ const FormPeliculas = () => {
 
             <div className="nombreconteiner">
               <input
-                id="runtime"
-                type="text"
-                name="runtime"
-                placeholder="Duración:"
-                className="name formEntry2"
-                onChange={(e) => HandleInput(e)}
-              />
-            </div>
-            <div className="nombreconteiner">
-              <input
                 id="elenco"
                 type="text"
                 name="elenco"
@@ -197,7 +275,7 @@ const FormPeliculas = () => {
                 className="name formEntry2"
               />
               <button
-                class="submit formEntry2"
+                className="submit formEntry2"
                 id="elencobutton"
                 value="Agregar"
                 type="button"
@@ -207,133 +285,139 @@ const FormPeliculas = () => {
               </button>
             </div>
 
-        <div className="nombreconteiner">
-          <input
-            id="posterImagen"
-            type="text"
-            name="posterImagen"
-            onChange={(e) => HandleInput(e)}
-            placeholder="Imagen poster:"
-            className="name formEntry2"
-          />
-        </div>
-        <section class="containerSelect">
-        <div class="dropdown">
-          <select
-            name="generos"
-            onChange={(e) => HandleChangeGeneros(e)}
-            className="dropdown-select"
-          >
-            <option value=" ">Generos..</option>
-            {generos?.map((t) => (
-              <option key={t.id} value={t.name}>
-                {t.name}
-              </option>
+            <div className="nombreconteiner">
+              <input
+                id="posterImagen"
+                type="file"
+                name="posterImagen"
+                onChange={(e) => HandleInput(e)}
+                // onChange={(e) => HandleImageInput(e)}
+                placeholder="Imagen poster:"
+                className="name formEntry2"
+              />
+            </div>
+            <div className="nombreconteiner">
+              <input
+                id="backDropImagen"
+                type="file"
+                name="backDropImagen"
+                onChange={(e) => HandleInput(e)}
+                placeholder="Imagen backDrop  :"
+                className="name formEntry2"
+              />
+            </div>
+            <section className="containerSelect">
+              <div className="dropdown">
+                <select
+                  name="generos"
+                  onChange={(e) => HandleChangeGeneros(e)}
+                  className="dropdown-select"
+                >
+                  <option value=" ">Generos..</option>
+                  {generos?.map((t) => (
+                    <option key={t.id} value={t.name}>
+                      {t.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </section>
+            {data.genre_ids?.map((g) => (
+              <div style={{ color: "white" }} onClick={() => eliminarGenero(g)}>
+                {g}
+              </div>
             ))}
-          </select>
-        </div>
-        </section>
-        {data.genre_ids?.map((g) => (
-          <div style={{ color: "white" }} onClick={() => eliminarGenero(g)}>
-            {g}
+
+            <button
+              className="submit formEntry2"
+              type="submit"
+              value="Enviar"
+              disabled={Object.keys(error).length}
+            >
+              Enviar
+            </button>
+          </form>
+
+          <div className="erroresconteiner">
+            <h2 style={{ color: "white" }}>{error.name}</h2>
+            <h2 style={{ color: "white" }}>{error.genre_ids}</h2>
+            <h2 style={{ color: "white" }}>{error.overview}</h2>
+            <h2 style={{ color: "white" }}>{error.release_date}</h2>
+            <h2 style={{ color: "white" }}>{error.vote_average}</h2>
+            <h2 style={{ color: "white" }}>{error.cast}</h2>
+            <h2 style={{ color: "white" }}>{error.posterImagen}</h2>
+            <h2 style={{ color: "white" }}>{error.backDropImagen}</h2>
+            <h2 style={{ color: "white" }}>{error.popularity}</h2>
+            <h2 style={{ color: "white" }}>{error.tipo}</h2>
+            <h2 style={{ color: "white" }}>{error.runtime}</h2>
+            <h2 style={{ color: "white" }}>{error.episode_run_time}</h2>
+            <h2 style={{ color: "white" }}>{error.number_of_episodes}</h2>
           </div>
-        ))}
-      <section class="containerSelect">
-          <div class="dropdown">
-            <select name="tipo"
-            onChange={(e) => HandleChangeTipos(e)}
-            className="dropdown-select">
-              <option value=" ">Tipos..</option>
-            <option value="serie">serie</option>
-            <option value="pelicula">pelicula</option>
-          </select>
+
+          <div className="conteinerbackDropImagen">
+            <div className="backDropImagen" style={{ color: "white" }}>
+              Image back-drop
+            </div>
+
+            {!data.backDropImagen ? (
+              <>
+                <img
+                  className="imgconteinerbackDropImagen"
+                  src={back}
+                  alt="img"
+                />
+              </>
+            ) : data.backDropImagen === "Alt" ? (
+              <>
+                <img
+                  className="imgconteinerbackDropImagen"
+                  src={back}
+                  alt="Debe ingresar una URL"
+                />
+              </>
+            ) : (
+              <>
+                <img
+                  className="imgconteinerbackDropImagen"
+                  src={data.backDropImagen}
+                  alt="Debe ingresar una URL"
+                />
+              </>
+            )}
           </div>
-        </section>
-          <button class="submit formEntry2" 
-            type="submit"
-            value="Enviar"
-            disabled={Object.keys(error).length}
-            >Enviar</button>
-       
-      </form>
 
-      <div className="erroresconteiner">
-        <h2 style={{ color: "white" }}>{error.name}</h2>
-        <h2 style={{ color: "white" }}>{error.genre_ids}</h2>
-        <h2 style={{ color: "white" }}>{error.overview}</h2>
-        <h2 style={{ color: "white" }}>{error.release_date}</h2>
-        <h2 style={{ color: "white" }}>{error.vote_average}</h2>
-        <h2 style={{ color: "white" }}>{error.cast}</h2>
-        <h2 style={{ color: "white" }}>{error.posterImagen}</h2>
-        <h2 style={{ color: "white" }}>{error.backDropImagen}</h2>
-        <h2 style={{ color: "white" }}>{error.popularity}</h2>
-        <h2 style={{ color: "white" }}>{error.tipo}</h2>
-      </div>
+          <div className="conteinerposterImagen">
+            <div className="posterImagen" style={{ color: "white" }}>
+              Image poster
+            </div>
 
-      <div className="conteinerbackDropImagen">
-        <div className="backDropImagen" style={{ color: "white" }}>
-          Image back-drop
+            {!data.posterImagen ? (
+              <>
+                <img
+                  className="imgconteinerposterImagen"
+                  src={poster}
+                  alt="img"
+                />
+              </>
+            ) : data.posterImagen === "Alt" ? (
+              <>
+                <img
+                  className="imgconteinerposterImagen"
+                  src={poster}
+                  alt="Debe ingresar una URL"
+                />
+              </>
+            ) : (
+              <>
+                <img
+                  className="imgconteinerposterImagen"
+                  src={data.posterImagen}
+                  alt="Debe ingresar una URL"
+                />
+              </>
+            )}
+          </div>
         </div>
-
-        {data.backDropImagen.length === 0 ? (
-          <>
-            <img
-              className="imgconteinerbackDropImagen"
-              src={back}
-              alt="img"
-            />
-          </>
-        ) : data.backDropImagen === "Alt" ? (
-          <>
-            <img
-              className="imgconteinerbackDropImagen"
-              src={back}
-              alt="Debe ingresar una URL"
-            />
-          </>
-        ) : (
-          <>
-            <img
-              className="imgconteinerbackDropImagen"
-              src={data.backDropImagen}
-              alt="Debe ingresar una URL"
-            />
-          </>
-        )}
-      </div>
-
-      <div className="conteinerposterImagen">
-        <div className="posterImagen" style={{ color: "white" }}>
-          Image poster
-        </div>
-
-        {data.posterImagen.length === 0 ? (
-          <>
-            <img
-              className="imgconteinerposterImagen"
-              src={poster}
-              alt="img"
-            />
-          </>
-        ) : data.posterImagen === "Alt" ? (
-          <>
-            <img
-              className="imgconteinerposterImagen"
-              src={poster}
-              alt="Debe ingresar una URL"
-            />
-          </>
-        ) : (
-          <>
-            <img
-              className="imgconteinerposterImagen"
-              src={data.posterImagen}
-              alt="Debe ingresar una URL"
-            />
-          </>
-        )}
-      </div>
-      </div>
       </div>
     </>
   );

@@ -1,3 +1,4 @@
+import React from "react";
 import "../../Styles/components/card.scss";
 import { mostrarImagen } from "../../auxiliares/Funciones";
 import { Link } from "react-router-dom";

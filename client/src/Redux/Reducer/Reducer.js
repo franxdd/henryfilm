@@ -36,6 +36,8 @@ import {
   REMOVE_TO_WISHLIST,
   GET_REVIEW,
   POST_REVIEW,
+  GOOGLE_USER,
+  GOOGLE_LOG_OUT
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -135,6 +137,7 @@ const initialState = {
   idiomaDefault: "es/ES",
   isos: [],
   user: [],
+  googleUser: [],
   comentarios: [],
   token: "",
   wishlist: wishlistStorage,
@@ -155,14 +158,40 @@ const rootRouter = (state = initialState, action) => {
         token: "",
         cart: [],
         wishlist: [],
+        googleUser: [],
       };
+      case GOOGLE_USER:
+        // console.log(action.payload)
+        sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
+        localStorage.setItem("cart", JSON.stringify(action.payload[1]));
+        localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
 
+        return {
+          ...state,
+          token: action.payload[0],
+          cart: action.payload[1],
+          wishlist: action.payload[2],
+          googleUser: action.payload[0]
+        }
+
+        case GOOGLE_LOG_OUT:
+          sessionStorage.removeItem("token");
+          localStorage.setItem("cart", JSON.stringify([]));
+          localStorage.setItem("wishlist", JSON.stringify([]));
+          return {
+            ...state,
+            token: "",
+            cart: [],
+            wishlist: [],
+            googleUser: [],
+            user: [],
+          }
     case POST_USUARIOS:
       return {
         ...state,
       };
     case POST_LOGIN:
-   
+      console.log(action.payload[3])
       sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
       localStorage.setItem("cart", JSON.stringify(action.payload[1]));
       localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
