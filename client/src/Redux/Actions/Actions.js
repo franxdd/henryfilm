@@ -45,8 +45,8 @@ export const REMOVE_TO_WISHLIST = "REMOVE_TO_WISHLIST";
 // export const POST_PAGOS = "POST_PAGOS"
 export const GET_REVIEW = "GET_REVIEW";
 export const POST_REVIEW = "POST_REVIEW";
-
-
+export const GOOGLE_USER = "GOOGLE_USER";
+export const GOOGLE_LOG_OUT = "GOOGLE_LOG_OUT";
 
 function a(error) {
   return toast.error(error, {
@@ -158,11 +158,10 @@ export const willunmont = () => {
 export const PostUsuario = (payload) => {
   return async function (dispatch) {
     try {
-      return async function (dispatch) {
-        let created = await axios.post("/usuarios/register", payload);
-        // console.log(created.data)
-        return dispatch({ type: POST_USUARIOS });
-      };
+      console.log("mando la action");
+      let created = await axios.post("/usuarios/register", payload);
+      // console.log(created.data)
+      return dispatch({ type: POST_USUARIOS });
     } catch (error) {
       console.log(error);
     }
@@ -185,9 +184,12 @@ export const PostLogin = (payload) => {
 
       sessionStorage.setItem("token", JSON.stringify(created.data[0]));
 
-      return dispatch({ type: POST_LOGIN, payload: created.data }, b(created.data[3]));
+      return dispatch(
+        { type: POST_LOGIN, payload: created.data },
+        b(created.data[3])
+      );
     } catch (error) {
-      a(error.response.data)
+      a(error.response.data);
       // console.log(error)
       return error;
     }
@@ -212,7 +214,27 @@ export const logOut = (payload) => {
     return dispatch({ type: LOG_OUT });
   };
 };
+export const signInUser = (payload) => {
+  return async function (dispatch) {
+    try {
+      console.log("entro a al action");
+      var user = await axios.post("/usuarios/google", payload);
+    } catch (error) {}
+    // {
+    //   // withCredentials: true,
+    // });
+    console.log(user);
+    // sessionStorage.setItem("token", JSON.stringify(user.data));
 
+    return dispatch({ type: GOOGLE_USER, payload: user.data });
+  };
+};
+
+export const googleLogOut = () => {
+  return {
+    type: GOOGLE_LOG_OUT,
+  };
+};
 export const getUser = (token) => {
   return async function (dispatch) {
     // console.log("access-token=" + token);

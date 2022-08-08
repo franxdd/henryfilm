@@ -1,20 +1,68 @@
 import { React, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Router } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { PostLogin } from "../../Redux/Actions/Actions.js";
+import { useEffect } from "react";
+import {
+  PostLogin,
+  signInUser,
+  googleLogOut,
+} from "../../Redux/Actions/Actions.js";
 import { Link } from "react-router-dom";
 import "../../Styles/components/_Form.scss";
 import "../../Styles/components/_Login.scss";
+import jwt_decode from "jwt-decode";
 function Login() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
+  const googleUser = useSelector((state) => state.googleUser);
   const [input, setInput] = useState({
     username: "",
     password: "",
   });
 
+  // function prueba() {
+  //   dispatch(googleUser())
+  // }
+  // useEffect(()=>{
+
+  // },[])
+
+  function handleCallbackResponse(response) {
+    var userObject = jwt_decode(response.credential);
+    // console.log(userObject)
+    dispatch(signInUser(userObject));
+  }
+
+  // function HandleSignLogOut(e) {
+  //   e.preventDefault();
+  //   dispatch(googleLogOut());
+  //   //console.log(googleUser)
+  // }
+
+  useEffect(() => {
+    /* global google*/
+
+    google.accounts.id.initialize({
+      client_id:
+        "611424478766-nb0c91tvcdmqko0ch36tc74gu7gqcmbe.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+
+    if (googleUser.length === 0) {
+      console.log("entro");
+      google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+        theme: "outline",
+        size: "large",
+      });
+    }
+    if(typeof googleUser === 'string'){
+      navigate("/home", { replace: true });
+    }
+  }, [googleUser]);
+
   function handdleChange(e) {
+    e.preventDefault()
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -37,6 +85,9 @@ function Login() {
     }, 1500);
   }
 
+
+
+  // console.log(googleUser);
   return (
     <div className="ContainerLogin">
       <div className="Login">
@@ -61,12 +112,21 @@ function Login() {
             className="name formEntry"
             onChange={handdleChange}
           />
-          <button button className="submit formEntry" type="submit">
+          <button button class="submit formEntry" type="submit">
             Iniciar Sesion
           </button>
+          {googleUser.length !== 0 ? (
+            <>
+              {/* <button onClick={(e) => HandleSignLogOut(e)}>LOGOUT</button> */}
+            </>
+          ) : (
+            <>
+              <div id="signInDiv"></div>
+            </>
+          )}
           <div className="pageTitle2"> ¿No tienes una cuenta?</div>
           <Link to="/home/Register">
-            <button button className="submit formEntry">
+            <button button class="submit formEntry">
               <b>Registrate</b>
             </button>
           </Link>
