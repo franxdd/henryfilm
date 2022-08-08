@@ -75,7 +75,7 @@ const stripePromise = loadStripe(
       <div className="containerElement">
       <form  className="elementCard" onSubmit={handleSubmit}>
         <CardElement/>
-        <button className="card-button" disabled={!stripe}>Buy</button>
+        <button className="card-button" disabled={!stripe}><strong>REALIZAR PAGO</strong></button>
       </form>
       </div>
     </div>

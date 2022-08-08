@@ -51,7 +51,7 @@ function Login() {
 
     if (googleUser.length === 0) {
       console.log("entro");
-      google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      google.accounts.id.renderButton(document.getElementById("g_id_onload"), {
         theme: "outline",
         size: "large",
       });
@@ -118,11 +118,13 @@ function Login() {
           <div className="or">────────── O ──────────</div>
           {googleUser.length !== 0 ? (
             <>
-        
+    
             </>
           ) : (
             <>
-              <div className="containerGoogle" id="signInDiv"></div>
+            <div className="containerGoogle" id="signInDiv">
+              <div id="g_id_onload" data-type="icon"></div>
+              </div>
             </>
           )}
           

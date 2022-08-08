@@ -17,7 +17,7 @@
   ::-webkit-input-placeholder {
     font-size: 1.1em;
   }
-  
+
   .name2 {
     background-color: #ebebeb;
     color: rgb(0, 0, 0);
@@ -53,10 +53,10 @@
 }
 
 }
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 600px) {
     .form3 {
       margin-left: 15px;
-      width: 330px;
+      width: 320px;
  
     }
     ::-webkit-input-placeholder {

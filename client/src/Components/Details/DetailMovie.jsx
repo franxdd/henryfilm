@@ -127,6 +127,7 @@ function DetailMovie() {
                     <a href="#"> <CloseIcon className="iconoClose"/> </a><br></br>
                     <div className="iframe-container">
                     <iframe className="video" width="100%" height="100%" src={video}></iframe>
+                    
                     </div>
                   </div>  
                 </div>

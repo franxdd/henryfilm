@@ -166,7 +166,7 @@ const getMovieDetailParams = async (req, res) => {
         urlVideos
       );
     }
-
+  
     res.status(200).json(datosAEnviar);
   } catch (error) {
     console.log("hubo un error con la API", error);

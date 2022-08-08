@@ -38,7 +38,7 @@ import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import perfil from "../../img/perfil2.png";
-import perfiladmin from "../../img/perfil3.png";
+
 
 function getToken() {
   const tokenString = sessionStorage.getItem("token");
@@ -284,7 +284,8 @@ const Nav2 = () => {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Abrir las opciones">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    {/* <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} /> */}
+                    {/* <Avatar src={userReducer?.img || "/broken-image.jpg"} /> */}
+                
                     <img src={perfil} height="auto" width="40px" />
                   </IconButton>
                 </Tooltip>
