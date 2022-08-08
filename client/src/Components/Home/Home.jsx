@@ -42,7 +42,7 @@ const Home = () => {
     // dispatch(getGenerosMovies());
     dispatch(getTodo());
     // dispatch(getUser(tokenString))
-  }, []);
+  }, [dispatch]);
 
   //let movies = useSelector((state)=> state.allMovies)
   const idioma = useContext(Context).lenguaje;
