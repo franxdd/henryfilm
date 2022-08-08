@@ -30,13 +30,15 @@ import {
   logOut,
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_NavBar.scss";
-import { BiHomeHeart as HomeIcon, BiCameraMovie as CamaraIcon } from "react-icons/bi";
+import {
+  BiHomeHeart as HomeIcon,
+  BiCameraMovie as CamaraIcon,
+} from "react-icons/bi";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import perfil from "../../img/perfil2.png";
 import perfiladmin from "../../img/perfil3.png";
-
 
 function getToken() {
   const tokenString = sessionStorage.getItem("token");
@@ -54,11 +56,11 @@ const Nav2 = () => {
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-    console.log("Estoy haciendo click")
+    console.log("Estoy haciendo click");
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-    console.log("Estoy haciendo click2")
+    console.log("Estoy haciendo click2");
   };
 
   const handleCloseNavMenu = () => {
@@ -107,14 +109,13 @@ const Nav2 = () => {
 
   // **************************** ESTA COMENTADO PORQUE EL LOG OUT ESTA EN PROFILE ***********************************
 
-
   const HandleClick = (e) => {
     e.preventDefault();
     // console.log("entro a logout");
 
     const token = sessionStorage.getItem("token");
     const carro = cart.slice();
-    const deseados = deseado.slice()
+    const deseados = deseado.slice();
     const arrAux = [token, carro, deseados];
 
     // console.log("ASDASD", arrAux)
@@ -256,7 +257,7 @@ const Nav2 = () => {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white" }}
                 >
-                  <CamaraIcon className="iconoHome"/>
+                  <CamaraIcon className="iconoHome" />
                 </Button>
               </Link>
               <Link style={{ textDecoration: "none" }} to="/home/series">
@@ -270,14 +271,14 @@ const Nav2 = () => {
               <SearchBar sx={{ my: 2, color: "white" }} />
             </Box>
 
-              <IconButton sx={{ mr: "6px", mt: "4px", p: "9px 6px 8px 6px" }}>
+            <IconButton sx={{ mr: "6px", mt: "4px", p: "9px 6px 8px 6px" }}>
               <abbr title="Ver el carrito">
                 <Link to="/home/carro" style={{ color: "grey" }}>
                   <ShopIcon className="iconoShop" />
                 </Link>
-            </abbr>
-              </IconButton>
-        
+              </abbr>
+            </IconButton>
+
             {/* {userReducer.username ? ( */}
             {userReducer.username ? (
               <Box sx={{ flexGrow: 0 }}>
@@ -353,9 +354,9 @@ const Nav2 = () => {
                       }}
                       logOut
                     > */}
-                    
-                      {/* <Button  onClick={(e) => HandleClick(e)}>Logout<LogoutIcon /></Button> */}
-                      {/* <Link to={"/home/Profile"}>
+
+                    {/* <Button  onClick={(e) => HandleClick(e)}>Logout<LogoutIcon /></Button> */}
+                    {/* <Link to={"/home/Profile"}>
                  <Button sx={{ color: "black" }}>
                   {" "}
                   Logout <LogoutIcon sx={{ ml: "5px" }} />
@@ -364,20 +365,17 @@ const Nav2 = () => {
                     {/* </Typography> */}
                   </MenuItem>
                 </Menu>
-                <Button sx={{ color: "white" }} onClick={(e) => HandleClick(e)}>Logout</Button>
+                <Button sx={{ color: "white" }} onClick={(e) => HandleClick(e)}>
+                  Logout
+                </Button>
               </Box>
-              
             ) : (
               <Link
                 style={{ textDecoration: "none", color: "white" }}
                 to={"/home/Login"}
               >
-                <Button sx={{ color: "white" }}>
-                  {" "}
-                  Login 
-                </Button>
+                <Button sx={{ color: "white" }}> Login</Button>
               </Link>
-              
             )}
           </Toolbar>
         </Container>
