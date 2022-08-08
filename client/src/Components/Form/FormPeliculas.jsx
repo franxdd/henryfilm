@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { postPeliculas, getGenerosMovies } from "../../Redux/Actions/Actions";
+import {
+  postPeliculas,
+  getGenerosMovies,
+  getGenerosSeries,
+} from "../../Redux/Actions/Actions";
 import validate from "../../util/validate.js";
 import poster from "../../img/poster.jpg";
 import back from "../../img/backdrop.jpg";
@@ -10,12 +14,17 @@ import "../../Styles/components/_FormPeliculas.scss";
 
 const FormPeliculas = () => {
   let dispatch = useDispatch();
-  let navigate = useNavigate()
+  let navigate = useNavigate();
   useEffect(() => {
     dispatch(getGenerosMovies());
+    dispatch(getGenerosSeries());
   }, []);
 
-  const generos = useSelector((state) => state.generosMovies);
+  // var generos; // 343
+  const auxGenerosMovie = useSelector((state) => state.generosMovies);
+  const auxGenerosSerie =useSelector((state) => state.generosSeries);
+  const [generos, setGeneros] = useState();
+  const [tipo, setTipo] = useState("");
   const [error, setError] = useState({ " ": " " });
   const [data, setdata] = useState({
     name: "",
@@ -31,6 +40,20 @@ const FormPeliculas = () => {
     tipo: "",
   });
 
+  useEffect(() => {
+
+    console.log(tipo)
+
+    if (tipo === "serie") {
+      // generos = auxGenerosSerie.slice()
+      setGeneros(auxGenerosSerie)
+    } else if (tipo === "pelicula") {
+      // generos = auxGenerosMovie.slice()
+      setGeneros(auxGenerosMovie)
+      
+    }
+  }, [tipo]);
+
   const HandleSubmit = (e) => {
     e.preventDefault();
     console.log("entre al inicio del submit");
@@ -42,7 +65,7 @@ const FormPeliculas = () => {
     }
     // const reader = new FileReader();
     // reader.readAsDataURL(data.backDropImagen);
-    console.log("entro en el submit");
+
     dispatch(postPeliculas(data));
     console.log(data);
     alert("Pelicula creada");
@@ -53,8 +76,8 @@ const FormPeliculas = () => {
       cast: [],
       runtime: "",
       release_date: "",
-      number_of_episodes:"",
-      episode_run_time:"",
+      number_of_episodes: "",
+      episode_run_time: "",
       posterImagen: null,
       backDropImagen: null,
       vote_average: "",
@@ -100,6 +123,7 @@ const FormPeliculas = () => {
       ...data,
       tipo: e.target.value,
     });
+    setTipo(e.target.value);
     setError(
       validate({
         ...data,
@@ -115,10 +139,7 @@ const FormPeliculas = () => {
       e.value = "";
     }
   };
-   const HandleInput = (e) => {
-    console.log(data);
-    console.log(e.target.files);
-    console.log("entro");
+  const HandleInput = (e) => {
     if (e.target.id === "posterImagen") {
       const file = e.target.files[0];
       const reader = new FileReader();
@@ -161,7 +182,6 @@ const FormPeliculas = () => {
     });
   };
 
-  console.log(data);
   return (
     <>
       <div className="ContainerForm2">
@@ -310,22 +330,27 @@ const FormPeliculas = () => {
                 className="name formEntry2"
               />
             </div>
-            <section className="containerSelect">
-              <div className="dropdown">
-                <select
-                  name="generos"
-                  onChange={(e) => HandleChangeGeneros(e)}
-                  className="dropdown-select"
-                >
-                  <option value=" ">Generos..</option>
-                  {generos?.map((t) => (
-                    <option key={t.id} value={t.name}>
-                      {t.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </section>
+            {data.tipo !== "" ? (
+              <section className="containerSelect">
+                <div className="dropdown">
+                  <select
+                    name="generos"
+                    onChange={(e) => HandleChangeGeneros(e)}
+                    className="dropdown-select"
+                  >
+                    <option value=" ">Generos..</option>
+                    {generos?.map((t) => (
+                      <option key={t.id} value={t.name}>
+                        {t.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </section>
+            ) : (
+              <></>
+            )}
+
             {data.genre_ids?.map((g) => (
               <div style={{ color: "white" }} onClick={() => eliminarGenero(g)}>
                 {g}
