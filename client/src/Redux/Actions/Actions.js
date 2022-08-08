@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { toast } from "react-toastify";
 export const DETAIL = "DETAIL";
 export const GET_ALL_SERIES = "GET_ALL_SERIES";
 export const GET_ALL_MOVIES = "GET_ALL_MOVIES";
@@ -46,6 +46,30 @@ export const REMOVE_TO_WISHLIST = "REMOVE_TO_WISHLIST";
 export const GET_REVIEW = "GET_REVIEW";
 export const POST_REVIEW = "POST_REVIEW";
 
+
+
+function a(error) {
+  return toast.error(error, {
+    position: "bottom-left",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+}
+function b(mensaje) {
+  return toast.success(mensaje, {
+    position: "bottom-left",
+    autoClose: 500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+}
 // export const getAllSeries = () => {
 //   return (dispatch) => {
 //     return fetch("http://localhost:3001/series")
@@ -133,9 +157,15 @@ export const willunmont = () => {
 
 export const PostUsuario = (payload) => {
   return async function (dispatch) {
-    let created = await axios.post("/usuarios/register", payload);
-    // console.log(created.data)
-    return dispatch({ type: POST_USUARIOS });
+    try {
+      return async function (dispatch) {
+        let created = await axios.post("/usuarios/register", payload);
+        // console.log(created.data)
+        return dispatch({ type: POST_USUARIOS });
+      };
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 export const checkState = () => {
@@ -155,9 +185,9 @@ export const PostLogin = (payload) => {
 
       sessionStorage.setItem("token", JSON.stringify(created.data[0]));
 
-      return dispatch({ type: POST_LOGIN, payload: created.data });
+      return dispatch({ type: POST_LOGIN, payload: created.data }, b(created.data[3]));
     } catch (error) {
-      alert("Usuario inexistente");
+      a(error.response.data)
       // console.log(error)
       return error;
     }

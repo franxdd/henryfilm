@@ -21,7 +21,10 @@ const validate = ({
   let regRelease = new RegExp(
     /[0-9]{0,2}-[0-9]{0,2}-[2]{1,1}[0]{1,1}[2-9]{1,1}[0-9]{1,1}$/
   );
-
+  console.log("entro en la 24");
+  console.log(name);
+  console.log(typeof backDropImagen);
+  console.log(posterImagen);
 
   if (!name) {
     error.name = "Falta ingresar un nombre";
@@ -35,6 +38,14 @@ const validate = ({
     error.overview = "Falta ingresar una descripcion";
   } else if (!isNaN(overview)) {
     error.overview = "Solo se pueden ingresar letras";
+  } else if (!tipo) {
+    error.tipo = "Se debe seleccionar un tipo";
+  } else if (tipo && tipo === "serie" && !number_of_episodes) {
+    error.number_of_episodes = "Debe existir un numero de episodio";
+  } else if (tipo && tipo === "serie" && !episode_run_time) {
+    error.episode_run_time = "Debe existir una duracion de episodio";
+  } else if (tipo && tipo === "pelicula" && !runtime) {
+    error.runtime = "Debe existir una duracion de pelicula";
   } else if (!release_date) {
     error.release_date = "Falta ingresar fecha de lanzamiento";
   } else if (!regRelease.test(release_date)) {
@@ -49,44 +60,22 @@ const validate = ({
     error.popularity = "Debe ingresar la popularidad";
   } else if (isNaN(popularity)) {
     error.popularity = "La popuralidad debe ser un numero";
-  } else if (!runtime) {
-    error.popularity = "Debe ingresar la duracion";
   } else if (isNaN(runtime)) {
     error.popularity = "La duracion debe ser un numero";
   } else if (cast.length === 0) {
     error.cast = "Debe existir al menos un actor/a";
   } else if (cast.includes("")) {
     error.cast = "Debe existir al menos un actor/a";
-  } else if (!backDropImagen) {
-    error.backDropImagen =
-      "Debe existir una opcion para back-image, caso contrario escribir Alt";
-  } else if (backDropImagen !== "Alt" && backDropImagen.length < 30) {
-    error.backDropImagen = "Ingresar una opcion correcta";
-  } else if (!posterImagen) {
-    error.posterImagen =
-      "Debe existir una opcion para poster,  caso contrario escribir Alt";
-  } else if (posterImagen !== "Alt" && posterImagen.length < 30) {
-    error.posterImagen = "Ingresar una opcion correcta";
+  } else if (!backDropImagen || backDropImagen === null) {
+    error.backDropImagen = "Debe existir una opcion para back-image";
+  } else if (!posterImagen || posterImagen === null) {
+    error.posterImagen = "Debe existir una opcion para poster";
   } else if (!genre_ids.length) {
     error.genre_ids = "Debe existir un genero";
   } else if (genre_ids.length === 0) {
     error.genre_ids = "Se debe ingresar al menos un genero";
-  } else if (!tipo) {
-    error.tipo = "Se debe seleccionar un tipo";
   }
-
-  if (tipo && tipo === "serie") {
-    if (!number_of_episodes) {
-      error.number_of_episodes = "Debe existir un numero de episodio";
-    } else if (!episode_run_time) {
-      error.episode_run_time = "Debe existir una duracion de episodio";
-    }
-  } else if (tipo && tipo === "pelicula") {
-    if (!runtime) {
-      error.runtime = "Debe existir una duracion de pelicula";
-    }
-  }
-
+  console.log(error);
   return error;
 };
 

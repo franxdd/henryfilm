@@ -109,15 +109,26 @@ const postLogin = async (req, res) => {
               accessToken,
               carrito.dataValues.contenido,
               deseados.dataValues.contenido,
+              "Te logueaste con exito",
             ];
           } else if (carrito) {
-            arrAux = [accessToken, carrito.dataValues.contenido, []];
+            arrAux = [
+              accessToken,
+              carrito.dataValues.contenido,
+              [],
+              "Te logueaste con exito",
+            ];
           } else if (deseados) {
-            arrAux = [accessToken, [], deseados.dataValues.contenido];
+            arrAux = [
+              accessToken,
+              [],
+              deseados.dataValues.contenido,
+              "Te logueaste con exito",
+            ];
           } else {
-            arrAux = [accessToken, [], []];
+            arrAux = [accessToken, [], [], "Te logueaste con exito"];
           }
-
+          console.log(arrAux)
           res.status(200).json(arrAux);
         }
       })
@@ -125,7 +136,6 @@ const postLogin = async (req, res) => {
         res.status(400).json(err);
       });
   } catch (error) {
-    console.log(error);
     res.status(400).json(error);
   }
 };
