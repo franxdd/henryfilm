@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { postPeliculas, getGenerosMovies } from "../../Redux/Actions/Actions";
 import validate from "../../util/validate.js";
 import poster from "../../img/poster.jpg";
@@ -9,6 +10,7 @@ import "../../Styles/components/_FormPeliculas.scss";
 
 const FormPeliculas = () => {
   let dispatch = useDispatch();
+  let navigate = useNavigate()
   useEffect(() => {
     dispatch(getGenerosMovies());
   }, []);
@@ -72,6 +74,8 @@ const FormPeliculas = () => {
         e.target[i].selectedIndex = 0;
       }
     }
+
+    navigate("/home", { replace: true });
   };
 
   const HandleChangeGeneros = (e) => {
