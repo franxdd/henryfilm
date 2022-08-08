@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterName, getTodo } from "../../Redux/Actions/Actions";
 import { useNavigate } from "react-router-dom";
@@ -10,9 +10,14 @@ function SearchBar() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
 
-  function handleName(e) {
-    setName(e.target.value);
+  useEffect(() => {
     dispatch(filterName(name));
+  }, [name]);
+
+  function handleName(e) {
+
+    setName(e.target.value);
+    ///
     navigate("/home/search");
   }
 
@@ -22,7 +27,11 @@ function SearchBar() {
         <button className="boton-buscar" aria-label="Buscar">
           <LupaIcon className="icono-nav" />
         </button>
-        <input onChange={(e) => handleName(e)} type={"text"} placeholder="Buscar..."></input>
+        <input
+          onChange={(e) => handleName(e)}
+          type={"text"}
+          placeholder="Buscar..."
+        ></input>
       </form>
     </div>
   );

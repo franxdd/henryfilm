@@ -133,7 +133,7 @@ function MoviesHome() {
               <CardMovies
                 key={r.id}
                 id={r.id}
-                name={r.title}
+                name={r.name}
                 poster={r.posterImagen}
               />
             );
