@@ -9,34 +9,32 @@ const Profile = () => {
   let cart = useSelector((state) => state.cart);
   let deseado = useSelector((state) => state.wishlist);
 
-  const HandleClick = (e) => {
-    e.preventDefault()
-    try {
-      console.log("entro a logout");
+  // const HandleClick = (e) => {
+  //   e.preventDefault()
+  //   try {
+  //     console.log("entro a logout");
 
-      const token = sessionStorage.getItem("token");
-      const carro = cart.slice();
-      const deseados = deseado.slice()
-      
-      console.log(deseados)
-      const arrAux = [token, carro, deseados];
+  //     const token = sessionStorage.getItem("token");
+  //     const carro = cart.slice();
+  //     const deseados = deseado.slice()
+  //     const arrAux = [token, carro, deseados];
 
-      // console.log("ASDASD", arrAux)
+  //     // console.log("ASDASD", arrAux)
 
-      // dispatch(logOut(arrAux));
+  //     dispatch(logOut(arrAux));
 
-      sessionStorage.removeItem("token");
-      localStorage.setItem("cart", JSON.stringify([]));
-      localStorage.setItem("wishlist", JSON.stringify([]));
+  //     sessionStorage.removeItem("token");
+  //     localStorage.setItem("cart", JSON.stringify([]));
+  //     localStorage.setItem("wishlist", JSON.stringify([]));
 
-      navigate("/home");
-    } catch (error) {
-      console.log(error)
-    }
-  };
+  //     navigate("/home");
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // };
 
   return (
-    <button style={{ color: "white" }} onClick={(e) => HandleClick(e)}>
+    <button style={{ color: "white" }} >
       UnLogged
     </button>
   );

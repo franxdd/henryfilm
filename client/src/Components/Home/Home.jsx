@@ -2,6 +2,7 @@ import React from "react";
 import Carousel from "../Carousel/Carousel";
 import Header from "../Header/Header";
 import { useContext, useEffect } from "react";
+
 import Context from "../../contexto/Context";
 import {
   seriesName,
@@ -10,9 +11,9 @@ import {
   apiKey,
 } from "../../auxiliares/Variables";
 import "../../Styles/components/_Home.scss";
-import { 
-  // useSelector, 
-  useDispatch 
+import {
+  // useSelector,
+  useDispatch,
 } from "react-redux";
 import {
   // getAllSeries,
@@ -23,7 +24,6 @@ import {
   // getUser,
 } from "../../Redux/Actions/Actions";
 // import Footer from "../Footer/Footer";
-
 
 function getToken() {
   const tokenString = sessionStorage.getItem("token");
@@ -49,7 +49,7 @@ const Home = () => {
 
   return (
     <section className="contenedor-carousels">
-      <div>
+      <div id="signInDiv"></div>
       <Header />
       <Carousel
         url={`${urlBase}/trending/movie/week?api_key=${apiKey}&language=${idioma}`}
@@ -65,9 +65,7 @@ const Home = () => {
         titulo={seriesName[idioma].tendencia}
         clase="series"
       />
-      <div>
-      </div>
-      </div>
+      <div></div>
     </section>
   );
 };

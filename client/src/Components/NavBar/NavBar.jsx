@@ -105,6 +105,9 @@ const Nav2 = () => {
   //   }
   // }
 
+  // **************************** ESTA COMENTADO PORQUE EL LOG OUT ESTA EN PROFILE ***********************************
+
+
   const HandleClick = (e) => {
     e.preventDefault();
     // console.log("entro a logout");
@@ -123,6 +126,8 @@ const Nav2 = () => {
 
     navigate("/home");
   };
+
+  // **************************** ESTA COMENTADO PORQUE EL LOG OUT ESTA EN PROFILE ***********************************
 
   // return userReducer.isAdmin ? (
   return (

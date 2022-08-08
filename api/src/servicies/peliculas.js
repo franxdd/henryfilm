@@ -205,9 +205,7 @@ const postPeliculas = async (req, res) => {
     tipo,
   });
 
-  // if (Object.keys(errores).length === 0) res.status(400).json(errores);
-console.log(errores)
-  console.log(runtime);
+  if (Object.keys(errores).length !== 0) res.status(400).json(errores);
   try {
     if (
       !name ||

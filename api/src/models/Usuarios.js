@@ -12,18 +12,6 @@ module.exports = (sequelize) => {
         primaryKey: true,
         
       },
-      /* telefono:{
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    nombre:{
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    apellido:{
-      type: DataTypes.STRING,
-      allowNull: false
-    }, */
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -36,6 +24,10 @@ module.exports = (sequelize) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      picture: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       isAdmin: {
         type: DataTypes.BOOLEAN,

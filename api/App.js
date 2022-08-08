@@ -2,10 +2,10 @@ const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const routes = require("../src/routes/index.js");
+const routes = require("./src/routes/index.js");
 const cors = require("cors");
 
-require("../src/DB/db");
+require("./src/DB/db");
 
 const server = express();
 
