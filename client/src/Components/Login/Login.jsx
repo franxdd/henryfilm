@@ -56,9 +56,13 @@ function Login() {
         size: "large",
       });
     }
+    if(typeof googleUser === 'string'){
+      navigate("/home", { replace: true });
+    }
   }, [googleUser]);
 
   function handdleChange(e) {
+    e.preventDefault()
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -81,7 +85,7 @@ function Login() {
     }, 1500);
   }
 
-  navigate("/home", { replace: true });
+
 
   // console.log(googleUser);
   return (
