@@ -106,24 +106,24 @@ const Nav2 = () => {
   // **************************** ESTA COMENTADO PORQUE EL LOG OUT ESTA EN PROFILE ***********************************
 
 
-  // const HandleClick = (e) => {
-  //   e.preventDefault();
-  //   // console.log("entro a logout");
+  const HandleClick = (e) => {
+    e.preventDefault();
+    // console.log("entro a logout");
 
-  //   const token = sessionStorage.getItem("token");
-  //   const carro = cart.slice();
-  //   const deseados = deseado.slice()
-  //   const arrAux = [token, carro, deseados];
+    const token = sessionStorage.getItem("token");
+    const carro = cart.slice();
+    const deseados = deseado.slice()
+    const arrAux = [token, carro, deseados];
 
-  //   console.log("ASDASD", arrAux)
+    // console.log("ASDASD", arrAux)
 
-  //   dispatch(logOut(arrAux));
-  //   sessionStorage.removeItem("token");
-  //   localStorage.setItem("cart", JSON.stringify([]));
-  //   localStorage.setItem("wishlist", JSON.stringify([]));
+    dispatch(logOut(arrAux));
+    sessionStorage.removeItem("token");
+    localStorage.setItem("cart", JSON.stringify([]));
+    localStorage.setItem("wishlist", JSON.stringify([]));
 
-  //   navigate("/home");
-  // };
+    navigate("/home");
+  };
 
   // **************************** ESTA COMENTADO PORQUE EL LOG OUT ESTA EN PROFILE ***********************************
 

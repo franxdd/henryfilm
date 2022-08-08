@@ -215,7 +215,7 @@ const postgoogleuser = async (req, res) => {
       where: { username: name },
     });
 
-    console.log(user)
+  
 
     if (!user) {
 
