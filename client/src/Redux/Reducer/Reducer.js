@@ -121,7 +121,7 @@ if (!wishlistStorage) {
 const initialState = {
   allMovies: [],
   allSeries: [],
-  movieDetail: {},
+  movieDetail: [],
   seriesDetail: {},
   backupSeries: [],
   backupMovies: [],
