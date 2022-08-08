@@ -21,11 +21,6 @@ const validate = ({
   let regRelease = new RegExp(
     /[0-9]{0,2}-[0-9]{0,2}-[2]{1,1}[0]{1,1}[2-9]{1,1}[0-9]{1,1}$/
   );
-  console.log("entro en la 24");
-  console.log(name);
-  console.log(typeof backDropImagen);
-  console.log(posterImagen);
-
   if (!name) {
     error.name = "Falta ingresar un nombre";
   } else if (!regPrimerLetraMayus.test(name)) {
@@ -75,7 +70,7 @@ const validate = ({
   } else if (genre_ids.length === 0) {
     error.genre_ids = "Se debe ingresar al menos un genero";
   }
-  console.log(error);
+
   return error;
 };
 
