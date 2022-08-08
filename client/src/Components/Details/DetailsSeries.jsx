@@ -87,9 +87,6 @@ function DetailsSeries() {
     return () => dispatch(willunmont());
   }, [dispatch]);
 
-
-
-
   // console.log(input);
 
   function handleRegister(e) {
