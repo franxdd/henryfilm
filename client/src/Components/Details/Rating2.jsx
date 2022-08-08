@@ -12,7 +12,7 @@ function Rating2({ id, token }) {
   const dispatch = useDispatch();
   const [input, setInput] = useState({
     contenido: "",
-    puntuacion: 2,
+    puntuacion: 0,
     idpelicula: id,
     token: token,
   });

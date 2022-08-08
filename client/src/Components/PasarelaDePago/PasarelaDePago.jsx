@@ -4,8 +4,7 @@ import { Elements, CardElement, useStripe, useElements } from "@stripe/react-str
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-
+import "../../Styles/components/_Pasarela.scss"
 
 const stripePromise = loadStripe(
   "pk_test_51LTGaXLAMID6zp4FN23yqliUFRecPc1GmqazMXb4525foqI6x0vjAdYsIeCw3ovTIId4tj0WthzhKIhyJyaSCBjp00WA0Mdadg"
@@ -61,26 +60,30 @@ const stripePromise = loadStripe(
   
   return (
     <div>
-      <div>
+      <div className="pasarela">
+        <div className="pasarelaCont">
       {cart &&
           cart.map((e) => {
             return (
-              <img src={e.posterImagen} alt="img" height="180px" width="120px" />
+           <div className="compras">
+              <img  src={e.posterImagen} alt="img" height="200px" width="140px" />
+            </div>
             );
           })}
-      </div>
+          </div>
       <p>Total de la compra: ${precioTotal}.00</p>
-      <form onSubmit={handleSubmit}>
-        <CardElement />
-        <button disabled={!stripe}>Buy</button>
+      <div className="containerElement">
+      <form  className="elementCard" onSubmit={handleSubmit}>
+        <CardElement/>
+        <button className="card-button" disabled={!stripe}>Buy</button>
       </form>
+      </div>
     </div>
+      </div>
   );
 };
 
 function PasarelaDePago() {
-
-
 
   return (
     <div>

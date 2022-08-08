@@ -443,7 +443,6 @@ const rootRouter = (state = initialState, action) => {
     //       allMovies: state.backupMovies.slice(),
     //     };
     //   }
-
     case ADD_TO_CART:
       const item = state.todo.find((e) => e.id === action.payload);
       let cartStorage = localStorage.getItem("cart");

@@ -24,8 +24,8 @@ import {FaCommentDots as ComentIcon} from "react-icons/fa"
 function DetailMovie() {
   const userReducer = useSelector((state) => state.user);
   let navigate = useNavigate();
-  const dispatch = useDispatch();
   let { id } = useParams();
+  const dispatch = useDispatch();
   let movieDetail = useSelector((state) => state.movieDetail);
   let { comentarios } = useSelector((state) => state);
   let token = sessionStorage.getItem("token");
@@ -40,13 +40,6 @@ function DetailMovie() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
   }
-  var video2 = document.querySelector("video");
-   function stopVideo(){
-    video.pause();
-    video.currentTime = 0;
-  }  
-    // $("#stop").on('click', function(){
-    //   stopVideo(); });
 
   const [input, setInput] = useState({
     contenido: "",
