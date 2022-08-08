@@ -44,6 +44,11 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    creado:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false
+    },
     tipo: {
       type: DataTypes.ENUM(["serie", "pelicula"]),
       allowNull: true
