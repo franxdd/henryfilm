@@ -23,13 +23,20 @@ import {FaCommentDots as ComentIcon} from "react-icons/fa"
 
 function DetailMovie() {
   const userReducer = useSelector((state) => state.user);
+  let movieDetail = useSelector((state) => state.movieDetail);
+  let { comentarios } = useSelector((state) => state);
+
+
+ 
+
+  let video = movieDetail[0]?.videosAMostrar[0]; // El problema del rederizado de details de los datos de la DB esta aca
+  console.log(movieDetail);
+
   let navigate = useNavigate();
   let { id } = useParams();
   const dispatch = useDispatch();
-  let movieDetail = useSelector((state) => state.movieDetail);
-  let { comentarios } = useSelector((state) => state);
+
   let token = sessionStorage.getItem("token");
-  let video = movieDetail[0]?.videosAMostrar[0];
   // .replace("watch?v=", "embed/")
   function addCart(id) {
     let idParseado = parseInt(id);
@@ -82,7 +89,10 @@ function DetailMovie() {
     dispatch(getReview(input2));
     return () => dispatch(willunmont2());
   }, [dispatch]);
-  console.log(comentarios);
+
+
+
+  
 
   // console.log(input);
   return (
