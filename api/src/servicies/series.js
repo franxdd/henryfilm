@@ -269,10 +269,104 @@ const seriePorIdParmsTrad = async (req, res) => {
   }
 };
 
+
+
+
+// const postNuevaSerie = async(req,res) => {
+
+//   let {
+//     name, //*
+//     genre_ids,
+//     overview, //*
+//     cast, //*
+//     runtime, //*
+//     release_date, //*
+//     episode_run_time,
+//     number_of_episodes,
+//     posterImagen, //*
+//     backDropImagen, //*
+//     vote_average, //*
+//     popularity, //*
+//     tipo,
+//   } = req.body;
+
+//   var errores = validate({
+//     name,//*
+//     genre_ids,//*
+//     overview,//*
+//     cast,//*
+//     episode_run_time,//*
+//     popularity,//*
+//     backDropImagen, //*
+//     posterImagen,//*
+//     vote_average,//*
+//     number_of_episodes,//*
+//     tipo,
+//   });
+
+//   if (Object.keys(errores).length !== 0) res.status(400).json(errores);
+//   try {
+//     if (
+//       !name ||
+//       !genre_ids ||
+//       !overview ||
+//       !cast ||
+//       !episode_run_time ||
+//       !number_of_episodes ||
+//       !posterImagen
+//     )
+//       return res.status(404).send("Falta completar un dato..");
+
+//     const upload = await cloudinary.uploader.upload(posterImagen, {
+//       upload_preset: "mf7vmjsa",
+//     });
+//     const upload2 = await cloudinary.uploader.upload(backDropImagen, {
+//       upload_preset: "mf7vmjsa",
+//     });
+//     if (tipo === "serie") {
+//       const response = await Series.create({
+//         name,
+//         genre_ids,
+//         overview,
+//         cast,
+//         episode_run_time,
+//         number_of_episodes,
+//         release_date,
+//         posterImagen: upload.url,
+//         backDropImagen: upload2.url,
+//         vote_average,
+//         popularity,
+//         tipo,
+//       });
+//       res.status(200).json(response.data);
+//     } else {
+//       const response = await Peliculas.create({
+//         name,
+//         genre_ids,
+//         overview,
+//         cast,
+//         runtime,
+//         release_date,
+//         posterImagen: upload.url,
+//         backDropImagen: upload2.url,
+//         vote_average,
+//         popularity,
+//         tipo,
+//       });
+//       console.log("estoy entrando en el back");
+//       res.status(200).json(response.data);
+//     }
+//   } catch (error) {
+//     console.log("hubo un error con la API", error);
+//   }
+
+// }
+
 module.exports = {
   infoQuery,
   seriePorId,
   seriePorIdParms,
   seriePorIdParmsTrad,
+  
   // languages,
 };

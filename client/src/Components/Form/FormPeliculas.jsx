@@ -65,7 +65,7 @@ const FormPeliculas = () => {
     }
     // const reader = new FileReader();
     // reader.readAsDataURL(data.backDropImagen);
-
+    
     dispatch(postPeliculas(data));
     console.log(data);
     alert("Pelicula creada");
