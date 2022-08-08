@@ -11,7 +11,7 @@ import MoviesHome from "./Components/MoviesHome/MoviesHome";
 import NavBar from "./Components/NavBar/NavBar";
 import SeriesHome from "./Components/SeriesHome/SeriesHome";
 import Context from "./contexto/Context";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Search from "./Components/Search/Search";
 import Profile from "./Components/Profile/Profile.jsx";
 import Carro from "./Components/Carro/Carro";
@@ -19,14 +19,20 @@ import Wishlist from "./Components/Wishlist/Wishlist";
 import { ToastContainer } from "react-toastify";
 import "./Styles/ReactToastify.css";
 import Footer from "./Components/Footer/Footer";
-import "./Styles/ReactToastify.css";
 import PutPeliculas from "./Components/Form/PutPeliculas";
 import UserProfile from "./Components/Profile/UserProfile";
 import PasarelaDePago from "./Components/PasarelaDePago/PasarelaDePago";
+import { BsGoogle } from "react-icons/bs";
 
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
   const [token, setToken] = useState();
+
+
+
+
+
+
 
   // if(!token) {
   //   return <Login setToken={setToken} />

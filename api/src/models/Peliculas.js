@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
         type: DataTypes.ARRAY(DataTypes.STRING),
       }, //*
       runtime: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       }, // - episode run time
       release_date: {
@@ -45,6 +45,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
       }, // *
       // - number of episodes
+      creado:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
+      },
       tipo: {
         type: DataTypes.ENUM(["serie", "pelicula"]),
       },

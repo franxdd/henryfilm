@@ -16,7 +16,7 @@
  ;
 }
 .pageTitle2{
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 400;
     color:aliceblue
 }
@@ -38,5 +38,19 @@
     border-radius: 2px;
     border: none;
  
+  }
+}
+@keyframes bounce {
+  50% {
+    transform: translate(0, 8px);
+  }
+} 
+@media screen and (max-width: 500px){
+  .ContainerLogin{
+  .pageTitle2{
+    font-size: 0.9em;
+    font-weight: 400;
+    color:aliceblue
+}
   }
 }

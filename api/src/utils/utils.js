@@ -1,4 +1,4 @@
-const axios = require("axios");
+  const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
 [1, 2, 3, 3, 1, 3, 1, 3, 1, 2, 1, 2];
@@ -14,7 +14,7 @@ const parseador = (
   var num;
   let generos = {};
   var resultado = [];
-  // console.log(urlVideos);
+  console.log(generosData.data.genres);
   for (let j = 0; j < generosData.data.genres.length; j++) {
     for (const prop in generosData.data.genres[j]) {
       if (typeof generosData.data.genres[j][prop] === "number") {
@@ -24,7 +24,7 @@ const parseador = (
       }
     }
   }
-
+  
   for (let index = 0; index < data.length; index++) {
     if (data[index].genre_ids) {
       for (let g = 0; g < data[index].genre_ids.length; g++) {
@@ -115,6 +115,14 @@ const validate = ({
     error.overview = "Falta ingresar una descripcion";
   } else if (!isNaN(overview)) {
     error.overview = "Solo se pueden ingresar letras";
+  } else if (!tipo) {
+    error.tipo = "Se debe seleccionar un tipo";
+  } else if (tipo && tipo === "serie" && !number_of_episodes) {
+    error.number_of_episodes = "Debe existir un numero de episodio";
+  } else if (tipo && tipo === "serie" && !episode_run_time) {
+    error.episode_run_time = "Debe existir una duracion de episodio";
+  } else if (tipo && tipo === "pelicula" && !runtime) {
+    error.runtime = "Debe existir una duracion de pelicula";
   } else if (!release_date) {
     error.release_date = "Falta ingresar fecha de lanzamiento";
   } else if (!regRelease.test(release_date)) {
@@ -129,42 +137,20 @@ const validate = ({
     error.popularity = "Debe ingresar la popularidad";
   } else if (isNaN(popularity)) {
     error.popularity = "La popuralidad debe ser un numero";
-  } else if (!runtime) {
-    error.popularity = "Debe ingresar la duracion";
   } else if (isNaN(runtime)) {
     error.popularity = "La duracion debe ser un numero";
   } else if (cast.length === 0) {
     error.cast = "Debe existir al menos un actor/a";
   } else if (cast.includes("")) {
     error.cast = "Debe existir al menos un actor/a";
-  } else if (!backDropImagen) {
-    error.backDropImagen =
-      "Debe existir una opcion para back-image, caso contrario escribir Alt";
-  } else if (backDropImagen !== "Alt" && backDropImagen.length < 30) {
-    error.backDropImagen = "Ingresar una opcion correcta";
-  } else if (!posterImagen) {
-    error.posterImagen =
-      "Debe existir una opcion para poster,  caso contrario escribir Alt";
-  } else if (posterImagen !== "Alt" && posterImagen.length < 30) {
-    error.posterImagen = "Ingresar una opcion correcta";
+  } else if (!backDropImagen || backDropImagen === null) {
+    error.backDropImagen = "Debe existir una opcion para back-image";
+  } else if (!posterImagen || posterImagen === null) {
+    error.posterImagen = "Debe existir una opcion para poster";
   } else if (!genre_ids.length) {
     error.genre_ids = "Debe existir un genero";
   } else if (genre_ids.length === 0) {
     error.genre_ids = "Se debe ingresar al menos un genero";
-  } else if (!tipo) {
-    error.tipo = "Se debe seleccionar un tipo";
-  }
-
-  if (tipo && tipo === "serie") {
-    if (!number_of_episodes) {
-      error.number_of_episodes = "Debe existir un numero de episodio";
-    } else if (!episode_run_time) {
-      error.episode_run_time = "Debe existir una duracion de episodio";
-    }
-  } else if (tipo && tipo === "pelicula") {
-    if (!runtime) {
-      error.runtime = "Debe existir una duracion de pelicula";
-    }
   }
 
   return error;

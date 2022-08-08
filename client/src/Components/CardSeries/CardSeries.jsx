@@ -1,4 +1,4 @@
-import { React } from "react";
+import  React  from "react";
 import { Link } from "react-router-dom";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { useDispatch } from "react-redux";
@@ -25,12 +25,16 @@ function CardSeries({ id, name, poster }) {
       </div>
       <div className="card-info">
       <div className="Iconos">
+      <abbr title="Agrega a Favoritos">
         <span onClick={() => addWishlist(id)}>
           <HeartIcon className="iconoHeart" />
         </span>
+        </abbr>
+        <abbr title="Añade al carrito">
         <span onClick={() => addCart(id)}>
           <ShopIcon className="iconoShop" />
         </span>
+        </abbr>
         </div>
         {/* ^^^^^^^Este es el boton de la wishlist para cambiar^^^^ */}
         <p className="text-title">{name}</p>

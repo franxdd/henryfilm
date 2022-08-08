@@ -67,10 +67,6 @@
   display: flex;
 };
 
-.NavbarLinkContainer{
-  display: flex;
-};
-
 .NavbarLink{
   color: white;
   font-size: x-large;
@@ -81,10 +77,11 @@
    :hover{
     color: $detalles;
   }
-  @media (max-width: 700px) {
-    display: none;
-  }
 };
+.NavbarLinkContainer{
+  display: flex;
+};
+
 
  .NavbarLinkExtended{
   color: white;

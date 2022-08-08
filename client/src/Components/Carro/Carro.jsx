@@ -35,21 +35,20 @@ function Carro() {
   var totalPrice = 0;
 
   for (let i = 0; i < cart.length; i++) {
-    // console.log(cart[i].price);
+    console.log(cart[i].price);
     totalPrice = totalPrice + cart[i].price;
   }
 
   return (
     <div className="container">
       <h3>
-        {" "}
         <img
           className="logo"
           src={tuCarrito}
           alt="Logo"
           height="auto"
-          width="250px"
-        />{" "}
+          width="200px"
+        />
       </h3>
       <div className="containerCarrito">
         {cart &&

@@ -1,9 +1,10 @@
 const axios = require("axios");
 require("dotenv").config();
-const { Peliculas } = require("../DB/db.js");
+const { Peliculas, Series } = require("../DB/db.js");
 const { parseador, validate } = require("../utils/utils.js");
 const { API_KEY } = process.env;
-
+const { cloudinary } = require("../utils/cloudinary");
+// const Series = require("../models/Series.js");
 const getAllMovies = async (req, res) => {
   try {
     const cantidad = 5;
@@ -122,14 +123,12 @@ const getMovieDetailParams = async (req, res) => {
 
   try {
     if (isNaN(idPelicula)) {
-
       const peliculasDb = await Peliculas.findOne({
         where: {
           id: idPelicula,
         },
       });
 
-    
       var datosAEnviar = [peliculasDb];
     } else {
       let movie = await axios.get(
@@ -146,16 +145,16 @@ const getMovieDetailParams = async (req, res) => {
       var cast = await axios.get(
         `https://api.themoviedb.org/3/movie/${idPelicula}/credits?api_key=${API_KEY}&language=es-SP`
       );
-    var videos = await axios.get(
-      `https://api.themoviedb.org/3/movie/${idPelicula}/videos?api_key=${API_KEY}&language=es-SP`
-    );
+      var videos = await axios.get(
+        `https://api.themoviedb.org/3/movie/${idPelicula}/videos?api_key=${API_KEY}&language=es-SP`
+      );
 
       var castAEnviar = cast.data.cast;
 
       var urlVideos = `https://www.youtube.com/embed/`;
 
       var videosAEnviar = videos.data.results;
-      
+
       var data_parseado = [movie.data];
 
       var datosAEnviar = parseador(
@@ -167,9 +166,7 @@ const getMovieDetailParams = async (req, res) => {
         urlVideos
       );
     }
-
-   
-
+  
     res.status(200).json(datosAEnviar);
   } catch (error) {
     console.log("hubo un error con la API", error);
@@ -178,6 +175,7 @@ const getMovieDetailParams = async (req, res) => {
 
 //Posteo
 const postPeliculas = async (req, res) => {
+  console.log("?")
   let {
     name, //*
     genre_ids,
@@ -185,6 +183,8 @@ const postPeliculas = async (req, res) => {
     cast, //*
     runtime, //*
     release_date, //*
+    episode_run_time,
+    number_of_episodes,
     posterImagen, //*
     backDropImagen, //*
     vote_average, //*
@@ -198,6 +198,8 @@ const postPeliculas = async (req, res) => {
     overview,
     cast,
     runtime,
+    number_of_episodes,
+    episode_run_time,
     release_date,
     posterImagen,
     backDropImagen,
@@ -206,35 +208,63 @@ const postPeliculas = async (req, res) => {
     tipo,
   });
 
-  if (errores) res.status(400).json(errores);
-
+  if (Object.keys(errores).length !== 0) res.status(400).json(errores);
   try {
-    if (
-      !name ||
-      !genre_ids ||
-      !overview ||
-      !cast ||
-      !runtime ||
-      !release_date ||
-      !posterImagen
-    )
-      return res.status(404).send("Falta completar un dato..");
+    // if (
+    //   !name ||
+    //   !genre_ids ||
+    //   !overview ||
+    //   !cast ||
+    //   !runtime ||
+    //   !release_date ||
+    //   !posterImagen
+    // )
+    //   return res.status(404).send("Falta completar un dato..");
 
-    const response = await Peliculas.create({
-      name,
-      genre_ids,
-      overview,
-      cast,
-      runtime,
-      release_date,
-      posterImagen,
-      backDropImagen,
-      vote_average,
-      popularity,
-      tipo,
+    const upload = await cloudinary.uploader.upload(posterImagen, {
+      upload_preset: "mf7vmjsa",
+    });
+    const upload2 = await cloudinary.uploader.upload(backDropImagen, {
+      upload_preset: "mf7vmjsa",
     });
 
-    res.status(200).json(response.data);
+    console.log('antes del create')
+    var number_of_episodesParse = parseInt(number_of_episodes)
+    if (tipo === "serie") {
+      console.log(' create')
+      const response = await Series.create({
+        name,
+        genre_ids,
+        overview,
+        cast,
+        episode_run_time,
+        number_of_episodes: number_of_episodesParse,
+        posterImagen: upload.url,
+        backDropImagen: upload2.url,
+        vote_average,
+        popularity,
+        tipo,
+      });
+
+      console.log(' salio')
+      res.status(200).json(response.data);
+    } else {
+      const response = await Peliculas.create({
+        name,
+        genre_ids,
+        overview,
+        cast,
+        runtime,
+        release_date,
+        posterImagen: upload.url,
+        backDropImagen: upload2.url,
+        vote_average,
+        popularity,
+        tipo,
+      });
+     
+      res.status(200).json(response.data);
+    }
   } catch (error) {
     console.log("hubo un error con la API", error);
   }
@@ -273,9 +303,8 @@ const modificarPeli = async (req, res) => {
     let nuevaPeli = await peliActualizada.update(peliculitas);
     return res.status(200).send(nuevaPeli);
   } catch (error) {
-
     console.log(error);
-    res.status(400).json(error)
+    res.status(400).json(error);
   }
 };
 
