@@ -1,4 +1,4 @@
-  const axios = require("axios");
+const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
 [1, 2, 3, 3, 1, 3, 1, 3, 1, 2, 1, 2];
@@ -24,7 +24,7 @@ const parseador = (
       }
     }
   }
-  
+
   for (let index = 0; index < data.length; index++) {
     if (data[index].genre_ids) {
       for (let g = 0; g < data[index].genre_ids.length; g++) {
@@ -91,6 +91,7 @@ const validate = ({
   vote_average,
   popularity,
   number_of_episodes,
+  number_of_seasons,
   episode_run_time,
   tipo,
 }) => {
@@ -121,13 +122,15 @@ const validate = ({
     error.number_of_episodes = "Debe existir un numero de episodio";
   } else if (tipo && tipo === "serie" && !episode_run_time) {
     error.episode_run_time = "Debe existir una duracion de episodio";
+  } else if (tipo && tipo === "serie" && !number_of_seasons) {
+    error.number_of_seasons = "Debe existir un numero de temporada";
   } else if (tipo && tipo === "pelicula" && !runtime) {
     error.runtime = "Debe existir una duracion de pelicula";
-  } else if (!release_date) {
+  } else if (tipo && tipo === "pelicula" && !release_date) {
     error.release_date = "Falta ingresar fecha de lanzamiento";
-  } else if (!regRelease.test(release_date)) {
+  } else if (tipo && tipo === "pelicula" && !regRelease.test(release_date)) {
     error.release_date = "La fecha debe tener formato dd-mm-aaaa";
-  } else if (!vote_average) {
+  }else if (!vote_average) {
     error.vote_average = "Falta ingresar un rating";
   } else if (isNaN(vote_average)) {
     error.vote_average = "El rating debe ser un valor numerico";

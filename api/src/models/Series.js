@@ -44,6 +44,10 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    number_of_seasons:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     creado:{
       type: DataTypes.BOOLEAN,
       defaultValue: true,
