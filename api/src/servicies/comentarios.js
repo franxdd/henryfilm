@@ -7,8 +7,7 @@ const { sign, verify, decode } = require("jsonwebtoken");
 
 const getComentarios = async (req, res) => {
   let { id, tipo } = req.query;
-  console.log(id);
-  console.log(tipo);
+
   if (tipo === "pelicula") {
     var comentarios = await Comentarios.findAll({ where: { idpelicula: id } });
   } else if (tipo === "serie") {
@@ -49,7 +48,7 @@ const postComentario = async (req, res) => {
       });
     }
     
-    console.log(validToken.id);
+ 
     comentario.setUsuario(validToken.id);
     // comentario.setPelicula(idPelicula);
     res.status(200).json(comentario);

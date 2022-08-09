@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { getTodo, putPeliculas, getMoviesDetail, getSeriesDetail, willunmont2 } from "../../Redux/Actions/Actions";
@@ -17,14 +17,18 @@ const PutPeliculas = ({info}) => {
   var aux;
   var auxId;
 
-  if(id.includes("A-Z")){
-    auxId = id + ""
-  }else{
-    auxId = Number(id)
-  }
+  // if(id.includes("A-Z")){
+  //   auxId = id + ""
+  // }else{
+  //   auxId = Number(id)
+  // }
 
   for (let i = 0; i < todos.length; i++) {
-    if(todos[i].id === auxId) aux = todos[i]
+    if(todos[i].id === Number(id)){
+      aux = todos[i]
+    }else if(todos[i].id === id){
+      aux = todos[i]
+    }
   }
   console.log(aux)
   console.log(auxId)

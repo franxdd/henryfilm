@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Router } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +45,7 @@ function Login() {
 
     google.accounts.id.initialize({
       client_id:
-        "611424478766-nb0c91tvcdmqko0ch36tc74gu7gqcmbe.apps.googleusercontent.com",
+        "738554188035-l294si4hjt9homonivsai0ga65t64tg0.apps.googleusercontent.com",
       callback: handleCallbackResponse,
     });
 

@@ -28,12 +28,6 @@ const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
   const [token, setToken] = useState();
 
-
-
-
-
-
-
   // if(!token) {
   //   return <Login setToken={setToken} />
   // }

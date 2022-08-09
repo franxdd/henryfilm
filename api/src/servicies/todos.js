@@ -88,8 +88,6 @@ const todos = async (req, res) => {
       res.status(200).json(datosAEnviar);
     }
   } catch (error) {
-    
-    console.log(error.message);
     res.status(200).json(error)
   }
 };
