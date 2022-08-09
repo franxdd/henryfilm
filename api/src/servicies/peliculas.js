@@ -307,7 +307,7 @@ const modificarPeli = async (req, res) => {
     let nuevaPeli = await peliActualizada.update(peliculitas);
     return res.status(200).send(nuevaPeli);
   } catch (error) {
-    console.log(error);
+
     res.status(400).json(error);
   }
 };

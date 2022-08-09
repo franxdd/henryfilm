@@ -53,7 +53,7 @@ const getSeriesInfo = async (req, res) => {
 
     return seriesAEnviar;
   } catch (error) {
-    console.log(error);
+ 
   }
 };
 
@@ -217,16 +217,16 @@ const seriePorIdParms = async (req, res) => {
 //   var idioma = {}
 
 //   try {
-//     console.log("Hola?");
+
 //     const { id } = req.params;
 //     const tvLanguages = await axios(
 //       `https://api.themoviedb.org/3/tv/${id}/translations?api_key=${API_KEY}`
 //     );
 //     const languages = tvLanguages.data.translations;
-//     // console.log(languages)
+
 //     res.status(200).json(languages)
 //   } catch (error) {
-//     console.log(error);
+
 //   }
 // };
 
