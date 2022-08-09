@@ -121,8 +121,8 @@ if (!wishlistStorage) {
 const initialState = {
   allMovies: [],
   allSeries: [],
-  movieDetail: {},
-  seriesDetail: {},
+  movieDetail: [],
+  seriesDetail: [],
   backupSeries: [],
   backupMovies: [],
   generosMovies: [],
@@ -191,7 +191,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
       };
     case POST_LOGIN:
-      console.log(action.payload[3])
+      console.log(action.payload)
       sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
       localStorage.setItem("cart", JSON.stringify(action.payload[1]));
       localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
@@ -200,7 +200,8 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         token: action.payload[0],
         cart: action.payload[1],
-        wishlist: action.payload[2]
+        wishlist: action.payload[2],
+        user: action.payload[3]
       };
     case CHECK_STATE:
       return {
@@ -262,12 +263,12 @@ const rootRouter = (state = initialState, action) => {
     case WILLUNMOUNT:
       return {
         ...state,
-        seriesDetail: {},
+        seriesDetail: [],
       };
     case WILLUNMOUNT2:
       return {
         ...state,
-        movieDetail: {},
+        movieDetail: [],
       };
 
     case ORDER_NAME_ASC:

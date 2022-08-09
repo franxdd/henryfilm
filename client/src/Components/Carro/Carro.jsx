@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CarritoCard from "../CarritoCard/CarritoCard";
 import "../../Styles/components/_Carrito.scss";
@@ -11,6 +11,7 @@ function Carro() {
   const [totalPrecio, settotalPrecio] = useState(0);
   const [totalItems, settotalItems] = useState([]);
   const { cart } = useSelector((state) => state);
+  const { user } = useSelector((state) => state);
 
   useEffect(() => {
     if (cart) {
@@ -23,6 +24,11 @@ function Carro() {
   }, [cart]);
 
   const HandleClickComprar = () => {
+    console.log(cart)
+    console.log(user)
+    var arrAux = [cart,user ]
+    //aca va el dispatch de la action que guarda en la BD
+    // dispatch(postHistorial(arrAux))
     const token = sessionStorage.getItem("token");
     if (token) {
       navigate("/home/pasarela");

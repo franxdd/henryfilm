@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -22,38 +22,48 @@ import "../../Styles/components/_CardComentarios.scss";
 import {FaCommentDots as ComentIcon} from "react-icons/fa"
 
 function DetailMovie() {
+  let navigate = useNavigate();
+  let { id } = useParams();
+  let token = sessionStorage.getItem("token");
+  
+  const dispatch = useDispatch();
   const userReducer = useSelector((state) => state.user);
   let movieDetail = useSelector((state) => state.movieDetail);
   let { comentarios } = useSelector((state) => state);
-
-
- 
-
-  let video = movieDetail[0]?.videosAMostrar[0]; // El problema del rederizado de details de los datos de la DB esta aca
-  console.log(movieDetail);
-
-  let navigate = useNavigate();
-  let { id } = useParams();
-  const dispatch = useDispatch();
-
-  let token = sessionStorage.getItem("token");
-  // .replace("watch?v=", "embed/")
-  function addCart(id) {
-    let idParseado = parseInt(id);
-    dispatch(addToCart(idParseado));
-  }
-  function BasicModal() {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-  }
-
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: "",
     idPelicula: id,
     token: token,
   });
+  
+  useEffect(() => {
+    dispatch(getMoviesDetail(id));
+    dispatch(getReview(input2));
+    return () => dispatch(willunmont2());
+  }, [dispatch]);
+  
+  
+  // console.log(movieDetail)
+  // if(!movieDetail[0].creado){
+    
+  //   var video = movieDetail[0]?.videosAMostrar[0]; // El problema del rederizado de details de los datos de la DB esta aca
+    
+  // }
+  // console.log(movieDetail);
+
+  
+  // .replace("watch?v=", "embed/")
+  function addCart(id) {
+    let idParseado = parseInt(id);
+    dispatch(addToCart(idParseado));
+  }
+  function BasicModal() {
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+  }
+
   const input2 = {
     id: id,
     tipo: "pelicula",
@@ -84,25 +94,18 @@ function DetailMovie() {
     dispatch(addToWishlist(idParseado2));
   }
 
-  useEffect(() => {
-    dispatch(getMoviesDetail(id));
-    dispatch(getReview(input2));
-    return () => dispatch(willunmont2());
-  }, [dispatch]);
-
-
-
-  
-
-  // console.log(input);
-  return (
+  return movieDetail.length === 0 ? (
+    <div className="Loading">
+      <div className="loader"></div>
+    </div>
+  ) : (
     <section>
       <header
         className="header-info"
         style={{
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundImage: `url(https://image.tmdb.org/t/p/original${movieDetail[0]?.backdrop_path})`,
+          backgroundImage: movieDetail[0]?.backdrop_path ?    `url(https://image.tmdb.org/t/p/original${movieDetail[0]?.backdrop_path})` : `url(${movieDetail[0]?.backDropImagen})` ,
         }}
       >
         <div className="contenedor-info">
@@ -115,28 +118,37 @@ function DetailMovie() {
             <p className="item-descripcion">
               Duracion: {movieDetail[0]?.runtime} min
             </p>
+            {movieDetail[0]?.production_companies ? (
             <ul className="item-descripcion">
               Producción:{" "}
               {movieDetail[0]?.production_companies?.map((e) => {
-                return <div>{e.name}</div>;
+                return <div className="divGeneros">{movieDetail[0].production_companies[movieDetail[0].production_companies.length-1].name === e.name ? `${e.name}` : `${e.name},` }</div>;
               })}
             </ul>
+
+
+            ):(
+              <>
+                <br></br>
+              </>
+
+            )}
             <ul className="lista-generos">
-              Géneros:{" "}
-              {movieDetail[0]?.genres?.map((e) => {
-                return <div>{e.name}</div>;
+              Géneros: {" "}
+              {movieDetail[0]?.genre_ids?.map((e) => {
+                return <div className="divGeneros">{movieDetail[0].genre_ids[movieDetail[0].genre_ids.length-1] === e ? `${e}` : `${e},` } </div>;
               })}
             </ul>
 
             <div className="contenedor-links">
-              {userReducer.username ? (
+              {movieDetail[0]?.videosAMostrar ? (
                 <div>
-                <a href="#miModal"><button>Trailer</button></a>
+                <a href="#miModal"><button >Trailer</button></a>
                 <div id="miModal" className="modal">
                   <div className="modal-contenido">
                     <a href="#"> <CloseIcon className="iconoClose"/> </a><br></br>
                     <div className="iframe-container">
-                    <iframe className="video" width="100%" height="100%" src={video}></iframe>
+                    <iframe className="video" width="100%" height="100%" src={movieDetail[0]?.videosAMostrar[0]}></iframe>
                     </div>
                   </div>  
                 </div>
@@ -146,9 +158,10 @@ function DetailMovie() {
                     <iframe width="200" height="200" src={video}></iframe>
                   </div>
                 </div> */}
+                {/* <button >Trailer</button> */}
                 </div>
               ) : (
-                <button onClick={handleRegister}>Trailer</button>
+                <></>
               )}
 
               <Link to={`/home/videos`}>
