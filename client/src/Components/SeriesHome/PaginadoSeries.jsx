@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import {  useState } from "react";
 import { FaAngleDoubleLeft, FaAngleLeft, FaAngleRight, FaAngleDoubleRight } from "react-icons/fa";
 
 function Paginacion({ pagina, setPagina, maximo }) {
