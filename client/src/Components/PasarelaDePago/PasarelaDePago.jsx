@@ -1,7 +1,7 @@
 // import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart, addToWishlist, postHistorial } from "../../Redux/Actions/Actions";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -14,8 +14,10 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   let navigate = useNavigate();
+  let dispatch = useDispatch()
 
   const { cart } = useSelector((state) => state);
+  const { user } = useSelector((state) => state);
 
   var titulosAComprar = [];
   var precioTotal = 0;
@@ -54,6 +56,9 @@ const CheckoutForm = () => {
     }
     localStorage.setItem("cart", JSON.stringify([]));
     alert("Compra realizada con exito");
+    var arrAux = [cart,user ]
+    dispatch(postHistorial(arrAux))
+
     navigate("/home", { replace: true });
   };
 

@@ -1,5 +1,5 @@
 import {  useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
@@ -8,6 +8,9 @@ import { createReview } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_ComentariosForm.scss";
 
 function Rating2({ id, token }) {
+
+  const histo = useSelector((state) => state.historial);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [input, setInput] = useState({
@@ -37,11 +40,30 @@ function Rating2({ id, token }) {
   }
   const submitHandler = (e) => {
     e.preventDefault();
+
+    console.log(Object.keys(histo))
     if (!input.token) {
+
       alert("Debes loguearte");
       navigate("/home/Login");
-    } else {
-      dispatch(createReview(input));
+
+    } else if(Object.keys(histo).length === 0) {
+      alert("Debes comprar el producto antes de comentar");
+      // navigate("/home");
+    }
+    else{
+      
+      let coincidencia = histo.compras.filter(h => h.id+'' === id )
+      console.log(coincidencia)
+
+      if(coincidencia.length !== 0) {
+        
+        dispatch(createReview(input));
+      }else{
+
+        alert("Debes comprar el producto antes de comentar");
+      }
+      
     }
   };
   console.log(input);

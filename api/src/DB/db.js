@@ -11,7 +11,7 @@ const modelComentarios = require("../models/Comentarios.js");
 const modelCarros = require("../models/Carros.js");
 const modelDeseados = require("../models/Deseados.js");
 const modelPrecios = require("../models/Precios.js");
-const modelHistorial = require("../models/Historial.js");
+const modelHistorials = require("../models/Historials.js");
 
 let sequelize =
   process.env.NODE_ENV === "production"
@@ -83,9 +83,9 @@ modelComentarios(sequelize);
 modelCarros(sequelize)
 modelDeseados(sequelize)
 modelPrecios(sequelize)
-modelHistorial(sequelize)
+modelHistorials(sequelize)
 
-const { Peliculas, Usuarios, Series, Comentarios, Carros, Deseados, Precios, Historial } = sequelize.models;
+const { Peliculas, Usuarios, Series, Comentarios, Carros, Deseados, Precios, Historials } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -101,8 +101,8 @@ Carros.belongsTo(Usuarios);
 Usuarios.hasMany(Deseados)
 Deseados.belongsTo(Usuarios);
 
-Usuarios.hasOne(Historial);
-Historial.belongsTo(Usuarios);
+Usuarios.hasOne(Historials);
+Historials.belongsTo(Usuarios);
 
 Series.belongsToMany(Usuarios, { through: "series-Usuario" });
 Usuarios.belongsToMany(Series, { through: "series-Usuario" });
