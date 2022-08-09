@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -44,7 +44,7 @@ function DetailsSeries() {
     return () => dispatch(willunmont());
   }, [dispatch]);
 
-  console.log(seriesDetail);
+  // console.log(seriesDetail);
 
   // let video = seriesDetail[0]?.videosAMostrar[0];
 

@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import Carousel from "../Carousel/Carousel";
 import Header from "../Header/Header";
 import { useContext, useEffect } from "react";
