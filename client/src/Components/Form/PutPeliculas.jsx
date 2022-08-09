@@ -1,14 +1,35 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { postPeliculas, putPeliculas } from "../../Redux/Actions/Actions";
+import { getTodo, putPeliculas, getMoviesDetail, getSeriesDetail, willunmont2 } from "../../Redux/Actions/Actions";
 import validate from "../../util/validate.js";
 import poster from "../../img/poster.jpg";
 import back from "../../img/backdrop.jpg";
-import "../../Styles/components/_FormPeliculas.scss"
+import "../../Styles/components/_FormPeliculas.scss";
+import { useParams } from "react-router-dom";
 
-const PutPeliculas = () => {
+const PutPeliculas = ({info}) => {
   let dispatch = useDispatch();
+  let { id } = useParams();
+
+  let todos = useSelector((state) => state.todo);
+  // console.log(movieDetail)
+  var aux;
+  var auxId;
+
+  if(id.includes("A-Z")){
+    auxId = id + ""
+  }else{
+    auxId = Number(id)
+  }
+
+  for (let i = 0; i < todos.length; i++) {
+    if(todos[i].id === auxId) aux = todos[i]
+  }
+  console.log(aux)
+  console.log(auxId)
+
+
   const generos = useSelector((state) => state.generosMovies);
   const [error, setError] = useState({ " ": " " });
   const [data, setdata] = useState({
@@ -25,6 +46,7 @@ const PutPeliculas = () => {
     popularity: "",
     tipo: "",
   });
+  console.log(data)
 
   const HandleSubmit = (e) => {
     e.preventDefault();
@@ -122,7 +144,7 @@ const PutPeliculas = () => {
     <div className="FormPeliculas">
       <form className ="form2" onSubmit={HandleSubmit}>
       <div className="pageTitle title"> Editar Producto </div>
-        <div className="nombreconteiner">
+        {/* <div className="nombreconteiner">
           <input
             id="id"
             type="text"
@@ -131,13 +153,13 @@ const PutPeliculas = () => {
             className="name formEntry2"
             onChange={(e) => HandleInput(e)}
           />
-        </div>
+        </div> */}
         <div className="nombreconteiner">
           <input
             id="name"
             type="text"
             name="name"
-            placeholder="Nombre:"
+            placeholder={aux.name}
             className="name formEntry2"
             onChange={(e) => HandleInput(e)}
           />
@@ -149,30 +171,44 @@ const PutPeliculas = () => {
             type="text"
             name="overview"
             rows="5"
-            placeholder="Descripción:"
+            placeholder={aux.overview}
             className="name formEntry2"
             maxLength="140"
             onChange={(e) => HandleInput(e)}
           />
         </div>
 
+        {
+        aux.tipo === "pelicula" ? 
         <div className="relasedconteiner">
           <input
             id="release_date"
             type="text"
             name="release_date"
-            placeholder="Released:"
+            placeholder={aux.release_date}
             className="name formEntry2"
             onChange={(e) => HandleInput(e)}
           />
         </div>
+        :
+        <div className="relasedconteiner">
+        <input
+          id="release_date"
+          type="text"
+          name="release_date"
+          placeholder={aux.first_air_date}
+          className="name formEntry2"
+          onChange={(e) => HandleInput(e)}
+        />
+      </div>
+        }
 
         <div className="vote_averageconteiner">
           <input
             id="vote_average"
             type="text"
             name="vote_average"
-            placeholder="Rating:"
+            placeholder={aux.vote_average}
             className="name formEntry2"
             onChange={(e) => HandleInput(e)}
           />
@@ -183,7 +219,7 @@ const PutPeliculas = () => {
             id="popularity"
             type="text"
             name="popularity"
-            placeholder="Popularidad:"
+            placeholder={aux.popularity}
             className="name formEntry2"
             onChange={(e) => HandleInput(e)}
           />
@@ -264,9 +300,12 @@ const PutPeliculas = () => {
             <select name="tipo"
             onChange={(e) => HandleChangeTipos(e)}
             className="dropdown-select">
-              <option value=" ">Tipos..</option>
+              {/* <option value=" ">Tipos..</option> */}
+              {
+                aux.tipo === "pelicula" ? 
+                <option value="pelicula">pelicula</option> :
             <option value="serie">serie</option>
-            <option value="pelicula">pelicula</option>
+              }
           </select>
           </div>
         </section>

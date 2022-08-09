@@ -68,7 +68,7 @@ const App = () => {
             <Route path="Search" element={<Search />}></Route>
             <Route path="Profile" element={<Profile />}></Route>
             <Route path="Carro" element={<Carro />}></Route>
-            <Route path="modificar" element={<PutPeliculas />}></Route>
+            <Route path="modificar/:id" element={<PutPeliculas />}></Route>
             <Route path="userProfile" element={<UserProfile />}></Route>
             <Route path="wishlist" element={<Wishlist />}></Route>
             <Route path="pasarela" element={<PasarelaDePago />}></Route>

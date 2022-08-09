@@ -44,7 +44,7 @@ function DetailMovie() {
   }, [dispatch]);
   
   
-  console.log(movieDetail)
+  console.log("asdasdasd", movieDetail)
   // if(!movieDetail[0].creado){
     
   //   var video = movieDetail[0]?.videosAMostrar[0]; // El problema del rederizado de details de los datos de la DB esta aca

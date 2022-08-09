@@ -459,7 +459,7 @@ const rootRouter = (state = initialState, action) => {
           ...state,
           all: filter,
         };
-      }
+      };
     // case CLEAR:
     //   console.log(action.payload)
     //   if (action.payload === "series") {
