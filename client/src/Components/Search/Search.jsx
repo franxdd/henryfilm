@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getTodo } from "../../Redux/Actions/Actions";
 import CardSearch from "./CardSearch";

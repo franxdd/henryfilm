@@ -1,4 +1,4 @@
-import { React } from "react";
+// import { React } from "react";
 import { Link } from "react-router-dom";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { useDispatch } from "react-redux";
@@ -39,7 +39,7 @@ function CardSearch({ id, name, poster, tipo }) {
         {/* ^^^^^^^Este es el boton de la wishlist para cambiar^^^^ */}
         <p className="text-title">{name}</p>
         <p className="text-body">${Math.ceil(getRandomArbitrary(15, 30))}</p>
-        <Link to={`/home/${tipo}/${id}`}>
+        <Link to={`/home/${tipo}s/${id}`}>
           <button className="card-button"> + Info</button>
         </Link>
       </div>
