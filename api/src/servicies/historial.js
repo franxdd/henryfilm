@@ -6,26 +6,33 @@ const {
   Usuarios,
   Peliculas,
   Carros,
-  Historial,
+  Historials,
 } = require("../DB/db.js");
+const { renderSync } = require("sass");
+
 
 const posthistorial = async (req, res) => {
-  let { historialContent, idUsuario } = req.body;
+  let payload = req.body;
+  var historialContent = payload[0]
+  var idUsuario = payload[1].id
+
+
+
   try {
-    let histoUser = await Historial.findOne({
+    if(historialContent.length === 0) return res.status(400).json("Debe seleccionar un elemento a comprar")
+
+    let histoUser = await Historials.findOne({
       where: {
         UsuarioId: idUsuario,
       },
     });
 
-    console.log(histoUser);
 
     if (histoUser) {
-      console.log(histoUser.dataValues);
-      console.log(historialContent);
-      var auxContent = [historialContent, histoUser.dataValues];
-      console.log(auxContent);
-      var histo = await Historial.update(
+
+      var auxContent = [...historialContent, ...histoUser.dataValues.compras];
+
+      var histo = await Historials.update(
         { compras: auxContent },
         {
           where: {
@@ -34,17 +41,18 @@ const posthistorial = async (req, res) => {
         }
       );
     } else {
+
       var user = await Usuarios.findOne({
         where: {
           id: idUsuario,
         },
       });
 
-      var histo = await Historial.create({
+      var histo = await Historials.create({
         compras: historialContent,
       });
 
-      user[0].setHistorial(histo);
+      user.setHistorial(histo);
     }
 
     res.status(200).json(histo);
@@ -56,8 +64,29 @@ const posthistorial = async (req, res) => {
 
 const getHistorial = async (req, res) => {
   let { idUsuario } = req.params;
+  console.log("id de params",idUsuario)
   try {
-  } catch (error) {}
+
+
+    console.log('antes del find one')
+    let histoUser = await Historials.findOne({
+      where: {
+        UsuarioId: idUsuario,
+      },
+    })
+    console.log(histoUser)
+    if(!histoUser) return res.status(200).json(false)
+
+    console.log('devuelve')
+    res.status(200).json(histoUser)
+
+
+  } catch (error) {
+
+    res.status(400).json("Error en obtencion de historial")
+
+
+  }
 };
 
 module.exports = {

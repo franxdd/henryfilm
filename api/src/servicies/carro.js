@@ -6,17 +6,13 @@ const { Comentarios, Usuarios, Peliculas, Carros } = require("../DB/db.js");
 const { API_KEY } = process.env;
 
 const postCarrito = async (req, res) => {
-
-
   let body = req.body;
-  
 
   let token = body[0];
   let contenido = body[1];
-  // console.log(contenido.length);
+
   try {
     if (!token || !contenido) return res.status(404).send("Falta un dato..");
-    // if (contenido.length === 0) return res.status(200).send("Carro vacio");
 
     let tokenParseado = JSON.parse(token);
     const dataUser = verify(tokenParseado, "jwtsecretcambiar");
@@ -26,10 +22,8 @@ const postCarrito = async (req, res) => {
         UsuarioId: dataUser.id,
       },
     });
- 
+
     if (verificacionCarro.length !== 0) {
-
-
       const carro = await Carros.update(
         { contenido: contenido },
         {
@@ -40,24 +34,18 @@ const postCarrito = async (req, res) => {
       );
 
       return res.status(200).json(carro);
-      
     } else {
-      // console.log("entro al crear");
-      const user = await Usuarios.findAll({
+      const user = await Usuarios.findOne({
         where: {
           id: dataUser.id,
         },
       });
 
-      // idParseado = String(dataUser.id)
-      // console.log(dataUser.id)
-      // console.log(idParseado)
-
       const carro = await Carros.create({
         contenido: contenido,
       });
 
-      user[0].setCarro(carro);
+      user.setCarro(carro);
 
       const carrito = await Carros.findAll({
         where: {

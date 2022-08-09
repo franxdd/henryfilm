@@ -7,6 +7,8 @@ import {
   willunmont2,
   addToWishlist,
   getReview,
+  getHistorial,
+
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_DetailsMovies.scss";
 import { estrellas } from "../../auxiliares/Funciones";
@@ -27,7 +29,9 @@ function DetailMovie() {
   let token = sessionStorage.getItem("token");
   
   const dispatch = useDispatch();
-  const userReducer = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
+
+  let iduser = user.id
   let movieDetail = useSelector((state) => state.movieDetail);
   let { comentarios } = useSelector((state) => state);
   const [input, setInput] = useState({
@@ -40,6 +44,10 @@ function DetailMovie() {
   useEffect(() => {
     dispatch(getMoviesDetail(id));
     dispatch(getReview(input2));
+    if(iduser){ 
+      console.log('entro aca')
+      dispatch(getHistorial(iduser))
+    }
     return () => dispatch(willunmont2());
   }, [dispatch]);
   

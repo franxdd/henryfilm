@@ -3,18 +3,16 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Historial",
+    "ProductosEliminados",
     {
+      contenido: {
+        type: DataTypes.ARRAY(DataTypes.JSON),
+      },
       id: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true,
-        unique: true,
-      }, //*
-      compras: {
-        type: DataTypes.ARRAY(DataTypes.JSON),
-        allowNull: false,
       },
     },
     {
