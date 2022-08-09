@@ -59,7 +59,7 @@ function DetailMovie() {
     dispatch(addToCart(idParseado));
   }
   function BasicModal() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
   }
