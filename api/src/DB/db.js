@@ -12,6 +12,8 @@ const modelCarros = require("../models/Carros.js");
 const modelDeseados = require("../models/Deseados.js");
 const modelPrecios = require("../models/Precios.js");
 const modelHistorials = require("../models/Historials.js");
+const modelProdEliminados = require("../models/ProductosEliminados.js");
+const modelProdModificados = require("../models/ProductosModificados.js");
 
 let sequelize =
   process.env.NODE_ENV === "production"
@@ -84,6 +86,8 @@ modelCarros(sequelize)
 modelDeseados(sequelize)
 modelPrecios(sequelize)
 modelHistorials(sequelize)
+modelProdEliminados(sequelize)
+modelProdModificados(sequelize)
 
 const { Peliculas, Usuarios, Series, Comentarios, Carros, Deseados, Precios, Historials } = sequelize.models;
 
