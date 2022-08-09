@@ -7,6 +7,12 @@ import {TiHeart as HeartIcon} from "react-icons/ti";
 
 
 function CardSearch({ id, name, poster, tipo }) {
+
+
+  
+
+
+
   function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
   }
@@ -40,7 +46,7 @@ function CardSearch({ id, name, poster, tipo }) {
         {/* ^^^^^^^Este es el boton de la wishlist para cambiar^^^^ */}
         <p className="text-title">{name}</p>
         <p className="text-body">${Math.ceil(getRandomArbitrary(15, 30))}</p>
-        <Link to={`/home/series/${id}`}>
+        <Link to={`/home/${tipo}s/${id}`}>
           <button className="card-button"> + Info</button>
         </Link>
       </div>
