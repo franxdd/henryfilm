@@ -2,6 +2,7 @@
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useSelector } from "react-redux";
+import { addToCart, addToWishlist, postHistorial } from "../../Redux/Actions/Actions";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +16,7 @@ const CheckoutForm = () => {
   let navigate = useNavigate();
 
   const { cart } = useSelector((state) => state);
+
   var titulosAComprar = [];
   var precioTotal = 0;
   for (let i = 0; i < cart.length; i++) {
@@ -23,11 +25,13 @@ const CheckoutForm = () => {
 
     // console.log(titulosAComprar)
     // console.log(precioTotal)
-    console.log(cart);
+    // console.log(cart);
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),

@@ -65,7 +65,7 @@ const postLogin = async (req, res) => {
       },
     });
 
-    // console.log(user)
+    console.log(user.dataValues.id)
 
     if (!user) {
       return res.status(400).send("Usuario no existente");
@@ -110,6 +110,7 @@ const postLogin = async (req, res) => {
               carrito.dataValues.contenido,
               deseados.dataValues.contenido,
               "Te logueaste con exito",
+              user
             ];
           } else if (carrito) {
             arrAux = [
@@ -117,6 +118,7 @@ const postLogin = async (req, res) => {
               carrito.dataValues.contenido,
               [],
               "Te logueaste con exito",
+              user
             ];
           } else if (deseados) {
             arrAux = [
@@ -124,9 +126,10 @@ const postLogin = async (req, res) => {
               [],
               deseados.dataValues.contenido,
               "Te logueaste con exito",
+              user
             ];
           } else {
-            arrAux = [accessToken, [], [], "Te logueaste con exito"];
+            arrAux = [accessToken, [], [], "Te logueaste con exito",user];
           }
           console.log(arrAux)
           res.status(200).json(arrAux);

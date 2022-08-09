@@ -47,6 +47,7 @@ export const GET_REVIEW = "GET_REVIEW";
 export const POST_REVIEW = "POST_REVIEW";
 export const GOOGLE_USER = "GOOGLE_USER";
 export const GOOGLE_LOG_OUT = "GOOGLE_LOG_OUT";
+export const POST_HISTORIAL = "POST_HISTORIAL"
 
 function a(error) {
   return toast.error(error, {
@@ -82,6 +83,19 @@ function b(mensaje) {
 //       });
 //   };
 // };
+
+
+export const postHistorial = (payload) => {
+  return async function (dispatch) {
+    let getAllSeries = await axios(`/historial/`);
+    return dispatch({
+      type: GET_ALL_SERIES,
+      payload: getAllSeries.data,
+    });
+  };
+}
+
+
 export const getAllSeries = () => {
   return async function (dispatch) {
     let getAllSeries = await axios(`/series`);
@@ -176,6 +190,7 @@ export const checkState = () => {
 export const PostLogin = (payload) => {
   return async function (dispatch) {
     try {
+      console.log(payload)
       let created = await axios.post("/usuarios/login", payload);
       // {
       //   // withCredentials: true,
