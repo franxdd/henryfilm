@@ -124,7 +124,7 @@ const Nav2 = () => {
     sessionStorage.removeItem("token");
     localStorage.setItem("cart", JSON.stringify([]));
     localStorage.setItem("wishlist", JSON.stringify([]));
-
+    // $crisp.push(['do', 'session:reset']);
     navigate("/home");
   };
 
@@ -134,7 +134,7 @@ const Nav2 = () => {
   return (
     <main>
       <AppBar position="static" sx={{ background: "black" }}>
-        <Container maxWidth="xl">
+        <Container maxWidth="xxl">
           <Toolbar disableGutters>
             <Link to="/" style={{ textDecoration: "none" }}>
               <Typography

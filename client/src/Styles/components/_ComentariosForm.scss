@@ -39,14 +39,14 @@
   .submit2 {
     width: 50%;
     color: rgb(0, 0, 0);
-    background-color: $detalles;
+    background-color: $background-intermedio;
     font-size: 20px;
-    cursor: pointer
+    cursor: pointer;
+    color: $detalles;
   }
   .submit2:hover {
-
-    background-color: $background-intermedio;
-    color:$detalles;
+    background-color:$detalles;
+    color:  $background-intermedio;
   }
 .ratingStyle{
   margin-left: 180px;

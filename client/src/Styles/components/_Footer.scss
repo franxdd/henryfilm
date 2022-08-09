@@ -34,7 +34,7 @@
 	justify-content:flex-start;
 	align-items: center;
 	gap:8px;
-	margin-left:-20px;
+	margin-left:29px;
 }
 .footerDistributed{
 	background: #000000;
@@ -182,8 +182,11 @@
 	/* margin-bottom: 5px; */
 }
 
-
-
+@media (max-width: 1600px) {
+.footerCenter ul{
+	margin-left:-20px;
+}
+}
 @media (max-width: 500px) {
 
 	.footerDistributed{

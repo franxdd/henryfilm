@@ -111,7 +111,6 @@ function DetailMovie() {
       <div className="loader"></div>
     </div>
   ) : (
-
     <section>
       <header
         className="header-info"
