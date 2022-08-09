@@ -122,7 +122,7 @@ const initialState = {
   allMovies: [],
   allSeries: [],
   movieDetail: [],
-  seriesDetail: {},
+  seriesDetail: [],
   backupSeries: [],
   backupMovies: [],
   generosMovies: [],
@@ -262,12 +262,12 @@ const rootRouter = (state = initialState, action) => {
     case WILLUNMOUNT:
       return {
         ...state,
-        seriesDetail: {},
+        seriesDetail: [],
       };
     case WILLUNMOUNT2:
       return {
         ...state,
-        movieDetail: {},
+        movieDetail: [],
       };
 
     case ORDER_NAME_ASC:

@@ -175,7 +175,7 @@ const getMovieDetailParams = async (req, res) => {
 
 //Posteo
 const postPeliculas = async (req, res) => {
-  console.log("?")
+  
   let {
     name, //*
     genre_ids,
@@ -185,6 +185,7 @@ const postPeliculas = async (req, res) => {
     release_date, //*
     episode_run_time,
     number_of_episodes,
+    number_of_seasons,
     posterImagen, //*
     backDropImagen, //*
     vote_average, //*
@@ -199,6 +200,7 @@ const postPeliculas = async (req, res) => {
     cast,
     runtime,
     number_of_episodes,
+    number_of_seasons,
     episode_run_time,
     release_date,
     posterImagen,
@@ -230,6 +232,7 @@ const postPeliculas = async (req, res) => {
 
     console.log('antes del create')
     var number_of_episodesParse = parseInt(number_of_episodes)
+    var number_of_seasonsParse = parseInt(number_of_seasons)
     if (tipo === "serie") {
       console.log(' create')
       const response = await Series.create({
@@ -239,6 +242,7 @@ const postPeliculas = async (req, res) => {
         cast,
         episode_run_time,
         number_of_episodes: number_of_episodesParse,
+        number_of_seasons: number_of_seasonsParse,
         posterImagen: upload.url,
         backDropImagen: upload2.url,
         vote_average,

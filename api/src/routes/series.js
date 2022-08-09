@@ -9,7 +9,7 @@ route.get("/detalleDeSerie", seriePorId);
 route.get("/seriePorId/:id", seriePorIdParms);
 // route.post("/postNuevaSerie", postNuevaSerie);
 route.put("/modificarSerie/:id", modificarSerie)
-route.get("/traductor/:id/:iso1/:iso2", seriePorIdParmsTrad)
+// route.get("/traductor/:id/:iso1/:iso2", seriePorIdParmsTrad)
 // route.get("/test/:id", languages)
 
 module.exports = route;

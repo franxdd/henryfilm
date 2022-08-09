@@ -44,7 +44,7 @@ function DetailMovie() {
   }, [dispatch]);
   
   
-  console.log(movieDetail)
+  // console.log(movieDetail)
   // if(!movieDetail[0].creado){
     
   //   var video = movieDetail[0]?.videosAMostrar[0]; // El problema del rederizado de details de los datos de la DB esta aca
@@ -122,7 +122,7 @@ function DetailMovie() {
             <ul className="item-descripcion">
               Producción:{" "}
               {movieDetail[0]?.production_companies?.map((e) => {
-                return <div>{e.name}</div>;
+                return <div className="divGeneros">{movieDetail[0].production_companies[movieDetail[0].production_companies.length-1].name === e.name ? `${e.name}` : `${e.name},` }</div>;
               })}
             </ul>
 
@@ -136,7 +136,7 @@ function DetailMovie() {
             <ul className="lista-generos">
               Géneros: {" "}
               {movieDetail[0]?.genre_ids?.map((e) => {
-                return <div> {e}</div>;
+                return <div className="divGeneros">{movieDetail[0].genre_ids[movieDetail[0].genre_ids.length-1] === e ? `${e}` : `${e},` } </div>;
               })}
             </ul>
 
