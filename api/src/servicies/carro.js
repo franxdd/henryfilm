@@ -6,8 +6,10 @@ const { Comentarios, Usuarios, Peliculas, Carros } = require("../DB/db.js");
 const { API_KEY } = process.env;
 
 const postCarrito = async (req, res) => {
+
+
   let body = req.body;
-  let idParseado;
+  
 
   let token = body[0];
   let contenido = body[1];
