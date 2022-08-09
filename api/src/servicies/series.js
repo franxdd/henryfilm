@@ -57,7 +57,7 @@ const getSeriesInfo = async (req, res) => {
 
     return seriesAEnviar;
   } catch (error) {
-    console.log(error);
+ 
   }
 };
 
@@ -162,7 +162,6 @@ const seriePorId = async (req, res) => {
 
 const seriePorIdParms = async (req, res) => {
   try {
-    // console.log('Hola?')
     const { id, iso1, iso2 } = req.params;
 
     const allSeries = await axios(
@@ -203,7 +202,7 @@ const seriePorIdParms = async (req, res) => {
     // console.log("Esto es para obtener la info de los detalles:", serieId)
     res.status(200).json(datosAEnviar);
   } catch (error) {
-    console.log(error);
+
     res.status(400).json(error)
   }
 };
@@ -212,16 +211,16 @@ const seriePorIdParms = async (req, res) => {
 //   var idioma = {}
 
 //   try {
-//     console.log("Hola?");
+
 //     const { id } = req.params;
 //     const tvLanguages = await axios(
 //       `https://api.themoviedb.org/3/tv/${id}/translations?api_key=${API_KEY}`
 //     );
 //     const languages = tvLanguages.data.translations;
-//     // console.log(languages)
+
 //     res.status(200).json(languages)
 //   } catch (error) {
-//     console.log(error);
+
 //   }
 // };
 
@@ -254,7 +253,7 @@ const seriePorIdParmsTrad = async (req, res) => {
       );
       var data_parseado = [allSeries.data];
       var datosAEnviar = parseador(data_parseado, urlImg, generosData);
-      // console.log(datosAEnviar);.
+
 
 
 
@@ -264,7 +263,6 @@ const seriePorIdParmsTrad = async (req, res) => {
 
     res.status(200).json(datosAEnviar);
   } catch (error) {
-    console.log(error);
     res.status(400).json(error);
   }
 };

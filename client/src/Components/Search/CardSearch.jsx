@@ -40,7 +40,7 @@ function CardSearch({ id, name, poster, tipo }) {
         {/* ^^^^^^^Este es el boton de la wishlist para cambiar^^^^ */}
         <p className="text-title">{name}</p>
         <p className="text-body">${Math.ceil(getRandomArbitrary(15, 30))}</p>
-        <Link to={`/home/series/${id}`}>
+        <Link to={`/home/${tipo}/${id}`}>
           <button className="card-button"> + Info</button>
         </Link>
       </div>

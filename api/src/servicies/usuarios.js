@@ -46,7 +46,7 @@ const postUser = async (req, res) => {
           .then(mandarEmail(username, email, password));
       })
       .catch((err) => {
-        // console.log(err);
+
         if (err) {
           res.status(400).send("El usuario ya existe");
         }
@@ -65,7 +65,7 @@ const postLogin = async (req, res) => {
       },
     });
 
-    // console.log(user)
+
 
     if (!user) {
       return res.status(400).send("Usuario no existente");
@@ -83,7 +83,7 @@ const postLogin = async (req, res) => {
       },
     });
 
-    // console.log("carrito.dataValues.contenido")
+
 
     if (user.length === 0)
       res.status(400).json({ error: "El usuario no existe" });
@@ -128,7 +128,7 @@ const postLogin = async (req, res) => {
           } else {
             arrAux = [accessToken, [], [], "Te logueaste con exito"];
           }
-          console.log(arrAux)
+  
           res.status(200).json(arrAux);
         }
       })
@@ -162,7 +162,7 @@ const putModificarAdmin = async (req, res) => {
     const userValidate = await Usuarios.findOne({
       where: { id: id },
     });
-    console.log(userValidate);
+
 
     if (!userValidate.dataValues.isAdmin) {
       var user = await Usuarios.update(
@@ -274,13 +274,11 @@ const postgoogleuser = async (req, res) => {
       .then((match) => {
         console.log("antes del if del match");
         if (!match) {
-          console.log('negado del match')
+
           res
             .status(400)
             .json({ error: "Combinacions de usuario y password erroneo" });
         } else {
-          console.log('verdad del match')
-          // console.log(user)
           const accessToken = createTokens(user);
           res.status(200).cookie("access-token", accessToken, {
             maxAge: 60 * 60 * 60,
@@ -308,7 +306,7 @@ const postgoogleuser = async (req, res) => {
         res.status(400).json(err);
       });
   } catch (error) {
-    console.log("entro al error api");
+
     res.status(400).json(error);
   }
 };

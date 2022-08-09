@@ -8,7 +8,7 @@ const stripe = new Stripe(SECRET_KEY);
 
 const pasarelaDePagos = async (req, res) => {
   const { id, amount } = req.body;
-  console.log(req.body)
+ 
   try {
     const payment = await stripe.paymentIntents.create({
       amount,
@@ -17,12 +17,12 @@ const pasarelaDePagos = async (req, res) => {
       payment_method: id,
       confirm: true,
     });
-    console.log(payment);
+
     return res.status(200).json({
       message: "Compra realizada con exito",
     });
   } catch (error) {
-    console.log(error);
+
     return res.json({
       message: error.raw.message,
     });
