@@ -4,16 +4,17 @@
 section {
   .header-info {
     height: 100%;
-    -webkit-box-shadow: inset 450px -7px 120px 106px rgba(0,0,0,0.91);
-    -moz-box-shadow: inset 450px -7px 120px 106px rgba(0,0,0,0.91);
-    box-shadow: inset 450px -7px 120px 106px rgba(0,0,0,0.91);
+    // object-position: 35% 15%;  
+    -webkit-box-shadow: inset 630px -7px 120px 106px rgba(0,0,0,0.91);
+    -moz-box-shadow: inset 630px -7px 120px 106px rgba(0,0,0,0.91);
+    box-shadow: inset 630px -7px 120px 106px rgba(0,0,0,0.91);
   }
   .contenedor-info{
     width: 100%;
     // position: fixed;
   }
   .contenedor-descripcion {
-    height:720px;
+    min-height: calc(100vh - 110px);
     color: #ece7e7;
     letter-spacing: 1px;
     // margin-top: 120px;
@@ -45,16 +46,16 @@ section {
       justify-content: space-around;
       svg {
         color: $detalles;
-        font-size: 20px;
+        font-size: 25px;
       }
     }
     .descripcion {
-      width: 40%;
+      width: 35%;
       padding: 20px;
       line-height: 25px;
       margin-left: -1%;
       text-align: left;
-      font-size: 15px;
+      font-size: 20px;
     }
     ul {
       width: 50%;
@@ -80,9 +81,9 @@ section {
      align-items: center;
       button {
         margin: 20px 20px;
-        width: 80px;
+        width: 120px;
         height: 35px;
-        font-size: 15px;
+        font-size: 20px;
         cursor: pointer;
         border: none;
         outline: none;
@@ -132,10 +133,10 @@ section {
     }
     .Iconos{
       display:flex ;
-      gap: 20px;
+      gap: 30px;
     .iconoShop {
       margin-top: 9px;
-      font-size: 30px;
+      font-size: 40px;
       color: $detalles;
       cursor: pointer;
       :hover{
@@ -145,7 +146,7 @@ section {
     }
     .iconoHeart {
       margin-top: 2%;
-      font-size: 40px;
+      font-size: 50px;
       color: $detalles;
       cursor: pointer;
       :hover{
@@ -157,6 +158,68 @@ section {
     } 
   }
 }
+@media screen and (max-width: 1600px) {
+  section {
+  .header-info {
+    -webkit-box-shadow: inset 450px -7px 120px 106px rgba(0,0,0,0.91);
+    -moz-box-shadow: inset 450px -7px 120px 106px rgba(0,0,0,0.91);
+    box-shadow: inset 450px -7px 120px 106px rgba(0,0,0,0.91);
+    .contenedor-info{
+    .contenedor-descripcion {
+      min-height: calc(100vh - 95px);
+    }
+  h3 {
+    width: 50%;
+  }
+  .contenedor-estrellas {
+    margin-top: -10px;
+    width: 240px;
+    display: flex;
+    justify-content: space-around;
+    svg {
+      color: $detalles;
+      font-size: 20px;
+    }
+  }
+  .descripcion {
+    width: 40%;
+    padding: 20px;
+    line-height: 25px;
+    margin-left: -1%;
+    text-align: left;
+    font-size: 15px;
+  }
+  ul {
+    width: 50%;
+    li {
+      margin-left: 15px;
+    }
+  }
+  .contenedor-links {
+   margin-top: 30px;
+    button {
+      width: 80px;
+      height: 35px;
+      font-size: 15px;
+    }
+    
+    button:active:before {
+     background: #b9b9b9;
+    }
+  
+  .iconoShop {
+    font-size: 30px;
+    cursor: pointer;
+  }
+  .iconoHeart {
+    font-size: 40px;
+
+  }
+}
+}
+}
+  }
+} 
 
 @media screen and (max-width: 600px) {
   section {
@@ -183,6 +246,7 @@ section {
                 text-shadow: 2px 2px 2px rgb(0, 0, 0);
               }
               .item-descripcion{
+                display: flex;
                 margin-left: 3%;
                 width: 80%;
                 font-size: 15px;
