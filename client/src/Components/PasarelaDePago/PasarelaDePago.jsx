@@ -9,11 +9,14 @@ import "../../Styles/components/_Pasarela.scss"
 const stripePromise = loadStripe(
   "pk_test_51LTGaXLAMID6zp4FN23yqliUFRecPc1GmqazMXb4525foqI6x0vjAdYsIeCw3ovTIId4tj0WthzhKIhyJyaSCBjp00WA0Mdadg"
   );
-
+  
   const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     let navigate = useNavigate();
+
+    const { user } = useSelector((state) => state)
+    console.log(user)
 
 
     const { cart } = useSelector((state) => state);
@@ -35,7 +38,7 @@ const stripePromise = loadStripe(
       card: elements.getElement(CardElement),
     });
 
-    if (!error) {
+    if (error) {
       console.log(paymentMethod);
       const { id } = paymentMethod;
       try {
@@ -54,13 +57,15 @@ const stripePromise = loadStripe(
       }
     }
     alert("Compra realizada con exito")
-    navigate('/home', {replace: true});
     localStorage.setItem("cart", JSON.stringify([]))
+    // navigate('/home/carro', {replace: true});
+    navigate(0);
   };
   
   return (
     <div>
       <div className="pasarela">
+        <h3>Cantidad de articulos: {cart.length}</h3><br />
         <div className="pasarelaCont">
       {cart &&
           cart.map((e) => {
@@ -74,6 +79,10 @@ const stripePromise = loadStripe(
       <p>Total de la compra: ${precioTotal}.00</p>
       <div className="containerElement">
       <form  className="elementCard" onSubmit={handleSubmit}>
+        <div>
+          <input type="text" disabled placeholder={user.email} />
+          <input type="text" disabled placeholder={user.username} />
+        </div><br />
         <CardElement/>
         <button className="card-button" disabled={!stripe}>Buy</button>
       </form>

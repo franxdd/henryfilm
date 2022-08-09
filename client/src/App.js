@@ -19,7 +19,6 @@ import Wishlist from "./Components/Wishlist/Wishlist";
 import { ToastContainer } from "react-toastify";
 import "./Styles/ReactToastify.css";
 import Footer from "./Components/Footer/Footer";
-import "./Styles/ReactToastify.css";
 import PutPeliculas from "./Components/Form/PutPeliculas";
 import UserProfile from "./Components/Profile/UserProfile";
 import PasarelaDePago from "./Components/PasarelaDePago/PasarelaDePago";
