@@ -1,4 +1,4 @@
-import {  useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -52,7 +52,7 @@ function DetailMovie() {
   }, [dispatch]);
   
   
-  // console.log(movieDetail)
+  console.log(movieDetail)
   // if(!movieDetail[0].creado){
     
   //   var video = movieDetail[0]?.videosAMostrar[0]; // El problema del rederizado de details de los datos de la DB esta aca
