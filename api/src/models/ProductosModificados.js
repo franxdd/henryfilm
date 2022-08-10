@@ -14,6 +14,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
+      idProducto: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       timestamps: false,

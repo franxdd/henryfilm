@@ -462,6 +462,9 @@ import {
   getGenerosMovies,
   getGenerosSeries,
   getMoviesDetail,
+  getSeriesDetail,
+  modificarMovie,
+  modificarSerie,
 } from "../../Redux/Actions/Actions";
 import validate from "../../util/validate.js";
 import poster from "../../img/poster.jpg";
@@ -469,14 +472,22 @@ import back from "../../img/backdrop.jpg";
 import "../../Styles/components/_FormPeliculas.scss";
 
 const PutPeliculas = () => {
-  let { id } = useParams();
+  let { id, tipos } = useParams();
   let todos = useSelector((state) => state.todo);
-
+  console.log(tipos)
   let dispatch = useDispatch();
   let navigate = useNavigate();
   useEffect(() => {
     dispatch(getGenerosMovies());
-    dispatch(getMoviesDetail(id));
+    if(tipos === 'pelicula'){
+
+      dispatch(getMoviesDetail(id));
+
+    }else if(tipos === 'serie'){
+
+      dispatch(getSeriesDetail(id));
+
+    }
     dispatch(getGenerosSeries());
   }, []);
 
@@ -484,7 +495,8 @@ const PutPeliculas = () => {
   const auxGenerosMovie = useSelector((state) => state.generosMovies);
   const auxGenerosSerie = useSelector((state) => state.generosSeries);
   let thePelis = useSelector((state) => state.movieDetail);
-  console.log("aaaaaaaaaaaaaaaaaa", thePelis);
+  let theSeries = useSelector((state) => state.seriesDetail);
+  // console.log("aaaaaaaaaaaaaaaaaa", thePelis);
   const [generos, setGeneros] = useState();
   const [tipo, setTipo] = useState("");
   const [error, setError] = useState({ " ": " " });
@@ -507,7 +519,7 @@ const PutPeliculas = () => {
   });
 
   useEffect(() => {
-    console.log(tipo);
+    // console.log(tipo);
 
     if (tipo === "serie") {
       // generos = auxGenerosSerie.slice()
@@ -519,8 +531,9 @@ const PutPeliculas = () => {
   }, [tipo]);
 
   const HandleSubmit = (e) => {
+
     e.preventDefault();
-    console.log("entre al inicio del submit");
+    // console.log("entre al inicio del submit");
     if (data.backDropImagen === "Alt") {
       data.backDropImagen = back;
     }
@@ -530,8 +543,23 @@ const PutPeliculas = () => {
     // const reader = new FileReader();
     // reader.readAsDataURL(data.backDropImagen);
 
-    dispatch(putPeliculas(data));
-    console.log(data);
+    // console.log(thePelis)
+
+    if( thePelis.length !== 0 && !thePelis[0].creado && tipo === 'pelicula'){
+
+      dispatch(modificarMovie(data))
+
+    }else if(theSeries.length !== 0 && !theSeries[0].creado && tipo === 'serie'){
+
+      dispatch(modificarSerie(data))
+    }else{
+
+      dispatch(putPeliculas(data));
+
+    }
+
+
+    // console.log(data);
     alert("Producto modificado");
     setdata({
       name: "",
@@ -563,7 +591,7 @@ const PutPeliculas = () => {
       }
     }
 
-    // navigate("/home", { replace: true });
+    navigate("/home", { replace: true });
   };
 
   const HandleChangeGeneros = (e) => {
@@ -657,7 +685,7 @@ const PutPeliculas = () => {
       aux = todos[i];
     }
   }
-  console.log("Este es el aux", aux);
+  // console.log("Este es el aux", aux);
 
   return (
     <>

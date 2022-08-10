@@ -41,7 +41,7 @@ function Rating2({ id, token }) {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    console.log(Object.keys(histo))
+    // console.log(Object.keys(histo))
     if (!input.token) {
 
       alert("Debes loguearte");
@@ -54,7 +54,7 @@ function Rating2({ id, token }) {
     else{
       
       let coincidencia = histo.compras.filter(h => h.id+'' === id )
-      console.log(coincidencia)
+      // console.log(coincidencia)
 
       if(coincidencia.length !== 0) {
         
@@ -66,7 +66,7 @@ function Rating2({ id, token }) {
       
     }
   };
-  console.log(input);
+  // console.log(input);
   return (
     <div className="RatingCard">
       <form className="formulario3" onSubmit={submitHandler}>
