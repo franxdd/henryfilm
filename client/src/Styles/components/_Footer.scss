@@ -28,15 +28,7 @@
   fill: currentColor;
 }
 
-<<<<<<< HEAD
-.footerCenter ul{
-	display: flex;
-	flex-direction: row;
-	justify-content:flex-start;
-	align-items: center;
-	gap:8px;
-	margin-left:29px;
-=======
+
 .footerCenter ul {
   display: flex;
   flex-direction: row;
@@ -44,7 +36,7 @@
   align-items: center;
   gap: 8px;
   margin-left: 29px;
->>>>>>> 3d1fe0913934e598441c6095d07c3ce92185cc1d
+
 }
 .footerDistributed {
   background: #000000;
@@ -178,7 +170,7 @@
   margin-top: 25px;
 }
 
-<<<<<<< HEAD
+
 .footerDistributed .footerIcons{
 	display: inline-block;
 	cursor: pointer;
@@ -237,7 +229,7 @@
 		gap:5px;
 		margin-left:-40px;
 	}
-=======
+
 .footerDistributed .footerIcons {
   display: inline-block;
   cursor: pointer;
@@ -286,5 +278,5 @@
     flex-direction: column;
     align-items: center;
   }
->>>>>>> 3d1fe0913934e598441c6095d07c3ce92185cc1d
+}
 }
