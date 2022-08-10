@@ -1,6 +1,6 @@
 const axios = require("axios");
 require("dotenv").config();
-const { Peliculas, Series } = require("../DB/db.js");
+const { Peliculas, Series, ProductosModificados } = require("../DB/db.js");
 const { parseador, validate } = require("../utils/utils.js");
 const { API_KEY } = process.env;
 const { cloudinary } = require("../utils/cloudinary");
@@ -165,8 +165,30 @@ const getMovieDetailParams = async (req, res) => {
         videosAEnviar,
         urlVideos
       );
+
+      // console.log("entro aca");
+
+      let modificado = await ProductosModificados.findOne({
+        where: {
+          idProducto: idPelicula,
+        },
+      });
+
+      if (modificado) {
+        // console.log(modificado.dataValues.contenido[0]);
+        // console.log(datosAEnviar[0]);
+
+        for (const propOriginal in datosAEnviar[0]) {
+          for (const propMod in modificado.dataValues.contenido[0]) {
+            if (propOriginal === propMod) {
+              datosAEnviar[0][propOriginal] =
+                modificado.dataValues.contenido[0][propMod];
+            }
+          }
+        }
+      }
     }
-  
+
     res.status(200).json(datosAEnviar);
   } catch (error) {
     console.log("hubo un error con la API", error);
@@ -175,7 +197,6 @@ const getMovieDetailParams = async (req, res) => {
 
 //Posteo
 const postPeliculas = async (req, res) => {
-  
   let {
     name, //*
     genre_ids,
@@ -230,9 +251,9 @@ const postPeliculas = async (req, res) => {
       upload_preset: "mf7vmjsa",
     });
 
-    console.log('antes del create')
-    var number_of_episodesParse = parseInt(number_of_episodes)
-    var number_of_seasonsParse = parseInt(number_of_seasons)
+    console.log("antes del create");
+    var number_of_episodesParse = parseInt(number_of_episodes);
+    var number_of_seasonsParse = parseInt(number_of_seasons);
     if (tipo === "serie") {
       // console.log(' create')
       const response = await Series.create({
@@ -266,7 +287,7 @@ const postPeliculas = async (req, res) => {
         popularity,
         tipo,
       });
-     
+
       res.status(200).json(response.data);
     }
   } catch (error) {
@@ -307,7 +328,6 @@ const modificarPeli = async (req, res) => {
     let nuevaPeli = await peliActualizada.update(peliculitas);
     return res.status(200).send(nuevaPeli);
   } catch (error) {
-
     res.status(400).json(error);
   }
 };

@@ -113,7 +113,7 @@ function DetailMovie() {
         style={{
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundImage: movieDetail[0]?.backdrop_path ?    `url(https://image.tmdb.org/t/p/original${movieDetail[0]?.backdrop_path})` : `url(${movieDetail[0]?.backDropImagen})` ,
+          backgroundImage: movieDetail[0]?.backDropImagen ?   `url(${movieDetail[0]?.backDropImagen})` : `url(https://image.tmdb.org/t/p/original${movieDetail[0]?.backdrop_path})` ,
         }}
       >
         <div className="contenedor-info">
