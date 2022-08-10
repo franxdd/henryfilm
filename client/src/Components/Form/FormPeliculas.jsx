@@ -44,7 +44,8 @@ const FormPeliculas = () => {
   });
 
   useEffect(() => {
-    console.log(tipo);
+
+    // console.log(tipo)
 
     if (tipo === "serie") {
       // generos = auxGenerosSerie.slice()
@@ -57,7 +58,7 @@ const FormPeliculas = () => {
 
   const HandleSubmit = (e) => {
     e.preventDefault();
-    console.log("entre al inicio del submit");
+    // console.log("entre al inicio del submit");
     if (data.backDropImagen === "Alt") {
       data.backDropImagen = back;
     }
@@ -68,7 +69,7 @@ const FormPeliculas = () => {
     // reader.readAsDataURL(data.backDropImagen);
 
     dispatch(postPeliculas(data));
-    console.log(data);
+    // console.log(data);
     alert("Pelicula creada");
     setdata({
       name: "",
@@ -172,7 +173,7 @@ const FormPeliculas = () => {
         [e.target.name]: e.target.value,
       });
     }
-
+    
     setError(validate({ ...data, [e.target.name]: e.target.value }));
   };
 
@@ -183,7 +184,7 @@ const FormPeliculas = () => {
       genre_ids: arrAux,
     });
   };
-
+  
   return (
     <>
       <div className="ContainerForm2">
@@ -199,6 +200,7 @@ const FormPeliculas = () => {
                 className="name formEntry2"
                 onChange={(e) => HandleInput(e)}
               />
+            <h4 style={{ color: "white" }}>{error.name}</h4>
             </div>
             <textarea
               id="Overview"
@@ -210,6 +212,7 @@ const FormPeliculas = () => {
               placeholder="Descripción:"
               onChange={(e) => HandleInput(e)}
             />
+            <h4 style={{ color: "white" }}>{error.overview}</h4>
             <section className="containerSelect">
               <div className="dropdown">
                 <select
@@ -223,6 +226,7 @@ const FormPeliculas = () => {
                 </select>
               </div>
             </section>
+            <h4 style={{ color: "white" }}>{error.tipo}</h4>
             {data && data.tipo === "pelicula" ? (
               <div className="nombreconteiner">
                 <input
@@ -233,7 +237,9 @@ const FormPeliculas = () => {
                   className="name formEntry2"
                   onChange={(e) => HandleInput(e)}
                 />
+                <h4 style={{ color: "white" }}>{error.runtime}</h4>
               </div>
+              
             ) : (
               <div>
                 <div className="nombreconteiner">
@@ -246,6 +252,7 @@ const FormPeliculas = () => {
                     onChange={(e) => HandleInput(e)}
                   />
                 </div>
+                <h4 style={{ color: "white" }}>{error.number_of_episodes}</h4>
                 <div className="nombreconteiner">
                   <input
                     id="episode_run_time"
@@ -269,17 +276,23 @@ const FormPeliculas = () => {
               </div>
             )}
             {data && data.tipo === "pelicula" ? (
-              <div className="nombreconteiner">
-                <input
-                  id="release_date"
-                  type="text"
-                  name="release_date"
-                  placeholder="Released:"
-                  className="name formEntry2"
-                  onChange={(e) => HandleInput(e)}
-                />
-              </div>
-            ) : (
+
+
+            <div className="nombreconteiner">
+              <input
+                id="release_date"
+                type="text"
+                name="release_date"
+                placeholder="Released:"
+                className="name formEntry2"
+                onChange={(e) => HandleInput(e)}
+              />
+            <h4 style={{ color: "white" }}>{error.release_date}</h4>
+            </div>
+
+
+
+            ):(
               <></>
             )}
 
@@ -293,7 +306,7 @@ const FormPeliculas = () => {
                 onChange={(e) => HandleInput(e)}
               />
             </div>
-
+            <h4 style={{ color: "white" }}>{error.vote_average}</h4>
             <div className="nombreconteiner">
               <input
                 id="popularity"
@@ -304,7 +317,8 @@ const FormPeliculas = () => {
                 onChange={(e) => HandleInput(e)}
               />
             </div>
-
+            <h4 style={{ color: "white" }}>{error.popularity}</h4>
+      
             <div className="nombreconteiner">
               <input
                 id="elenco"
@@ -322,8 +336,8 @@ const FormPeliculas = () => {
               >
                 Agregar{" "}
               </button>
-            </div>
-
+            </div>   
+            <h4 style={{ color: "white" }}>{error.cast}</h4>
             <div className="nombreconteiner">
               <input
                 id="posterImagen"
@@ -335,6 +349,7 @@ const FormPeliculas = () => {
                 className="name formEntry2"
               />
             </div>
+            <h4 style={{ color: "white" }}>{error.posterImagen}</h4>
             <div className="nombreconteiner">
               <input
                 id="backDropImagen"
@@ -345,6 +360,7 @@ const FormPeliculas = () => {
                 className="name formEntry2"
               />
             </div>
+            <h4 style={{ color: "white" }}>{error.backDropImagen}</h4>
             {data.tipo !== "" ? (
               <section className="containerSelect">
                 <div className="dropdown">
@@ -359,6 +375,7 @@ const FormPeliculas = () => {
                         {t.name}
                       </option>
                     ))}
+            <h4 style={{ color: "white" }}>{error.genre_ids}</h4>
                   </select>
                 </div>
               </section>
@@ -383,19 +400,7 @@ const FormPeliculas = () => {
           </form>
 
           <div className="erroresconteiner">
-            <h2 style={{ color: "white" }}>{error.name}</h2>
-            <h2 style={{ color: "white" }}>{error.genre_ids}</h2>
-            <h2 style={{ color: "white" }}>{error.overview}</h2>
-            <h2 style={{ color: "white" }}>{error.release_date}</h2>
-            <h2 style={{ color: "white" }}>{error.vote_average}</h2>
-            <h2 style={{ color: "white" }}>{error.cast}</h2>
-            <h2 style={{ color: "white" }}>{error.posterImagen}</h2>
-            <h2 style={{ color: "white" }}>{error.backDropImagen}</h2>
-            <h2 style={{ color: "white" }}>{error.popularity}</h2>
-            <h2 style={{ color: "white" }}>{error.tipo}</h2>
-            <h2 style={{ color: "white" }}>{error.runtime}</h2>
-            <h2 style={{ color: "white" }}>{error.episode_run_time}</h2>
-            <h2 style={{ color: "white" }}>{error.number_of_episodes}</h2>
+                
           </div>
 
           <div className="conteinerbackDropImagen">

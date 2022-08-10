@@ -22,7 +22,7 @@ function LoginRegister() {
   }
   function handdleSubmit(e) {
     e.preventDefault();
-    console.log('entro al register')
+    // console.log('entro al register')
     dispatch(PostUsuario(input));
     setInput({
       username: "",

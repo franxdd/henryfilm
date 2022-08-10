@@ -11,6 +11,8 @@ const carro = require("./carro")
 const deseados = require("./deseados")
 const pasarelaDePagos = require("./pasarelaDePagos")
 const historial = require("./historial")
+const productosEliminados = require("./productosEliminados")
+const productosModificados = require("./productosModificados")
 
 router.use("/peliculas", peliculas);
 router.use("/series", series);
@@ -23,5 +25,7 @@ router.use("/carro", carro);
 router.use("/deseados", deseados);
 router.use("/pagos", pasarelaDePagos);
 router.use("/historial", historial);
+router.use("/productosEliminados", productosEliminados);
+router.use("/productosModificados", productosModificados);
 
 module.exports = router;

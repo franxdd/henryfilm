@@ -1,5 +1,5 @@
-import {  useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
@@ -8,6 +8,8 @@ import { createReview } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_ComentariosForm.scss";
 
 function Rating2({ id, token, nickname, picture, tipo }) {
+  const histo = useSelector((state) => state.historial);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [input, setInput] = useState({
@@ -35,19 +37,30 @@ function Rating2({ id, token, nickname, picture, tipo }) {
   };
 
   function getLabelText(value) {
- 
     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
   const submitHandler = (e) => {
     e.preventDefault();
+
+    // console.log(Object.keys(histo))
     if (!input.token) {
       alert("Debes loguearte");
       navigate("/home/Login");
+    } else if (Object.keys(histo).length === 0) {
+      alert("Debes comprar el producto antes de comentar");
+      // navigate("/home");
     } else {
-      dispatch(createReview(input));
+      let coincidencia = histo.compras.filter((h) => h.id + "" === id);
+      // console.log(coincidencia)
+
+      if (coincidencia.length !== 0) {
+        dispatch(createReview(input));
+      } else {
+        alert("Debes comprar el producto antes de comentar");
+      }
     }
   };
-  console.log(input);
+  // console.log(input);
   return (
     <div className="RatingCard">
       <form className="formulario3" onSubmit={submitHandler}>
@@ -60,12 +73,13 @@ function Rating2({ id, token, nickname, picture, tipo }) {
           className="name2 formularioEntry3"
         ></textarea>
 
-        <Box className="Stars"
+        <Box
+          className="Stars"
           sx={{
             width: 500,
             display: "flex",
             alignItems: "center",
-            color:"white"
+            color: "white",
           }}
         >
           <Rating
@@ -74,13 +88,24 @@ function Rating2({ id, token, nickname, picture, tipo }) {
             value={input.puntuacion}
             precision={1}
             getLabelText={getLabelText}
-            emptyIcon={<StarIcon style={{ opacity: 0.55, color:"white" }} fontSize="medium" />}
+            emptyIcon={
+              <StarIcon
+                style={{ opacity: 0.55, color: "white" }}
+                fontSize="medium"
+              />
+            }
           />
           {input.puntuacion !== null && (
-            <Box sx={{ ml: 5 }}>{labels[hover !== -1 ? hover : input.puntuacion]}</Box>
+            <Box sx={{ ml: 5 }}>
+              {labels[hover !== -1 ? hover : input.puntuacion]}
+            </Box>
           )}
         </Box>
-        <button className="submit2 formularioEntry3" type="submit" value="Enviar">
+        <button
+          className="submit2 formularioEntry3"
+          type="submit"
+          value="Enviar"
+        >
           Comentar
         </button>
       </form>

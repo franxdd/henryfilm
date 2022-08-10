@@ -54,6 +54,7 @@ const postUser = async (req, res) => {
         }
       });
   } catch (error) {
+    console.log(error)
     res.status(404).send(error);
   }
 };
@@ -341,7 +342,7 @@ const postgoogleuser = async (req, res) => {
     bcrypt
       .compare(jwtPass, dbPass)
       .then((match) => {
-        console.log("antes del if del match");
+        // console.log("antes del if del match");
         if (!match) {
           res
             .status(400)

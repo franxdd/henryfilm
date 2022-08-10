@@ -35,7 +35,6 @@ import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import perfil from "../../img/perfil2.png";
-import perfiladmin from "../../img/perfil3.png";
 
 function getToken() {
   const tokenString = sessionStorage.getItem("token");
@@ -121,7 +120,7 @@ const Nav2 = () => {
     sessionStorage.removeItem("token");
     localStorage.setItem("cart", JSON.stringify([]));
     localStorage.setItem("wishlist", JSON.stringify([]));
-
+    // $crisp.push(['do', 'session:reset']);
     navigate("/home");
   };
 
@@ -290,13 +289,13 @@ const Nav2 = () => {
                   ) : userReducer.isAdmin ? (
                     <>
                       <MenuItem>
-                        <Link to="/home/agregar" style={{ textDecoration: "none", color: "black" }}>
-                          <Typography textaling="center">Agregar Producto</Typography>
+                        <Link to="/home/dashBoard" style={{ textDecoration: "none", color: "black" }}>
+                          <Typography textaling="center">DashBoard</Typography>
                         </Link>
                       </MenuItem>
                       <MenuItem>
-                        <Link to="/home/modificar" style={{ textDecoration: "none", color: "black" }}>
-                          <Typography textaling="center">Modificar</Typography>
+                        <Link to="/home/wishlist" style={{ textDecoration: "none", color: "black" }}>
+                          <Typography textaling="center">Favoritos</Typography>
                         </Link>
                       </MenuItem>
                     </>
