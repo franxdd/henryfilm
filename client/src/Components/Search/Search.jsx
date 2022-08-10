@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getTodo } from "../../Redux/Actions/Actions";
 import CardSearch from "./CardSearch";
-import "../../Styles/components/_Search.scss"
+import "../../Styles/components/_Search.scss";
 
 function Search() {
   const dispatch = useDispatch();
@@ -14,18 +14,11 @@ function Search() {
 
   return (
     <div className="contenedorSearch">
+      {}
       <div className="contenedorCards">
-      {all?.map((r) => {
-        return (
-          <CardSearch
-            key={r.id}
-            id={r.id}
-            name={r.name}
-            poster={r.posterImagen}
-            tipo={r.tipo}
-          />
-        );
-      })}
+        {all?.map((r) => {
+          return <CardSearch key={r.id} id={r.id} name={r.name} poster={r.posterImagen} tipo={r.tipo} />;
+        })}
       </div>
     </div>
   );
