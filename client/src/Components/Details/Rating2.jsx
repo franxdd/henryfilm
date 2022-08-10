@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Rating from "@mui/material/Rating";
@@ -7,8 +7,7 @@ import StarIcon from "@mui/icons-material/Star";
 import { createReview } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_ComentariosForm.scss";
 
-function Rating2({ id, token }) {
-
+function Rating2({ id, token, nickname, picture, tipo }) {
   const histo = useSelector((state) => state.historial);
 
   const navigate = useNavigate();
@@ -16,8 +15,11 @@ function Rating2({ id, token }) {
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: 0,
-    idpelicula: id,
+    id: id,
     token: token,
+    nickname: nickname,
+    picture: picture,
+    tipo: tipo,
   });
   const [hover, setHover] = useState(-1);
   function handdleChange(e) {
@@ -35,7 +37,6 @@ function Rating2({ id, token }) {
   };
 
   function getLabelText(value) {
- 
     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
   const submitHandler = (e) => {
@@ -43,27 +44,20 @@ function Rating2({ id, token }) {
 
     // console.log(Object.keys(histo))
     if (!input.token) {
-
       alert("Debes loguearte");
       navigate("/home/Login");
-
-    } else if(Object.keys(histo).length === 0) {
+    } else if (Object.keys(histo).length === 0) {
       alert("Debes comprar el producto antes de comentar");
       // navigate("/home");
-    }
-    else{
-      
-      let coincidencia = histo.compras.filter(h => h.id+'' === id )
+    } else {
+      let coincidencia = histo.compras.filter((h) => h.id + "" === id);
       // console.log(coincidencia)
 
-      if(coincidencia.length !== 0) {
-        
+      if (coincidencia.length !== 0) {
         dispatch(createReview(input));
-      }else{
-
+      } else {
         alert("Debes comprar el producto antes de comentar");
       }
-      
     }
   };
   // console.log(input);
@@ -79,12 +73,13 @@ function Rating2({ id, token }) {
           className="name2 formularioEntry3"
         ></textarea>
 
-        <Box className="Stars"
+        <Box
+          className="Stars"
           sx={{
             width: 500,
             display: "flex",
             alignItems: "center",
-            color:"white"
+            color: "white",
           }}
         >
           <Rating
@@ -93,13 +88,24 @@ function Rating2({ id, token }) {
             value={input.puntuacion}
             precision={1}
             getLabelText={getLabelText}
-            emptyIcon={<StarIcon style={{ opacity: 0.55, color:"white" }} fontSize="medium" />}
+            emptyIcon={
+              <StarIcon
+                style={{ opacity: 0.55, color: "white" }}
+                fontSize="medium"
+              />
+            }
           />
           {input.puntuacion !== null && (
-            <Box sx={{ ml: 5 }}>{labels[hover !== -1 ? hover : input.puntuacion]}</Box>
+            <Box sx={{ ml: 5 }}>
+              {labels[hover !== -1 ? hover : input.puntuacion]}
+            </Box>
           )}
         </Box>
-        <button className="submit2 formularioEntry3" type="submit" value="Enviar">
+        <button
+          className="submit2 formularioEntry3"
+          type="submit"
+          value="Enviar"
+        >
           Comentar
         </button>
       </form>

@@ -34,13 +34,14 @@ function DetailMovie() {
   let iduser = user.id
   let movieDetail = useSelector((state) => state.movieDetail);
   let { comentarios } = useSelector((state) => state);
+
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: "",
     idPelicula: id,
     token: token,
   });
-  
+  console.log(comentarios);
   useEffect(() => {
     dispatch(getMoviesDetail(id));
     dispatch(getReview(input2));
@@ -101,7 +102,7 @@ function DetailMovie() {
     let idParseado2 = parseInt(id);
     dispatch(addToWishlist(idParseado2));
   }
-
+console.log();
   return movieDetail.length === 0 ? (
     <div className="Loading">
       <div className="loader"></div>
@@ -203,7 +204,7 @@ function DetailMovie() {
           placeholder="Escribe tu comentario:"
           className="name formEntry3"
         ></textarea> */}
-        <Rating2 className="ratingStyle" id={id} token={token}/>
+        <Rating2 className="ratingStyle" id={id} token={token} picture={user.picture} nickname={user.nickname} tipo={movieDetail[0]?.tipo}/>
         {/* <Rating className="ratingStyle" /> */}
         <br></br>
 
@@ -213,7 +214,10 @@ function DetailMovie() {
            comentarios.map((e) => {
           return (
             <div className= "review">
-              <div className="email" >Usuario: {e.username}</div>
+              <div height="auto" width="40px">
+                <img src={e.picture} alt="profile" height="auto" width="40px"/>
+                </div>
+              <div className="email" >Usuario: {e.nickname}</div>
              <div className="infoRev"><Rating 
              name="read-only" value={e.puntuacion} /></div>
               <div className="p">Comentario: {e.contenido}</div>

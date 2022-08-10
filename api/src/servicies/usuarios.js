@@ -5,12 +5,13 @@ const app = express();
 require("dotenv").config();
 const { API_KEY } = process.env;
 const { Usuarios, Carros, Deseados } = require("../DB/db");
-
+const { cloudinary } = require("../utils/cloudinary");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 const { createTokens } = require("../utils/JWT.js");
 const { mandarEmail } = require("../utils/sendEmail");
-
+const perfil =
+  "https://res.cloudinary.com/dwcgf7wdr/image/upload/v1660076263/dev_setups/perfil2_mdv75w.png";
 // app.use(express.json());
 // app.use(cookieParser());
 
@@ -26,10 +27,11 @@ const getAllUsers = async (req, res) => {
 const postUser = async (req, res) => {
   var arrAux = [];
   try {
-    const { username, email, password, isAdmin } = req.body;
+    const { username, email, password, isAdmin, nickname } = req.body;
 
-    if (!username || !email || !password)
+    if (!username || !email || !password || !nickname)
       return res.status(404).send("Falta completar un dato..");
+
     bcrypt
       .hash(password, 10)
 
@@ -39,14 +41,14 @@ const postUser = async (req, res) => {
           password: hash,
           email: email,
           isAdmin,
+          nickname: nickname,
         })
           .then((response) => {
             res.status(200).send("Usuario creado con exito");
           })
-          .then(mandarEmail(username, email, password));
+          .then(mandarEmail(username, email, password, nickname));
       })
       .catch((err) => {
-
         if (err) {
           res.status(400).send("El usuario ya existe");
         }
@@ -66,8 +68,6 @@ const postLogin = async (req, res) => {
       },
     });
 
-    // console.log(user.dataValues.id)
-
     if (!user) {
       return res.status(400).send("Usuario no existente");
     }
@@ -83,8 +83,6 @@ const postLogin = async (req, res) => {
         UsuarioId: user.dataValues.id,
       },
     });
-
-
 
     if (user.length === 0)
       res.status(400).json({ error: "El usuario no existe" });
@@ -111,7 +109,7 @@ const postLogin = async (req, res) => {
               carrito.dataValues.contenido,
               deseados.dataValues.contenido,
               "Te logueaste con exito",
-              user
+              user,
             ];
           } else if (carrito) {
             arrAux = [
@@ -119,7 +117,7 @@ const postLogin = async (req, res) => {
               carrito.dataValues.contenido,
               [],
               "Te logueaste con exito",
-              user
+              user,
             ];
           } else if (deseados) {
             arrAux = [
@@ -127,12 +125,12 @@ const postLogin = async (req, res) => {
               [],
               deseados.dataValues.contenido,
               "Te logueaste con exito",
-              user
+              user,
             ];
           } else {
-            arrAux = [accessToken, [], [], "Te logueaste con exito",user];
+            arrAux = [accessToken, [], [], "Te logueaste con exito", user];
           }
-  
+
           res.status(200).json(arrAux);
         }
       })
@@ -151,14 +149,93 @@ const getProfile = async (req, res) => {
   const users = await Usuarios.findOne({
     where: { username: dataUser.username },
   });
-
-  try {
-    res.status(200).json(users.dataValues);
-  } catch (error) {
-    res.status(400).json(error);
+  if (users && users.dataValues.picture === null) {
+    users.dataValues.picture = perfil;
+    try {
+      res.status(200).json(users.dataValues);
+    } catch (error) {
+      res.status(400).json(error);
+    }
+  } else {
+    try {
+      res.status(200).json(users.dataValues);
+    } catch (error) {
+      res.status(400).json(error);
+    }
   }
 };
 
+const putProfile = async (req, res) => {
+  console.log("estoy entrando");
+  let { id, avatar, nickname } = req.body;
+  console.log(id, nickname);
+  try {
+    console.log("estoy entrando try");
+    // const upload = await cloudinary.uploader.upload(avatar, {
+    //   upload_preset: "mf7vmjsa",
+    // });
+    if (!nickname) {
+      console.log("estoy entrando en !nickname");
+      console.log(avatar);
+      const upload = await cloudinary.uploader.upload(avatar, {
+        upload_preset: "mf7vmjsa",
+      });
+      console.log("estoy saliendo cloud");
+      const response = await Usuarios.update(
+        { picture: upload.url },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+      console.log("estoy saliendo update sin nickname");
+    } else if (!avatar) {
+      // console.log(id, nickname);
+      console.log("estoy entrando en !avatar");
+      const response = await Usuarios.update(
+        { nickname: nickname },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+      console.log("estoy saliendo update sin foto");
+    } else {
+      const upload = await cloudinary.uploader.upload(avatar, {
+        upload_preset: "mf7vmjsa",
+      });
+      console.log("estoy saliendo cloud");
+      const response = await Usuarios.update(
+        { nickname: nickname, picture: upload.url },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+      console.log("estoy saliendo update con ambos");
+  
+    }
+    let user = await Usuarios.findByPk(id);
+    console.log(user);
+    return res.status(200).send(user);
+    // const response = await Usuarios.update(
+    //   { nickname: nickname, picture: upload.url },
+    //   {
+    //     where: {
+    //       id: id,
+    //     },
+    //   }
+    // );
+    // console.log("estoy saliendo update");
+    // console.log(response);
+    // return res.status(200).send(response);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
 const putModificarAdmin = async (req, res) => {
   let { id } = req.body;
 
@@ -166,7 +243,6 @@ const putModificarAdmin = async (req, res) => {
     const userValidate = await Usuarios.findOne({
       where: { id: id },
     });
-
 
     if (!userValidate.dataValues.isAdmin) {
       var user = await Usuarios.update(
@@ -211,8 +287,6 @@ const putElminar = async (req, res) => {
 };
 
 const postgoogleuser = async (req, res) => {
- 
-
   try {
     let { email, name, jti, picture } = req.body;
 
@@ -222,19 +296,13 @@ const postgoogleuser = async (req, res) => {
         email: email,
       }),
       "jwtsecretcambiar"
-      );
-    
+    );
 
     var user = await Usuarios.findOne({
       where: { username: name },
     });
 
-  
-
     if (!user) {
-
-
-
       var user = await bcrypt
         .hash(jwtPass, 10)
 
@@ -253,8 +321,6 @@ const postgoogleuser = async (req, res) => {
           }
         });
     }
-
-
 
     const carrito = await Carros.findOne({
       where: {
@@ -278,7 +344,6 @@ const postgoogleuser = async (req, res) => {
       .then((match) => {
         // console.log("antes del if del match");
         if (!match) {
-
           res
             .status(400)
             .json({ error: "Combinacions de usuario y password erroneo" });
@@ -289,7 +354,6 @@ const postgoogleuser = async (req, res) => {
           });
 
           if (carrito && deseados) {
-
             arrAux = [
               accessToken,
               carrito.dataValues.contenido,
@@ -302,7 +366,6 @@ const postgoogleuser = async (req, res) => {
           } else {
             arrAux = [accessToken, [], []];
           }
-          // console.log(arrAux)
           return res.status(200).json(arrAux);
         }
       })
@@ -310,7 +373,6 @@ const postgoogleuser = async (req, res) => {
         res.status(400).json(err);
       });
   } catch (error) {
-
     res.status(400).json(error);
   }
 };
@@ -323,4 +385,5 @@ module.exports = {
   putModificarAdmin,
   putElminar,
   postgoogleuser,
+  putProfile,
 };
