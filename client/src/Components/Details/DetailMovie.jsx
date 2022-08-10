@@ -115,6 +115,7 @@ function DetailMovie() {
           backgroundPosition: "center",
           backgroundImage: movieDetail[0]?.backdrop_path ?    `url(https://image.tmdb.org/t/p/original${movieDetail[0]?.backdrop_path})` : `url(${movieDetail[0]?.backDropImagen})` ,
         }}
+      
       >
         <div className="contenedor-info">
           <div className="contenedor-descripcion">
@@ -156,7 +157,9 @@ function DetailMovie() {
                   <div className="modal-contenido">
                     <a href="#"> <CloseIcon className="iconoClose"/> </a><br></br>
                     <div className="iframe-container">
+
                     <iframe className="video" width="100%" height="100%" src={movieDetail[0]?.videosAMostrar[0]}></iframe>
+
                     </div>
                   </div>  
                 </div>

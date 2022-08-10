@@ -68,29 +68,24 @@ const CheckoutForm = () => {
         <h3>Cantidad de articulos: {cart.length}</h3>
         <br />
         <div className="pasarelaCont">
-          {cart &&
-            cart.map((e) => {
-              return (
-                <div className="compras">
-                  <img src={e.posterImagen} alt="img" height="200px" width="140px" />
-                </div>
-              );
-            })}
-        </div>
-        <p>Total de la compra: ${precioTotal}.00</p>
-        <div className="containerElement">
-          <form className="elementCard" onSubmit={handleSubmit}>
-            <div>
-              <input type="text" />
-              <input type="text" />
+      {cart &&
+          cart.map((e) => {
+            return (
+           <div className="compras">
+              <img  src={e.posterImagen} alt="img" height="200px" width="140px" />
             </div>
-            <br />
-            <CardElement />
-            <button className="card-button">Buy</button>
-          </form>
-        </div>
+            );
+          })}
+          </div>
+      <p>Total de la compra: ${precioTotal}.00</p>
+      <div className="containerElement">
+      <form  className="elementCard" onSubmit={handleSubmit}>
+        <CardElement/>
+        <button className="card-button" disabled={!stripe}><strong>REALIZAR PAGO</strong></button>
+      </form>
       </div>
     </div>
+      </div>
   );
 };
 
