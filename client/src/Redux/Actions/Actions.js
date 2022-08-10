@@ -50,6 +50,7 @@ export const GOOGLE_LOG_OUT = "GOOGLE_LOG_OUT";
 export const POST_HISTORIAL = "POST_HISTORIAL";
 export const GET_HISTORIAL = "GET_HISTORIAL";
 export const DELETED_MOVIE = "DELETED_MOVIE"
+export const DELETED_SERIE = 'DELETED_SERIE'
 
 function a(error) {
   return toast.error(error, {
@@ -131,6 +132,21 @@ export const deleteMovie =(payload)=>{
     console.log(deleted)
     return dispatch({
       type: DELETED_MOVIE,
+      payload: payload[0],
+    });
+  };
+
+
+}
+
+
+export const deleteSerie =(payload)=>{
+  console.log(payload)
+  return async function (dispatch) {
+    let deleted = await axios.post(`/productosEliminados/postProd`, payload);
+    console.log(deleted)
+    return dispatch({
+      type: DELETED_SERIE,
       payload: payload[0],
     });
   };

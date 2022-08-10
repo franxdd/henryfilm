@@ -40,7 +40,9 @@ import {
   GOOGLE_LOG_OUT,
   POST_HISTORIAL,
   GET_HISTORIAL,
-  DELETED_MOVIE
+  DELETED_MOVIE,
+  DELETED_SERIE
+  
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -187,6 +189,17 @@ const rootRouter = (state = initialState, action) => {
         todo: moviesFil,
         allMovies: moviesFilHome
       }
+
+      case DELETED_SERIE:
+        let seriesFil = state.todo.filter(t => t.id !== action.payload)
+        let seriesFilHome = state.allSeries.filter(t => t.id !== action.payload)
+       
+        return{
+          ...state,
+          todo: seriesFil,
+          allSeries: seriesFilHome
+
+        }
     case LOG_OUT:
       return {
         ...state,

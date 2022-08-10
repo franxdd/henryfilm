@@ -54,14 +54,20 @@ const todos = async (req, res) => {
     const peliculasBd = await Peliculas.findAll();
     const seriesBd = await Series.findAll();
 
-
-
     const moviesEliminadas = await ProductosEliminados.findAll({
       attributes: ["idProducto"],
     });
 
     var arrMoviesElim = moviesEliminadas.map((m) => {
       return m.dataValues.idProducto;
+    });
+
+    const seriesEliminadas = await ProductosEliminados.findAll({
+      attributes: ["idProducto"],
+    });
+
+    var arrSeriesElim = seriesEliminadas.map((s) => {
+      return s.dataValues.idProducto;
     });
 
     datosParseadosMovies = parseador(newGetMovies, urlImg, generosDataMovie);
@@ -73,12 +79,12 @@ const todos = async (req, res) => {
       }
     });
 
+    datosParseadosSeries = datosParseadosSeries.filter((s) => {
+      if (!arrSeriesElim.includes(s.id + "")) {
+        return s;
+      }
+    });
 
-
-
-
-
-    
     var datosAEnviar = [
       ...peliculasBd,
       ...datosParseadosMovies,

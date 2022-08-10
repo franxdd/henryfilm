@@ -123,7 +123,7 @@ function SeriesHome() {
       <div className="contenedor-seccion">
         <div className="contenedor-resultados">
           {allpSeries.map((e) => {
-            return <CardSeries key={e.id} id={e.id} name={e.name} poster={e.posterImagen} />;
+            return <CardSeries key={e.id} id={e.id} name={e.name} poster={e.posterImagen} tipo={e.tipo} />;
           })}
         </div>
       </div>

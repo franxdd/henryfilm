@@ -2,13 +2,22 @@
 import { Link } from "react-router-dom";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, addToWishlist } from "../../Redux/Actions/Actions";
+import { addToCart, addToWishlist, deleteSerie } from "../../Redux/Actions/Actions";
 import {TiHeart as HeartIcon} from "react-icons/ti";
-import { BiPaintRoll } from "react-icons/bi";
+import { BiPaintRoll, BiTrash } from "react-icons/bi";
 
 
-function CardSeries({ id, name, poster }) {
+function CardSeries({ id, name, poster, tipo }) {
   const userReducer = useSelector((state) => state.user);
+
+
+
+  function HandleDelete(e){
+    e.preventDefault()
+    var arrAux = [id, tipo]
+    dispatch(deleteSerie(arrAux))
+  }
+
 
   function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
@@ -46,7 +55,13 @@ function CardSeries({ id, name, poster }) {
                   <BiPaintRoll className="icono" />
                 </Link>
               </abbr>
+              <abbr title="Delete">
+                <div onClick={(e)=>HandleDelete(e)}>
+                  <BiTrash className="icono" />
+                </div>
+              </abbr>
             </div>
+            
           ) : (
             <div className="Iconos">
             <abbr title="Agrega a Favoritos">
