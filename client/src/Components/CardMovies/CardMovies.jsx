@@ -5,9 +5,9 @@ import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, addToWishlist, deleteMovie } from "../../Redux/Actions/Actions";
 import { TiHeart as HeartIcon } from "react-icons/ti";
-import { BiPaintRoll, BiTrash } from "react-icons/bi";
+import { BiEdit as EditIcon } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-
+import { BiTrash } from "react-icons/bi";
 
 function CardMovies({ id, name, poster, tipo }) {
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ function CardMovies({ id, name, poster, tipo }) {
               </abbr>
               <abbr title="Modificar">
                 <Link to={`/home/modificar/${id}/${tipo}`}>
-                  <BiPaintRoll className="icono" />
+                  <EditIcon className="iconoEdit" />
 
                 </Link>
               </abbr>
