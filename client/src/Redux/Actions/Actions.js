@@ -55,6 +55,8 @@ export const DELETED_MOVIE = "DELETED_MOVIE";
 export const DELETED_SERIE = "DELETED_SERIE";
 export const MODIFICAR_MOVIE = "MODIFICAR_MOVIE";
 export const MODIFICAR_SERIE = "MODIFICAR_SERIE";
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const PUT_ADMIN = "PUT_ADMIN";
 
 function a(error) {
   return toast.error(error, {
@@ -596,5 +598,34 @@ export const usermodificado = (payload) => {
     payload: payload,
   };
 };
-//   }
-// }
+
+export const allusers = () => {
+  console.log("estoy entrando en la action");
+  return async function (dispatch) {
+    try {
+      let getUsers = await axios.get(`/usuarios`);
+
+      return dispatch({
+        type: GET_ALL_USERS,
+        payload: getUsers.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const putAdmin = (payload) => {
+  console.log(payload);
+  return async (dispatch) => {
+    try {
+      let profileA = await axios.put(`/usuarios/cambiar`, payload);
+
+      dispatch({
+        type: PUT_ADMIN,
+        payload: profileA.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

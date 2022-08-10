@@ -46,6 +46,8 @@ import {
   DELETED_SERIE,
   MODIFICAR_SERIE,
   MODIFICAR_MOVIE,
+  GET_ALL_USERS,
+  PUT_ADMIN,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -150,6 +152,8 @@ const initialState = {
   comentarios: [],
   token: "",
   wishlist: wishlistStorage,
+  allUser:[],
+  isadmin:[],
 };
 
 const rootRouter = (state = initialState, action) => {
@@ -159,6 +163,26 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         allSeries: action.payload,
         backupSeries: action.payload,
+      };
+      case PUT_ADMIN:
+        var cambio = action.payload
+        var cambio2 = cambio.isAdmin 
+      let array = state.allUser.map(e=>{
+        if (e.id === cambio.id + "") {
+          e.isAdmin = cambio2
+        }
+        return e
+      })
+      console.log(array);
+      return {
+        ...state,
+        allUser: array
+      };
+    case GET_ALL_USERS:
+      console.log(action.payload);
+      return {
+        ...state,
+        allUser: action.payload
       };
 
     case POST_HISTORIAL:
