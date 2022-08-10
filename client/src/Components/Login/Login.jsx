@@ -50,10 +50,10 @@ function Login() {
     });
 
     if (googleUser.length === 0) {
-      console.log("entro");
+      // console.log("entro");
       google.accounts.id.renderButton(document.getElementById("g_id_onload"), {
         theme: "outline",
-        size: "large",
+        size: "short",
       });
     }
     if(typeof googleUser === 'string'){
@@ -78,7 +78,7 @@ function Login() {
 
     setTimeout(() => {
       const tokenn = sessionStorage.getItem("token");
-      console.log(tokenn);
+      // console.log(tokenn);
       if (tokenn) {
         navigate("/home", { replace: true });
       }

@@ -46,7 +46,7 @@ function Carro() {
   var totalPrice = 0;
 
   for (let i = 0; i < cart.length; i++) {
-    console.log(cart[i].price);
+    // console.log(cart[i].price);
     totalPrice = totalPrice + cart[i].price;
   }
 

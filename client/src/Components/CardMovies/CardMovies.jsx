@@ -3,16 +3,26 @@ import { Link } from "react-router-dom";
 import "../../Styles/components/_CardMovies.scss";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, addToWishlist } from "../../Redux/Actions/Actions";
+import { addToCart, addToWishlist, deleteMovie } from "../../Redux/Actions/Actions";
 import { TiHeart as HeartIcon } from "react-icons/ti";
 import { BiEdit as EditIcon } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
 
-function CardMovies({ id, name, poster }) {
+function CardMovies({ id, name, poster, tipo }) {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const userReducer = useSelector((state) => state.user);
+
+
+
+  function HandleDelete(e){
+
+    e.preventDefault()
+    var arrAux = [id, tipo]
+    dispatch(deleteMovie(arrAux))
+
+  }
 
   function addCart(id) {
     // console.log(id)
@@ -50,10 +60,17 @@ function CardMovies({ id, name, poster }) {
                 </span>
               </abbr>
               <abbr title="Modificar">
-                <Link to={`/home/modificar/${id}`}>
+                <Link to={`/home/modificar/${id}/${tipo}`}>
                   <EditIcon className="iconoEdit" />
+
                 </Link>
               </abbr>
+              <abbr title="Delete">
+                <div onClick={(e)=>HandleDelete(e)}>
+                  <BiTrash className="icono" />
+                </div>
+              </abbr>
+              
             </div>
           ) : (
             <div className="Iconos">

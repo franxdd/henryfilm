@@ -1,7 +1,11 @@
 const axios = require("axios");
 require("dotenv").config();
 const { parseador } = require("../utils/utils.js");
-const { Peliculas } = require("../DB/db.js");
+const {
+  Peliculas,
+  ProductosEliminados,
+  ProductosModificados,
+} = require("../DB/db.js");
 const { Series } = require("../DB/db.js");
 const { API_KEY } = process.env;
 
@@ -54,8 +58,62 @@ const todos = async (req, res) => {
     const peliculasBd = await Peliculas.findAll();
     const seriesBd = await Series.findAll();
 
+    const moviesEliminadas = await ProductosEliminados.findAll({
+      attributes: ["idProducto"],
+    });
+
+    var arrMoviesElim = moviesEliminadas.map((m) => {
+      return m.dataValues.idProducto;
+    });
+
+    const seriesEliminadas = await ProductosEliminados.findAll({
+      attributes: ["idProducto"],
+    });
+
+    var arrSeriesElim = seriesEliminadas.map((s) => {
+      return s.dataValues.idProducto;
+    });
+
+    const Modificadas = await ProductosModificados.findAll();
+
+    var arrAuxModificado = Modificadas.map((m) => {
+      return m.dataValues;
+    });
+    console.log(arrAuxModificado);
+
     datosParseadosMovies = parseador(newGetMovies, urlImg, generosDataMovie);
     datosParseadosSeries = parseador(newGetSeries, urlImg, generosDataSerie);
+
+    datosParseadosMovies = datosParseadosMovies.filter((m) => {
+      if (!arrMoviesElim.includes(m.id + " ")) {
+        return m;
+      }
+    });
+
+    datosParseadosSeries = datosParseadosSeries.filter((s) => {
+      if (!arrSeriesElim.includes(s.id + "")) {
+        return s;
+      }
+    });
+
+    datosParseadosSeries = datosParseadosSeries.map((s) => {
+      for (let i = 0; i < arrAuxModificado.length; i++) {
+        if (s.id + "" === arrAuxModificado[i].idProducto) {
+          console.log("entro aca");
+          s = arrAuxModificado[i].contenido[0];
+        }
+      }
+      return s;
+    });
+
+    datosParseadosMovies = datosParseadosMovies.map((m) => {
+      for (let i = 0; i < arrAuxModificado.length; i++) {
+        if (m.id + "" === arrAuxModificado[i].idProducto) {
+          m = arrAuxModificado[i].contenido[0];
+        }
+      }
+      return m;
+    });
 
     var datosAEnviar = [
       ...peliculasBd,
@@ -88,7 +146,7 @@ const todos = async (req, res) => {
       res.status(200).json(datosAEnviar);
     }
   } catch (error) {
-    res.status(200).json(error)
+    res.status(200).json(error);
   }
 };
 

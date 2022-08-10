@@ -23,6 +23,7 @@ import PutPeliculas from "./Components/Form/PutPeliculas";
 import UserProfile from "./Components/Profile/UserProfile";
 import PasarelaDePago from "./Components/PasarelaDePago/PasarelaDePago";
 import { BsGoogle } from "react-icons/bs";
+import DashBoard from "./Components/Dashboard/DashBoard";
 
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
@@ -62,10 +63,11 @@ const App = () => {
             <Route path="Search" element={<Search />}></Route>
             <Route path="Profile" element={<Profile />}></Route>
             <Route path="Carro" element={<Carro />}></Route>
-            <Route path="modificar/:id" element={<PutPeliculas />}></Route>
+            <Route path="modificar/:id/:tipos" element={<PutPeliculas />}></Route>
             <Route path="userProfile" element={<UserProfile />}></Route>
             <Route path="wishlist" element={<Wishlist />}></Route>
             <Route path="pasarela" element={<PasarelaDePago />}></Route>
+            <Route path="dashBoard" element={<DashBoard />}></Route>
           </Route>
         </Routes>
         <Routes>
