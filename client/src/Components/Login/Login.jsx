@@ -30,7 +30,7 @@ function Login() {
 
   function handleCallbackResponse(response) {
     var userObject = jwt_decode(response.credential);
-    // console.log(userObject)
+    console.log('entro aca')
     dispatch(signInUser(userObject));
   }
 

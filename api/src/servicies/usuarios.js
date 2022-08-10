@@ -292,30 +292,31 @@ const putElminar = async (req, res) => {
 const postgoogleuser = async (req, res) => {
   try {
     let { email, name, jti, picture } = req.body;
-
     const jwtPass = sign(
       JSON.stringify({
         username: name,
         email: email,
       }),
       "jwtsecretcambiar"
-    );
+      );
+      
+      var user = await Usuarios.findOne({
+        where: { username: name },
+      });
 
-    var user = await Usuarios.findOne({
-      where: { username: name },
-    });
-
-    if (!user) {
+      if (!user) {
       var user = await bcrypt
-        .hash(jwtPass, 10)
-
-        .then(async (hash) => {
+      .hash(jwtPass, 10)
+      
+      .then(async (hash) => {
           var user = await Usuarios.create({
             username: name,
+            nickname: name,
             password: hash,
             email: email,
             picture: picture,
           }).then(mandarEmail(name, email, jti));
+          console.log('salio del create al service')
           return user;
         })
         .catch((err) => {
