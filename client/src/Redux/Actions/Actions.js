@@ -51,6 +51,8 @@ export const POST_HISTORIAL = "POST_HISTORIAL";
 export const GET_HISTORIAL = "GET_HISTORIAL";
 export const DELETED_MOVIE = "DELETED_MOVIE"
 export const DELETED_SERIE = 'DELETED_SERIE'
+export const MODIFICAR_MOVIE = "MODIFICAR_MOVIE"
+export const MODIFICAR_SERIE = "MODIFICAR_SERIE"
 
 function a(error) {
   return toast.error(error, {
@@ -139,7 +141,6 @@ export const deleteMovie =(payload)=>{
 
 }
 
-
 export const deleteSerie =(payload)=>{
   console.log(payload)
   return async function (dispatch) {
@@ -153,6 +154,37 @@ export const deleteSerie =(payload)=>{
 
 
 }
+
+export const modificarMovie =(payload)=>{
+  
+  return async function (dispatch) {
+    let deleted = await axios.post(`/productosModificados/postProd`, payload);
+  
+    return dispatch({
+      type: MODIFICAR_MOVIE,
+      payload: payload[0],
+    });
+  };
+
+}
+
+
+export const modificarSerie =(payload)=>{
+
+  return async function (dispatch) {
+    let deleted = await axios.post(`/productosModificados/postProd`, payload);
+
+    return dispatch({
+      type: MODIFICAR_SERIE,
+      payload: payload[0],
+    });
+  };
+
+}
+
+
+
+
 
 
 export const getAllSeries = () => {

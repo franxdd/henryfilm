@@ -51,7 +51,7 @@ function CardSeries({ id, name, poster, tipo }) {
                 </span>
               </abbr>
               <abbr title="Modificar">
-                <Link to={`/home/modificar/${id}`}>
+                <Link to={`/home/modificar/${id}/${tipo}`}>
                   <BiPaintRoll className="icono" />
                 </Link>
               </abbr>

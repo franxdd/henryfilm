@@ -41,7 +41,9 @@ import {
   POST_HISTORIAL,
   GET_HISTORIAL,
   DELETED_MOVIE,
-  DELETED_SERIE
+  DELETED_SERIE,
+  MODIFICAR_SERIE,
+  MODIFICAR_MOVIE,
   
 } from "../Actions/Actions.js";
 
@@ -200,6 +202,17 @@ const rootRouter = (state = initialState, action) => {
           allSeries: seriesFilHome
 
         }
+
+        case MODIFICAR_MOVIE:
+          return {
+            ...state,
+          }
+
+        case MODIFICAR_SERIE:
+          return {
+            ...state,
+
+          }
     case LOG_OUT:
       return {
         ...state,

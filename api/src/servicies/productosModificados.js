@@ -7,13 +7,11 @@ const {
   Peliculas,
   Carros,
   Historials,
-  ProductosModificados
+  ProductosModificados,
 } = require("../DB/db.js");
 const { renderSync } = require("sass");
 
-
 const getProductoModificado = async (req, res) => {
-
   try {
     let ProductosModificados = await ProductosModificados.findAll();
 
@@ -24,52 +22,42 @@ const getProductoModificado = async (req, res) => {
 };
 
 const postProductoModificado = async (req, res) => {
-  
-  let {contenido, id} = req.body;
-  // console.log(contenido)
+  var payload = req.body;
+
+  var id = payload.id;
+  var contenido = payload;
+  // console.log(payload)
 
   try {
-
     let prod = await ProductosModificados.findOne({
       where: {
-        idProducto: id
-      }
-    })
-
-    if(prod){
-
-      var producto = await ProductosModificados.update(
-        {contenido : contenido},
-        {where: {
-          idProducto: id
-        }}
-
-      )
-     
-
-    }else{
-
-      var producto = await ProductosModificados.create({
-  
         idProducto: id,
-        contenido: contenido,
-  
-      })
-
-
+      },
+    });
+    console.log(prod);
+    if (prod !== null) {
+      var producto = await ProductosModificados.update(
+        { contenido: [payload] },
+        {
+          where: {
+            idProducto: id,
+          },
+        }
+      );
+    } else {
+      var producto = await ProductosModificados.create({
+        idProducto: id,
+        contenido: [payload],
+      });
     }
 
-    res.status(200).json(producto)
-
-
+    res.status(200).json(producto);
   } catch (error) {
-
-    res.status(400).json(error)
-
+    res.status(400).json(error);
   }
 };
 
 module.exports = {
-    getProductoModificado,
-    postProductoModificado,
+  getProductoModificado,
+  postProductoModificado,
 };

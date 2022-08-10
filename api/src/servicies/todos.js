@@ -1,7 +1,11 @@
 const axios = require("axios");
 require("dotenv").config();
 const { parseador } = require("../utils/utils.js");
-const { Peliculas, ProductosEliminados } = require("../DB/db.js");
+const {
+  Peliculas,
+  ProductosEliminados,
+  ProductosModificados,
+} = require("../DB/db.js");
 const { Series } = require("../DB/db.js");
 const { API_KEY } = process.env;
 
@@ -70,6 +74,13 @@ const todos = async (req, res) => {
       return s.dataValues.idProducto;
     });
 
+    const Modificadas = await ProductosModificados.findAll();
+
+    var arrAuxModificado = Modificadas.map((m) => {
+      return m.dataValues;
+    });
+    console.log(arrAuxModificado);
+
     datosParseadosMovies = parseador(newGetMovies, urlImg, generosDataMovie);
     datosParseadosSeries = parseador(newGetSeries, urlImg, generosDataSerie);
 
@@ -83,6 +94,25 @@ const todos = async (req, res) => {
       if (!arrSeriesElim.includes(s.id + "")) {
         return s;
       }
+    });
+
+    datosParseadosSeries = datosParseadosSeries.map((s) => {
+      for (let i = 0; i < arrAuxModificado.length; i++) {
+        if (s.id + "" === arrAuxModificado[i].idProducto) {
+          console.log("entro aca");
+          s = arrAuxModificado[i].contenido[0];
+        }
+      }
+      return s;
+    });
+
+    datosParseadosMovies = datosParseadosMovies.map((m) => {
+      for (let i = 0; i < arrAuxModificado.length; i++) {
+        if (m.id + "" === arrAuxModificado[i].idProducto) {
+          m = arrAuxModificado[i].contenido[0];
+        }
+      }
+      return m;
     });
 
     var datosAEnviar = [
