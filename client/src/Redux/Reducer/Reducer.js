@@ -37,7 +37,9 @@ import {
   GET_REVIEW,
   POST_REVIEW,
   GOOGLE_USER,
-  GOOGLE_LOG_OUT
+  GOOGLE_LOG_OUT,
+  PUT_PROFILE,
+  USER_MODIFICADO
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -190,6 +192,12 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
       };
+    case USER_MODIFICADO:
+      console.log(action.payload);
+      return {
+        ...state,
+        user: action.payload
+      };
     case POST_LOGIN:
       console.log(action.payload)
       sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
@@ -249,7 +257,6 @@ const rootRouter = (state = initialState, action) => {
         seriesDetail: action.payload,
       };
     case GET_MOVIES_DETAIL:
-      console.log(action.payload)
       return {
         ...state,
         movieDetail: action.payload,
@@ -435,6 +442,7 @@ const rootRouter = (state = initialState, action) => {
         };
       }
     case GET_TODO:
+      console.log(action.payload);
       var arrAuxpeli = action.payload.filter((fil) => fil.tipo === "pelicula");
       var arrAuxserie = action.payload.filter((fil) => fil.tipo === "serie");
 
@@ -554,6 +562,11 @@ const rootRouter = (state = initialState, action) => {
     case PUT_PELICULA:
       return {
         ...state,
+      };
+    case PUT_PROFILE:
+      return {
+        ...state,
+        user: action.payload
       };
     case POST_COMENTARIO:
       return {

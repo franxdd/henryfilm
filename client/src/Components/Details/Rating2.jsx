@@ -7,14 +7,17 @@ import StarIcon from "@mui/icons-material/Star";
 import { createReview } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_ComentariosForm.scss";
 
-function Rating2({ id, token }) {
+function Rating2({ id, token, nickname, picture, tipo }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: 0,
-    idpelicula: id,
+    id: id,
     token: token,
+    nickname: nickname,
+    picture: picture,
+    tipo: tipo,
   });
   const [hover, setHover] = useState(-1);
   function handdleChange(e) {

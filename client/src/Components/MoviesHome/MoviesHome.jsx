@@ -43,7 +43,6 @@ function MoviesHome() {
     console.log(e.target.value)
     let notinclude = allMovies?.map(e=> e.genre_ids)
     let notinclude2 = notinclude?.map(a=> a.includes(e.target.value))
-    // let notinclude3 = notinclude2.includes(e.target.value)
     setgenerosCache(arrsetgenero);
     console.log(notinclude2)
     dispatch(filtradoGeneroMovies(e.target.value));

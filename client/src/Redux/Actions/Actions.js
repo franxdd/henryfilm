@@ -47,7 +47,9 @@ export const GET_REVIEW = "GET_REVIEW";
 export const POST_REVIEW = "POST_REVIEW";
 export const GOOGLE_USER = "GOOGLE_USER";
 export const GOOGLE_LOG_OUT = "GOOGLE_LOG_OUT";
-export const POST_HISTORIAL = "POST_HISTORIAL"
+export const POST_HISTORIAL = "POST_HISTORIAL";
+export const PUT_PROFILE = "PUT_PROFILE";
+export const USER_MODIFICADO = "USER_MODIFICADO";
 
 function a(error) {
   return toast.error(error, {
@@ -84,7 +86,6 @@ function b(mensaje) {
 //   };
 // };
 
-
 export const postHistorial = (payload) => {
   return async function (dispatch) {
     let getAllSeries = await axios(`/historial/`);
@@ -93,8 +94,7 @@ export const postHistorial = (payload) => {
       payload: getAllSeries.data,
     });
   };
-}
-
+};
 
 export const getAllSeries = () => {
   return async function (dispatch) {
@@ -172,7 +172,6 @@ export const willunmont = () => {
 export const PostUsuario = (payload) => {
   return async function (dispatch) {
     try {
-      console.log("mando la action");
       let created = await axios.post("/usuarios/register", payload);
       // console.log(created.data)
       return dispatch({ type: POST_USUARIOS });
@@ -190,12 +189,10 @@ export const checkState = () => {
 export const PostLogin = (payload) => {
   return async function (dispatch) {
     try {
-      console.log(payload)
       let created = await axios.post("/usuarios/login", payload);
       // {
       //   // withCredentials: true,
       // });
-      console.log(created.data);
 
       sessionStorage.setItem("token", JSON.stringify(created.data[0]));
 
@@ -205,7 +202,6 @@ export const PostLogin = (payload) => {
       );
     } catch (error) {
       a(error.response.data);
-      // console.log(error)
       return error;
     }
   };
@@ -252,7 +248,6 @@ export const googleLogOut = () => {
 };
 export const getUser = (token) => {
   return async function (dispatch) {
-    // console.log("access-token=" + token);
     var obj = {
       "access-token": token,
     };
@@ -455,7 +450,6 @@ export const loadCurren = (payload) => {
 };
 
 export const putPeliculas = (payload) => {
-  // console.log(payload);
   return async (dispatch) => {
     let created = await axios.put(
       `/peliculas/modificarPeli/${payload.id}`,
@@ -468,7 +462,6 @@ export const putPeliculas = (payload) => {
   };
 };
 export const createReview = (payload) => {
-  console.log(payload);
   return async (dispatch) => {
     let creado = await axios.post("/comentarios/agregar", payload);
     return dispatch({
@@ -506,8 +499,26 @@ export const removeToWishlist = (id) => {
     });
 };
 
-// export const postPagos = (payload) => {
-//   return async (dispatch) => {
+export const putProfile = (payload) => {
+  console.log(payload);
+  return async (dispatch) => {
+    try {
+      let profile = await axios.put(`/usuarios/IProfile`, payload);
 
+      dispatch({
+        type: PUT_PROFILE,
+        payload: profile.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const usermodificado = (payload) => {
+  return {
+    type: USER_MODIFICADO,
+    payload: payload,
+  };
+};
 //   }
 // }

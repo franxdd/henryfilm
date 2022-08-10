@@ -53,11 +53,11 @@ const Nav2 = () => {
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-    console.log("Estoy haciendo click");
+ 
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-    console.log("Estoy haciendo click2");
+  
   };
 
   const handleCloseNavMenu = () => {
@@ -126,7 +126,7 @@ const Nav2 = () => {
   };
 
   // **************************** ESTA COMENTADO PORQUE EL LOG OUT ESTA EN PROFILE ***********************************
-
+  let foto = userReducer.picture === "" ? perfil : userReducer.picture;
   // return userReducer.isAdmin ? (
   return (
     <main>
@@ -261,7 +261,7 @@ const Nav2 = () => {
                 <Tooltip title="Abrir las opciones">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     {/* <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} /> */}
-                    <img src={perfil} height="auto" width="40px" />
+                    <img src={foto} height="auto" width="40px" />
                   </IconButton>
                 </Tooltip>
                 <Menu

@@ -32,8 +32,8 @@ const mandarEmail = async (username, email, password) => {
     html: contenidoHTML,
   });
 
-  console.log("Message sent", info.messageId);
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // console.log("Message sent", info.messageId);
+  // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 };
 
 const mandarEmailCompra = async (amount, description, currency) => {
@@ -65,8 +65,8 @@ const mandarEmailCompra = async (amount, description, currency) => {
     html: contenidoHTML,
   });
 
-  console.log("Message sent", info.messageId);
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // console.log("Message sent", info.messageId);
+  // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 };
 
 module.exports = {

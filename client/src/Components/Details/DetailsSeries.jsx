@@ -94,7 +94,7 @@ function DetailsSeries() {
     alert("debes registrarte");
     navigate("/home/Login");
   }
-
+console.log(seriesDetail);
   return seriesDetail.length === 0 ? (
     <div className="Loading">
       <div className="loader"></div>
@@ -201,7 +201,7 @@ function DetailsSeries() {
           </div>
         </div>
       </header>
-      <Rating2 className="ratingStyle" id={id} token={token} />
+      <Rating2 className="ratingStyle" id={id} token={token} picture={userReducer.picture} nickname={userReducer.nickname} tipo={seriesDetail[0]?.tipo}/>
       {/* <Rating className="ratingStyle" /> */}
       <br></br>
 
@@ -211,7 +211,10 @@ function DetailsSeries() {
           comentarios.map((e) => {
             return (
               <div className="review">
-                <div className="email">Usuario: {e.username}</div>
+                <div height="auto" width="40px">
+                <img src={e.picture} alt="profile" height="auto" width="40px"/>
+                </div>
+              <div className="email" >Usuario: {e.nickname}</div>
                 <div className="infoRev">
                   <Rating name="read-only" value={e.puntuacion} />
                 </div>
