@@ -44,7 +44,6 @@ import {
   DELETED_SERIE,
   MODIFICAR_SERIE,
   MODIFICAR_MOVIE,
-  
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -160,59 +159,54 @@ const rootRouter = (state = initialState, action) => {
         backupSeries: action.payload,
       };
 
-      case POST_HISTORIAL:
-        return{
-          ...state,
-          cart: [],
-        }
+    case POST_HISTORIAL:
+      return {
+        ...state,
+        cart: [],
+      };
 
     case GET_HISTORIAL:
-      if(action.payload !== false){
-        return{
-          ...state,
-          historial: action.payload
-        }
-
-      }else{
-
+      if (action.payload !== false) {
         return {
           ...state,
-          historial: false
-        }
-
+          historial: action.payload,
+        };
+      } else {
+        return {
+          ...state,
+          historial: false,
+        };
       }
 
     case DELETED_MOVIE:
-      let moviesFil = state.todo.filter(t => t.id !== action.payload)
-      let moviesFilHome = state.allMovies.filter(t => t.id !== action.payload)
-     
-      return{
+      let moviesFil = state.todo.filter((t) => t.id !== action.payload);
+      let moviesFilHome = state.allMovies.filter((t) => t.id !== action.payload);
+
+      return {
         ...state,
         todo: moviesFil,
-        allMovies: moviesFilHome
-      }
+        allMovies: moviesFilHome,
+      };
 
-      case DELETED_SERIE:
-        let seriesFil = state.todo.filter(t => t.id !== action.payload)
-        let seriesFilHome = state.allSeries.filter(t => t.id !== action.payload)
-       
-        return{
-          ...state,
-          todo: seriesFil,
-          allSeries: seriesFilHome
+    case DELETED_SERIE:
+      let seriesFil = state.todo.filter((t) => t.id !== action.payload);
+      let seriesFilHome = state.allSeries.filter((t) => t.id !== action.payload);
 
-        }
+      return {
+        ...state,
+        todo: seriesFil,
+        allSeries: seriesFilHome,
+      };
 
-        case MODIFICAR_MOVIE:
-          return {
-            ...state,
-          }
+    case MODIFICAR_MOVIE:
+      return {
+        ...state,
+      };
 
-        case MODIFICAR_SERIE:
-          return {
-            ...state,
-
-          }
+    case MODIFICAR_SERIE:
+      return {
+        ...state,
+      };
     case LOG_OUT:
       return {
         ...state,
@@ -222,32 +216,32 @@ const rootRouter = (state = initialState, action) => {
         wishlist: [],
         googleUser: [],
       };
-      case GOOGLE_USER:
-        // console.log(action.payload)
-        sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
-        localStorage.setItem("cart", JSON.stringify(action.payload[1]));
-        localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
+    case GOOGLE_USER:
+      // console.log(action.payload)
+      sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
+      localStorage.setItem("cart", JSON.stringify(action.payload[1]));
+      localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
 
-        return {
-          ...state,
-          token: action.payload[0],
-          cart: action.payload[1],
-          wishlist: action.payload[2],
-          googleUser: action.payload[0]
-        }
+      return {
+        ...state,
+        token: action.payload[0],
+        cart: action.payload[1],
+        wishlist: action.payload[2],
+        googleUser: action.payload[0],
+      };
 
-        case GOOGLE_LOG_OUT:
-          sessionStorage.removeItem("token");
-          localStorage.setItem("cart", JSON.stringify([]));
-          localStorage.setItem("wishlist", JSON.stringify([]));
-          return {
-            ...state,
-            token: "",
-            cart: [],
-            wishlist: [],
-            googleUser: [],
-            user: [],
-          }
+    case GOOGLE_LOG_OUT:
+      sessionStorage.removeItem("token");
+      localStorage.setItem("cart", JSON.stringify([]));
+      localStorage.setItem("wishlist", JSON.stringify([]));
+      return {
+        ...state,
+        token: "",
+        cart: [],
+        wishlist: [],
+        googleUser: [],
+        user: [],
+      };
     case POST_USUARIOS:
       return {
         ...state,
@@ -255,15 +249,26 @@ const rootRouter = (state = initialState, action) => {
     case POST_LOGIN:
       // console.log(action.payload)
       sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
-      localStorage.setItem("cart", JSON.stringify(action.payload[1]));
+      let local = localStorage.getItem("cart") || [];
+      console.log(local);
+      let carroTotal;
+      let jsonTotal = JSON.parse(local);
+      console.log(jsonTotal);
+      if (local !== "undefined") {
+        carroTotal = [...jsonTotal, ...action.payload[1]];
+      } else {
+        carroTotal = [...action.payload[1]];
+      }
+      localStorage.setItem("cart", JSON.stringify(carroTotal));
+      console.log("soy el carro total", carroTotal);
       localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
-      
+
       return {
         ...state,
         token: action.payload[0],
-        cart: action.payload[1],
+        cart: carroTotal,
         wishlist: action.payload[2],
-        user: action.payload[3]
+        user: action.payload[3],
       };
     case CHECK_STATE:
       return {
@@ -465,10 +470,7 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_MOVIES_REVERSA:
-      const arrMovie = filterGenres(
-        state.backupTodo.slice(0, 100),
-        action.payload
-      );
+      const arrMovie = filterGenres(state.backupTodo.slice(0, 100), action.payload);
       if (arrMovie.length === 0) {
         return {
           ...state,
@@ -482,10 +484,7 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_SERIES_REVERSA:
-      const arrSeries = filterGenres(
-        state.backupTodo.slice(100, 200),
-        action.payload
-      );
+      const arrSeries = filterGenres(state.backupTodo.slice(100, 200), action.payload);
       if (arrSeries.length === 0) {
         return {
           ...state,
@@ -516,14 +515,12 @@ const rootRouter = (state = initialState, action) => {
           todo: state.backupTodo,
         };
       } else {
-        const filter = state.todo.filter((e) =>
-          e.name.toLowerCase().includes(action.payload.toLowerCase())
-        );
+        const filter = state.todo.filter((e) => e.name.toLowerCase().includes(action.payload.toLowerCase()));
         return {
           ...state,
           all: filter,
         };
-      };
+      }
     // case CLEAR:
     //   console.log(action.payload)
     //   if (action.payload === "series") {
@@ -649,9 +646,7 @@ const rootRouter = (state = initialState, action) => {
       };
 
     case REMOVE_TO_WISHLIST:
-      let wishlistFilter = state.wishlist.filter(
-        (e) => e.id !== action.payload
-      );
+      let wishlistFilter = state.wishlist.filter((e) => e.id !== action.payload);
       localStorage.setItem("wishlist", JSON.stringify(wishlistFilter));
       return {
         ...state,

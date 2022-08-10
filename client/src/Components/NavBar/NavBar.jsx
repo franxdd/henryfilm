@@ -36,7 +36,6 @@ import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import perfil from "../../img/perfil2.png";
 
-
 function getToken() {
   const tokenString = sessionStorage.getItem("token");
   const userToken = JSON.parse(tokenString);
@@ -261,7 +260,7 @@ const Nav2 = () => {
                 <Tooltip title="Abrir las opciones">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     {/* <Avatar src={userReducer?.img || "/broken-image.jpg"} /> */}
-                
+
                     <img src={perfil} height="auto" width="40px" />
                   </IconButton>
                 </Tooltip>
@@ -291,13 +290,13 @@ const Nav2 = () => {
                   ) : userReducer.isAdmin ? (
                     <>
                       <MenuItem>
-                        <Link to="/home/agregar" style={{ textDecoration: "none", color: "black" }}>
-                          <Typography textaling="center">Agregar Producto</Typography>
+                        <Link to="/home/dashBoard" style={{ textDecoration: "none", color: "black" }}>
+                          <Typography textaling="center">DashBoard</Typography>
                         </Link>
                       </MenuItem>
                       <MenuItem>
-                        <Link to="/home/modificar" style={{ textDecoration: "none", color: "black" }}>
-                          <Typography textaling="center">Modificar</Typography>
+                        <Link to="/home/wishlist" style={{ textDecoration: "none", color: "black" }}>
+                          <Typography textaling="center">Favoritos</Typography>
                         </Link>
                       </MenuItem>
                     </>
