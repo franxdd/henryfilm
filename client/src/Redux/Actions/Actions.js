@@ -298,9 +298,12 @@ export const logOut = (payload) => {
 export const signInUser = (payload) => {
   return async function (dispatch) {
     try {
-      // console.log("entro a al action");
+      console.log("entro a al action");
       var user = await axios.post("/usuarios/google", payload);
-    } catch (error) {}
+    } catch (error) {
+
+      console.log(error)
+    }
     // {
     //   // withCredentials: true,
     // });
