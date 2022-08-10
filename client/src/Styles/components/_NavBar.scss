@@ -1,6 +1,6 @@
 @import "../Utilidades/_Variables.scss";
 
- .NavbarContainer{
+.NavbarContainer{
     width: 100%;
     height:  "100vh";
     background-color: black;
@@ -52,13 +52,7 @@
     box-shadow: 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.3);
     transform: translate(0.1em, 0.1em);
   }
-  //   .select-lenguaje {
-  //   border-radius: 7px;
-  //   background-color:#191919;
-  //   color: $detalles;
-  //   height: 30px;
-  //   padding: 5px;
-  // }
+
 };
 
 .NavbarInnerContainer{
@@ -122,3 +116,13 @@
   }
 }
 };
+@media screen and (min-width: 1700px) {
+  .NavbarContainer{
+    max-width: 130%;
+    height:  80px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    }
+
+}

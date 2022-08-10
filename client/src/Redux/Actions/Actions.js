@@ -48,6 +48,7 @@ export const POST_REVIEW = "POST_REVIEW";
 export const GOOGLE_USER = "GOOGLE_USER";
 export const GOOGLE_LOG_OUT = "GOOGLE_LOG_OUT";
 export const POST_HISTORIAL = "POST_HISTORIAL";
+export const GET_HISTORIAL = "GET_HISTORIAL";
 
 function a(error) {
   return toast.error(error, {
@@ -85,12 +86,33 @@ function b(mensaje) {
 // };
 
 export const postHistorial = (payload) => {
+  console.log(payload);
   return async function (dispatch) {
-    let getAllSeries = await axios(`/historial/`);
-    return dispatch({
-      type: GET_ALL_SERIES,
-      payload: getAllSeries.data,
-    });
+    try {
+      let postHistorial = await axios.post(`/historial/agregar`, payload);
+      return dispatch({
+        type: POST_HISTORIAL,
+        payload: postHistorial.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getHistorial = (id) => {
+  console.log(id);
+  return async function (dispatch) {
+    try {
+      let getHistorial = await axios.get(`/historial/${id}`);
+      console.log(getHistorial.data);
+      return dispatch({
+        type: GET_HISTORIAL,
+        payload: getHistorial.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -450,9 +472,9 @@ export const loadCurren = (payload) => {
 };
 
 export const putPeliculas = (payload) => {
-  // console.log(payload);
+  console.log(payload.id);
   return async (dispatch) => {
-    let created = await axios.put(`/peliculas/modificarPeli/${payload.id}`, payload);
+    let created = await axios.put(`/${payload.tipo}s/modificar/${payload.id}`, payload);
     dispatch({
       type: PUT_PELICULA,
       payload: created,

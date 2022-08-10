@@ -98,6 +98,14 @@
     color:$detalles;
   }
 }
+.ContainerForm2 h6{
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 15%;
+  margin-bottom: -4%;
+  cursor: default;
+}
 .containerSelect {
   margin: 10px auto;
   width: 400px;

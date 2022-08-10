@@ -1,4 +1,4 @@
-import {  useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -7,6 +7,8 @@ import {
   willunmont2,
   addToWishlist,
   getReview,
+  getHistorial,
+
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_DetailsMovies.scss";
 import { estrellas } from "../../auxiliares/Funciones";
@@ -27,7 +29,9 @@ function DetailMovie() {
   let token = sessionStorage.getItem("token");
   
   const dispatch = useDispatch();
-  const userReducer = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
+
+  let iduser = user.id
   let movieDetail = useSelector((state) => state.movieDetail);
   let { comentarios } = useSelector((state) => state);
   const [input, setInput] = useState({
@@ -40,11 +44,15 @@ function DetailMovie() {
   useEffect(() => {
     dispatch(getMoviesDetail(id));
     dispatch(getReview(input2));
+    if(iduser){ 
+      console.log('entro aca')
+      dispatch(getHistorial(iduser))
+    }
     return () => dispatch(willunmont2());
   }, [dispatch]);
   
   
-  // console.log(movieDetail)
+  console.log(movieDetail)
   // if(!movieDetail[0].creado){
     
   //   var video = movieDetail[0]?.videosAMostrar[0]; // El problema del rederizado de details de los datos de la DB esta aca
@@ -107,6 +115,7 @@ function DetailMovie() {
           backgroundPosition: "center",
           backgroundImage: movieDetail[0]?.backdrop_path ?    `url(https://image.tmdb.org/t/p/original${movieDetail[0]?.backdrop_path})` : `url(${movieDetail[0]?.backDropImagen})` ,
         }}
+      
       >
         <div className="contenedor-info">
           <div className="contenedor-descripcion">
@@ -148,7 +157,9 @@ function DetailMovie() {
                   <div className="modal-contenido">
                     <a href="#"> <CloseIcon className="iconoClose"/> </a><br></br>
                     <div className="iframe-container">
+
                     <iframe className="video" width="100%" height="100%" src={movieDetail[0]?.videosAMostrar[0]}></iframe>
+
                     </div>
                   </div>  
                 </div>

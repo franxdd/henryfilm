@@ -45,7 +45,7 @@ function Login() {
 
     google.accounts.id.initialize({
       client_id:
-        "611424478766-nb0c91tvcdmqko0ch36tc74gu7gqcmbe.apps.googleusercontent.com",
+        "738554188035-l294si4hjt9homonivsai0ga65t64tg0.apps.googleusercontent.com",
       callback: handleCallbackResponse,
     });
 
@@ -115,15 +115,19 @@ function Login() {
           <button button class="submit formEntry" type="submit">
             Iniciar Sesion
           </button>
+          <div className="or">────────── O ──────────</div>
           {googleUser.length !== 0 ? (
             <>
-              {/* <button onClick={(e) => HandleSignLogOut(e)}>LOGOUT</button> */}
+    
             </>
           ) : (
             <>
+            <div className="containerGoogle" id="signInDiv">
               <div id="g_id_onload" data-type="icon"></div>
+              </div>
             </>
           )}
+          
           <div className="pageTitle2"> ¿No tienes una cuenta?</div>
           <Link to="/home/Register">
             <button button class="submit formEntry">

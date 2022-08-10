@@ -5,6 +5,10 @@ import "../../Styles/components/_Carrito.scss";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/components/_Carrito.scss";
 import tuCarrito from "../../img/tucarrito.png";
+import {
+  postHistorial,
+
+} from "../../Redux/Actions/Actions";
 function Carro() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,18 +27,19 @@ function Carro() {
     }
   }, [cart]);
 
-  const HandleClickComprar = () => {
-    console.log(cart)
-    console.log(user)
-    var arrAux = [cart,user ]
+  const HandleClickComprar = (e) => {
+    e.preventDefault()
+
+    // var arrAux = [cart,user ]
     //aca va el dispatch de la action que guarda en la BD
     // dispatch(postHistorial(arrAux))
     const token = sessionStorage.getItem("token");
-    if (token) {
+    if (token && cart.length != 0) {
       navigate("/home/pasarela");
-      console.log("COMPRADISIMO BRO");
+      
     } else {
-      navigate("/home/login");
+      alert("No se cumplen los requisitos para continuar con la compra")
+      navigate("/home");
     }
   };
 
@@ -85,7 +90,7 @@ function Carro() {
             </p>
             <button
               className="submit formEntry4"
-              onClick={() => HandleClickComprar()}
+              onClick={(e) => HandleClickComprar(e)}
             >
               COMPRAR
             </button>

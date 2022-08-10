@@ -38,6 +38,8 @@ import {
   POST_REVIEW,
   GOOGLE_USER,
   GOOGLE_LOG_OUT,
+  POST_HISTORIAL,
+  GET_HISTORIAL,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -138,6 +140,7 @@ const initialState = {
   isos: [],
   user: [],
   googleUser: [],
+  historial: {},
   comentarios: [],
   token: "",
   wishlist: wishlistStorage,
@@ -151,6 +154,25 @@ const rootRouter = (state = initialState, action) => {
         allSeries: action.payload,
         backupSeries: action.payload,
       };
+
+    case POST_HISTORIAL:
+      return {
+        ...state,
+        cart: [],
+      };
+
+    case GET_HISTORIAL:
+      if (action.payload !== false) {
+        return {
+          ...state,
+          historial: action.payload,
+        };
+      } else {
+        return {
+          ...state,
+          historial: false,
+        };
+      }
     case LOG_OUT:
       return {
         ...state,
@@ -280,6 +302,7 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         movieDetail: [],
+        historial: {},
       };
 
     case ORDER_NAME_ASC:
