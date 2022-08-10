@@ -1,5 +1,14 @@
 @import "../Utilidades/_Variables.scss";
 
+
+.gSignIn{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .ContainerLogin{
   background-image: url("../../img/Landing3.png");
   display: flex;

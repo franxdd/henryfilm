@@ -53,7 +53,7 @@ function Login() {
       console.log("entro");
       google.accounts.id.renderButton(document.getElementById("g_id_onload"), {
         theme: "outline",
-        size: "large",
+        size: "short",
       });
     }
     if(typeof googleUser === 'string'){
@@ -120,9 +120,9 @@ function Login() {
               {/* <button onClick={(e) => HandleSignLogOut(e)}>LOGOUT</button> */}
             </>
           ) : (
-            <>
+            <div className="gSignIn">
               <div id="g_id_onload" data-type="icon"></div>
-            </>
+            </div>
           )}
           <div className="pageTitle2"> ¿No tienes una cuenta?</div>
           <Link to="/home/Register">
