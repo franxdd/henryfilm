@@ -54,10 +54,9 @@ const UserProfile = () => {
   console.log(user);
   return (
     <div className="container3">
-      <div className="profileTitle">
-        <div>
+    <div className="profileTitle">
+      <h1>Mi Perfil</h1>
           <h1 className="nombre">{user.nickname}</h1>
-        </div>
       </div>
       <div className="cardContainer3">
         <div>
@@ -86,7 +85,7 @@ const UserProfile = () => {
                   />
                 </div>
 
-                <button type="submit">cambiar</button>
+                <button type="submit">Cambiar</button>
               </form>
               <a href="#">
                 {" "}
