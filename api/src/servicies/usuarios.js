@@ -31,11 +31,11 @@ const postUser = async (req, res) => {
 
     if (!username || !email || !password || !nickname)
       return res.status(404).send("Falta completar un dato..");
-      bcrypt
+    bcrypt
       .hash(password, 10)
-      
+
       .then(async (hash) => {
-        console.log("entre de las promesas")
+        console.log("entre de las promesas");
         console.log(username, email, password, nickname);
         const response = await Usuarios.create({
           username: username,
@@ -44,12 +44,18 @@ const postUser = async (req, res) => {
           isAdmin,
           nickname: nickname,
         })
-        .then((response) => {
-          console.log("entre de las promesas 2")
+          .then((response) => {
+            console.log("entre de las promesas 2");
             res.status(200).send("Usuario creado con exito");
           })
-          .then(mandarEmail(username, email, password, nickname));
-          console.log("sali de las promesas");
+          .then(() => {
+            try {
+              mandarEmail(username, email, password, nickname);
+            } catch (error) {
+              console.log(error);
+            }
+          });
+        console.log("sali de las promesas");
       })
       .catch((err) => {
         if (err) {
@@ -57,7 +63,7 @@ const postUser = async (req, res) => {
         }
       });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(404).send(error);
   }
 };
@@ -219,7 +225,6 @@ const putProfile = async (req, res) => {
         }
       );
       console.log("estoy saliendo update con ambos");
-  
     }
     let user = await Usuarios.findByPk(id);
     console.log(user);
@@ -298,17 +303,17 @@ const postgoogleuser = async (req, res) => {
         email: email,
       }),
       "jwtsecretcambiar"
-      );
-      
-      var user = await Usuarios.findOne({
-        where: { username: name },
-      });
+    );
 
-      if (!user) {
+    var user = await Usuarios.findOne({
+      where: { username: name },
+    });
+
+    if (!user) {
       var user = await bcrypt
-      .hash(jwtPass, 10)
-      
-      .then(async (hash) => {
+        .hash(jwtPass, 10)
+
+        .then(async (hash) => {
           var user = await Usuarios.create({
             username: name,
             nickname: name,
@@ -316,7 +321,7 @@ const postgoogleuser = async (req, res) => {
             email: email,
             picture: picture,
           }).then(mandarEmail(name, email, jti));
-          console.log('salio del create al service')
+          console.log("salio del create al service");
           return user;
         })
         .catch((err) => {

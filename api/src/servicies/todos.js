@@ -66,6 +66,7 @@ const todos = async (req, res) => {
       return m.dataValues.idProducto;
     });
 
+
     const seriesEliminadas = await ProductosEliminados.findAll({
       attributes: ["idProducto"],
     });
@@ -85,7 +86,7 @@ const todos = async (req, res) => {
     datosParseadosSeries = parseador(newGetSeries, urlImg, generosDataSerie);
 
     datosParseadosMovies = datosParseadosMovies.filter((m) => {
-      if (!arrMoviesElim.includes(m.id + " ")) {
+      if (!arrMoviesElim.includes(m.id + "")) {
         return m;
       }
     });
@@ -99,7 +100,6 @@ const todos = async (req, res) => {
     datosParseadosSeries = datosParseadosSeries.map((s) => {
       for (let i = 0; i < arrAuxModificado.length; i++) {
         if (s.id + "" === arrAuxModificado[i].idProducto) {
-          console.log("entro aca");
           s = arrAuxModificado[i].contenido[0];
         }
       }
@@ -114,6 +114,10 @@ const todos = async (req, res) => {
       }
       return m;
     });
+
+
+    console.log(datosParseadosMovies.length)
+    console.log(datosParseadosSeries.length)
 
     var datosAEnviar = [
       ...peliculasBd,
