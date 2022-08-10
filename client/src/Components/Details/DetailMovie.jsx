@@ -204,7 +204,7 @@ console.log();
           placeholder="Escribe tu comentario:"
           className="name formEntry3"
         ></textarea> */}
-        <Rating2 className="ratingStyle" id={id} token={token} picture={userReducer.picture} nickname={userReducer.nickname} tipo={movieDetail[0]?.tipo}/>
+        <Rating2 className="ratingStyle" id={id} token={token} picture={user.picture} nickname={user.nickname} tipo={movieDetail[0]?.tipo}/>
         {/* <Rating className="ratingStyle" /> */}
         <br></br>
 
