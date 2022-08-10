@@ -40,15 +40,15 @@ const CheckoutForm = () => {
     });
     console.log(error);
     if (error) {
-      console.log(paymentMethod);
+      // console.log(paymentMethod);
       const { id } = paymentMethod;
       try {
-        console.log("Holis");
+        // console.log("Holis");
         const { data } = await axios.post("/pagos/api/checkout", {
           id,
           amount: precioTotal * 100,
         });
-        console.log("La data", data);
+        // console.log("La data", data);
         elements.getElement(CardElement).clear();
       } catch (error) {
         console.log(error);

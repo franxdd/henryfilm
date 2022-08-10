@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 
 const mandarEmail = async (username, email, password) => {
-  console.log("lalala");
+  // console.log("lalala");
   let contenidoHTML = `
           <h1>User Information</h1>
           <ul>
@@ -37,7 +37,7 @@ const mandarEmail = async (username, email, password) => {
 };
 
 const mandarEmailCompra = async (amount, description, currency) => {
-  console.log("lalala");
+  // console.log("lalala");
   let contenidoHTML = `
           <h1>User Information</h1>
           <ul>

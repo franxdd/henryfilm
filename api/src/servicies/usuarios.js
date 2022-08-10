@@ -52,6 +52,7 @@ const postUser = async (req, res) => {
         }
       });
   } catch (error) {
+    console.log(error)
     res.status(404).send(error);
   }
 };
@@ -65,7 +66,7 @@ const postLogin = async (req, res) => {
       },
     });
 
-    console.log(user.dataValues.id)
+    // console.log(user.dataValues.id)
 
     if (!user) {
       return res.status(400).send("Usuario no existente");
@@ -275,7 +276,7 @@ const postgoogleuser = async (req, res) => {
     bcrypt
       .compare(jwtPass, dbPass)
       .then((match) => {
-        console.log("antes del if del match");
+        // console.log("antes del if del match");
         if (!match) {
 
           res
@@ -301,7 +302,7 @@ const postgoogleuser = async (req, res) => {
           } else {
             arrAux = [accessToken, [], []];
           }
-          console.log(arrAux)
+          // console.log(arrAux)
           return res.status(200).json(arrAux);
         }
       })

@@ -40,15 +40,15 @@ function MoviesHome() {
 
   const FiltradoGenero = (e) => {
     let arrsetgenero = [...new Set([e.target.value, ...generosCache])];
-    console.log(e.target.value)
+    // console.log(e.target.value)
     let notinclude = allMovies?.map(e=> e.genre_ids)
     let notinclude2 = notinclude?.map(a=> a.includes(e.target.value))
     // let notinclude3 = notinclude2.includes(e.target.value)
     setgenerosCache(arrsetgenero);
-    console.log(notinclude2)
+    // console.log(notinclude2)
     dispatch(filtradoGeneroMovies(e.target.value));
     if(!notinclude2.includes(true)){
-      console.log("entre al if");
+      // console.log("entre al if");
       setgenerosCache([])
     }
   };
@@ -142,6 +142,7 @@ function MoviesHome() {
             return (
               <CardMovies
                 key={r.id}
+                tipo={r.tipo}
                 id={r.id}
                 name={r.name}
                 poster={r.posterImagen}

@@ -1,7 +1,7 @@
 const axios = require("axios");
 require("dotenv").config();
 const { parseador } = require("../utils/utils.js");
-const { Peliculas } = require("../DB/db.js");
+const { Peliculas, ProductosEliminados } = require("../DB/db.js");
 const { Series } = require("../DB/db.js");
 const { API_KEY } = process.env;
 
@@ -54,9 +54,31 @@ const todos = async (req, res) => {
     const peliculasBd = await Peliculas.findAll();
     const seriesBd = await Series.findAll();
 
+
+
+    const moviesEliminadas = await ProductosEliminados.findAll({
+      attributes: ["idProducto"],
+    });
+
+    var arrMoviesElim = moviesEliminadas.map((m) => {
+      return m.dataValues.idProducto;
+    });
+
     datosParseadosMovies = parseador(newGetMovies, urlImg, generosDataMovie);
     datosParseadosSeries = parseador(newGetSeries, urlImg, generosDataSerie);
 
+    datosParseadosMovies = datosParseadosMovies.filter((m) => {
+      if (!arrMoviesElim.includes(m.id + " ")) {
+        return m;
+      }
+    });
+
+
+
+
+
+
+    
     var datosAEnviar = [
       ...peliculasBd,
       ...datosParseadosMovies,
@@ -88,7 +110,7 @@ const todos = async (req, res) => {
       res.status(200).json(datosAEnviar);
     }
   } catch (error) {
-    res.status(200).json(error)
+    res.status(200).json(error);
   }
 };
 

@@ -234,7 +234,7 @@ const postPeliculas = async (req, res) => {
     var number_of_episodesParse = parseInt(number_of_episodes)
     var number_of_seasonsParse = parseInt(number_of_seasons)
     if (tipo === "serie") {
-      console.log(' create')
+      // console.log(' create')
       const response = await Series.create({
         name,
         genre_ids,
@@ -250,7 +250,7 @@ const postPeliculas = async (req, res) => {
         tipo,
       });
 
-      console.log(' salio')
+      // console.log(' salio')
       res.status(200).json(response.data);
     } else {
       const response = await Peliculas.create({

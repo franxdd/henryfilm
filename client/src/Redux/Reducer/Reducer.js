@@ -39,7 +39,8 @@ import {
   GOOGLE_USER,
   GOOGLE_LOG_OUT,
   POST_HISTORIAL,
-  GET_HISTORIAL
+  GET_HISTORIAL,
+  DELETED_MOVIE
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -176,6 +177,16 @@ const rootRouter = (state = initialState, action) => {
         }
 
       }
+
+    case DELETED_MOVIE:
+      let moviesFil = state.todo.filter(t => t.id !== action.payload)
+      let moviesFilHome = state.allMovies.filter(t => t.id !== action.payload)
+     
+      return{
+        ...state,
+        todo: moviesFil,
+        allMovies: moviesFilHome
+      }
     case LOG_OUT:
       return {
         ...state,
@@ -216,7 +227,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
       };
     case POST_LOGIN:
-      console.log(action.payload)
+      // console.log(action.payload)
       sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
       localStorage.setItem("cart", JSON.stringify(action.payload[1]));
       localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
@@ -234,13 +245,13 @@ const rootRouter = (state = initialState, action) => {
       };
 
     case POST_REVIEW:
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         comentarios: [...state.comentarios, action.payload],
       };
     case GET_REVIEW:
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         comentarios: action.payload,
@@ -274,7 +285,7 @@ const rootRouter = (state = initialState, action) => {
         seriesDetail: action.payload,
       };
     case GET_MOVIES_DETAIL:
-      console.log(action.payload)
+      // console.log(action.payload)
       return {
         ...state,
         movieDetail: action.payload,
@@ -589,7 +600,7 @@ const rootRouter = (state = initialState, action) => {
     case ADD_TO_WISHLIST:
       const itemFromWishlist = state.todo.find((e) => e.id === action.payload);
       let wishlistStorage = localStorage.getItem("wishlist");
-      console.log( wishlistStorage);
+      // console.log( wishlistStorage);
 
       if (wishlistStorage === "undefined") {
         d();

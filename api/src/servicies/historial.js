@@ -64,20 +64,20 @@ const posthistorial = async (req, res) => {
 
 const getHistorial = async (req, res) => {
   let { idUsuario } = req.params;
-  console.log("id de params",idUsuario)
+  // console.log("id de params",idUsuario)
   try {
 
 
-    console.log('antes del find one')
+    // console.log('antes del find one')
     let histoUser = await Historials.findOne({
       where: {
         UsuarioId: idUsuario,
       },
     })
-    console.log(histoUser)
+    // console.log(histoUser)
     if(!histoUser) return res.status(200).json(false)
 
-    console.log('devuelve')
+    // console.log('devuelve')
     res.status(200).json(histoUser)
 
 

@@ -45,14 +45,14 @@ function DetailMovie() {
     dispatch(getMoviesDetail(id));
     dispatch(getReview(input2));
     if(iduser){ 
-      console.log('entro aca')
+      // console.log('entro aca')
       dispatch(getHistorial(iduser))
     }
     return () => dispatch(willunmont2());
   }, [dispatch]);
   
   
-  console.log(movieDetail)
+  // console.log(movieDetail)
   // if(!movieDetail[0].creado){
     
   //   var video = movieDetail[0]?.videosAMostrar[0]; // El problema del rederizado de details de los datos de la DB esta aca

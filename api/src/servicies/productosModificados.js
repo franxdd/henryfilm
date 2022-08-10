@@ -26,7 +26,7 @@ const getProductoModificado = async (req, res) => {
 const postProductoModificado = async (req, res) => {
   
   let {contenido, id} = req.body;
-  console.log(contenido)
+  // console.log(contenido)
 
   try {
 

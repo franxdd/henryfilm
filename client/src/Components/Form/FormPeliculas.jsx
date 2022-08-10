@@ -45,7 +45,7 @@ const FormPeliculas = () => {
 
   useEffect(() => {
 
-    console.log(tipo)
+    // console.log(tipo)
 
     if (tipo === "serie") {
       // generos = auxGenerosSerie.slice()
@@ -59,7 +59,7 @@ const FormPeliculas = () => {
 
   const HandleSubmit = (e) => {
     e.preventDefault();
-    console.log("entre al inicio del submit");
+    // console.log("entre al inicio del submit");
     if (data.backDropImagen === "Alt") {
       data.backDropImagen = back;
     }
@@ -70,7 +70,7 @@ const FormPeliculas = () => {
     // reader.readAsDataURL(data.backDropImagen);
     
     dispatch(postPeliculas(data));
-    console.log(data);
+    // console.log(data);
     alert("Pelicula creada");
     setdata({
       name: "",

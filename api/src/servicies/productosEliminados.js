@@ -23,35 +23,54 @@ const getProductoEliminado = async (req, res) => {
 };
 
 const postProductoEliminado = async (req, res) => {
-  let { id, tipo } = req.body;
+  let payload = req.body;
+
+  console.log(payload[0])
+  console.log(payload[1])
+  
+  let id = payload[0] + " "
+  let tipo = payload[1]
 
   try {
-
+    
     if (tipo === "pelicula") {
-      let pelicula = await Peliculas.findOne({
+  
+
+      let pelicula = await Peliculas.findAll({
         where: {
           id: id,
         },
       });
 
-      if (pelicula) {
+
+
+      if (pelicula.length !== 0) {
+
+        
         let eliminado = await Peliculas.destroy({
           where: {
             id: id,
           },
         });
 
-        console.log(eliminado);
         return res.status(200).json(eliminado);
+
       } else {
+
+
+        console.log('entro aca')
+
         let peliculaEliminada = await ProductosEliminados.create({
           idProducto: id,
         });
 
-        console.log(peliculaEliminada);
+        console.log("peliculaEliminada");
         return res.status(200).json(peliculaEliminada);
       }
+
+
     } else if (tipo === "serie") {
+
       let serie = await Series.findOne({
         where: {
           id: id,
@@ -65,14 +84,14 @@ const postProductoEliminado = async (req, res) => {
           },
         });
 
-        console.log(eliminado);
+        // console.log(eliminado);
         return res.status(200).json(eliminado);
       } else {
         let serieEliminada = await ProductosEliminados.create({
           idProducto: id,
         });
 
-        console.log(serieEliminada);
+        // console.log(serieEliminada);
         return res.status(200).json(serieEliminada);
       }
     } else {

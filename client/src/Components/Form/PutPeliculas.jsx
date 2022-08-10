@@ -484,7 +484,7 @@ const PutPeliculas = () => {
   const auxGenerosMovie = useSelector((state) => state.generosMovies);
   const auxGenerosSerie = useSelector((state) => state.generosSeries);
   let thePelis = useSelector((state) => state.movieDetail);
-  console.log("aaaaaaaaaaaaaaaaaa", thePelis);
+  // console.log("aaaaaaaaaaaaaaaaaa", thePelis);
   const [generos, setGeneros] = useState();
   const [tipo, setTipo] = useState("");
   const [error, setError] = useState({ " ": " " });
@@ -507,7 +507,7 @@ const PutPeliculas = () => {
   });
 
   useEffect(() => {
-    console.log(tipo);
+    // console.log(tipo);
 
     if (tipo === "serie") {
       // generos = auxGenerosSerie.slice()
@@ -519,8 +519,9 @@ const PutPeliculas = () => {
   }, [tipo]);
 
   const HandleSubmit = (e) => {
+
     e.preventDefault();
-    console.log("entre al inicio del submit");
+    // console.log("entre al inicio del submit");
     if (data.backDropImagen === "Alt") {
       data.backDropImagen = back;
     }
@@ -530,8 +531,16 @@ const PutPeliculas = () => {
     // const reader = new FileReader();
     // reader.readAsDataURL(data.backDropImagen);
 
+    // console.log(thePelis)
+
+    if(!thePelis[0].creado){
+
+      console.log('entro aca')
+    }
+
+
     dispatch(putPeliculas(data));
-    console.log(data);
+    // console.log(data);
     alert("Producto modificado");
     setdata({
       name: "",
@@ -657,7 +666,7 @@ const PutPeliculas = () => {
       aux = todos[i];
     }
   }
-  console.log("Este es el aux", aux);
+  // console.log("Este es el aux", aux);
 
   return (
     <>
