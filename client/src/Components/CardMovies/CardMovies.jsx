@@ -7,7 +7,7 @@ import { addToCart, addToWishlist, deleteMovie } from "../../Redux/Actions/Actio
 import { TiHeart as HeartIcon } from "react-icons/ti";
 import { BiEdit as EditIcon } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-
+import { BiTrash } from "react-icons/bi";
 
 function CardMovies({ id, name, poster, tipo }) {
   const dispatch = useDispatch();
