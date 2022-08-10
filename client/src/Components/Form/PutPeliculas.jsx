@@ -474,19 +474,15 @@ import "../../Styles/components/_FormPeliculas.scss";
 const PutPeliculas = () => {
   let { id, tipos } = useParams();
   let todos = useSelector((state) => state.todo);
-  console.log(tipos)
+  // console.log(tipos)
   let dispatch = useDispatch();
   let navigate = useNavigate();
   useEffect(() => {
     dispatch(getGenerosMovies());
-    if(tipos === 'pelicula'){
-
+    if (tipos === "pelicula") {
       dispatch(getMoviesDetail(id));
-
-    }else if(tipos === 'serie'){
-
+    } else if (tipos === "serie") {
       dispatch(getSeriesDetail(id));
-
     }
     dispatch(getGenerosSeries());
   }, []);
@@ -499,23 +495,24 @@ const PutPeliculas = () => {
   // console.log("aaaaaaaaaaaaaaaaaa", thePelis);
   const [generos, setGeneros] = useState();
   const [tipo, setTipo] = useState("");
+  const [datosAEnviar, setdatosAEnviar] = useState();
   const [error, setError] = useState({ " ": " " });
   const [data, setdata] = useState({
     id: id,
-    name: "",
-    genre_ids: [],
-    overview: "",
-    cast: [],
-    runtime: "",
-    release_date: "",
-    number_of_episodes: "",
-    episode_run_time: "",
-    number_of_seasons: "",
-    posterImagen: null,
-    backDropImagen: null,
-    vote_average: "",
-    popularity: "",
-    tipo: "",
+    name: false,
+    genre_ids: false,
+    overview: false,
+    cast: false,
+    runtime: false,
+    release_date: false,
+    number_of_episodes: false,
+    episode_run_time: false,
+    number_of_seasons: false,
+    posterImagen: false,
+    backDropImagen: false,
+    vote_average: false,
+    popularity: false,
+    tipo: false,
   });
 
   useEffect(() => {
@@ -531,9 +528,8 @@ const PutPeliculas = () => {
   }, [tipo]);
 
   const HandleSubmit = (e) => {
-
     e.preventDefault();
-    // console.log("entre al inicio del submit");
+
     if (data.backDropImagen === "Alt") {
       data.backDropImagen = back;
     }
@@ -543,41 +539,88 @@ const PutPeliculas = () => {
     // const reader = new FileReader();
     // reader.readAsDataURL(data.backDropImagen);
 
-    // console.log(thePelis)
+    var auxObj = {};
+    if(tipos === 'pelicula'){
 
-    if( thePelis.length !== 0 && !thePelis[0].creado && tipo === 'pelicula'){
+      for (const prop in data) {
+        for (const keys in thePelis[0]) {
+          if (prop === keys && data[prop] !== false) {
+            auxObj[prop] = data[prop];
+  
+            auxObj = {
+              ...auxObj,
+            };
+          } else if (prop === keys && data[prop] === false) {
+            auxObj[prop] = thePelis[0][prop];
+  
+            auxObj = {
+              ...auxObj,
+            };
+          }
+        }
+      }
 
-      dispatch(modificarMovie(data))
 
-    }else if(theSeries.length !== 0 && !theSeries[0].creado && tipo === 'serie'){
+    }else if(tipos === 'serie'){
 
-      dispatch(modificarSerie(data))
-    }else{
+      for (const prop in data) {
+        for (const keys in theSeries[0]) {
+          if (prop === keys && data[prop] !== false) {
+            auxObj[prop] = data[prop];
+  
+            auxObj = {
+              ...auxObj,
+            };
+          } else if (prop === keys && data[prop] === false) {
+            auxObj[prop] = theSeries[0][prop];
+  
+            auxObj = {
+              ...auxObj,
+            };
+          }
+        }
+      }
 
-      dispatch(putPeliculas(data));
+
 
     }
 
+    if (
 
-    // console.log(data);
+      thePelis &&
+      thePelis.length !== 0 &&
+      !thePelis[0].creado &&
+      tipos === "pelicula"
+    ) {
+      dispatch(modificarMovie(auxObj));
+    } else if (
+      theSeries &&
+      theSeries.length !== 0 &&
+      !theSeries[0].creado &&
+      tipos === "serie"
+    ) {
+      dispatch(modificarSerie(auxObj));
+    } else {
+      dispatch(putPeliculas(auxObj));
+    }
+
     alert("Producto modificado");
     setdata({
-      name: "",
-      genre_ids: [],
-      overview: "",
-      cast: [],
-      runtime: "",
-      release_date: "",
-      number_of_episodes: "",
-      episode_run_time: "",
-      number_of_seasons: "",
-      posterImagen: null,
-      backDropImagen: null,
-      vote_average: "",
-      popularity: "",
-      tipo: "",
+      name: false,
+      genre_ids: false,
+      overview: false,
+      cast: false,
+      runtime: false,
+      release_date: false,
+      number_of_episodes: false,
+      episode_run_time: false,
+      number_of_seasons: false,
+      posterImagen: false,
+      backDropImagen: false,
+      vote_average: false,
+      popularity: false,
+      tipo: false,
     });
-    setError({ " ": " " });
 
     for (let i = 0; i < e.target.length - 1; i++) {
       if (e.target[i].localName === "input") {
@@ -602,12 +645,12 @@ const PutPeliculas = () => {
         ...data,
         genre_ids: arrset,
       });
-      setError(
-        validate({
-          ...data,
-          genre_ids: arrset,
-        })
-      );
+      // setError(
+      //   validate({
+      //     ...data,
+      //     genre_ids: arrset,
+      //   })
+      // );
     }
   };
 
@@ -617,18 +660,18 @@ const PutPeliculas = () => {
       tipo: e.target.value,
     });
     setTipo(e.target.value);
-    setError(
-      validate({
-        ...data,
-        tipo: e.target.value,
-      })
-    );
+    // setError(
+    //   validate({
+    //     ...data,
+    //     tipo: e.target.value,
+    //   })
+    // );
   };
 
   const HandleElenco = (e) => {
     if (e.value !== "") {
       setdata({ ...data, cast: [...data.cast, e.value] });
-      setError(validate({ ...data, cast: [...data.cast, e.value] }));
+      // setError(validate({ ...data, cast: [...data.cast, e.value] }));
       e.value = "";
     }
   };
@@ -664,7 +707,7 @@ const PutPeliculas = () => {
       });
     }
 
-    setError(validate({ ...data, [e.target.name]: e.target.value }));
+    // setError(validate({ ...data, [e.target.name]: e.target.value }));
   };
 
   const eliminarGenero = (g) => {
@@ -893,17 +936,21 @@ const PutPeliculas = () => {
               <></>
             )}
 
-            {data.genre_ids?.map((g) => (
-              <div style={{ color: "white" }} onClick={() => eliminarGenero(g)}>
-                {g}
-              </div>
-            ))}
+            {data.genre_ids &&
+              data.genre_ids?.map((g) => (
+                <div
+                  style={{ color: "white" }}
+                  onClick={() => eliminarGenero(g)}
+                >
+                  {g}
+                </div>
+              ))}
 
             <button
               className="submit formEntry2"
               type="submit"
               value="Enviar"
-              disabled={Object.keys(error).length}
+              // disabled={Object.keys(error).length}
             >
               Enviar
             </button>
