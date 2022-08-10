@@ -37,7 +37,7 @@ function CardMovies({ id, name, poster, tipo }) {
   function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
   }
-  // console.log(Math.ceil(getRandomArbitrary(1, 50)))
+
 
   return (
     <div className="Cardmovies">
@@ -72,7 +72,8 @@ function CardMovies({ id, name, poster, tipo }) {
               </abbr>
               
             </div>
-          ) : (
+          ) : userReducer.length !== 0 ?(
+
             <div className="Iconos">
             <abbr title="Agrega a Favoritos">
               <span onClick={() => addWishlist(id)}>
@@ -85,6 +86,11 @@ function CardMovies({ id, name, poster, tipo }) {
               </span>
             </abbr>
           </div>
+          ):(
+
+            <></>
+
+
           )}
 
 
