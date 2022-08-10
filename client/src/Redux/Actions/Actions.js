@@ -125,7 +125,12 @@ export const getHistorial = (id) => {
 export const deleteMovie = (payload) => {
   console.log(payload);
   return async function (dispatch) {
-    let deleted = await axios.post(`/productosEliminados/postProd`, payload);
+    try {
+      
+      let deleted = await axios.post(`/productosEliminados/postProd`, payload);
+    } catch (error) {
+      console.log(error)
+    }
     console.log(deleted);
     return dispatch({
       type: DELETED_MOVIE,

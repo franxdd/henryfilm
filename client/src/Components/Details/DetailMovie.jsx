@@ -59,7 +59,7 @@ function DetailMovie() {
   //   var video = movieDetail[0]?.videosAMostrar[0]; // El problema del rederizado de details de los datos de la DB esta aca
     
   // }
-  // console.log(movieDetail);
+  console.log(movieDetail);
 
   
   // .replace("watch?v=", "embed/")
