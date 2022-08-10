@@ -483,10 +483,10 @@ export const loadCurren = (payload) => {
 };
 
 export const putPeliculas = (payload) => {
-  // console.log(payload);
+  console.log(payload.id);
   return async (dispatch) => {
     let created = await axios.put(
-      `/peliculas/modificarPeli/${payload.id}`,
+      `/${payload.tipo}s/modificar/${payload.id}`,
       payload
     );
     dispatch({

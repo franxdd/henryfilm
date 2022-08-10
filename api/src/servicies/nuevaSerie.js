@@ -62,6 +62,7 @@ const postNuevaSerie = async (req, res) => {
 };
 
 const modificarSerie = async (req, res) => {
+  console.log("entro al modificar")
    let{
       name,
       backDropImagen,
