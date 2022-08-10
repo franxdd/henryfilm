@@ -115,15 +115,19 @@ function Login() {
           <button button class="submit formEntry" type="submit">
             Iniciar Sesion
           </button>
+          <div className="or">────────── O ──────────</div>
           {googleUser.length !== 0 ? (
             <>
-              {/* <button onClick={(e) => HandleSignLogOut(e)}>LOGOUT</button> */}
+    
             </>
           ) : (
-            <div className="gSignIn">
+            <>
+            <div className="containerGoogle" id="signInDiv">
               <div id="g_id_onload" data-type="icon"></div>
-            </div>
+              </div>
+            </>
           )}
+          
           <div className="pageTitle2"> ¿No tienes una cuenta?</div>
           <Link to="/home/Register">
             <button button class="submit formEntry">

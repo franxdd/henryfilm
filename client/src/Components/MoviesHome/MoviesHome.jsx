@@ -20,7 +20,8 @@ import "../../Styles/components/_MoviesHome.scss";
 import "../../Styles/components/_Filter.scss";
 import "../../Styles/components/_Loading.scss";
 import { AiOutlineClear as ClearIcon } from "react-icons/ai";
-import { FaWindowClose } from "react-icons/fa";
+import { VscChromeClose as CloseIcon } from "react-icons/vsc";
+
 
 function MoviesHome() {
   useEffect(() => {
@@ -104,24 +105,21 @@ function MoviesHome() {
       </button>
       <span>Filtrar por:</span>
 
-      {/* <div className="Selects">
-        <div className="select-genero"> */}
-
-      <select
-        className="select"
-        name="FiltroGenero"
+    <div class="select2">
+      <div class="select">
+      <select      
+        name="format" id="format"
         onChange={(e) => FiltradoGenero(e)}
         defaultValue={"Default"}
       >
-        <option value={"Default"}>Generos..</option>
+        <option  selected disabled value={"Default"}>Generos..</option>
         {generos?.map((t) => (
           <option key={t.id} value={t.name}>
             {t.name}
           </option>
         ))}
       </select>
-      {/* </div>
-      </div> */}
+      </div>
       <abbr title="Limpiar Filtros">
         <span onClick={() => HandleClickClear()}>
           <ClearIcon className="icono-clear" />
@@ -129,12 +127,15 @@ function MoviesHome() {
       </abbr>
       {generosCache?.map((g) => {
         return (
-          <button onClick={() => FiltradoReversa(g)}>
+          
+          <button classname="filterBoton" onClick={() => FiltradoReversa(g)}><span>
             {" "}
-            {g} <FaWindowClose />
+            {g} {" "}<CloseIcon color="yellow" size='14' /></span>
           </button>
-        );
-      })}
+      
+      );
+    })}
+    </div>     
 
       <div className="contenedor-seccion">
         <div className="contenedor-resultados">
