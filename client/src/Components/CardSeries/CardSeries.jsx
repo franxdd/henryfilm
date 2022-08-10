@@ -4,7 +4,8 @@ import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, addToWishlist, deleteSerie } from "../../Redux/Actions/Actions";
 import {TiHeart as HeartIcon} from "react-icons/ti";
-import { BiPaintRoll, BiTrash } from "react-icons/bi";
+import { BiPaintRoll as EditIcon} from "react-icons/bi";
+import { BiTrash } from "react-icons/bi"
 
 
 function CardSeries({ id, name, poster, tipo }) {
@@ -52,12 +53,13 @@ function CardSeries({ id, name, poster, tipo }) {
               </abbr>
               <abbr title="Modificar">
                 <Link to={`/home/modificar/${id}/${tipo}`}>
-                  <BiPaintRoll className="icono" />
+                  <EditIcon className="iconoEdit" />
+
                 </Link>
               </abbr>
-              <abbr title="Delete">
+              <abbr title="Eliminar">
                 <div onClick={(e)=>HandleDelete(e)}>
-                  <BiTrash className="icono" />
+                  <BiTrash className="iconoEdit" />
                 </div>
               </abbr>
             </div>
