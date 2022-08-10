@@ -40,14 +40,10 @@ import {
   GOOGLE_LOG_OUT,
   POST_HISTORIAL,
   GET_HISTORIAL,
-<<<<<<< HEAD
-=======
   DELETED_MOVIE,
   DELETED_SERIE,
   MODIFICAR_SERIE,
   MODIFICAR_MOVIE,
-  
->>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -183,36 +179,34 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case DELETED_MOVIE:
-      let moviesFil = state.todo.filter(t => t.id !== action.payload)
-      let moviesFilHome = state.allMovies.filter(t => t.id !== action.payload)
-     
-      return{
+      let moviesFil = state.todo.filter((t) => t.id !== action.payload);
+      let moviesFilHome = state.allMovies.filter((t) => t.id !== action.payload);
+
+      return {
         ...state,
         todo: moviesFil,
-        allMovies: moviesFilHome
-      }
+        allMovies: moviesFilHome,
+      };
 
-      case DELETED_SERIE:
-        let seriesFil = state.todo.filter(t => t.id !== action.payload)
-        let seriesFilHome = state.allSeries.filter(t => t.id !== action.payload)
-       
-        return{
-          ...state,
-          todo: seriesFil,
-          allSeries: seriesFilHome
+    case DELETED_SERIE:
+      let seriesFil = state.todo.filter((t) => t.id !== action.payload);
+      let seriesFilHome = state.allSeries.filter((t) => t.id !== action.payload);
 
-        }
+      return {
+        ...state,
+        todo: seriesFil,
+        allSeries: seriesFilHome,
+      };
 
-        case MODIFICAR_MOVIE:
-          return {
-            ...state,
-          }
+    case MODIFICAR_MOVIE:
+      return {
+        ...state,
+      };
 
-        case MODIFICAR_SERIE:
-          return {
-            ...state,
-
-          }
+    case MODIFICAR_SERIE:
+      return {
+        ...state,
+      };
     case LOG_OUT:
       return {
         ...state,
@@ -253,11 +247,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
       };
     case POST_LOGIN:
-<<<<<<< HEAD
-      console.log(action.payload);
-=======
       // console.log(action.payload)
->>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
       sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
       let local = localStorage.getItem("cart") || [];
       console.log(local);
@@ -326,11 +316,7 @@ const rootRouter = (state = initialState, action) => {
         seriesDetail: action.payload,
       };
     case GET_MOVIES_DETAIL:
-<<<<<<< HEAD
-      console.log(action.payload);
-=======
       // console.log(action.payload)
->>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
       return {
         ...state,
         movieDetail: action.payload,
@@ -637,11 +623,7 @@ const rootRouter = (state = initialState, action) => {
     case ADD_TO_WISHLIST:
       const itemFromWishlist = state.todo.find((e) => e.id === action.payload);
       let wishlistStorage = localStorage.getItem("wishlist");
-<<<<<<< HEAD
-      console.log(wishlistStorage);
-=======
       // console.log( wishlistStorage);
->>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
 
       if (wishlistStorage === "undefined") {
         d();

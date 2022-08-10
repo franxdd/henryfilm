@@ -49,10 +49,10 @@ export const GOOGLE_USER = "GOOGLE_USER";
 export const GOOGLE_LOG_OUT = "GOOGLE_LOG_OUT";
 export const POST_HISTORIAL = "POST_HISTORIAL";
 export const GET_HISTORIAL = "GET_HISTORIAL";
-export const DELETED_MOVIE = "DELETED_MOVIE"
-export const DELETED_SERIE = 'DELETED_SERIE'
-export const MODIFICAR_MOVIE = "MODIFICAR_MOVIE"
-export const MODIFICAR_SERIE = "MODIFICAR_SERIE"
+export const DELETED_MOVIE = "DELETED_MOVIE";
+export const DELETED_SERIE = "DELETED_SERIE";
+export const MODIFICAR_MOVIE = "MODIFICAR_MOVIE";
+export const MODIFICAR_SERIE = "MODIFICAR_SERIE";
 
 function a(error) {
   return toast.error(error, {
@@ -90,11 +90,7 @@ function b(mensaje) {
 // };
 
 export const postHistorial = (payload) => {
-<<<<<<< HEAD
-  console.log(payload);
-=======
   // console.log(payload)
->>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
   return async function (dispatch) {
     try {
       let postHistorial = await axios.post(`/historial/agregar`, payload);
@@ -108,21 +104,12 @@ export const postHistorial = (payload) => {
   };
 };
 
-<<<<<<< HEAD
 export const getHistorial = (id) => {
-  console.log(id);
-=======
-export const getHistorial = (id) =>{
   // console.log(id)
->>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
   return async function (dispatch) {
     try {
       let getHistorial = await axios.get(`/historial/${id}`);
-<<<<<<< HEAD
-      console.log(getHistorial.data);
-=======
       // console.log(getHistorial.data)
->>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
       return dispatch({
         type: GET_HISTORIAL,
         payload: getHistorial.data,
@@ -131,55 +118,44 @@ export const getHistorial = (id) =>{
       console.log(error);
     }
   };
-<<<<<<< HEAD
 };
-=======
-}
 
-export const deleteMovie =(payload)=>{
-  console.log(payload)
+export const deleteMovie = (payload) => {
+  console.log(payload);
   return async function (dispatch) {
     let deleted = await axios.post(`/productosEliminados/postProd`, payload);
-    console.log(deleted)
+    console.log(deleted);
     return dispatch({
       type: DELETED_MOVIE,
       payload: payload[0],
     });
   };
+};
 
-
-}
-
-export const deleteSerie =(payload)=>{
-  console.log(payload)
+export const deleteSerie = (payload) => {
+  console.log(payload);
   return async function (dispatch) {
     let deleted = await axios.post(`/productosEliminados/postProd`, payload);
-    console.log(deleted)
+    console.log(deleted);
     return dispatch({
       type: DELETED_SERIE,
       payload: payload[0],
     });
   };
+};
 
-
-}
-
-export const modificarMovie =(payload)=>{
-  
+export const modificarMovie = (payload) => {
   return async function (dispatch) {
     let deleted = await axios.post(`/productosModificados/postProd`, payload);
-  
+
     return dispatch({
       type: MODIFICAR_MOVIE,
       payload: payload[0],
     });
   };
+};
 
-}
-
-
-export const modificarSerie =(payload)=>{
-
+export const modificarSerie = (payload) => {
   return async function (dispatch) {
     let deleted = await axios.post(`/productosModificados/postProd`, payload);
 
@@ -188,14 +164,7 @@ export const modificarSerie =(payload)=>{
       payload: payload[0],
     });
   };
-
-}
-
-
-
-
-
->>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
+};
 
 export const getAllSeries = () => {
   return async function (dispatch) {
@@ -291,20 +260,12 @@ export const checkState = () => {
 export const PostLogin = (payload) => {
   return async function (dispatch) {
     try {
-<<<<<<< HEAD
-      console.log(payload);
-=======
       // console.log(payload)
->>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
       let created = await axios.post("/usuarios/login", payload);
       // {
       //   // withCredentials: true,
       // });
-<<<<<<< HEAD
-      console.log("lalal", created);
-=======
       // console.log(created.data);
->>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
 
       sessionStorage.setItem("token", JSON.stringify(created.data[0]));
 
