@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../../Styles/components/_UserProfile.scss";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { putProfile, usermodificado } from "../../Redux/Actions/Actions";
-import { AiFillCloseSquare as CloseIcon } from "react-icons/ai";
-import {TiHeart as HeartIcon} from "react-icons/ti";
+import bienvenido from "../../img/bienvenido.png";
+
 const UserProfile = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state);
@@ -12,14 +12,6 @@ const UserProfile = () => {
     avatar: "",
     nickname: "",
   });
-  // useEffect(() => {
-  //   console.log(profileImg);
-  //   dispatch(usermodificado(profileImg));
-  // }, [profileImg]);
-  // useEffect(() => {
-  //   if (Object.keys(user).length !== 0) setProfileImg(user);
-  //   console.log(user);
-  // }, [user]);
 
   function HandleInput(e) {
     e.preventDefault();
@@ -44,6 +36,7 @@ const UserProfile = () => {
       };
     }
   }
+
   function handleSubmit(e) {
     e.preventDefault();
     console.log("se envia la accion");
@@ -55,18 +48,20 @@ const UserProfile = () => {
   return (
     <div className="container3">
     <div className="profileTitle">
-      <h1>Mi Perfil</h1>
+    <h3>
+        <img
+          className="logo"
+          src={bienvenido}
+          alt="Logo"
+          height="auto"
+          width="250px"
+        />
+      </h3>
           <h1 className="nombre">{user.nickname}</h1>
       </div>
       <div className="cardContainer3">
-        <div>
-          <img src={foto} alt="profile" />
-          <a href="#miModal">
-            <button>Modificar perfil</button>
-          </a>
-          <div id="miModal" className="modal">
-            <div className="modal-contenido">
-              <form onSubmit={handleSubmit}>
+        <img className="profile" style={{width:'160px', height:'auto', borderRadius:'200px'}} src={foto} alt="Profile"/>
+              {/* <form onSubmit={handleSubmit}>
                 <div>
                   <input
                     id="nickname"
@@ -83,35 +78,27 @@ const UserProfile = () => {
                     name="avatar"
                     onChange={(e) => HandleInputImg(e)}
                   />
-                </div>
-
-                <button type="submit">Cambiar</button>
-              </form>
-              <a href="#">
-                {" "}
-                <CloseIcon className="iconoClose" />{" "}
-              </a>
-              <br></br>
-              <div className="iframe-container"></div>
-            </div>
-          </div>
+                </div> 
+                <button type="submit">MODIFICAR</button>
+              </form>  */}
+          <div className="containerOpciones">
           <Link to="/home/wishlist"> 
-            <HeartIcon className="iconoHeart" />Favoritos
+        <div className="opciones">
+            <img src="/images/favoritos.png" alt="" />
+            <video autoPlay={true} loop={true} playsInline={true}>
+          <source src="/videos/1564676115-marvel.mp4" type="video/mp4" />
+        </video>
+        </div>
           </Link>
+        <div className="opciones">
+            <img src="/images/comprado.png" alt="" />
+            <video autoPlay={true} loop={true} playsInline={true}>
+          <source src="/videos/dinero.mp4" type="video/mp4" />
+        </video>
         </div>
-        <div className="cardProfile">
-          <NavLink
-            to="/contactform"
-            style={{ textDecoration: "none", color: "#5A5A5A" }}
-          >
-            <h3 className="card-title">Ayuda</h3>
-          </NavLink>
-          <p className="card-content">
-            Contactanos para un asesoramiento personalizado
-          </p>
-        </div>
-      </div>
-    </div>
+        </div>    
+   </div>
+   </div>
   );
 };
 export default UserProfile;
