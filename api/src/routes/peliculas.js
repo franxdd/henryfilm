@@ -13,6 +13,6 @@ route.get("/", infoMovie); // /peliculas --> te trae todas las peliculas || /pel
 route.get("/pelicula/detalle", getMovieDetail); // /peliculas/pelicula/detalle  esto es con query
 route.get("/:idPelicula", getMovieDetailParams); // /peliculas/:idPelicula   esto es con params
 route.post("/postPelicula", postPeliculas);
-route.put("/modificarPeli/:id", modificarPeli);
+route.put("/modificar/:id", modificarPeli);
 
 module.exports = route;
