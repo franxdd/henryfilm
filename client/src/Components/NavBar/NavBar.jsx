@@ -299,6 +299,11 @@ const Nav2 = () => {
                           <Typography textaling="center">Modificar</Typography>
                         </Link>
                       </MenuItem>
+                      <MenuItem>
+                        <Link to="/home/wishlist" style={{ textDecoration: "none", color: "black" }}>
+                          <Typography textaling="center">Favoritos</Typography>
+                        </Link>
+                      </MenuItem>
                     </>
                   ) : (
                     <MenuItem>

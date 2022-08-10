@@ -1,14 +1,19 @@
-// import React from "react";
-import { Link, Outlet } from "react-router-dom";
-import FormPeliculas from "../Form/FormPeliculas.jsx"
+import { Link } from "react-router-dom";
 
 const DashBoard = () => {
   return (
     <div>
-      <h2 style={{ color: "white" }}>DASHBOARD</h2>
-      <Link to={'/home/modificar'}>MODIFICAR</Link>
-      <br></br>
-      <Link to={'/home/agregar'}>AGREGAR</Link>
+      <ul>
+        <li>
+          <Link to="/agregarProd">Agregar Producto</Link>
+        </li>
+        <li>
+          <Link to="/modificarProd">Modificar Producto</Link>
+        </li>
+        <li>
+          <Link to="/eliminarprod">Eliminar Producto</Link>
+        </li>
+      </ul>
     </div>
   );
 };

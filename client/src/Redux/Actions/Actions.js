@@ -47,7 +47,7 @@ export const GET_REVIEW = "GET_REVIEW";
 export const POST_REVIEW = "POST_REVIEW";
 export const GOOGLE_USER = "GOOGLE_USER";
 export const GOOGLE_LOG_OUT = "GOOGLE_LOG_OUT";
-export const POST_HISTORIAL = "POST_HISTORIAL"
+export const POST_HISTORIAL = "POST_HISTORIAL";
 
 function a(error) {
   return toast.error(error, {
@@ -84,7 +84,6 @@ function b(mensaje) {
 //   };
 // };
 
-
 export const postHistorial = (payload) => {
   return async function (dispatch) {
     let getAllSeries = await axios(`/historial/`);
@@ -93,8 +92,7 @@ export const postHistorial = (payload) => {
       payload: getAllSeries.data,
     });
   };
-}
-
+};
 
 export const getAllSeries = () => {
   return async function (dispatch) {
@@ -190,22 +188,19 @@ export const checkState = () => {
 export const PostLogin = (payload) => {
   return async function (dispatch) {
     try {
-      console.log(payload)
+      console.log(payload);
       let created = await axios.post("/usuarios/login", payload);
       // {
       //   // withCredentials: true,
       // });
-      console.log(created.data);
+      console.log("lalal", created);
 
       sessionStorage.setItem("token", JSON.stringify(created.data[0]));
 
-      return dispatch(
-        { type: POST_LOGIN, payload: created.data },
-        b(created.data[3])
-      );
+      return dispatch({ type: POST_LOGIN, payload: created.data }, b(created.data[3]));
     } catch (error) {
+      console.log("lelele", error);
       a(error.response.data);
-      // console.log(error)
       return error;
     }
   };
@@ -457,10 +452,7 @@ export const loadCurren = (payload) => {
 export const putPeliculas = (payload) => {
   // console.log(payload);
   return async (dispatch) => {
-    let created = await axios.put(
-      `/peliculas/modificarPeli/${payload.id}`,
-      payload
-    );
+    let created = await axios.put(`/peliculas/modificarPeli/${payload.id}`, payload);
     dispatch({
       type: PUT_PELICULA,
       payload: created,
@@ -480,9 +472,7 @@ export const createReview = (payload) => {
 
 export const getReview = (payload) => {
   return async (dispatch) => {
-    let creado = await axios.get(
-      `/comentarios?id=${payload.id}&tipo=${payload.tipo}`
-    );
+    let creado = await axios.get(`/comentarios?id=${payload.id}&tipo=${payload.tipo}`);
     return dispatch({
       type: GET_REVIEW,
       payload: creado.data,
