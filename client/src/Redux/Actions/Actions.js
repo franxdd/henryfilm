@@ -49,6 +49,10 @@ export const GOOGLE_USER = "GOOGLE_USER";
 export const GOOGLE_LOG_OUT = "GOOGLE_LOG_OUT";
 export const POST_HISTORIAL = "POST_HISTORIAL";
 export const GET_HISTORIAL = "GET_HISTORIAL";
+export const DELETED_MOVIE = "DELETED_MOVIE"
+export const DELETED_SERIE = 'DELETED_SERIE'
+export const MODIFICAR_MOVIE = "MODIFICAR_MOVIE"
+export const MODIFICAR_SERIE = "MODIFICAR_SERIE"
 
 function a(error) {
   return toast.error(error, {
@@ -86,7 +90,11 @@ function b(mensaje) {
 // };
 
 export const postHistorial = (payload) => {
+<<<<<<< HEAD
   console.log(payload);
+=======
+  // console.log(payload)
+>>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
   return async function (dispatch) {
     try {
       let postHistorial = await axios.post(`/historial/agregar`, payload);
@@ -100,12 +108,21 @@ export const postHistorial = (payload) => {
   };
 };
 
+<<<<<<< HEAD
 export const getHistorial = (id) => {
   console.log(id);
+=======
+export const getHistorial = (id) =>{
+  // console.log(id)
+>>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
   return async function (dispatch) {
     try {
       let getHistorial = await axios.get(`/historial/${id}`);
+<<<<<<< HEAD
       console.log(getHistorial.data);
+=======
+      // console.log(getHistorial.data)
+>>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
       return dispatch({
         type: GET_HISTORIAL,
         payload: getHistorial.data,
@@ -114,7 +131,71 @@ export const getHistorial = (id) => {
       console.log(error);
     }
   };
+<<<<<<< HEAD
 };
+=======
+}
+
+export const deleteMovie =(payload)=>{
+  console.log(payload)
+  return async function (dispatch) {
+    let deleted = await axios.post(`/productosEliminados/postProd`, payload);
+    console.log(deleted)
+    return dispatch({
+      type: DELETED_MOVIE,
+      payload: payload[0],
+    });
+  };
+
+
+}
+
+export const deleteSerie =(payload)=>{
+  console.log(payload)
+  return async function (dispatch) {
+    let deleted = await axios.post(`/productosEliminados/postProd`, payload);
+    console.log(deleted)
+    return dispatch({
+      type: DELETED_SERIE,
+      payload: payload[0],
+    });
+  };
+
+
+}
+
+export const modificarMovie =(payload)=>{
+  
+  return async function (dispatch) {
+    let deleted = await axios.post(`/productosModificados/postProd`, payload);
+  
+    return dispatch({
+      type: MODIFICAR_MOVIE,
+      payload: payload[0],
+    });
+  };
+
+}
+
+
+export const modificarSerie =(payload)=>{
+
+  return async function (dispatch) {
+    let deleted = await axios.post(`/productosModificados/postProd`, payload);
+
+    return dispatch({
+      type: MODIFICAR_SERIE,
+      payload: payload[0],
+    });
+  };
+
+}
+
+
+
+
+
+>>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
 
 export const getAllSeries = () => {
   return async function (dispatch) {
@@ -192,7 +273,7 @@ export const willunmont = () => {
 export const PostUsuario = (payload) => {
   return async function (dispatch) {
     try {
-      console.log("mando la action");
+      // console.log("mando la action");
       let created = await axios.post("/usuarios/register", payload);
       // console.log(created.data)
       return dispatch({ type: POST_USUARIOS });
@@ -210,12 +291,20 @@ export const checkState = () => {
 export const PostLogin = (payload) => {
   return async function (dispatch) {
     try {
+<<<<<<< HEAD
       console.log(payload);
+=======
+      // console.log(payload)
+>>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
       let created = await axios.post("/usuarios/login", payload);
       // {
       //   // withCredentials: true,
       // });
+<<<<<<< HEAD
       console.log("lalal", created);
+=======
+      // console.log(created.data);
+>>>>>>> 0a3f2f006fb202a5b7f2d7ae3c180b50302ba54d
 
       sessionStorage.setItem("token", JSON.stringify(created.data[0]));
 
@@ -249,13 +338,13 @@ export const logOut = (payload) => {
 export const signInUser = (payload) => {
   return async function (dispatch) {
     try {
-      console.log("entro a al action");
+      // console.log("entro a al action");
       var user = await axios.post("/usuarios/google", payload);
     } catch (error) {}
     // {
     //   // withCredentials: true,
     // });
-    console.log(user);
+    // console.log(user);
     // sessionStorage.setItem("token", JSON.stringify(user.data));
 
     return dispatch({ type: GOOGLE_USER, payload: user.data });
@@ -472,7 +561,7 @@ export const loadCurren = (payload) => {
 };
 
 export const putPeliculas = (payload) => {
-  console.log(payload.id);
+  // console.log(payload.id);
   return async (dispatch) => {
     let created = await axios.put(`/${payload.tipo}s/modificar/${payload.id}`, payload);
     dispatch({
@@ -482,7 +571,7 @@ export const putPeliculas = (payload) => {
   };
 };
 export const createReview = (payload) => {
-  console.log(payload);
+  // console.log(payload);
   return async (dispatch) => {
     let creado = await axios.post("/comentarios/agregar", payload);
     return dispatch({

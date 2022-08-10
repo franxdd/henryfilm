@@ -1,5 +1,10 @@
 const axios = require("axios");
-const { Peliculas, Series, Usuarios } = require("../DB/db");
+const {
+  Peliculas,
+  Series,
+  Usuarios,
+  ProductosModificados,
+} = require("../DB/db");
 const { parseador } = require("../utils/utils.js");
 const { API_KEY } = process.env;
 const API_URL_SERIES = `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=es-SP&page=`;
@@ -52,9 +57,7 @@ const getSeriesInfo = async (req, res) => {
     }
 
     return seriesAEnviar;
-  } catch (error) {
- 
-  }
+  } catch (error) {}
 };
 
 const getInfoFromDb = async (req, res) => {
@@ -170,47 +173,64 @@ const seriePorIdParms = async (req, res) => {
 
       var datosAEnviar = [seriesDb];
     } else {
-    const allSeries = await axios(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=es-SP`
-    );
-    var imagenesConfig = await axios.get(
-      `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
-    );
-    urlImg = imagenesConfig.data.images.base_url + "original";
+      const allSeries = await axios(
+        `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=es-SP`
+      );
+      var imagenesConfig = await axios.get(
+        `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
+      );
+      urlImg = imagenesConfig.data.images.base_url + "original";
 
-    var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
-    );
-    var cast = await axios.get(
-      `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${API_KEY}&language=es-SP`
-    );
+      var generosData = await axios.get(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
+      );
+      var cast = await axios.get(
+        `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${API_KEY}&language=es-SP`
+      );
 
-    var castAEnviar = cast.data.cast;
+      var castAEnviar = cast.data.cast;
 
-    var videos = await axios.get(
-      `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=es-SP`
-    );
+      var videos = await axios.get(
+        `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=es-SP`
+      );
 
-    var videosAEnviar = videos.data.results;
+      var videosAEnviar = videos.data.results;
 
-    var urlVideos = `https://www.youtube.com/embed/`;
+      var urlVideos = `https://www.youtube.com/embed/`;
 
-    var data_parseado = [allSeries.data];
+      var data_parseado = [allSeries.data];
 
-    var datosAEnviar = parseador(
-      data_parseado,
-      urlImg,
-      generosData,
-      castAEnviar,
-      videosAEnviar,
-      urlVideos
-    );
+      var datosAEnviar = parseador(
+        data_parseado,
+        urlImg,
+        generosData,
+        castAEnviar,
+        videosAEnviar,
+        urlVideos
+      );
+
+      let modificado = await ProductosModificados.findOne({
+        where: {
+          idProducto: id,
+        },
+      });
+
+      if (modificado) {
+        for (const propOriginal in datosAEnviar[0]) {
+          for (const propMod in modificado.dataValues.contenido[0]) {
+            if (propOriginal === propMod) {
+              datosAEnviar[0][propOriginal] =
+                modificado.dataValues.contenido[0][propMod];
+            }
+          }
+        }
+      }
     }
-    // console.log("Esto es para obtener la info de los detalles:", serieId)
+
     res.status(200).json(datosAEnviar);
   } catch (error) {
     console.log(error);
-    res.status(400).json(error)
+    res.status(400).json(error);
   }
 };
 
@@ -235,19 +255,15 @@ const seriePorIdParmsTrad = async (req, res) => {
   try {
     const { id, iso1, iso2 } = req.params;
 
-  
-    if(isNaN(id)){
-  
-      const seriesBd = await Series.findOne({where:{
-        id : id,
-      }});
+    if (isNaN(id)) {
+      const seriesBd = await Series.findOne({
+        where: {
+          id: id,
+        },
+      });
 
-
-
-      var datosAEnviar = seriesBd
-
-    }else{
- 
+      var datosAEnviar = seriesBd;
+    } else {
       const allSeries = await axios(
         `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=${iso1}-${iso2}`
       );
@@ -261,12 +277,7 @@ const seriePorIdParmsTrad = async (req, res) => {
       var data_parseado = [allSeries.data];
       var datosAEnviar = parseador(data_parseado, urlImg, generosData);
       // console.log(datosAEnviar);.
-
-
-
     }
-
-
 
     res.status(200).json(datosAEnviar);
   } catch (error) {
@@ -274,7 +285,6 @@ const seriePorIdParmsTrad = async (req, res) => {
     res.status(400).json(error);
   }
 };
-
 
 //     }
 
@@ -379,7 +389,6 @@ module.exports = {
   infoQuery,
   seriePorId,
   seriePorIdParms,
- 
 
   // languages,
 };
