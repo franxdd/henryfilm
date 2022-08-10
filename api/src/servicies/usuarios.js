@@ -31,11 +31,12 @@ const postUser = async (req, res) => {
 
     if (!username || !email || !password || !nickname)
       return res.status(404).send("Falta completar un dato..");
-
-    bcrypt
+      bcrypt
       .hash(password, 10)
-
+      
       .then(async (hash) => {
+        console.log("entre de las promesas")
+        console.log(username, email, password, nickname);
         const response = await Usuarios.create({
           username: username,
           password: hash,
@@ -43,10 +44,12 @@ const postUser = async (req, res) => {
           isAdmin,
           nickname: nickname,
         })
-          .then((response) => {
+        .then((response) => {
+          console.log("entre de las promesas 2")
             res.status(200).send("Usuario creado con exito");
           })
           .then(mandarEmail(username, email, password, nickname));
+          console.log("sali de las promesas");
       })
       .catch((err) => {
         if (err) {
