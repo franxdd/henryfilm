@@ -540,28 +540,50 @@ const PutPeliculas = () => {
     // reader.readAsDataURL(data.backDropImagen);
 
     var auxObj = {};
+    if(tipos === 'pelicula'){
 
-    for (const prop in data) {
-      for (const keys in thePelis[0]) {
-        if (prop === keys && data[prop] !== false) {
-          auxObj[prop] = data[prop];
-
-          auxObj = {
-            ...auxObj,
-          };
-        } else if (prop === keys && data[prop] === false) {
-          auxObj[prop] = thePelis[0][prop];
-
-          auxObj = {
-            ...auxObj,
-          };
+      for (const prop in data) {
+        for (const keys in thePelis[0]) {
+          if (prop === keys && data[prop] !== false) {
+            auxObj[prop] = data[prop];
+  
+            auxObj = {
+              ...auxObj,
+            };
+          } else if (prop === keys && data[prop] === false) {
+            auxObj[prop] = thePelis[0][prop];
+  
+            auxObj = {
+              ...auxObj,
+            };
+          }
         }
       }
+
+
+    }else if(tipos === 'serie'){
+
+      for (const prop in data) {
+        for (const keys in theSeries[0]) {
+          if (prop === keys && data[prop] !== false) {
+            auxObj[prop] = data[prop];
+  
+            auxObj = {
+              ...auxObj,
+            };
+          } else if (prop === keys && data[prop] === false) {
+            auxObj[prop] = theSeries[0][prop];
+  
+            auxObj = {
+              ...auxObj,
+            };
+          }
+        }
+      }
+
+
+
     }
-
-    // setdatosAEnviar(auxObj)
-
-    // setTimeout(console.log(data), 5000);
 
     if (
 
