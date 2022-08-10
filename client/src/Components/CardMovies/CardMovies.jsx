@@ -65,9 +65,9 @@ function CardMovies({ id, name, poster, tipo }) {
 
                 </Link>
               </abbr>
-              <abbr title="Delete">
+              <abbr title="Eliminar">
                 <div onClick={(e)=>HandleDelete(e)}>
-                  <BiTrash className="icono" />
+                  <BiTrash className="iconoEdit" />
                 </div>
               </abbr>
               
