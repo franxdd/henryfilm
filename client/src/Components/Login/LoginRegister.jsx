@@ -12,6 +12,7 @@ function LoginRegister() {
     username: "",
     email: "",
     password: "",
+    nickname:""
   });
   function handdleChange(e) {
     setInput({
@@ -27,6 +28,7 @@ function LoginRegister() {
       username: "",
       email: "",
       password: "",
+      nickname:"",
     });
     navigate("/home/login");
   }
@@ -43,6 +45,15 @@ function LoginRegister() {
               value={input.username}
               name="username"
               placeholder="Usuario: "
+              className="name formEntry"
+              onChange={handdleChange}
+            />
+            <input
+              autoComplete="off"
+              type={"text"}
+              value={input.nickname}
+              name="nickname"
+              placeholder="Nickname: "
               className="name formEntry"
               onChange={handdleChange}
             />

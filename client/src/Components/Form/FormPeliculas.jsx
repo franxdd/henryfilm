@@ -1,4 +1,4 @@
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -22,7 +22,7 @@ const FormPeliculas = () => {
 
   // var generos; // 343
   const auxGenerosMovie = useSelector((state) => state.generosMovies);
-  const auxGenerosSerie =useSelector((state) => state.generosSeries);
+  const auxGenerosSerie = useSelector((state) => state.generosSeries);
   const [generos, setGeneros] = useState();
   const [tipo, setTipo] = useState("");
   const [error, setError] = useState({ " ": " " });
@@ -49,11 +49,10 @@ const FormPeliculas = () => {
 
     if (tipo === "serie") {
       // generos = auxGenerosSerie.slice()
-      setGeneros(auxGenerosSerie)
+      setGeneros(auxGenerosSerie);
     } else if (tipo === "pelicula") {
       // generos = auxGenerosMovie.slice()
-      setGeneros(auxGenerosMovie)
-      
+      setGeneros(auxGenerosMovie);
     }
   }, [tipo]);
 
@@ -68,7 +67,7 @@ const FormPeliculas = () => {
     }
     // const reader = new FileReader();
     // reader.readAsDataURL(data.backDropImagen);
-    
+
     dispatch(postPeliculas(data));
     // console.log(data);
     alert("Pelicula creada");

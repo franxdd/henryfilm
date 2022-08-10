@@ -211,6 +211,16 @@
       transform: scale(1.1);
     }
   }
+  .iconoEdit {
+    margin-top: 30%;
+    font-size: 28px;
+    color: $detalles;
+    cursor: pointer;
+    :hover {
+      color: $blanco;
+      transform: scale(1.1);
+    }
+  }
 }
 
 /*Image*/
