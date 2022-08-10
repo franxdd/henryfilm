@@ -37,7 +37,9 @@ import {
   GET_REVIEW,
   POST_REVIEW,
   GOOGLE_USER,
-  GOOGLE_LOG_OUT
+  GOOGLE_LOG_OUT,
+  POST_HISTORIAL,
+  GET_HISTORIAL
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -122,7 +124,7 @@ const initialState = {
   allMovies: [],
   allSeries: [],
   movieDetail: [],
-  seriesDetail: {},
+  seriesDetail: [],
   backupSeries: [],
   backupMovies: [],
   generosMovies: [],
@@ -138,6 +140,7 @@ const initialState = {
   isos: [],
   user: [],
   googleUser: [],
+  historial: {},
   comentarios: [],
   token: "",
   wishlist: wishlistStorage,
@@ -151,6 +154,28 @@ const rootRouter = (state = initialState, action) => {
         allSeries: action.payload,
         backupSeries: action.payload,
       };
+
+      case POST_HISTORIAL:
+        return{
+          ...state,
+          cart: [],
+        }
+
+    case GET_HISTORIAL:
+      if(action.payload !== false){
+        return{
+          ...state,
+          historial: action.payload
+        }
+
+      }else{
+
+        return {
+          ...state,
+          historial: false
+        }
+
+      }
     case LOG_OUT:
       return {
         ...state,
@@ -191,7 +216,7 @@ const rootRouter = (state = initialState, action) => {
         ...state,
       };
     case POST_LOGIN:
-      console.log(action.payload[3])
+      console.log(action.payload)
       sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
       localStorage.setItem("cart", JSON.stringify(action.payload[1]));
       localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
@@ -200,7 +225,8 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         token: action.payload[0],
         cart: action.payload[1],
-        wishlist: action.payload[2]
+        wishlist: action.payload[2],
+        user: action.payload[3]
       };
     case CHECK_STATE:
       return {
@@ -262,12 +288,13 @@ const rootRouter = (state = initialState, action) => {
     case WILLUNMOUNT:
       return {
         ...state,
-        seriesDetail: {},
+        seriesDetail: [],
       };
     case WILLUNMOUNT2:
       return {
         ...state,
-        movieDetail: {},
+        movieDetail: [],
+        historial: {},
       };
 
     case ORDER_NAME_ASC:

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -33,6 +33,9 @@ const FormPeliculas = () => {
     cast: [],
     runtime: "",
     release_date: "",
+    number_of_episodes: "",
+    episode_run_time: "",
+    number_of_seasons: "",
     posterImagen: null,
     backDropImagen: null,
     vote_average: "",
@@ -78,6 +81,7 @@ const FormPeliculas = () => {
       release_date: "",
       number_of_episodes: "",
       episode_run_time: "",
+      number_of_seasons: "",
       posterImagen: null,
       backDropImagen: null,
       vote_average: "",
@@ -260,11 +264,21 @@ const FormPeliculas = () => {
                     onChange={(e) => HandleInput(e)}
                   />
                 </div>
-                <h4 style={{ color: "white" }}>{error.episode_run_time}</h4>
+                <div className="nombreconteiner">
+                  <input
+                    id="number_of_seasons"
+                    type="text"
+                    name="number_of_seasons"
+                    placeholder="Temporadas:"
+                    className="name formEntry2"
+                    onChange={(e) => HandleInput(e)}
+                  />
+                </div>
               </div>
             )}
-            
-          
+            {data && data.tipo === "pelicula" ? (
+
+
             <div className="nombreconteiner">
               <input
                 id="release_date"
@@ -274,8 +288,14 @@ const FormPeliculas = () => {
                 className="name formEntry2"
                 onChange={(e) => HandleInput(e)}
               />
-            </div>
             <h4 style={{ color: "white" }}>{error.release_date}</h4>
+            </div>
+
+
+
+            ):(
+              <></>
+            )}
 
             <div className="nombreconteiner">
               <input

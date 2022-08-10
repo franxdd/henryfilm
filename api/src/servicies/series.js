@@ -16,14 +16,12 @@ const getSeriesInfo = async (req, res) => {
     let generosApi = await axios(API_GENRES);
     let generos = generosApi.data.genres;
 
-
     var imagenesConfig = await axios.get(
       "https://api.themoviedb.org/3/configuration?api_key=3832b93c32749d817ba7fc39076d3398"
     );
     urlImg = imagenesConfig.data.images.base_url + "original";
 
     for (let i = 0; i < generos.length; i++) {
- 
       for (const key in generos[i]) {
         if (typeof generos[i][key] === "number") {
           idGenero = generos[i][key];
@@ -33,20 +31,18 @@ const getSeriesInfo = async (req, res) => {
       }
     }
 
-
     for (let o = 0; o < paginas; o++) {
       let seriesApi = await axios(`${API_URL_SERIES}${o + 1}`);
-   
+
       let series = seriesApi.data.results;
       for (let s = 0; s < series.length; s++) {
         for (let a = 0; a < series[s].genre_ids.length; a++) {
           series[s].genre_ids[a] = generosAEnviar[series[s].genre_ids[a]];
         }
-  
+
         seriesAEnviar = [...seriesAEnviar, series[s]];
       }
     }
-
 
     for (let img = 0; img < seriesAEnviar.length; img++) {
       seriesAEnviar[img].tipo = "serie";
@@ -57,7 +53,7 @@ const getSeriesInfo = async (req, res) => {
 
     return seriesAEnviar;
   } catch (error) {
-    console.log(error);
+ 
   }
 };
 
@@ -113,7 +109,6 @@ const infoQuery = async (req, res) => {
 
 const seriePorId = async (req, res) => {
   try {
-
     const { id } = req.query;
 
     const allSeries = await axios(
@@ -161,107 +156,56 @@ const seriePorId = async (req, res) => {
 };
 
 const seriePorIdParms = async (req, res) => {
+  // console.log('Hola?')
+  const { id, iso1, iso2 } = req.params;
+
   try {
-    // console.log('Hola?')
-    const { id, iso1, iso2 } = req.params;
+    if (isNaN(id)) {
+      const SerieDb = await Series.findOne({
+        where: {
+          id: id,
+        },
+      });
 
-    const allSeries = await axios(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=es-SP`
-    );
-    var imagenesConfig = await axios.get(
-      `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
-    );
-    urlImg = imagenesConfig.data.images.base_url + "original";
-
-    var generosData = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
-    );
-    var cast = await axios.get(
-      `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${API_KEY}&language=es-SP`
-    );
-
-    var castAEnviar = cast.data.cast;
-
-    var videos = await axios.get(
-      `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=es-SP`
-    );
-
-    var videosAEnviar = videos.data.results;
-
-    var urlVideos = `https://www.youtube.com/embed/`;
-
-    var data_parseado = [allSeries.data];
-
-    var datosAEnviar = parseador(
-      data_parseado,
-      urlImg,
-      generosData,
-      castAEnviar,
-      videosAEnviar,
-      urlVideos
-    );
-    // console.log("Esto es para obtener la info de los detalles:", serieId)
-    res.status(200).json(datosAEnviar);
-  } catch (error) {
-    console.log(error);
-    res.status(400).json(error)
-  }
-};
-
-// const languages = async (req, res) => {
-//   var idioma = {}
-
-//   try {
-//     console.log("Hola?");
-//     const { id } = req.params;
-//     const tvLanguages = await axios(
-//       `https://api.themoviedb.org/3/tv/${id}/translations?api_key=${API_KEY}`
-//     );
-//     const languages = tvLanguages.data.translations;
-//     // console.log(languages)
-//     res.status(200).json(languages)
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-const seriePorIdParmsTrad = async (req, res) => {
-  try {
-    const { id, iso1, iso2 } = req.params;
-
-  
-    if(isNaN(id)){
-  
-      const seriesBd = await Series.findOne({where:{
-        id : id,
-      }});
-
-
-
-      var datosAEnviar = seriesBd
-
-    }else{
- 
+      var datosAEnviar = [SerieDb];
+    } else {
       const allSeries = await axios(
-        `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=${iso1}-${iso2}`
+        `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=es-SP`
       );
       var imagenesConfig = await axios.get(
         `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
       );
       urlImg = imagenesConfig.data.images.base_url + "original";
+
       var generosData = await axios.get(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=${iso1}-${iso2}`
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=es-SP`
       );
+      var cast = await axios.get(
+        `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${API_KEY}&language=es-SP`
+      );
+
+      var castAEnviar = cast.data.cast;
+
+      var videos = await axios.get(
+        `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}&language=es-SP`
+      );
+
+      var videosAEnviar = videos.data.results;
+
+      var urlVideos = `https://www.youtube.com/embed/`;
+
       var data_parseado = [allSeries.data];
-      var datosAEnviar = parseador(data_parseado, urlImg, generosData);
-      // console.log(datosAEnviar);.
 
-
-
+      var datosAEnviar = parseador(
+        data_parseado,
+        urlImg,
+        generosData,
+        castAEnviar,
+        videosAEnviar,
+        urlVideos
+      );
     }
-
-
-
+    // console.log("Esto es para obtener la info de los detalles:", serieId)
     res.status(200).json(datosAEnviar);
   } catch (error) {
     console.log(error);
@@ -269,8 +213,59 @@ const seriePorIdParmsTrad = async (req, res) => {
   }
 };
 
+// const languages = async (req, res) => {
+//   var idioma = {}
 
+//   try {
 
+//     const { id } = req.params;
+//     const tvLanguages = await axios(
+//       `https://api.themoviedb.org/3/tv/${id}/translations?api_key=${API_KEY}`
+//     );
+//     const languages = tvLanguages.data.translations;
+
+//     res.status(200).json(languages)
+//   } catch (error) {
+
+//   }
+// };
+
+// const seriePorIdParmsTrad = async (req, res) => {
+//   try {
+//     const { id, iso1, iso2 } = req.params;
+
+//     if(isNaN(id)){
+
+//       const seriesBd = await Series.findOne({where:{
+//         id : id,
+//       }});
+
+//       var datosAEnviar = seriesBd
+
+//     }else{
+
+//       const allSeries = await axios(
+//         `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=${iso1}-${iso2}`
+//       );
+//       var imagenesConfig = await axios.get(
+//         `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`
+//       );
+//       urlImg = imagenesConfig.data.images.base_url + "original";
+//       var generosData = await axios.get(
+//         `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=${iso1}-${iso2}`
+//       );
+//       var data_parseado = [allSeries.data];
+//       var datosAEnviar = parseador(data_parseado, urlImg, generosData);
+//       // console.log(datosAEnviar);.
+
+//     }
+
+//     res.status(200).json(datosAEnviar);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).json(error);
+//   }
+// };
 
 // const postNuevaSerie = async(req,res) => {
 
@@ -366,7 +361,7 @@ module.exports = {
   infoQuery,
   seriePorId,
   seriePorIdParms,
-  seriePorIdParmsTrad,
-  
+ 
+
   // languages,
 };

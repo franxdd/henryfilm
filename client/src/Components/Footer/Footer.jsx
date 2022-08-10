@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import logo from "../../img/logo.png"
 import "../../Styles/components/_Footer.scss"
 import { Link } from "react-router-dom";

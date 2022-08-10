@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import "../../Styles/components/_Form.scss";
 import "../../Styles/components/_Login.scss";

@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -7,6 +7,8 @@ import {
   willunmont2,
   addToWishlist,
   getReview,
+  getHistorial,
+
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_DetailsMovies.scss";
 import { estrellas } from "../../auxiliares/Funciones";
@@ -22,15 +24,16 @@ import "../../Styles/components/_CardComentarios.scss";
 import {FaCommentDots as ComentIcon} from "react-icons/fa"
 
 function DetailMovie() {
-  const userReducer = useSelector((state) => state.user);
   let navigate = useNavigate();
   let { id } = useParams();
+  let token = sessionStorage.getItem("token");
+  
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
+  let iduser = user.id
   let movieDetail = useSelector((state) => state.movieDetail);
   let { comentarios } = useSelector((state) => state);
-  let token = sessionStorage.getItem("token");
-  let video = movieDetail[0]?.videosAMostrar[0];
-
   const [input, setInput] = useState({
     contenido: "",
     puntuacion: "",
@@ -41,11 +44,15 @@ function DetailMovie() {
   useEffect(() => {
     dispatch(getMoviesDetail(id));
     dispatch(getReview(input2));
+    if(iduser){ 
+      console.log('entro aca')
+      dispatch(getHistorial(iduser))
+    }
     return () => dispatch(willunmont2());
   }, [dispatch]);
   
   
-  console.log(movieDetail)
+  // console.log(movieDetail)
   // if(!movieDetail[0].creado){
     
   //   var video = movieDetail[0]?.videosAMostrar[0]; // El problema del rederizado de details de los datos de la DB esta aca
@@ -60,7 +67,7 @@ function DetailMovie() {
     dispatch(addToCart(idParseado));
   }
   function BasicModal() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
   }
@@ -95,17 +102,6 @@ function DetailMovie() {
     dispatch(addToWishlist(idParseado2));
   }
 
-
-  useEffect(() => {
-    dispatch(getMoviesDetail(id));
-    dispatch(getReview(input2));
-    return () => dispatch(willunmont2());
-  }, [dispatch]);
-  console.log(comentarios);
-
-  // console.log(input);
-
-
   return movieDetail.length === 0 ? (
     <div className="Loading">
       <div className="loader"></div>
@@ -135,7 +131,7 @@ function DetailMovie() {
             <ul className="item-descripcion">
               Producción:{" "}
               {movieDetail[0]?.production_companies?.map((e) => {
-                return <div>{e.name}</div>;
+                return <div className="divGeneros">{movieDetail[0].production_companies[movieDetail[0].production_companies.length-1].name === e.name ? `${e.name}` : `${e.name},` }</div>;
               })}
             </ul>
 
@@ -149,7 +145,7 @@ function DetailMovie() {
             <ul className="lista-generos">
               Géneros: {" "}
               {movieDetail[0]?.genre_ids?.map((e) => {
-                return <div> {e}</div>;
+                return <div className="divGeneros">{movieDetail[0].genre_ids[movieDetail[0].genre_ids.length-1] === e ? `${e}` : `${e},` } </div>;
               })}
             </ul>
 

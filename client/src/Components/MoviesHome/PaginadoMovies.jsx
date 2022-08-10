@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { useState } from "react";
 import { FaAngleDoubleLeft, FaAngleLeft, FaAngleRight, FaAngleDoubleRight } from "react-icons/fa";
 import "../../Styles/components/_Paginado.scss";

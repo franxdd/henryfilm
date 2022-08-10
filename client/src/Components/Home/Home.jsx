@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import Carousel from "../Carousel/Carousel";
 import Header from "../Header/Header";
 import { useContext, useEffect } from "react";
@@ -42,7 +42,7 @@ const Home = () => {
     // dispatch(getGenerosMovies());
     dispatch(getTodo());
     // dispatch(getUser(tokenString))
-  }, []);
+  }, [dispatch]);
 
   //let movies = useSelector((state)=> state.allMovies)
   const idioma = useContext(Context).lenguaje;

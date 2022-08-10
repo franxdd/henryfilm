@@ -47,6 +47,8 @@ export const GET_REVIEW = "GET_REVIEW";
 export const POST_REVIEW = "POST_REVIEW";
 export const GOOGLE_USER = "GOOGLE_USER";
 export const GOOGLE_LOG_OUT = "GOOGLE_LOG_OUT";
+export const POST_HISTORIAL = "POST_HISTORIAL";
+export const GET_HISTORIAL = "GET_HISTORIAL";
 
 function a(error) {
   return toast.error(error, {
@@ -82,6 +84,46 @@ function b(mensaje) {
 //       });
 //   };
 // };
+
+
+export const postHistorial = (payload) => {
+  console.log(payload)
+  return async function (dispatch) {
+    try {
+      
+      let postHistorial = await axios.post(`/historial/agregar`, payload);
+      return dispatch({
+        type: POST_HISTORIAL,
+        payload: postHistorial.data,
+      });
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  };
+}
+
+export const getHistorial = (id) =>{
+  console.log(id)
+  return async function (dispatch) {
+    try {
+      
+      let getHistorial = await axios.get(`/historial/${id}`);
+      console.log(getHistorial.data)
+      return dispatch({
+        type: GET_HISTORIAL,
+        payload: getHistorial.data,
+      });
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  };
+}
+
+
 export const getAllSeries = () => {
   return async function (dispatch) {
     let getAllSeries = await axios(`/series`);
@@ -176,6 +218,7 @@ export const checkState = () => {
 export const PostLogin = (payload) => {
   return async function (dispatch) {
     try {
+      console.log(payload)
       let created = await axios.post("/usuarios/login", payload);
       // {
       //   // withCredentials: true,
