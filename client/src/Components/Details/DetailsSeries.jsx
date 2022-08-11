@@ -8,6 +8,7 @@ import {
   createReview,
   addToWishlist,
   getReview,
+  getHistorial,
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_DetailsMovies.scss";
 import { estrellas } from "../../auxiliares/Funciones.js";
@@ -29,6 +30,7 @@ function DetailsSeries() {
 
   const dispatch = useDispatch();
   const userReducer = useSelector((state) => state.user);
+  var iduser = userReducer.id
   let seriesDetail = useSelector((state) => state.seriesDetail);
   let { comentarios } = useSelector((state) => state);
   const [input, setInput] = useState({
@@ -41,6 +43,10 @@ function DetailsSeries() {
   useEffect(() => {
     dispatch(getSeriesDetail(id));
     dispatch(getReview(input2));
+    if(iduser){ 
+      // console.log('entro aca')
+      dispatch(getHistorial(iduser))
+    }
     return () => dispatch(willunmont());
   }, [dispatch]);
 
