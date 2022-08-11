@@ -148,7 +148,7 @@ const initialState = {
   idioma: [],
   idiomaDefault: "es/ES",
   isos: [],
-  user: [],
+  user: {},
   googleUser: [],
   historial: {},
   comentarios: [],
@@ -203,6 +203,7 @@ const rootRouter = (state = initialState, action) => {
       };
 
     case GET_HISTORIAL:
+      console.log(action.payload)
       if (action.payload !== false) {
         return {
           ...state,
@@ -211,7 +212,7 @@ const rootRouter = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          historial: false,
+          historial: {},
         };
       }
 
@@ -251,7 +252,7 @@ const rootRouter = (state = initialState, action) => {
     case LOG_OUT:
       return {
         ...state,
-        user: [],
+        user: {},
         token: "",
         cart: [],
         wishlist: [],
@@ -287,7 +288,7 @@ const rootRouter = (state = initialState, action) => {
         cart: [],
         wishlist: [],
         googleUser: [],
-        user: [],
+        user: {},
       };
     case POST_USUARIOS:
       return {
@@ -297,12 +298,14 @@ const rootRouter = (state = initialState, action) => {
       // console.log(action.payload)
       sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
       let local = localStorage.getItem("cart") || [];
-      console.log(local);
+      
       let carroTotal;
       let jsonTotal = JSON.parse(local);
-      console.log(jsonTotal);
+   
       if (local !== "undefined") {
-        carroTotal = [...jsonTotal, ...action.payload[1]];
+
+        carroTotal = [...new Set(jsonTotal, ...action.payload[1])]
+        // carroTotal = [...jsonTotal, ...action.payload[1]];
       } else {
         carroTotal = [...action.payload[1]];
       }

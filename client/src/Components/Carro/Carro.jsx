@@ -7,8 +7,10 @@ import "../../Styles/components/_Carrito.scss";
 import tuCarrito from "../../img/tucarrito.png";
 import {
   postHistorial,
-
+  getHistorial,
+  removeCart,
 } from "../../Redux/Actions/Actions";
+import { HiOutlineStop } from "react-icons/hi";
 function Carro() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -16,6 +18,7 @@ function Carro() {
   const [totalItems, settotalItems] = useState([]);
   const { cart } = useSelector((state) => state);
   const { user } = useSelector((state) => state);
+  const histo = useSelector((state) => state.historial);
 
   useEffect(() => {
     if (cart) {
@@ -25,28 +28,54 @@ function Carro() {
         });
       settotalItems(cart.length);
     }
+    if (user.id) {
+      // console.log('entro aca')
+      dispatch(getHistorial(user.id));
+    }
   }, [cart]);
 
   const HandleClickComprar = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    // var arrAux = [cart,user ]
-    //aca va el dispatch de la action que guarda en la BD
-    // dispatch(postHistorial(arrAux))
-    const token = sessionStorage.getItem("token");
-    if (token && cart.length != 0) {
-      navigate("/home/pasarela");
-      
-    } else {
-      alert("No se cumplen los requisitos para continuar con la compra")
+    if (Object.keys(user).length === 0) {
+      alert("Debe loggearse para continuar con la compra");
       navigate("/home");
+    }
+
+    const token = sessionStorage.getItem("token");
+    if (token && cart.length !== 0 && histo.compras) {
+      var coincidencia = [];
+
+      for (let i = 0; i < cart.length; i++) {
+        for (let j = 0; j < histo.compras.length; j++) {
+          if (cart[i].id === histo.compras[j].id) {
+            coincidencia.push(cart[i]);
+          }
+        }
+      }
+
+      if (coincidencia.length === 0) {
+        navigate("/home/pasarela");
+      } else {
+        var mostrar = [];
+
+        for (let i = 0; i < coincidencia.length; i++) {
+          mostrar.push(coincidencia[i].name);
+        }
+
+        alert(`Uno o mas de los productos ya fue comprado: ${mostrar}`);
+      }
+    } else if (
+      Object.keys(histo).length === 0 &&
+      Object.keys(user).length !== 0
+    ) {
+      navigate("/home/pasarela");
     }
   };
 
   var totalPrice = 0;
 
   for (let i = 0; i < cart.length; i++) {
-    // console.log(cart[i].price);
     totalPrice = totalPrice + cart[i].price;
   }
 

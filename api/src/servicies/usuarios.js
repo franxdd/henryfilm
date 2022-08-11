@@ -35,8 +35,7 @@ const postUser = async (req, res) => {
       .hash(password, 10)
 
       .then(async (hash) => {
-        console.log("entre de las promesas");
-        console.log(username, email, password, nickname);
+
         const response = await Usuarios.create({
           username: username,
           password: hash,
@@ -55,7 +54,6 @@ const postUser = async (req, res) => {
               console.log(error);
             }
           });
-        console.log("sali de las promesas");
       })
       .catch((err) => {
         if (err) {
@@ -67,6 +65,7 @@ const postUser = async (req, res) => {
     res.status(404).send(error);
   }
 };
+
 
 const postLogin = async (req, res) => {
   try {
@@ -298,7 +297,9 @@ console.log(id);
 
 const postgoogleuser = async (req, res) => {
   try {
+    
     let { email, name, jti, picture } = req.body;
+
     const jwtPass = sign(
       JSON.stringify({
         username: name,
