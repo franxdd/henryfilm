@@ -55,6 +55,9 @@ export const DELETED_MOVIE = "DELETED_MOVIE";
 export const DELETED_SERIE = "DELETED_SERIE";
 export const MODIFICAR_MOVIE = "MODIFICAR_MOVIE";
 export const MODIFICAR_SERIE = "MODIFICAR_SERIE";
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const PUT_ADMIN = "PUT_ADMIN";
+export const PUT_ELIMINAR = "PUT_ELIMINAR";
 export const WILLUNMOUNT3 = "WILLUNMOUNT3"
 
 function a(error) {
@@ -606,5 +609,50 @@ export const usermodificado = (payload) => {
     payload: payload,
   };
 };
-//   }
-// }
+
+export const allusers = () => {
+  console.log("estoy entrando en la action");
+  return async function (dispatch) {
+    try {
+      let getUsers = await axios.get(`/usuarios`);
+
+      return dispatch({
+        type: GET_ALL_USERS,
+        payload: getUsers.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const putAdmin = (payload) => {
+  console.log(payload);
+  return async (dispatch) => {
+    try {
+      let profileA = await axios.put(`/usuarios/cambiar`, payload);
+
+      dispatch({
+        type: PUT_ADMIN,
+        payload: profileA.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const putElminar = (payload) => {
+  console.log(payload);
+  var objaux = {id:payload}
+  return async (dispatch) => {
+    try {
+      let profileB = await axios.put(`/usuarios/eliminar`, objaux);
+
+      dispatch({
+        type: PUT_ELIMINAR,
+        payload: payload,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
