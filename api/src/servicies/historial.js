@@ -89,7 +89,36 @@ const getHistorial = async (req, res) => {
   }
 };
 
+
+
+const getTodosHistorial = async (req, res) => {
+  
+  console.log('antes del find one')
+ 
+  try {
+
+
+    let histoUser = await Historials.findAll()
+
+    console.log(histoUser)
+
+    if(!histoUser) return res.status(200).json(false)
+
+    console.log('devuelve')
+
+    res.status(200).json(histoUser)
+
+
+  } catch (error) {
+    console.log(error)
+    // res.status(400).json("Error en obtencion de historial")
+
+
+  }
+};
+
 module.exports = {
   posthistorial,
   getHistorial,
+  getTodosHistorial
 };

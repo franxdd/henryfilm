@@ -58,7 +58,8 @@ export const MODIFICAR_SERIE = "MODIFICAR_SERIE";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const PUT_ADMIN = "PUT_ADMIN";
 export const PUT_ELIMINAR = "PUT_ELIMINAR";
-export const WILLUNMOUNT3 = "WILLUNMOUNT3"
+export const WILLUNMOUNT3 = "WILLUNMOUNT3";
+export const GET_HISTORIALES = "GET_HISTORIALES";
 
 function a(error) {
   return toast.error(error, {
@@ -119,6 +120,24 @@ export const getHistorial = (id) => {
       return dispatch({
         type: GET_HISTORIAL,
         payload: getHistorial.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+
+export const getTodosHistorial = () => {
+  console.log("entro a la action")
+  return async function (dispatch) {
+    try {
+      console.log("antes del get")
+      let getHistoriales = await axios.get(`/historial/todos/traer`);
+      console.log(getHistoriales.data)
+      return dispatch({
+        type: GET_HISTORIALES,
+        payload: getHistoriales.data,
       });
     } catch (error) {
       console.log(error);
