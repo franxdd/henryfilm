@@ -1,7 +1,6 @@
 @import "../Utilidades/_Variables.scss";
 
 .ContainerForm2{
-  min-height: calc(100vh - 60px - 60px);
   display: flex;
   width: 100%;
   background-size:contain;
@@ -20,7 +19,7 @@
     padding-bottom: 3px;
     left: 0;
     right: 0;
-    //=position: absolute;
+ position: relative;
     border-top: 5px solid $detalles;
   /*   z-index: 1; */
     // animation: bounce 1.5s infinite;

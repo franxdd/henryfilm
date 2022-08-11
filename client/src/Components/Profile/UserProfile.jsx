@@ -165,12 +165,14 @@ const UserProfile = () => {
             </video>
           </div>
         </Link>
-        <div className="opciones">
-          <img src="/images/comprado.png" alt="" />
-          <video autoPlay={true} loop={true} playsInline={true}>
-            <source src="/videos/dinero.mp4" type="video/mp4" />
-          </video>
-        </div>
+        <Link to={`/home/comprados/${user.id}`}>
+          <div className="opciones">
+            <img src="/images/comprado.png" alt="" />
+            <video autoPlay={true} loop={true} playsInline={true}>
+              <source src="/videos/dinero.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </Link>
       </div>
     </div>
   );
