@@ -5,7 +5,6 @@
   min-height: calc(100vh - 250px);
 }
 .accordions {
-
     width: 30%;
     border-radius: 15px;
     overflow: hidden;
@@ -15,7 +14,6 @@
     border-radius: 15px;
     overflow: hidden;
   }
-  
   .accordion {
     width: 100%;
     overflow: hidden;
@@ -47,7 +45,6 @@
       color: $detalles;
     }
     
-  
     &::after {
       content: ">";
       width: 1em;
@@ -92,7 +89,7 @@
         transform: rotate(90deg);
       }
       ~ .acc-content {
-        max-height: 100rem;
+        max-height: 120rem;
         padding: 1em;
       }
     }

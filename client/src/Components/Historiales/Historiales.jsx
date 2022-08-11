@@ -5,6 +5,7 @@ import { getHistorial } from "../../Redux/Actions/Actions";
 import tusFavoritos from "../../img/tusfavoritos.png";
 import { useParams } from "react-router-dom";
 import HistorialCard from "./HistorialCard";
+import misCompras from "../../img/miscompras.png"
 
 function Historiales() {
   let dispatch = useDispatch();
@@ -19,7 +20,15 @@ function Historiales() {
   console.log(historial.compras);
   return (
     <div className="container">
-      <h1>Obvio bobis</h1>
+      <h3>
+        <img
+          className="logo"
+          src={misCompras}
+          alt="Logo"
+          height="auto"
+          width="280px"
+        />
+      </h3>
       <div className="containerCarrito">
         {historial.compras &&
           historial.compras.map((e) => {
