@@ -298,7 +298,9 @@ console.log(id);
 
 const postgoogleuser = async (req, res) => {
   try {
+    
     let { email, name, jti, picture } = req.body;
+
     const jwtPass = sign(
       JSON.stringify({
         username: name,

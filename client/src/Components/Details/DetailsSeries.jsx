@@ -100,7 +100,7 @@ function DetailsSeries() {
     alert("debes registrarte");
     navigate("/home/Login");
   }
-console.log(seriesDetail);
+
   return seriesDetail.length === 0 ? (
     <div className="Loading">
       <div className="loader"></div>

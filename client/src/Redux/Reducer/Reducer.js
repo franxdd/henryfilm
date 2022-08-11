@@ -148,7 +148,7 @@ const initialState = {
   idioma: [],
   idiomaDefault: "es/ES",
   isos: [],
-  user: [],
+  user: {},
   googleUser: [],
   historial: {},
   comentarios: [],
@@ -203,6 +203,7 @@ const rootRouter = (state = initialState, action) => {
       };
 
     case GET_HISTORIAL:
+      console.log(action.payload)
       if (action.payload !== false) {
         return {
           ...state,
@@ -211,7 +212,7 @@ const rootRouter = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          historial: false,
+          historial: {},
         };
       }
 
@@ -251,7 +252,7 @@ const rootRouter = (state = initialState, action) => {
     case LOG_OUT:
       return {
         ...state,
-        user: [],
+        user: {},
         token: "",
         cart: [],
         wishlist: [],
@@ -287,7 +288,7 @@ const rootRouter = (state = initialState, action) => {
         cart: [],
         wishlist: [],
         googleUser: [],
-        user: [],
+        user: {},
       };
     case POST_USUARIOS:
       return {
