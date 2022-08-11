@@ -113,7 +113,7 @@ const UserProfile = () => {
                 <Button
                   onClick={(e) => handleEditimg(e)}
                   style={{
-                    marginLeft: "4px",
+                    marginLeft: "-130px",
                     maxWidth: "30px",
                     maxHeight: "30px",
                     minWidth: "30px",
