@@ -175,10 +175,10 @@ function DetailMovie() {
               ) : (
                 <></>
               )}
-
+{/* 
               <Link to={`/home/videos`}>
                 <button>Reparto</button>
-              </Link>
+              </Link> */}
               <div className="Iconos">
                 <abbr title="Añade al carrito">
                   <span onClick={() => addCart(id)}>

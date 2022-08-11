@@ -260,7 +260,7 @@ const Nav2 = () => {
                 <Tooltip title="Abrir las opciones">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     {/* <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} /> */}
-                    <img src={foto} height="auto" width="40px" />
+                    <img src={foto} height="auto" width="40px" borderRadius="50%"/>
                   </IconButton>
                 </Tooltip>
                 <Menu
