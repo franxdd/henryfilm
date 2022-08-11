@@ -100,11 +100,6 @@ function DetailMovie() {
     let idParseado2 = parseInt(id);
     dispatch(addToWishlist(idParseado2));
   }
-<<<<<<< HEAD
-  console.log();
-=======
-
->>>>>>> a1da9f3caf44955188c7128c9deeed7c986294b9
   return movieDetail.length === 0 ? (
     <div className="Loading">
       <div className="loader"></div>

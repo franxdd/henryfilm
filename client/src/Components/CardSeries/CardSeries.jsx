@@ -64,15 +64,15 @@ function CardSeries({ id, name, poster, tipo }) {
                 <HeartIcon className="iconoHeart" />
               </span>
             </abbr>
+            <abbr title="Añade al carrito">
+              <span onClick={() => addCart(id)}>
+                <ShopIcon className="iconoShop" />
+              </span>
+            </abbr>
           </div>
         ) : (
           <></>
         )}
-        <abbr title="Añade al carrito">
-          <span onClick={() => addCart(id)}>
-            <ShopIcon className="iconoShop" />
-          </span>
-        </abbr>
         {/* ^^^^^^^Este es el boton de la wishlist para cambiar^^^^ */}
         <p className="text-title">{name}</p>
         <p className="text-body">${Math.ceil(getRandomArbitrary(15, 30))}</p>
