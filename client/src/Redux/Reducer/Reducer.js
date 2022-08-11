@@ -46,6 +46,7 @@ import {
   DELETED_SERIE,
   MODIFICAR_SERIE,
   MODIFICAR_MOVIE,
+  WILLUNMOUNT3
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -339,13 +340,19 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         seriesDetail: [],
       };
-    case WILLUNMOUNT2:
-      return {
-        ...state,
-        movieDetail: [],
-        historial: {},
-      };
-
+      
+      case WILLUNMOUNT2:
+        return {
+          ...state,
+          movieDetail: [],
+          historial: {},
+        };
+      case WILLUNMOUNT3:
+        return {
+         ...state,
+         movieDetail: [],
+        };
+        
     case ORDER_NAME_ASC:
       let new_arrayAsc = action.payload.sort((a, b) => {
         if (a.name > b.name) {

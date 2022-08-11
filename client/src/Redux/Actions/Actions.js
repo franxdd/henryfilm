@@ -55,6 +55,7 @@ export const DELETED_MOVIE = "DELETED_MOVIE";
 export const DELETED_SERIE = "DELETED_SERIE";
 export const MODIFICAR_MOVIE = "MODIFICAR_MOVIE";
 export const MODIFICAR_SERIE = "MODIFICAR_SERIE";
+export const WILLUNMOUNT3 = "WILLUNMOUNT3"
 
 function a(error) {
   return toast.error(error, {
@@ -238,6 +239,15 @@ export const willunmont = () => {
   return function (dispatch) {
     return dispatch({
       type: WILLUNMOUNT,
+    });
+  };
+};
+
+
+export const willunmont3 = () => {
+  return function (dispatch) {
+    return dispatch({
+      type: WILLUNMOUNT3,
     });
   };
 };
