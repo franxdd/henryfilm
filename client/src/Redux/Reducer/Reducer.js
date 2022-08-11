@@ -48,6 +48,7 @@ import {
   MODIFICAR_MOVIE,
   GET_ALL_USERS,
   PUT_ADMIN,
+  PUT_ELIMINAR,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -152,8 +153,8 @@ const initialState = {
   comentarios: [],
   token: "",
   wishlist: wishlistStorage,
-  allUser:[],
-  isadmin:[],
+  allUser: [],
+  isadmin: [],
 };
 
 const rootRouter = (state = initialState, action) => {
@@ -164,25 +165,34 @@ const rootRouter = (state = initialState, action) => {
         allSeries: action.payload,
         backupSeries: action.payload,
       };
-      case PUT_ADMIN:
-        var cambio = action.payload
-        var cambio2 = cambio.isAdmin 
-      let array = state.allUser.map(e=>{
+    case PUT_ADMIN:
+      var cambio = action.payload;
+      var cambio2 = cambio.isAdmin;
+      let array = state.allUser.map((e) => {
         if (e.id === cambio.id + "") {
-          e.isAdmin = cambio2
+          e.isAdmin = cambio2;
         }
-        return e
-      })
+        return e;
+      });
       console.log(array);
       return {
         ...state,
-        allUser: array
+        allUser: array,
+      };
+    case PUT_ELIMINAR:
+      var elimino = action.payload;
+      console.log(state.allUser);
+      console.log(action.payload);
+      let array2 = state.allUser.filter((e) => e.id !== elimino);
+      return {
+        ...state,
+        allUser: array2,
       };
     case GET_ALL_USERS:
       console.log(action.payload);
       return {
         ...state,
-        allUser: action.payload
+        allUser: action.payload,
       };
 
     case POST_HISTORIAL:
@@ -206,7 +216,9 @@ const rootRouter = (state = initialState, action) => {
 
     case DELETED_MOVIE:
       let moviesFil = state.todo.filter((t) => t.id !== action.payload);
-      let moviesFilHome = state.allMovies.filter((t) => t.id !== action.payload);
+      let moviesFilHome = state.allMovies.filter(
+        (t) => t.id !== action.payload
+      );
 
       return {
         ...state,
@@ -216,7 +228,9 @@ const rootRouter = (state = initialState, action) => {
 
     case DELETED_SERIE:
       let seriesFil = state.todo.filter((t) => t.id !== action.payload);
-      let seriesFilHome = state.allSeries.filter((t) => t.id !== action.payload);
+      let seriesFilHome = state.allSeries.filter(
+        (t) => t.id !== action.payload
+      );
 
       return {
         ...state,
@@ -242,11 +256,11 @@ const rootRouter = (state = initialState, action) => {
         wishlist: [],
         googleUser: [],
       };
-      case USER_MODIFICADO:
+    case USER_MODIFICADO:
       console.log(action.payload);
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
       };
     case GOOGLE_USER:
       // console.log(action.payload)
@@ -501,7 +515,10 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_MOVIES_REVERSA:
-      const arrMovie = filterGenres(state.backupTodo.slice(0, 100), action.payload);
+      const arrMovie = filterGenres(
+        state.backupTodo.slice(0, 100),
+        action.payload
+      );
       if (arrMovie.length === 0) {
         return {
           ...state,
@@ -515,7 +532,10 @@ const rootRouter = (state = initialState, action) => {
       }
 
     case FILTRO_GENERO_SERIES_REVERSA:
-      const arrSeries = filterGenres(state.backupTodo.slice(100, 200), action.payload);
+      const arrSeries = filterGenres(
+        state.backupTodo.slice(100, 200),
+        action.payload
+      );
       if (arrSeries.length === 0) {
         return {
           ...state,
@@ -547,7 +567,9 @@ const rootRouter = (state = initialState, action) => {
           todo: state.backupTodo,
         };
       } else {
-        const filter = state.todo.filter((e) => e.name.toLowerCase().includes(action.payload.toLowerCase()));
+        const filter = state.todo.filter((e) =>
+          e.name.toLowerCase().includes(action.payload.toLowerCase())
+        );
         return {
           ...state,
           all: filter,
@@ -650,7 +672,7 @@ const rootRouter = (state = initialState, action) => {
     case PUT_PROFILE:
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
       };
     case POST_COMENTARIO:
       return {
@@ -683,7 +705,9 @@ const rootRouter = (state = initialState, action) => {
       };
 
     case REMOVE_TO_WISHLIST:
-      let wishlistFilter = state.wishlist.filter((e) => e.id !== action.payload);
+      let wishlistFilter = state.wishlist.filter(
+        (e) => e.id !== action.payload
+      );
       localStorage.setItem("wishlist", JSON.stringify(wishlistFilter));
       return {
         ...state,

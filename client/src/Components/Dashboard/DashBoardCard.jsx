@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { putAdmin } from "../../Redux/Actions/Actions";
+import { putAdmin, putElminar } from "../../Redux/Actions/Actions";
 function DashBoardCard({ id, name, admin }) {
 //   const admin = useSelector((state) => state.isadmin);
   const dispatch = useDispatch();
@@ -24,10 +24,14 @@ function DashBoardCard({ id, name, admin }) {
       admin: "",
     });
   };
+  const handleDelete = (e)=>{
+e.preventDefault()
+dispatch(putElminar(id))
+  }
   return (
     <div className="contenedor">
       <div className="contenedor2">
-        <div>{name}</div>
+        <div style={{ color: "white" }}>{name}</div>
         <div style={{ color: "white" }}>{admin + ""}</div>
         <form onSubmit={handleSubmit}>
           <select onChange={(e) => handlecambio(e)}>
@@ -37,6 +41,7 @@ function DashBoardCard({ id, name, admin }) {
           </select>
           <button type="submit">cambiar</button>
         </form>
+        <button onClick={(e)=> handleDelete(e)}>eliminar</button>
       </div>
     </div>
   );

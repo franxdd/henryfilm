@@ -57,6 +57,7 @@ export const MODIFICAR_MOVIE = "MODIFICAR_MOVIE";
 export const MODIFICAR_SERIE = "MODIFICAR_SERIE";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const PUT_ADMIN = "PUT_ADMIN";
+export const PUT_ELIMINAR = "PUT_ELIMINAR";
 
 function a(error) {
   return toast.error(error, {
@@ -623,6 +624,22 @@ export const putAdmin = (payload) => {
       dispatch({
         type: PUT_ADMIN,
         payload: profileA.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const putElminar = (payload) => {
+  console.log(payload);
+  var objaux = {id:payload}
+  return async (dispatch) => {
+    try {
+      let profileB = await axios.put(`/usuarios/eliminar`, objaux);
+
+      dispatch({
+        type: PUT_ELIMINAR,
+        payload: payload,
       });
     } catch (error) {
       console.log(error);

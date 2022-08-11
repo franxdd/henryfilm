@@ -282,15 +282,15 @@ const putModificarAdmin = async (req, res) => {
 
 const putElminar = async (req, res) => {
   let { id } = req.body;
-
+console.log(id);
   try {
     var eliminado = await Usuarios.destroy({
       where: {
         id: id,
       },
     });
-
-    res.status(200).json(eliminado);
+    let userasd = await Usuarios.findByPk(id);
+    res.status(200).json(userasd);
   } catch (error) {
     res.status(400).json(error);
   }

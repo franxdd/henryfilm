@@ -10,7 +10,6 @@ import FormPeliculas from "../Form/FormPeliculas.jsx";
 const DashBoard = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.allUser);
-  console.log(users);
   useEffect(() => {
     dispatch(allusers());
   }, [dispatch]);
