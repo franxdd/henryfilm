@@ -1,0 +1,177 @@
+@import "../Utilidades/_Variables.scss";
+
+.cardCarrito {
+    width: 800px;
+    height: 220px;
+    padding: .8em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background:transparent;
+    border-bottom: 1px solid #eaeaea;
+   }
+   
+   .cardImg2 {
+    height: 93%;
+    width: 50%;
+    border-radius: .5rem;
+    transition: .3s ease;
+    .cardImg2 img{
+    border-radius: .5rem;
+    }
+   }
+   
+   .cardInfo2 {
+    width: 40%;
+    display: flex;
+     padding-top: 0%;
+     align-items: center;
+     flex-direction:row;
+     font-size:20px
+   }
+   .cardInfo3 {
+    margin-left: 50px;
+    width: 20%;
+    display: flex;
+     padding-top: 0%;
+     align-items: center;
+     flex-direction:row;
+     font-size:20px
+   }
+   .spanCompras {
+    font-size: 50px;
+    color: $detalles;
+    cursor: pointer;
+    :hover{
+      color: $blanco;
+      transform:scale(1.1);
+    }
+  }
+  .spanDelete {
+    font-size: 50px;
+    color: $detalles;
+    cursor: pointer;
+    :hover{
+      color: $blanco;
+      transform:scale(1.1);
+    }
+  }
+   .cardCarrito svg {
+    width: 30px;
+    height: 40px;
+   }
+   .textDetalle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    margin-top: -10%;
+    color:$blanco
+   }
+   .cardAbajo {
+    width: 50%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap:50px
+    // border-top: 1px solid #ddd;
+   }
+   
+   /*Text*/
+   .textNameCarrito {
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1.5;
+    color:$blanco
+   }
+   
+   .textDetalle {
+    margin-top: 10px;
+    font-size: .9em;
+    // padding-bottom: 10px;
+   }
+   
+   /*Button*/
+   .cardButton2 {
+    display: flex;
+    padding: .3em;
+    cursor: pointer;
+    border-radius: 60px;
+    transition: .3s ease-in-out;
+    .iconoDelete{
+      font-size: 40px;
+    }
+   }
+   
+   /*Hover*/
+  //  .cardImg2 :hover {
+  //   transform: translateY(-25%);
+   
+  //  }
+   
+   .cardButton2:hover {
+    border: 1px solid $detalles;
+    background-color: $detalles
+   }
+
+   @media screen and (max-width: 500px){
+    .cardCarrito {
+      width: 340px;
+      height: 440px;
+      display: flex;
+      flex-direction:column;
+      align-items: center;
+      background:transparent;
+      border-bottom: 1px solid #eaeaea;
+     }
+     .cardImg2 {
+      height: 50%;
+      width: 100%;
+      border-radius: .5rem;
+      transition: .3s ease;
+      .cardImg2 img{
+      border-radius: .5rem;
+      }
+      .textDetalle {
+        margin-top: 0px;
+        font-size: .6em;
+        width: 100%;
+        // padding-bottom: 10px;
+
+       }
+     }
+     
+     .textNameCarrito {
+      width: 100%;
+      font-weight: 600;
+      font-size: 0.9em;
+      line-height: 1.5;
+      color:$blanco;
+     }
+     .cardAbajo {
+      width: 50%;
+      margin-left: -15%;
+      display: flex;
+      justify-content:column;
+      align-items: center;
+      gap:30px
+      // border-top: 1px solid #ddd;
+     }
+     .cardInfo3 {
+      margin-left: 70%;
+      width: 100%;
+      display: flex;
+       padding-top: 0%;
+       align-items: center;
+       flex-direction:row;
+       font-size:20px
+     }
+   }
+   .IconoDetalle {
+      font-size: 30px;
+      color: $detalles;
+      :hover {
+        color: $blanco;
+      }
+    }
