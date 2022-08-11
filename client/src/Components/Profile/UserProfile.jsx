@@ -89,15 +89,14 @@ const UserProfile = () => {
         {img === false ? 
                     <Button style={{marginLeft:'124px',maxWidth: "30px", maxHeight: "40px",minWidth: "40px",minHeight: "40px", marginTop:'-30px'}} onClick={e=>handleEditimg(e)} > <BorderColorIcon style={{color:'rgb(253 254 0)'}}/></Button>
                 :<div>
-    
                   {" "}
-                  <input
+                  <input  
                     id="avatar"
                     type="file"
                     name="avatar"
                     onChange={(e) => HandleInputImg(e)}
                   />
-                  <Button onClick={e=>handleEditimg(e)} style={{marginLeft:'4px',maxWidth: "30px", maxHeight: "30px",minWidth: "30px",minHeight: "30px",}}><CancelIcon  style={{color:'rgb(253 254 0)'}}/></Button>
+                  <Button onClick={e=>handleEditimg(e)} style={{marginLeft:'-140px',maxWidth: "30px", maxHeight: "30px",minWidth: "30px",minHeight: "30px",}}><CancelIcon  style={{color:'rgb(253 254 0)'}}/></Button>
                 </div>}   
              <div className="namediv">   
                 {nombre === false ?<label className="nombre">{user.nickname}<Button onClick={e=>handleEdit(e)} style={{paddingLeft:'20px',maxWidth: "30px", maxHeight: "30px",minWidth: "30px",minHeight: "30px",}}><BorderColorIcon  style={{color:'rgb(253 254 0)'}}/></Button></label>
