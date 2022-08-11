@@ -36,7 +36,7 @@ const DashBoard = () => {
             </div>
           </div>
         </div>
-        <div className="accordions">
+        <div className="accordions2">
           <div className="accordion">
             <input className="inputP" type="checkbox" id="second" />
             <label className="acc-label2" for="second">

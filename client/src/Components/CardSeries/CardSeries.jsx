@@ -4,7 +4,7 @@ import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, addToWishlist, deleteSerie } from "../../Redux/Actions/Actions";
 import { TiHeart as HeartIcon } from "react-icons/ti";
-import { BiPaintRoll as EditIcon } from "react-icons/bi";
+import { BiEdit as EditIcon } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
 
 function CardSeries({ id, name, poster, tipo }) {
