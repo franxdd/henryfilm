@@ -72,7 +72,7 @@ function CardMovies({ id, name, poster, tipo }) {
               </abbr>
               
             </div>
-          ) : userReducer.length !== 0 ?(
+          ) : Object.keys(userReducer).length !== 0 ?(
 
             <div className="Iconos">
             <abbr title="Agrega a Favoritos">

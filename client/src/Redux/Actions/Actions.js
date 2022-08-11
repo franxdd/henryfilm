@@ -489,6 +489,9 @@ export const removeCart = (id) => {
       payload: id,
     });
 };
+
+
+
 export const adjusq = (id, value) => {
   return (dispatch) =>
     dispatch({
