@@ -4,10 +4,15 @@ import "../../Styles/components/_UserProfile.scss";
 import { Link } from "react-router-dom";
 import { putProfile, usermodificado } from "../../Redux/Actions/Actions";
 import bienvenido from "../../img/bienvenido.png";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { Button } from '@mui/material';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state);
+  const [img, setImg] = useState(false);
+  const [nombre ,setNombre] = useState(false);
   const [profileImg, setProfileImg] = useState({
     avatar: "",
     nickname: "",
@@ -36,7 +41,26 @@ const UserProfile = () => {
       };
     }
   }
-
+  function handleEdit(e){
+    e.preventDefault()
+    setNombre(true)
+    if(nombre === false){
+        setNombre(true)
+    }
+    if(nombre === true){
+        setNombre(false)
+    }
+}
+  function handleEditimg(e){
+    e.preventDefault()
+    setImg(true)
+    if(img === false){
+        setImg(true)
+    }
+    if(img === true){
+        setImg(false)
+    }
+}
   function handleSubmit(e) {
     e.preventDefault();
     console.log("se envia la accion");
@@ -57,20 +81,15 @@ const UserProfile = () => {
           width="250px"
         />
       </h3>
-          <h1 className="nombre">{user.nickname}</h1>
       </div>
       <div className="cardContainer3">
-        <img className="profile" style={{width:'160px', height:'auto', borderRadius:'200px'}} src={foto} alt="Profile"/>
-              {/* <form onSubmit={handleSubmit}>
-                <div>
-                  <input
-                    id="nickname"
-                    type="text"
-                    name="nickname"
-                    onChange={(e) => HandleInput(e)}
-                  />
-                </div>
-                <div>
+      <form onSubmit={handleSubmit}>
+      <div className="ContainerPerfil">
+        <img className="image"  src={foto} alt="Profile"/>
+        {img === false ? 
+                    <Button style={{marginLeft:'124px',maxWidth: "30px", maxHeight: "40px",minWidth: "40px",minHeight: "40px", marginTop:'-30px'}} onClick={e=>handleEditimg(e)} > <BorderColorIcon style={{color:'rgb(253 254 0)'}}/></Button>
+                :<div>
+    
                   {" "}
                   <input
                     id="avatar"
@@ -78,9 +97,28 @@ const UserProfile = () => {
                     name="avatar"
                     onChange={(e) => HandleInputImg(e)}
                   />
-                </div> 
-                <button type="submit">MODIFICAR</button>
-              </form>  */}
+                  <Button onClick={e=>handleEditimg(e)} style={{marginLeft:'4px',maxWidth: "30px", maxHeight: "30px",minWidth: "30px",minHeight: "30px",}}><CancelIcon  style={{color:'rgb(253 254 0)'}}/></Button>
+                </div>}   
+             <div className="namediv">   
+                {nombre === false ?<label className="nombre">{user.nickname}<Button onClick={e=>handleEdit(e)} style={{paddingLeft:'20px',maxWidth: "30px", maxHeight: "30px",minWidth: "30px",minHeight: "30px",}}><BorderColorIcon  style={{color:'rgb(253 254 0)'}}/></Button></label>
+                : 
+                <div>
+                  <input
+                    id="nickname"
+                    type="text"
+                    name="nickname"
+                    onChange={(e) => HandleInput(e)}
+                    />
+                    <Button onClick={e=>handleEdit(e)} style={{marginLeft:'4px',maxWidth: "30px", maxHeight: "30px",minWidth: "30px",minHeight: "30px",}}><CancelIcon  style={{color:'rgb(253 254 0)'}}/></Button>
+                          </div>
+                }
+                </div>
+                <div className="boton">
+                <button className="card-button" type="submit" style={{marginTop:'-18%'}}>MODIFICAR</button>
+                </div>
+                </div>
+              </form> 
+              </div>
           <div className="containerOpciones">
           <Link to="/home/wishlist"> 
         <div className="opciones">
@@ -97,7 +135,6 @@ const UserProfile = () => {
         </video>
         </div>
         </div>    
-   </div>
    </div>
   );
 };
