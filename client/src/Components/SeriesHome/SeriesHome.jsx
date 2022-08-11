@@ -9,7 +9,8 @@ import {
   orderVoteAvgDES,
   filtradoGeneroSeries,
   filtradoGeneroSeriesReversa,
-  getGenerosSeries
+  getGenerosSeries,
+  getTodo,
 } from "../../Redux/Actions/Actions";
 import Paginacion from "./PaginadoSeries";
 import "../../Styles/components/_SeriesHome.scss";
@@ -24,6 +25,7 @@ function SeriesHome() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getGenerosSeries());
+    dispatch(getTodo());
   }, []);
   
   let allSeries = useSelector((state) => state.allSeries);

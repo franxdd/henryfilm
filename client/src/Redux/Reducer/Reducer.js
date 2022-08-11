@@ -158,6 +158,7 @@ const initialState = {
   wishlist: wishlistStorage,
   allUser: [],
   isadmin: [],
+  flag : false,
 };
 
 const rootRouter = (state = initialState, action) => {
@@ -184,10 +185,11 @@ const rootRouter = (state = initialState, action) => {
         }
         return e;
       });
-      console.log(array);
+      console.log(state.flag);
       return {
         ...state,
         allUser: array,
+        flag: state.flag ? false : true
       };
     case PUT_ELIMINAR:
       var elimino = action.payload;
@@ -386,6 +388,8 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         errores: action.payload,
+        allMovies: [...state.allMovies],
+        allSeries: [...state.allSeries]
       };
     case WILLUNMOUNT:
       return {
