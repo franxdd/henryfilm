@@ -63,11 +63,6 @@ function CardMovies({ id, name, poster, tipo }) {
                   <BiTrash className="iconoEdit" />
                 </div>
               </abbr>
-              <abbr title="Añade al carrito">
-                <span onClick={() => addCart(id)}>
-                  <ShopIcon className="iconoShop" />
-                </span>
-              </abbr>
             </div>
           ) : userReducer.length !== 0 ? (
             <div className="Iconos">
@@ -76,15 +71,15 @@ function CardMovies({ id, name, poster, tipo }) {
                   <HeartIcon className="iconoHeart" />
                 </span>
               </abbr>
-              <abbr title="Añade al carrito">
-                <span onClick={() => addCart(id)}>
-                  <ShopIcon className="iconoShop" />
-                </span>
-              </abbr>
             </div>
           ) : (
             <></>
           )}
+          <abbr title="Añade al carrito">
+            <span onClick={() => addCart(id)}>
+              <ShopIcon className="iconoShop" />
+            </span>
+          </abbr>
 
           {/* ^^^^^^^Este es el boton de la wishlist para cambiar^^^^ */}
           <p className="text-title">{name}</p>

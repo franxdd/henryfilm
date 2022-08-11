@@ -126,8 +126,6 @@ export const deleteMovie = (payload) => {
   console.log(payload);
   return async function (dispatch) {
     let deleted = await axios.post(`/productosEliminados/postProd`, payload);
-
-
     return dispatch({
       type: DELETED_MOVIE,
       payload: payload[0],
@@ -269,10 +267,7 @@ export const PostLogin = (payload) => {
 
       sessionStorage.setItem("token", JSON.stringify(created.data[0]));
 
-      return dispatch(
-        { type: POST_LOGIN, payload: created.data },
-        b(created.data[3])
-      );
+      return dispatch({ type: POST_LOGIN, payload: created.data }, b(created.data[3]));
     } catch (error) {
       console.log("lelele", error);
       a(error.response.data);
@@ -527,10 +522,7 @@ export const loadCurren = (payload) => {
 
 export const putPeliculas = (payload) => {
   return async (dispatch) => {
-    let created = await axios.put(
-      `/${payload.tipo}s/modificar/${payload.id}`,
-      payload
-    );
+    let created = await axios.put(`/${payload.tipo}s/modificar/${payload.id}`, payload);
     dispatch({
       type: PUT_PELICULA,
       payload: created,
@@ -549,9 +541,7 @@ export const createReview = (payload) => {
 
 export const getReview = (payload) => {
   return async (dispatch) => {
-    let creado = await axios.get(
-      `/comentarios?id=${payload.id}&tipo=${payload.tipo}`
-    );
+    let creado = await axios.get(`/comentarios?id=${payload.id}&tipo=${payload.tipo}`);
     return dispatch({
       type: GET_REVIEW,
       payload: creado.data,

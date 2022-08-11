@@ -1,4 +1,4 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -94,7 +94,7 @@ function DetailsSeries() {
     alert("debes registrarte");
     navigate("/home/Login");
   }
-console.log(seriesDetail);
+  console.log(seriesDetail);
   return seriesDetail.length === 0 ? (
     <div className="Loading">
       <div className="loader"></div>
@@ -106,51 +106,51 @@ console.log(seriesDetail);
         style={{
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundImage: `url(${
-            seriesDetail && seriesDetail[0]?.backDropImagen
-          })`,
+          backgroundImage: `url(${seriesDetail && seriesDetail[0]?.backDropImagen})`,
         }}
       >
         <div className="contenedor-info">
           <div className="contenedor-descripcion">
             <h3>{seriesDetail && seriesDetail[0]?.name}</h3>
             <div className="contenedor-estrellas">
-              {estrellas(
-                Math.round(seriesDetail && seriesDetail[0]?.vote_average)
-              )}
+              {estrellas(Math.round(seriesDetail && seriesDetail[0]?.vote_average))}
             </div>
             <p className="descripcion">{seriesDetail[0]?.overview}</p>
-            <p className="item-descripcion">
-              Duracion: {seriesDetail[0]?.episode_run_time} min
-            </p>
+            <p className="item-descripcion">Duracion: {seriesDetail[0]?.episode_run_time} min</p>
 
             {seriesDetail[0]?.production_companies ? (
               <ul className="item-descripcion">
                 Producción:{" "}
                 {seriesDetail[0]?.production_companies?.map((e) => {
-                  return <div className="divGeneros">{seriesDetail[0].production_companies[seriesDetail[0].production_companies.length-1].name === e.name ? `${e.name }` : `${e.name },` } </div>;
+                  return (
+                    <div className="divGeneros">
+                      {seriesDetail[0].production_companies[seriesDetail[0].production_companies.length - 1].name ===
+                      e.name
+                        ? `${e.name}`
+                        : `${e.name},`}{" "}
+                    </div>
+                  );
                 })}
               </ul>
             ) : (
               <>
-              <br></br>
+                <br></br>
               </>
             )}
 
             <ul className="lista-generos">
-              Géneros: {" "}
+              Géneros:{" "}
               {seriesDetail &&
                 seriesDetail[0]?.genre_ids.map((e, index) => {
-                  return <div key={index} className="divGeneros">{seriesDetail[0].genre_ids[seriesDetail[0].genre_ids.length-1] === e ? `${e}` : `${e},` }  </div>;
+                  return (
+                    <div key={index} className="divGeneros">
+                      {seriesDetail[0].genre_ids[seriesDetail[0].genre_ids.length - 1] === e ? `${e}` : `${e},`}{" "}
+                    </div>
+                  );
                 })}
             </ul>
-            <p>
-              Numero de episodios:{" "}{seriesDetail && seriesDetail[0]?.number_of_episodes}
-            </p>
-            <ul>
-              Numero de Temporadas:{" "}
-              {seriesDetail && seriesDetail[0]?.number_of_seasons}
-            </ul>
+            <p>Numero de episodios: {seriesDetail && seriesDetail[0]?.number_of_episodes}</p>
+            <ul>Numero de Temporadas: {seriesDetail && seriesDetail[0]?.number_of_seasons}</ul>
             {/* <div className="contenedor-links">
               <Link to={`/videos`}>
                 <button>Trailer</button>
@@ -185,23 +185,34 @@ console.log(seriesDetail);
               <Link to={`/videos`}>
                 <button>Reparto</button>
               </Link>
-              <div className="Iconos">
-                <abbr title="Añade al carrito">
-                  <span onClick={() => addCart(id)}>
-                    <ShopIcon className="iconoShop" />
-                  </span>
-                </abbr>
-                <abbr title="Agrega a Favoritos">
-                  <span onClick={() => addWishlist(id)}>
-                    <HeartIcon className="iconoHeart" />
-                  </span>
-                </abbr>
-              </div>
+              {userReducer.length !== 0 ? (
+                <div className="Iconos">
+                  <abbr title="Agrega a Favoritos">
+                    <span onClick={() => addWishlist(id)}>
+                      <HeartIcon className="iconoHeart" />
+                    </span>
+                  </abbr>
+                </div>
+              ) : (
+                <></>
+              )}
+              <abbr title="Añade al carrito">
+                <span onClick={() => addCart(id)}>
+                  <ShopIcon className="iconoShop" />
+                </span>
+              </abbr>
             </div>
           </div>
         </div>
       </header>
-      <Rating2 className="ratingStyle" id={id} token={token} picture={userReducer.picture} nickname={userReducer.nickname} tipo={seriesDetail[0]?.tipo}/>
+      <Rating2
+        className="ratingStyle"
+        id={id}
+        token={token}
+        picture={userReducer.picture}
+        nickname={userReducer.nickname}
+        tipo={seriesDetail[0]?.tipo}
+      />
       {/* <Rating className="ratingStyle" /> */}
       <br></br>
 
@@ -212,9 +223,9 @@ console.log(seriesDetail);
             return (
               <div className="review">
                 <div height="auto" width="40px">
-                <img src={e.picture} alt="profile" height="auto" width="40px"/>
+                  <img src={e.picture} alt="profile" height="auto" width="40px" />
                 </div>
-              <div className="email" >Usuario: {e.nickname}</div>
+                <div className="email">Usuario: {e.nickname}</div>
                 <div className="infoRev">
                   <Rating name="read-only" value={e.puntuacion} />
                 </div>
