@@ -14,14 +14,10 @@ function CardMovies({ id, name, poster, tipo }) {
   let navigate = useNavigate();
   const userReducer = useSelector((state) => state.user);
 
-
-
-  function HandleDelete(e){
-
-    e.preventDefault()
-    var arrAux = [id, tipo]
-    dispatch(deleteMovie(arrAux))
-
+  function HandleDelete(e) {
+    e.preventDefault();
+    var arrAux = [id, tipo];
+    dispatch(deleteMovie(arrAux));
   }
 
   function addCart(id) {
@@ -38,7 +34,6 @@ function CardMovies({ id, name, poster, tipo }) {
     return Math.random() * (max - min) + min;
   }
 
-
   return (
     <div className="Cardmovies">
       <div className="card">
@@ -46,7 +41,6 @@ function CardMovies({ id, name, poster, tipo }) {
           <img src={poster} alt="poster" />
         </div>
         <div className="card-info">
-
           {userReducer.isAdmin ? (
             <div className="Iconos">
               <abbr title="Agrega a Favoritos">
@@ -62,37 +56,36 @@ function CardMovies({ id, name, poster, tipo }) {
               <abbr title="Modificar">
                 <Link to={`/home/modificar/${id}/${tipo}`}>
                   <EditIcon className="iconoEdit" />
-
                 </Link>
               </abbr>
               <abbr title="Eliminar">
-                <div onClick={(e)=>HandleDelete(e)}>
+                <div onClick={(e) => HandleDelete(e)}>
                   <BiTrash className="iconoEdit" />
                 </div>
               </abbr>
-              
             </div>
-          ) : Object.keys(userReducer).length !== 0 ?(
-
+          ) : Object.keys(userReducer).length !== 0 ? (
             <div className="Iconos">
-            <abbr title="Agrega a Favoritos">
-              <span onClick={() => addWishlist(id)}>
-                <HeartIcon className="iconoHeart" />
-              </span>
-            </abbr>
-            <abbr title="Añade al carrito">
-              <span onClick={() => addCart(id)}>
-                <ShopIcon className="iconoShop" />
-              </span>
-            </abbr>
-          </div>
-          ):(
-
-            <></>
-
-
+              <abbr title="Agrega a Favoritos">
+                <span onClick={() => addWishlist(id)}>
+                  <HeartIcon className="iconoHeart" />
+                </span>
+              </abbr>
+              <abbr title="Añade al carrito">
+                <span onClick={() => addCart(id)}>
+                  <ShopIcon className="iconoShop" />
+                </span>
+              </abbr>
+            </div>
+          ) : (
+            <>
+              <abbr title="Añade al carrito">
+                <span onClick={() => addCart(id)}>
+                  <ShopIcon className="iconoShop" />
+                </span>
+              </abbr>
+            </>
           )}
-
 
           {/* ^^^^^^^Este es el boton de la wishlist para cambiar^^^^ */}
           <p className="text-title">{name}</p>
