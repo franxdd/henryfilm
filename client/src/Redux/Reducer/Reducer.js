@@ -50,6 +50,7 @@ import {
   PUT_ADMIN,
   PUT_ELIMINAR,
   WILLUNMOUNT3,
+  GET_HISTORIALES
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -151,6 +152,7 @@ const initialState = {
   user: {},
   googleUser: [],
   historial: {},
+  historiales: {},
   comentarios: [],
   token: "",
   wishlist: wishlistStorage,
@@ -166,6 +168,13 @@ const rootRouter = (state = initialState, action) => {
         allSeries: action.payload,
         backupSeries: action.payload,
       };
+
+      case GET_HISTORIALES:
+        return {
+          ...state,
+          historiales: action.payload
+          
+        };
     case PUT_ADMIN:
       var cambio = action.payload;
       var cambio2 = cambio.isAdmin;
