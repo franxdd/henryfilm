@@ -21,7 +21,7 @@ function CarritoCard({ id, nombre, image, qty, tipo, precio }) {
         <p className="textNameCarrito">{nombre}</p>
         </div>
         <div className="cardInfo3">
-        <p className="textDetalle"> Es {tipo} </p>
+        <p className="textDetalle"> Tipo: {tipo} </p>
       </div>
 
        <div className="cardAbajo">
