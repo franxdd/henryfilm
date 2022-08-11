@@ -21,6 +21,8 @@ import Rating2 from "../Details/Rating2.jsx";
 import Rating from "@mui/material/Rating";
 import "../../Styles/components/_CardComentarios.scss";
 import { FaCommentDots as ComentIcon } from "react-icons/fa";
+import { toast } from "react-toastify";
+
 
 function DetailMovie() {
   const userReducer = useSelector((state) => state.user);
@@ -41,6 +43,19 @@ function DetailMovie() {
     idPelicula: id,
     token: token,
   });
+
+  function debesLogearte() {
+    return toast.error("Necesitas logearte", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
   console.log(comentarios);
   useEffect(() => {
     dispatch(getMoviesDetail(id));
@@ -85,16 +100,17 @@ function DetailMovie() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (!input.token) {
-      alert("Debes loguearte");
-      navigate("/home/Login");
+      debesLogearte()
+      // navigate("/home/Login");
     } else {
       dispatch(createReview(input));
     }
   };
   function handleRegister(e) {
     e.preventDefault();
-    alert("debes registrarte");
-    navigate("/home/Login");
+    // alert("debes registrarte");
+    // navigate("/home/Login");
+    debesLogearte()
   }
   function addWishlist(id) {
     let idParseado2 = parseInt(id);

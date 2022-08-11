@@ -98,8 +98,8 @@ function SeriesHome() {
       </button>
       <span>Filtrar por:</span>
       
-      <div class="select2">
-        <div class="select">
+      <div className="select2">
+        <div className="select">
         <select      
             name="format" id="format"
             onChange={(e) => FiltradoGenero(e)}

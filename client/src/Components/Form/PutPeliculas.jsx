@@ -472,6 +472,8 @@ import validate from "../../util/validate.js";
 import poster from "../../img/poster.jpg";
 import back from "../../img/backdrop.jpg";
 import "../../Styles/components/_FormPeliculas.scss";
+import { toast } from "react-toastify";
+
 
 const PutPeliculas = () => {
   let { id, tipos } = useParams();
@@ -521,6 +523,18 @@ const PutPeliculas = () => {
     popularity: false,
     tipo: false,
   });
+
+  function productoModificado() {
+    return toast.error("Necesitas logearte", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
 
   useEffect(() => {
     // console.log(tipo);
@@ -611,7 +625,8 @@ const PutPeliculas = () => {
       dispatch(putPeliculas(auxObj));
     }
 
-    alert("Producto modificado");
+    // alert("Producto modificado");
+    productoModificado()
     setdata({
       name: false,
       genre_ids: false,

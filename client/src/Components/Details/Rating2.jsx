@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
 import { createReview } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_ComentariosForm.scss";
+import { toast } from "react-toastify";
+
 
 function Rating2({ id, token, nickname, picture, tipo }) {
   const histo = useSelector((state) => state.historial);
@@ -21,6 +23,31 @@ function Rating2({ id, token, nickname, picture, tipo }) {
     picture: picture,
     tipo: tipo,
   });
+
+  function debesLogearte() {
+    return toast.error("Necesitas logearte", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+  function debesComprar() {
+    return toast.error("Necesitas comprar el producto", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
   const [hover, setHover] = useState(-1);
   function handdleChange(e) {
     setInput({
@@ -44,10 +71,12 @@ function Rating2({ id, token, nickname, picture, tipo }) {
 
     // console.log(Object.keys(histo))
     if (!input.token) {
-      alert("Debes loguearte");
-      navigate("/home/Login");
+      // alert("Debes loguearte");
+      // navigate("/home/Login");
+      debesLogearte()
     } else if (Object.keys(histo).length === 0) {
-      alert("Debes comprar el producto antes de comentar");
+      // alert("Debes comprar el producto antes de comentar");
+      debesComprar()
       // navigate("/home");
     } else {
       let coincidencia = histo.compras.filter((h) => h.id + "" === id);
@@ -56,7 +85,8 @@ function Rating2({ id, token, nickname, picture, tipo }) {
       if (coincidencia.length !== 0) {
         dispatch(createReview(input));
       } else {
-        alert("Debes comprar el producto antes de comentar");
+        // alert("Debes comprar el producto antes de comentar");
+        debesComprar()
       }
     }
   };

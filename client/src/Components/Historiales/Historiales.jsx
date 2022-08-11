@@ -19,7 +19,6 @@ function Historiales() {
   console.log(historial.compras);
   return (
     <div className="container">
-      <h1>Obvio bobis</h1>
       <div className="containerCarrito">
         {historial.compras &&
           historial.compras.map((e) => {
