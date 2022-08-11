@@ -11,6 +11,9 @@ import {
   removeCart,
 } from "../../Redux/Actions/Actions";
 import { HiOutlineStop } from "react-icons/hi";
+import { toast } from "react-toastify";
+
+
 function Carro() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,12 +37,35 @@ function Carro() {
     }
   }, [cart]);
 
+  function debesLogearte() {
+    return toast.error("Necesitas logearte", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+  function productoYaComprado() {
+    return toast.warn("Uno o mas productos ya fueron adquiridos", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
   const HandleClickComprar = (e) => {
     e.preventDefault();
 
     if (Object.keys(user).length === 0) {
-      alert("Debe loggearse para continuar con la compra");
-      navigate("/home");
+      debesLogearte()
     }
 
     const token = sessionStorage.getItem("token");
@@ -62,8 +88,7 @@ function Carro() {
         for (let i = 0; i < coincidencia.length; i++) {
           mostrar.push(coincidencia[i].name);
         }
-
-        alert(`Uno o mas de los productos ya fue comprado: ${mostrar}`);
+        productoYaComprado()
       }
     } else if (
       Object.keys(histo).length === 0 &&
