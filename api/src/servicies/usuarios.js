@@ -245,22 +245,23 @@ const putProfile = async (req, res) => {
   }
 };
 const putModificarAdmin = async (req, res) => {
-  let { id } = req.body;
-
+  let { id, admin } = req.body;
   try {
-    const userValidate = await Usuarios.findOne({
-      where: { id: id },
-    });
+    if (admin === "true") {
+      const userValidate = await Usuarios.findOne({
+        where: { id: id },
+      });
 
-    if (!userValidate.dataValues.isAdmin) {
-      var user = await Usuarios.update(
-        { isAdmin: true },
-        {
-          where: {
-            id: id,
-          },
-        }
-      );
+      if (!userValidate.dataValues.isAdmin) {
+        var user = await Usuarios.update(
+          { isAdmin: true },
+          {
+            where: {
+              id: id,
+            },
+          }
+        );
+      }
     } else {
       var user = await Usuarios.update(
         { isAdmin: false },
@@ -271,8 +272,9 @@ const putModificarAdmin = async (req, res) => {
         }
       );
     }
-
-    res.status(200).json(user);
+    let userasd = await Usuarios.findByPk(id);
+    console.log(userasd);
+    res.status(200).json(userasd);
   } catch (error) {
     res.status(400).json(error);
   }
@@ -280,15 +282,15 @@ const putModificarAdmin = async (req, res) => {
 
 const putElminar = async (req, res) => {
   let { id } = req.body;
-
+console.log(id);
   try {
     var eliminado = await Usuarios.destroy({
       where: {
         id: id,
       },
     });
-
-    res.status(200).json(eliminado);
+    let userasd = await Usuarios.findByPk(id);
+    res.status(200).json(userasd);
   } catch (error) {
     res.status(400).json(error);
   }
