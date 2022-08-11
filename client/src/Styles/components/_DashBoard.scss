@@ -2,7 +2,7 @@
 .cubretodo{
   display:flex;
   width: 100%;
-  min-height: calc(200vh - 250px);
+  min-height: calc(100vh - 250px);
 }
 .accordions {
 
@@ -91,7 +91,6 @@
       + .acc-label::after {
         transform: rotate(90deg);
       }
-  
       ~ .acc-content {
         max-height: 100rem;
         padding: 1em;
