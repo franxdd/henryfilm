@@ -103,7 +103,7 @@ function Carro() {
   for (let i = 0; i < cart.length; i++) {
     totalPrice = totalPrice + cart[i].price;
   }
-
+  console.log(cart)
   return (
     <div className="container">
       <h3>
