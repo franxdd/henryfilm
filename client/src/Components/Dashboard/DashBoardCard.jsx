@@ -5,7 +5,7 @@ import "../../Styles/components/_DashboardCard.scss";
 import {FaUserEdit as UserIcon} from "react-icons/fa";
 
 function DashBoardCard({ id, name, admin }) {
-//   const admin = useSelector((state) => state.isadmin);
+  console.log("que funcione dios")
   console.log(id)
   const dispatch = useDispatch();
   const {flag }= useSelector((state) => state);
