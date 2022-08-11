@@ -6,13 +6,16 @@ import {FaUserEdit as UserIcon} from "react-icons/fa";
 
 function DashBoardCard({ id, name, admin }) {
 //   const admin = useSelector((state) => state.isadmin);
+  console.log(id)
   const dispatch = useDispatch();
+  const {flag }= useSelector((state) => state);
   const [cambio, setCambio] = useState({
     id: id,
     admin: "",
   });
 
   const handlecambio = (e) => {
+    console.log(e.target.value)
     e.preventDefault();
     setCambio({
       ...cambio,
@@ -20,6 +23,7 @@ function DashBoardCard({ id, name, admin }) {
     });
   };
   const handleSubmit = (e) => {
+    console.log(cambio)
     e.preventDefault();
     dispatch(putAdmin(cambio));
     setCambio({
@@ -50,6 +54,7 @@ dispatch(putElminar(id))
           </select>
           <button type="submit"><span>Cambiar</span></button>
         <button onClick={(e)=> handleDelete(e)}><span>Eliminar</span></button>
+      
           </div>
         </form>
       </div>

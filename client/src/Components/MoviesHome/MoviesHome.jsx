@@ -8,6 +8,7 @@ import {
   orderVoteAvgASC,
   orderVoteAvgDES,
   getGenerosMovies,
+  getTodo
 } from "../../Redux/Actions/Actions";
 import { useEffect, useState } from "react";
 
@@ -26,6 +27,7 @@ import { VscChromeClose as CloseIcon } from "react-icons/vsc";
 function MoviesHome() {
   useEffect(() => {
     dispatch(getGenerosMovies());
+    dispatch(getTodo());
   }, []);
   const dispatch = useDispatch();
 

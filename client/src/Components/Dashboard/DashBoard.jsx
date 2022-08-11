@@ -10,6 +10,7 @@ import FormPeliculas from "../Form/FormPeliculas.jsx";
 const DashBoard = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.allUser);
+  const {flag }= useSelector((state) => state);
   useEffect(() => {
     dispatch(allusers());
   }, [dispatch]);
@@ -30,6 +31,7 @@ const DashBoard = () => {
                 id={e.id}
                 name={e.username}
                 admin={e.isAdmin + ""}
+
               />
             );
           })}
@@ -40,7 +42,7 @@ const DashBoard = () => {
           <div className="accordion">
             <input className="inputP" type="checkbox" id="second" />
             <label className="acc-label2" for="second">
-              Agregar Pelicula
+              Agregar Producto
             </label>
             <div className="acc-content">
               <FormPeliculas />
@@ -48,6 +50,7 @@ const DashBoard = () => {
           </div>
         </div>
       </div>
+      <div>{console.log(flag)}</div>
     </div>
   );
 };
