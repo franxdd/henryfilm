@@ -112,7 +112,7 @@ function Login() {
             className="name formEntry"
             onChange={handdleChange}
           />
-          <button button class="submit formEntry" type="submit">
+          <button button className="submit formEntry" type="submit">
             Iniciar Sesion
           </button>
           <div className="or">────────── O ──────────</div>
@@ -130,7 +130,7 @@ function Login() {
           
           <div className="pageTitle2"> ¿No tienes una cuenta?</div>
           <Link to="/home/Register">
-            <button button class="submit formEntry">
+            <button button className="submit formEntry">
               <b>Registrate</b>
             </button>
           </Link>

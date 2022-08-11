@@ -22,6 +22,8 @@ import Rating2 from "../Details/Rating2.jsx";
 import Rating from "@mui/material/Rating";
 import "../../Styles/components/_CardComentarios.scss";
 import { FaCommentDots as ComentIcon } from "react-icons/fa";
+import { toast } from "react-toastify";
+
 
 function DetailsSeries() {
   let navigate = useNavigate();
@@ -39,6 +41,18 @@ function DetailsSeries() {
     idserie: id,
     token: token,
   });
+
+  function debesLogearte() {
+    return toast.error("Necesitas logearte", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
 
   useEffect(() => {
     dispatch(getSeriesDetail(id));
@@ -79,16 +93,18 @@ function DetailsSeries() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (!input.token) {
-      alert("Debes loguearte");
-      navigate("/home/Login");
+      // alert("Debes loguearte");
+      // navigate("/home/Login");
+      debesLogearte()
     } else {
       dispatch(createReview(input));
     }
   };
   function handleRegister(e) {
     e.preventDefault();
-    alert("debes registrarte");
-    navigate("/home/Login");
+    // alert("debes registrarte");
+    // navigate("/home/Login");
+    debesLogearte()
   }
   function addWishlist(id) {
     let idParseado2 = parseInt(id);
@@ -97,8 +113,9 @@ function DetailsSeries() {
 
   function handleRegister(e) {
     e.preventDefault();
-    alert("debes registrarte");
-    navigate("/home/Login");
+    // alert("debes registrarte");
+    // navigate("/home/Login");
+    debesLogearte()
   }
 
   return seriesDetail.length === 0 ? (

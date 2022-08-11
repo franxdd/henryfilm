@@ -11,6 +11,8 @@ import validate from "../../util/validate.js";
 import poster from "../../img/poster.jpg";
 import back from "../../img/backdrop.jpg";
 import "../../Styles/components/_FormPeliculas.scss";
+import { toast } from "react-toastify";
+
 
 const FormPeliculas = () => {
   let dispatch = useDispatch();
@@ -56,6 +58,19 @@ const FormPeliculas = () => {
     }
   }, [tipo]);
 
+  function peliculaCreada() {
+    return toast.error("Necesitas logearte", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+
   const HandleSubmit = (e) => {
     e.preventDefault();
     // console.log("entre al inicio del submit");
@@ -70,7 +85,8 @@ const FormPeliculas = () => {
 
     dispatch(postPeliculas(data));
     // console.log(data);
-    alert("Pelicula creada");
+    // alert("Pelicula creada");
+    peliculaCreada()
     setdata({
       name: "",
       genre_ids: [],
