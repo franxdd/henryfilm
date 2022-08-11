@@ -100,7 +100,6 @@ function DetailMovie() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (!input.token) {
-      // alert("Debes loguearte");
       debesLogearte()
       // navigate("/home/Login");
     } else {
