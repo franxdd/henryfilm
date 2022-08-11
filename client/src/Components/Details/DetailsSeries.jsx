@@ -8,6 +8,7 @@ import {
   createReview,
   addToWishlist,
   getReview,
+  getHistorial,
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_DetailsMovies.scss";
 import { estrellas } from "../../auxiliares/Funciones.js";
@@ -29,6 +30,7 @@ function DetailsSeries() {
 
   const dispatch = useDispatch();
   const userReducer = useSelector((state) => state.user);
+  var iduser = userReducer.id;
   let seriesDetail = useSelector((state) => state.seriesDetail);
   let { comentarios } = useSelector((state) => state);
   const [input, setInput] = useState({
@@ -41,6 +43,10 @@ function DetailsSeries() {
   useEffect(() => {
     dispatch(getSeriesDetail(id));
     dispatch(getReview(input2));
+    if (iduser) {
+      // console.log('entro aca')
+      dispatch(getHistorial(iduser));
+    }
     return () => dispatch(willunmont());
   }, [dispatch]);
 
@@ -182,25 +188,21 @@ function DetailsSeries() {
               ) : (
                 <></>
               )}
-              <Link to={`/videos`}>
+              {/* <Link to={`/videos`}>
                 <button>Reparto</button>
-              </Link>
-              {userReducer.length !== 0 ? (
-                <div className="Iconos">
-                  <abbr title="Agrega a Favoritos">
-                    <span onClick={() => addWishlist(id)}>
-                      <HeartIcon className="iconoHeart" />
-                    </span>
-                  </abbr>
-                </div>
-              ) : (
-                <></>
-              )}
-              <abbr title="Añade al carrito">
-                <span onClick={() => addCart(id)}>
-                  <ShopIcon className="iconoShop" />
-                </span>
-              </abbr>
+              </Link> */}
+              <div className="Iconos">
+                <abbr title="Añade al carrito">
+                  <span onClick={() => addCart(id)}>
+                    <ShopIcon className="iconoShop" />
+                  </span>
+                </abbr>
+                <abbr title="Agrega a Favoritos">
+                  <span onClick={() => addWishlist(id)}>
+                    <HeartIcon className="iconoHeart" />
+                  </span>
+                </abbr>
+              </div>
             </div>
           </div>
         </div>

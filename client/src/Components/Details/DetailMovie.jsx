@@ -186,26 +186,22 @@ function DetailMovie() {
               ) : (
                 <></>
               )}
-
+              {/* 
               <Link to={`/home/videos`}>
                 <button>Reparto</button>
-              </Link>
-              {userReducer.length !== 0 ? (
-                <div className="Iconos">
-                  <abbr title="Agrega a Favoritos">
-                    <span onClick={() => addWishlist(id)}>
-                      <HeartIcon className="iconoHeart" />
-                    </span>
-                  </abbr>
-                </div>
-              ) : (
-                <></>
-              )}
-              <abbr title="Añade al carrito">
-                <span onClick={() => addCart(id)}>
-                  <ShopIcon className="iconoShop" />
-                </span>
-              </abbr>
+              </Link> */}
+              <div className="Iconos">
+                <abbr title="Añade al carrito">
+                  <span onClick={() => addCart(id)}>
+                    <ShopIcon className="iconoShop" />
+                  </span>
+                </abbr>
+                <abbr title="Agrega a Favoritos">
+                  <span onClick={() => addWishlist(id)}>
+                    <HeartIcon className="iconoHeart" />
+                  </span>
+                </abbr>
+              </div>
             </div>
           </div>
         </div>

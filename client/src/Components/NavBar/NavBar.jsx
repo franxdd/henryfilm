@@ -13,8 +13,6 @@ import Avatar from "@mui/material/Avatar";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import LoginIcon from "@mui/icons-material/Login";
-import LogoutIcon from "@mui/icons-material/Logout";
 import { Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../Styles/components/_NavBar.scss";
@@ -35,6 +33,7 @@ import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import perfil from "../../img/perfil2.png";
+
 
 function getToken() {
   const tokenString = sessionStorage.getItem("token");
@@ -259,8 +258,9 @@ const Nav2 = () => {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Abrir las opciones">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar src={foto}/>
                     {/* <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} /> */}
-                    <img src={foto} height="auto" width="40px" />
+                    {/* <img src={foto} height="40px" width="40px"  border-radius= "50%"/> */}
                   </IconButton>
                 </Tooltip>
                 <Menu

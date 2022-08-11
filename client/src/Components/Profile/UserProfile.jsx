@@ -1,25 +1,22 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../../Styles/components/_UserProfile.scss";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { putProfile, usermodificado } from "../../Redux/Actions/Actions";
-import { AiFillCloseSquare as CloseIcon } from "react-icons/ai";
-import {TiHeart as HeartIcon} from "react-icons/ti";
+import bienvenido from "../../img/bienvenido.png";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { Button } from '@mui/material';
+
 const UserProfile = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state);
+  const [img, setImg] = useState(false);
+  const [nombre ,setNombre] = useState(false);
   const [profileImg, setProfileImg] = useState({
     avatar: "",
     nickname: "",
   });
-  // useEffect(() => {
-  //   console.log(profileImg);
-  //   dispatch(usermodificado(profileImg));
-  // }, [profileImg]);
-  // useEffect(() => {
-  //   if (Object.keys(user).length !== 0) setProfileImg(user);
-  //   console.log(user);
-  // }, [user]);
 
   function HandleInput(e) {
     e.preventDefault();
@@ -44,6 +41,26 @@ const UserProfile = () => {
       };
     }
   }
+  function handleEdit(e){
+    e.preventDefault()
+    setNombre(true)
+    if(nombre === false){
+        setNombre(true)
+    }
+    if(nombre === true){
+        setNombre(false)
+    }
+}
+  function handleEditimg(e){
+    e.preventDefault()
+    setImg(true)
+    if(img === false){
+        setImg(true)
+    }
+    if(img === true){
+        setImg(false)
+    }
+}
   function handleSubmit(e) {
     e.preventDefault();
     console.log("se envia la accion");
@@ -54,29 +71,25 @@ const UserProfile = () => {
   console.log(user);
   return (
     <div className="container3">
-      <div className="profileTitle">
-        <div>
-          <h1 className="nombre">{user.nickname}</h1>
-        </div>
+    <div className="profileTitle">
+    <h3>
+        <img
+          className="logo"
+          src={bienvenido}
+          alt="Logo"
+          height="auto"
+          width="250px"
+        />
+      </h3>
       </div>
       <div className="cardContainer3">
-        <div>
-          <img src={foto} alt="profile" />
-          <a href="#miModal">
-            <button>Modificar perfil</button>
-          </a>
-          <div id="miModal" className="modal">
-            <div className="modal-contenido">
-              <form onSubmit={handleSubmit}>
-                <div>
-                  <input
-                    id="nickname"
-                    type="text"
-                    name="nickname"
-                    onChange={(e) => HandleInput(e)}
-                  />
-                </div>
-                <div>
+      <form onSubmit={handleSubmit}>
+      <div className="ContainerPerfil">
+        <img className="image"  src={foto} alt="Profile"/>
+        {img === false ? 
+                    <Button style={{marginLeft:'124px',maxWidth: "30px", maxHeight: "40px",minWidth: "40px",minHeight: "40px", marginTop:'-30px'}} onClick={e=>handleEditimg(e)} > <BorderColorIcon style={{color:'rgb(253 254 0)'}}/></Button>
+                :<div>
+    
                   {" "}
                   <input
                     id="avatar"
@@ -84,35 +97,45 @@ const UserProfile = () => {
                     name="avatar"
                     onChange={(e) => HandleInputImg(e)}
                   />
+                  <Button onClick={e=>handleEditimg(e)} style={{marginLeft:'4px',maxWidth: "30px", maxHeight: "30px",minWidth: "30px",minHeight: "30px",}}><CancelIcon  style={{color:'rgb(253 254 0)'}}/></Button>
+                </div>}   
+             <div className="namediv">   
+                {nombre === false ?<label className="nombre">{user.nickname}<Button onClick={e=>handleEdit(e)} style={{paddingLeft:'20px',maxWidth: "30px", maxHeight: "30px",minWidth: "30px",minHeight: "30px",}}><BorderColorIcon  style={{color:'rgb(253 254 0)'}}/></Button></label>
+                : 
+                <div>
+                  <input
+                    id="nickname"
+                    type="text"
+                    name="nickname"
+                    onChange={(e) => HandleInput(e)}
+                    />
+                    <Button onClick={e=>handleEdit(e)} style={{marginLeft:'4px',maxWidth: "30px", maxHeight: "30px",minWidth: "30px",minHeight: "30px",}}><CancelIcon  style={{color:'rgb(253 254 0)'}}/></Button>
+                          </div>
+                }
                 </div>
-
-                <button type="submit">cambiar</button>
-              </form>
-              <a href="#">
-                {" "}
-                <CloseIcon className="iconoClose" />{" "}
-              </a>
-              <br></br>
-              <div className="iframe-container"></div>
-            </div>
-          </div>
+                <div className="boton">
+                <button className="card-button" type="submit" style={{marginTop:'-18%'}}>MODIFICAR</button>
+                </div>
+                </div>
+              </form> 
+              </div>
+          <div className="containerOpciones">
           <Link to="/home/wishlist"> 
-            <HeartIcon className="iconoHeart" />Favoritos
+        <div className="opciones">
+            <img src="/images/favoritos.png" alt="" />
+            <video autoPlay={true} loop={true} playsInline={true}>
+          <source src="/videos/1564676115-marvel.mp4" type="video/mp4" />
+        </video>
+        </div>
           </Link>
+        <div className="opciones">
+            <img src="/images/comprado.png" alt="" />
+            <video autoPlay={true} loop={true} playsInline={true}>
+          <source src="/videos/dinero.mp4" type="video/mp4" />
+        </video>
         </div>
-        <div className="cardProfile">
-          <NavLink
-            to="/contactform"
-            style={{ textDecoration: "none", color: "#5A5A5A" }}
-          >
-            <h3 className="card-title">Ayuda</h3>
-          </NavLink>
-          <p className="card-content">
-            Contactanos para un asesoramiento personalizado
-          </p>
-        </div>
-      </div>
-    </div>
+        </div>    
+   </div>
   );
 };
 export default UserProfile;
