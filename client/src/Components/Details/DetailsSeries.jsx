@@ -188,9 +188,9 @@ function DetailsSeries() {
               ) : (
                 <></>
               )}
-              <Link to={`/videos`}>
+              {/* <Link to={`/videos`}>
                 <button>Reparto</button>
-              </Link>
+              </Link> */}
               <div className="Iconos">
                 <abbr title="Añade al carrito">
                   <span onClick={() => addCart(id)}>
