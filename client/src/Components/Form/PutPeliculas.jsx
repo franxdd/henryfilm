@@ -465,6 +465,8 @@ import {
   getSeriesDetail,
   modificarMovie,
   modificarSerie,
+  willunmont3,
+  willunmont
 } from "../../Redux/Actions/Actions";
 import validate from "../../util/validate.js";
 import poster from "../../img/poster.jpg";
@@ -485,6 +487,11 @@ const PutPeliculas = () => {
       dispatch(getSeriesDetail(id));
     }
     dispatch(getGenerosSeries());
+
+    return ()=>{
+      dispatch(willunmont3())
+      dispatch(willunmont())
+    }
   }, []);
 
   // var generos; // 343
