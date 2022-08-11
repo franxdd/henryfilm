@@ -14,6 +14,8 @@ const historial = require("./historial")
 const productosEliminados = require("./productosEliminados")
 const productosModificados = require("./productosModificados")
 
+
+
 router.use("/peliculas", peliculas);
 router.use("/series", series);
 router.use("/usuarios", usuarios);

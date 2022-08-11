@@ -15,7 +15,31 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/components/_Pasarela.scss";
-import "../../Styles/components/_TarjetaDeCredito.scss"
+import "../../Styles/components/_TarjetaDeCredito.scss";
+import { toast } from "react-toastify";
+
+function pagoErr() {
+  return toast.error("Ya esta en el carrito", {
+    position: "bottom-left",
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+}
+function pagoEx() {
+  return toast.success("Compra realizada con exito", {
+    position: "bottom-left",
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+}
 
 const stripePromise = loadStripe(
   "pk_test_51LTGaXLAMID6zp4FN23yqliUFRecPc1GmqazMXb4525foqI6x0vjAdYsIeCw3ovTIId4tj0WthzhKIhyJyaSCBjp00WA0Mdadg"
@@ -130,10 +154,12 @@ const CheckoutForm = () => {
         elements.getElement(CardElement).clear();
       } catch (error) {
         console.log(error);
+        pagoErr();
       }
     }
     localStorage.setItem("cart", JSON.stringify([]));
-    alert("Compra realizada con exito");
+    // alert("Compra realizada con exito");
+    pagoEx();
     var arrAux = [cart, user];
     dispatch(postHistorial(arrAux));
 
@@ -168,7 +194,16 @@ const CheckoutForm = () => {
               options={cardStyle}
               onChange={handleChange}
             />
-            <button className="card-button" disabled={processing || disabled || succeeded} id="submit">
+            {error && (
+              <p className="card-error" role="alert">
+                {error}
+              </p>
+            )}
+            <button
+              className="card-button"
+              disabled={processing || disabled || succeeded}
+              id="submit"
+            >
               <span id="button-text">
                 {processing ? (
                   <div className="spinner" id="spinner"></div>
@@ -177,11 +212,6 @@ const CheckoutForm = () => {
                 )}
               </span>
             </button>
-            {error && (
-              <div className="card-error" role="alert">
-                {error}
-              </div>
-            )}
           </form>
         </div>
       </div>

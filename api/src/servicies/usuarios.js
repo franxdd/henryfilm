@@ -31,11 +31,11 @@ const postUser = async (req, res) => {
 
     if (!username || !email || !password || !nickname)
       return res.status(404).send("Falta completar un dato..");
-      bcrypt
+    bcrypt
       .hash(password, 10)
-      
+
       .then(async (hash) => {
-        console.log("entre de las promesas")
+        console.log("entre de las promesas");
         console.log(username, email, password, nickname);
         const response = await Usuarios.create({
           username: username,
@@ -44,12 +44,18 @@ const postUser = async (req, res) => {
           isAdmin,
           nickname: nickname,
         })
-        .then((response) => {
-          console.log("entre de las promesas 2")
+          .then((response) => {
+            console.log("entre de las promesas 2");
             res.status(200).send("Usuario creado con exito");
           })
-          .then(mandarEmail(username, email, password, nickname));
-          console.log("sali de las promesas");
+          .then(() => {
+            try {
+              mandarEmail(username, email, password, nickname);
+            } catch (error) {
+              console.log(error);
+            }
+          });
+        console.log("sali de las promesas");
       })
       .catch((err) => {
         if (err) {
@@ -57,7 +63,7 @@ const postUser = async (req, res) => {
         }
       });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(404).send(error);
   }
 };
@@ -219,7 +225,6 @@ const putProfile = async (req, res) => {
         }
       );
       console.log("estoy saliendo update con ambos");
-  
     }
     let user = await Usuarios.findByPk(id);
     console.log(user);
@@ -240,22 +245,23 @@ const putProfile = async (req, res) => {
   }
 };
 const putModificarAdmin = async (req, res) => {
-  let { id } = req.body;
-
+  let { id, admin } = req.body;
   try {
-    const userValidate = await Usuarios.findOne({
-      where: { id: id },
-    });
+    if (admin === "true") {
+      const userValidate = await Usuarios.findOne({
+        where: { id: id },
+      });
 
-    if (!userValidate.dataValues.isAdmin) {
-      var user = await Usuarios.update(
-        { isAdmin: true },
-        {
-          where: {
-            id: id,
-          },
-        }
-      );
+      if (!userValidate.dataValues.isAdmin) {
+        var user = await Usuarios.update(
+          { isAdmin: true },
+          {
+            where: {
+              id: id,
+            },
+          }
+        );
+      }
     } else {
       var user = await Usuarios.update(
         { isAdmin: false },
@@ -266,8 +272,9 @@ const putModificarAdmin = async (req, res) => {
         }
       );
     }
-
-    res.status(200).json(user);
+    let userasd = await Usuarios.findByPk(id);
+    console.log(userasd);
+    res.status(200).json(userasd);
   } catch (error) {
     res.status(400).json(error);
   }
@@ -275,15 +282,15 @@ const putModificarAdmin = async (req, res) => {
 
 const putElminar = async (req, res) => {
   let { id } = req.body;
-
+console.log(id);
   try {
     var eliminado = await Usuarios.destroy({
       where: {
         id: id,
       },
     });
-
-    res.status(200).json(eliminado);
+    let userasd = await Usuarios.findByPk(id);
+    res.status(200).json(userasd);
   } catch (error) {
     res.status(400).json(error);
   }
@@ -292,7 +299,6 @@ const putElminar = async (req, res) => {
 const postgoogleuser = async (req, res) => {
   try {
     let { email, name, jti, picture } = req.body;
-
     const jwtPass = sign(
       JSON.stringify({
         username: name,
@@ -312,10 +318,12 @@ const postgoogleuser = async (req, res) => {
         .then(async (hash) => {
           var user = await Usuarios.create({
             username: name,
+            nickname: name,
             password: hash,
             email: email,
             picture: picture,
           }).then(mandarEmail(name, email, jti));
+          console.log("salio del create al service");
           return user;
         })
         .catch((err) => {

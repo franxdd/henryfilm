@@ -55,6 +55,10 @@ export const DELETED_MOVIE = "DELETED_MOVIE";
 export const DELETED_SERIE = "DELETED_SERIE";
 export const MODIFICAR_MOVIE = "MODIFICAR_MOVIE";
 export const MODIFICAR_SERIE = "MODIFICAR_SERIE";
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const PUT_ADMIN = "PUT_ADMIN";
+export const PUT_ELIMINAR = "PUT_ELIMINAR";
+export const WILLUNMOUNT3 = "WILLUNMOUNT3"
 
 function a(error) {
   return toast.error(error, {
@@ -126,7 +130,8 @@ export const deleteMovie = (payload) => {
   console.log(payload);
   return async function (dispatch) {
     let deleted = await axios.post(`/productosEliminados/postProd`, payload);
-    console.log(deleted);
+
+
     return dispatch({
       type: DELETED_MOVIE,
       payload: payload[0],
@@ -241,6 +246,15 @@ export const willunmont = () => {
   };
 };
 
+
+export const willunmont3 = () => {
+  return function (dispatch) {
+    return dispatch({
+      type: WILLUNMOUNT3,
+    });
+  };
+};
+
 export const PostUsuario = (payload) => {
   return async function (dispatch) {
     try {
@@ -268,7 +282,10 @@ export const PostLogin = (payload) => {
 
       sessionStorage.setItem("token", JSON.stringify(created.data[0]));
 
-      return dispatch({ type: POST_LOGIN, payload: created.data }, b(created.data[3]));
+      return dispatch(
+        { type: POST_LOGIN, payload: created.data },
+        b(created.data[3])
+      );
     } catch (error) {
       console.log("lelele", error);
       a(error.response.data);
@@ -298,9 +315,11 @@ export const logOut = (payload) => {
 export const signInUser = (payload) => {
   return async function (dispatch) {
     try {
-      // console.log("entro a al action");
+      console.log("entro a al action");
       var user = await axios.post("/usuarios/google", payload);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
     // {
     //   // withCredentials: true,
     // });
@@ -521,7 +540,10 @@ export const loadCurren = (payload) => {
 
 export const putPeliculas = (payload) => {
   return async (dispatch) => {
-    let created = await axios.put(`/${payload.tipo}s/modificar/${payload.id}`, payload);
+    let created = await axios.put(
+      `/${payload.tipo}s/modificar/${payload.id}`,
+      payload
+    );
     dispatch({
       type: PUT_PELICULA,
       payload: created,
@@ -540,7 +562,9 @@ export const createReview = (payload) => {
 
 export const getReview = (payload) => {
   return async (dispatch) => {
-    let creado = await axios.get(`/comentarios?id=${payload.id}&tipo=${payload.tipo}`);
+    let creado = await axios.get(
+      `/comentarios?id=${payload.id}&tipo=${payload.tipo}`
+    );
     return dispatch({
       type: GET_REVIEW,
       payload: creado.data,
@@ -585,5 +609,50 @@ export const usermodificado = (payload) => {
     payload: payload,
   };
 };
-//   }
-// }
+
+export const allusers = () => {
+  console.log("estoy entrando en la action");
+  return async function (dispatch) {
+    try {
+      let getUsers = await axios.get(`/usuarios`);
+
+      return dispatch({
+        type: GET_ALL_USERS,
+        payload: getUsers.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const putAdmin = (payload) => {
+  console.log(payload);
+  return async (dispatch) => {
+    try {
+      let profileA = await axios.put(`/usuarios/cambiar`, payload);
+
+      dispatch({
+        type: PUT_ADMIN,
+        payload: profileA.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const putElminar = (payload) => {
+  console.log(payload);
+  var objaux = {id:payload}
+  return async (dispatch) => {
+    try {
+      let profileB = await axios.put(`/usuarios/eliminar`, objaux);
+
+      dispatch({
+        type: PUT_ELIMINAR,
+        payload: payload,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

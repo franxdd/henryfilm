@@ -1,0 +1,63 @@
+@import "../Utilidades/_Variables.scss";
+.accordions {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .accordion {
+    width: 100%;
+    color: white;
+    overflow: hidden;
+  }
+  
+  .acc-label {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background: $negro;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .accordion:first-child {
+    border-bottom: 1px solid;
+  }
+  
+  .acc-label {
+    &:hover {
+      background: $detalles;
+      color: $negro
+    }
+  
+    &::after {
+      content: ">";
+      width: 1em;
+      height: 1em;
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+  }
+  
+  .acc-content {
+    max-height: 0;
+    padding: 0 1em;
+    background: $negro;
+    transition: all 0.4s ease;
+  }
+  
+  .inputP {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+  
+    &:checked {
+      + .acc-label::after {
+        transform: rotate(90deg);
+      }
+  
+      ~ .acc-content {
+        max-height: 100vh;
+        padding: 1em;
+      }
+    }
+  }
