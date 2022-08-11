@@ -16,6 +16,13 @@ const DashBoard = () => {
   return (
     <div>
       <div className="cubretodo">
+        <div className="accordions">
+          <div className="accordion">
+            <input className="inputP" type="checkbox" id="first" />
+            <label className="acc-label" for="first">
+              Administrar Usuarios
+            </label>
+            <div className="acc-content">
         {users &&
           users?.map((e) => {
             return (
@@ -26,11 +33,13 @@ const DashBoard = () => {
               />
             );
           })}
-
+            </div>
+          </div>
+        </div>
         <div className="accordions">
           <div className="accordion">
-            <input className="inputP" type="checkbox" id="first" />
-            <label className="acc-label" for="first">
+            <input className="inputP" type="checkbox" id="second" />
+            <label className="acc-label2" for="second">
               Agregar Pelicula
             </label>
             <div className="acc-content">

@@ -1,4 +1,8 @@
 @import "../Utilidades/_Variables.scss";
+.cubretodo{
+  width: 100%;
+  min-height: calc(100vh - 250px);
+}
 .accordions {
     border-radius: 8px;
     overflow: hidden;
@@ -14,11 +18,18 @@
     display: flex;
     justify-content: space-between;
     padding: 1em;
-    background: $negro;
+    background: $background-intermedio;
     font-weight: 700;
     cursor: pointer;
   }
-  
+  .acc-label2 {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background: $background-claro;
+    font-weight: 700;
+    cursor: pointer;
+  }
   .accordion:first-child {
     border-bottom: 1px solid;
   }
@@ -28,6 +39,22 @@
       background: $detalles;
       color: $negro
     }
+    
+  
+    &::after {
+      content: ">";
+      width: 1em;
+      height: 1em;
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+  }
+  .acc-label2 {
+    &:hover {
+      background: $negro;
+      color: $detalles
+    }
+    
   
     &::after {
       content: ">";
@@ -61,3 +88,4 @@
       }
     }
   }
+  
