@@ -49,6 +49,7 @@ import {
   GET_ALL_USERS,
   PUT_ADMIN,
   PUT_ELIMINAR,
+  WILLUNMOUNT3,
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -377,11 +378,17 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         seriesDetail: [],
       };
+
     case WILLUNMOUNT2:
       return {
         ...state,
         movieDetail: [],
         historial: {},
+      };
+    case WILLUNMOUNT3:
+      return {
+        ...state,
+        movieDetail: [],
       };
 
     case ORDER_NAME_ASC:

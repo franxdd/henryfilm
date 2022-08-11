@@ -58,6 +58,7 @@ export const MODIFICAR_SERIE = "MODIFICAR_SERIE";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const PUT_ADMIN = "PUT_ADMIN";
 export const PUT_ELIMINAR = "PUT_ELIMINAR";
+export const WILLUNMOUNT3 = "WILLUNMOUNT3"
 
 function a(error) {
   return toast.error(error, {
@@ -241,6 +242,15 @@ export const willunmont = () => {
   return function (dispatch) {
     return dispatch({
       type: WILLUNMOUNT,
+    });
+  };
+};
+
+
+export const willunmont3 = () => {
+  return function (dispatch) {
+    return dispatch({
+      type: WILLUNMOUNT3,
     });
   };
 };

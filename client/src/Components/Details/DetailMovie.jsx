@@ -102,7 +102,7 @@ function DetailMovie() {
     let idParseado2 = parseInt(id);
     dispatch(addToWishlist(idParseado2));
   }
-console.log();
+
   return movieDetail.length === 0 ? (
     <div className="Loading">
       <div className="loader"></div>
