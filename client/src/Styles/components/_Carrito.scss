@@ -1,6 +1,7 @@
 @import "../Utilidades/_Variables.scss";
 
 .container{
+    min-height: calc(100vh - 510px);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
