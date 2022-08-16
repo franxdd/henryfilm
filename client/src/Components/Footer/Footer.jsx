@@ -69,7 +69,7 @@ export default function Footer(){
             <div className="userPicture">
             <a href="https://www.linkedin.com/in/francisco-sequeira-349189240/" target="_blank">
             <img
-              src="https://media-exp1.licdn.com/dms/image/D5635AQH4SGFyHYs7wA/profile-framedphoto-shrink_800_800/0/1654722061874?e=1660521600&v=beta&t=Mnaqu39CK6BSEpPexYiWSfPLDLOjR-nvN-gzrb7R4SU"
+              src="https://media-exp1.licdn.com/dms/image/D4D35AQEuGLbqKWPNOQ/profile-framedphoto-shrink_400_400/0/1660605648948?e=1661270400&v=beta&t=YifuOprRPqF4jf0cF-vBZk9i1DzhF8CzQqro2uYmGrQ"
               alt="Person"
               className="cardImage"
             />
