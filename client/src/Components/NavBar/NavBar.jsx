@@ -325,10 +325,10 @@ const Nav2 = () => {
               </Link> */}
                     {/* </Typography> */}
                   </MenuItem>
-                </Menu>
                 <Button sx={{ color: "white" }} onClick={(e) => HandleClick(e)}>
                   Logout
                 </Button>
+                </Menu>
               </Box>
             ) : (
               <Link style={{ textDecoration: "none", color: "white" }} to={"/home/Login"}>
