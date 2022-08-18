@@ -47,7 +47,7 @@ export default function Footer(){
             <div className="userPicture">
             <a href="https://www.linkedin.com/in/matias-strficek-68a203142/" target="_blank">
             <img
-              src="https://media-exp1.licdn.com/dms/image/C4E03AQFGPUsQdYTX9Q/profile-displayphoto-shrink_800_800/0/1516930199489?e=1665619200&v=beta&t=ctcB57Q100ZIqhoE9olriUh9QdUkFtonYyBMbBcbfug"
+              src="https://media-exp1.licdn.com/dms/image/D4D35AQEZcUts61yCvA/profile-framedphoto-shrink_800_800/0/1660670981618?e=1661450400&v=beta&t=9urFAJ9pU3lFcJgu24rOft8Q-mEnfbkpKlPRdh2_5B8"
               alt="Person"
               className="cardImage"
             />
@@ -58,7 +58,7 @@ export default function Footer(){
             <div className="userPicture">
             <a href="https://www.linkedin.com/in/d%C3%A1rika-valdez-a367481a8/" target="_blank">
             <img
-              src="https://media-exp1.licdn.com/dms/image/C5603AQE7dwGfwtBf-A/profile-displayphoto-shrink_200_200/0/1654811649737?e=1665619200&v=beta&t=xaK97x7j7wtj8A5areorGO4N3mP2DByK2KcakvTsYS8"
+              src="https://media-exp1.licdn.com/dms/image/D4E35AQGwE0qcEsR37w/profile-framedphoto-shrink_200_200/0/1660674026779?e=1661450400&v=beta&t=tWZN71PIndik5HdZ7pHTrYrcW4cgz82Ph-wE_RtbgC0"
               alt="Person"
               className="cardImage"
             />
@@ -69,7 +69,7 @@ export default function Footer(){
             <div className="userPicture">
             <a href="https://www.linkedin.com/in/francisco-sequeira-349189240/" target="_blank">
             <img
-              src="https://media-exp1.licdn.com/dms/image/D4D35AQEuGLbqKWPNOQ/profile-framedphoto-shrink_400_400/0/1660605648948?e=1661270400&v=beta&t=YifuOprRPqF4jf0cF-vBZk9i1DzhF8CzQqro2uYmGrQ"
+              src="https://media-exp1.licdn.com/dms/image/D4D35AQEIZFbpVg3MhQ/profile-framedphoto-shrink_800_800/0/1660736391600?e=1661450400&v=beta&t=lNHh3tgXfSj4RNdo8i7_HJbx_99Yl2N1AtJmJHrfQI0"
               alt="Person"
               className="cardImage"
             />
