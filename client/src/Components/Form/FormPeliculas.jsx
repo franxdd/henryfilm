@@ -59,7 +59,7 @@ const FormPeliculas = () => {
   }, [tipo]);
 
   function peliculaCreada() {
-    return toast.error("Necesitas logearte", {
+    return toast.success("Producto creado", {
       position: "bottom-left",
       autoClose: 2000,
       hideProgressBar: false,
@@ -117,7 +117,7 @@ const FormPeliculas = () => {
       }
     }
 
-    navigate("/home", { replace: true });
+    // navigate("/home", { replace: true });
   };
 
   const HandleChangeGeneros = (e) => {

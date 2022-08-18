@@ -158,6 +158,7 @@ const initialState = {
   wishlist: wishlistStorage,
   allUser: [],
   isadmin: [],
+  flag : false,
 };
 
 const rootRouter = (state = initialState, action) => {
@@ -184,10 +185,11 @@ const rootRouter = (state = initialState, action) => {
         }
         return e;
       });
-      console.log(array);
+      console.log(state.flag);
       return {
         ...state,
         allUser: array,
+        flag: state.flag ? false : true
       };
     case PUT_ELIMINAR:
       var elimino = action.payload;
@@ -307,13 +309,15 @@ const rootRouter = (state = initialState, action) => {
       // console.log(action.payload)
       sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
       let local = localStorage.getItem("cart") || [];
-      
       let carroTotal;
       let jsonTotal = JSON.parse(local);
-   
-      if (local !== "undefined") {
+      let arrAuxjson = jsonTotal.slice()
+      console.log(action.payload[1])
+      console.log(jsonTotal)
 
-        carroTotal = [...new Set(jsonTotal, ...action.payload[1])]
+      if (arrAuxjson.length !== 0) {
+        // carroTotal = [new Set( ...action.payload[1])]
+        carroTotal = [...new Set(jsonTotal, action.payload[1])]
         // carroTotal = [...jsonTotal, ...action.payload[1]];
       } else {
         carroTotal = [...action.payload[1]];
@@ -384,6 +388,8 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         errores: action.payload,
+        allMovies: [...state.allMovies],
+        allSeries: [...state.allSeries]
       };
     case WILLUNMOUNT:
       return {
