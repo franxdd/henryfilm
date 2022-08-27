@@ -47,7 +47,7 @@ export default function Footer(){
             <div className="userPicture">
             <a href="https://www.linkedin.com/in/matias-strficek-68a203142/" target="_blank">
             <img
-              src="https://media-exp1.licdn.com/dms/image/D4D35AQEZcUts61yCvA/profile-framedphoto-shrink_800_800/0/1660670981618?e=1661450400&v=beta&t=9urFAJ9pU3lFcJgu24rOft8Q-mEnfbkpKlPRdh2_5B8"
+              src="https://avatars.githubusercontent.com/u/40149380?v=4"
               alt="Person"
               className="cardImage"
             />
@@ -58,7 +58,7 @@ export default function Footer(){
             <div className="userPicture">
             <a href="https://www.linkedin.com/in/d%C3%A1rika-valdez-a367481a8/" target="_blank">
             <img
-              src="https://media-exp1.licdn.com/dms/image/D4E35AQGwE0qcEsR37w/profile-framedphoto-shrink_200_200/0/1660674026779?e=1661450400&v=beta&t=tWZN71PIndik5HdZ7pHTrYrcW4cgz82Ph-wE_RtbgC0"
+              src="https://avatars.githubusercontent.com/u/102616109?v=4"
               alt="Person"
               className="cardImage"
             />
@@ -69,7 +69,7 @@ export default function Footer(){
             <div className="userPicture">
             <a href="https://www.linkedin.com/in/francisco-sequeira-349189240/" target="_blank">
             <img
-              src="https://media-exp1.licdn.com/dms/image/D4D35AQEIZFbpVg3MhQ/profile-framedphoto-shrink_800_800/0/1660736391600?e=1661450400&v=beta&t=lNHh3tgXfSj4RNdo8i7_HJbx_99Yl2N1AtJmJHrfQI0"
+              src="https://avatars.githubusercontent.com/u/99943249?v=4"
               alt="Person"
               className="cardImage"
             />
