@@ -1,5 +1,14 @@
 @import "../Utilidades/_Variables.scss";
 
+
+.gSignIn{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .ContainerLogin{
   background-image: url("../../img/Landing3.png");
   display: flex;
@@ -7,7 +16,7 @@
   background-size: cover;
   height: 100%;
  .form {
-    margin-top: 35px;
+
     background: black;
     box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
     border-radius: 5px;
@@ -53,7 +62,6 @@
     // width: 380px;
     // transition: ease 0.5s;
   }
-  
   .formEntry {
     // display: block;
     margin: 20px auto;
@@ -83,7 +91,7 @@
   }
 }
   
-@media screen and (max-width: 500px){
+@media screen and (max-width: 600px){
   .ContainerLogin{
     background-image: url("../../img/Landing3.png");
     display: flex;
@@ -96,7 +104,7 @@
       margin-left: auto;
 
     }
-  
+
     .formEntry {
       // display: block;
       margin: 20px auto;

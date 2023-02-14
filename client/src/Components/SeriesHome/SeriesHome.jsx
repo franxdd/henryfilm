@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardSeries from "../CardSeries/CardSeries";
@@ -9,7 +9,8 @@ import {
   orderVoteAvgDES,
   filtradoGeneroSeries,
   filtradoGeneroSeriesReversa,
-  getGenerosSeries
+  getGenerosSeries,
+  getTodo,
 } from "../../Redux/Actions/Actions";
 import Paginacion from "./PaginadoSeries";
 import "../../Styles/components/_SeriesHome.scss";
@@ -17,11 +18,14 @@ import "../../Styles/components/_Filter.scss"
 import "../../Styles/components/_Loading.scss";
 import {AiOutlineClear as ClearIcon} from "react-icons/ai";
 import {FaWindowClose} from "react-icons/fa";
+import { VscChromeClose as CloseIcon } from "react-icons/vsc";
+
 
 function SeriesHome() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getGenerosSeries());
+    dispatch(getTodo());
   }, []);
   
   let allSeries = useSelector((state) => state.allSeries);
@@ -38,8 +42,14 @@ function SeriesHome() {
 
   const FiltradoGenero = (e) => {
     let arrsetgenero = [...new Set([e.target.value, ...generosCache])];
+    let notinclude = allSeries?.map(e=> e.genre_ids)
+    let notinclude2 = notinclude?.map(a=> a.includes(e.target.value))
     setgenerosCache(arrsetgenero);
     dispatch(filtradoGeneroSeries(e.target.value));
+    if(!notinclude2.includes(true)){
+      console.log("entre al if");
+      setgenerosCache([])
+    }
   };
   const FiltradoReversa = (g) => {
     var auxArr = generosCache.filter((fil) => fil !== g);
@@ -89,15 +99,15 @@ function SeriesHome() {
         <span className="hover-underline-animation"> <strong> - </strong>Puntuación </span>
       </button>
       <span>Filtrar por:</span>
-      <div className="Selects">
-        <div className="select-genero">
-          <select
-            name="FiltroGenero"
+      
+      <div className="select2">
+        <div className="select">
+        <select      
+            name="format" id="format"
             onChange={(e) => FiltradoGenero(e)}
             defaultValue={"Default"}
-            className="selectgenero"
           >
-            <option value={"Default"}>Generos..</option>
+            <option selected disabled value={"Default"}>Generos..</option>
             {generos?.map((t) => (
               <option key={t.id} value={t.name}>
                 {t.name}
@@ -105,7 +115,6 @@ function SeriesHome() {
             ))}
           </select>
         </div>
-      </div>
       <abbr title="Limpiar Filtros">
       <span onClick={() => HandleClickClear()}>
         <ClearIcon className="icono-clear" />
@@ -113,17 +122,18 @@ function SeriesHome() {
       </abbr>
       {generosCache?.map((g) => {
         return (
-          <button onClick={() => FiltradoReversa(g)}>
-            {" "}
-            {g} <FaWindowClose />
-          </button>
+          <button classname="filterBoton" onClick={() => FiltradoReversa(g)}><span>
+          {" "}
+          {g} {" "}<CloseIcon color="yellow" size='14' /></span>
+        </button>
         );
       })}
+      </div>
 
       <div className="contenedor-seccion">
         <div className="contenedor-resultados">
           {allpSeries.map((e) => {
-            return <CardSeries key={e.id} id={e.id} name={e.name} poster={e.posterImagen} />;
+            return <CardSeries key={e.id} id={e.id} name={e.name} poster={e.posterImagen} tipo={e.tipo} />;
           })}
         </div>
       </div>

@@ -66,9 +66,130 @@
       color: $blanco;
       font-size: 25px;
       margin-right: 20px;
-      margin-left: 10px;
+      margin-left: 20px;
+      cursor: pointer;
     }
     .icono-clear:hover {
       color: $detalles;
     }
-    }
+  .select2{
+   margin-top: 10px;
+     display: flex;
+      color: #fff;
+   select {
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      -ms-appearance:none;
+      appearance:none;
+      outline:0;
+      box-shadow:none;
+      border:0!important;
+      background:$background-claro;
+      background-image: none;
+      flex: 1;
+      padding: 0 .5em;
+      color:#fff;
+      cursor:pointer;
+      font-size: 15px;
+ 
+      select option:hover{
+       background : #fff ;
+       }
+   }
+   select::-ms-expand {
+      display: none;
+   }
+   .select {
+      position: relative;
+      display: flex;
+      width: 130px;
+      height: 25px;
+      line-height: 3;
+      background: #353737;
+      overflow: hidden;
+      border-radius: .25em;
+   }
+   .select::after {
+      content: '\25BC';
+      position: absolute;
+      top: -11px;
+      right: 0;
+      padding: 0 0.7em;
+      background: #2b2e2e;
+      cursor:pointer;
+      pointer-events:none;
+      transition:.25s all ease;
+   }
+   .select:hover::after {
+      color: $detalles;
+   }
+
+   button {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      background:$background-claro;
+      box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      border: none;
+      margin-right:15px;
+      
+   }
+   
+   button:after {
+      content: " ";
+      width: 0%;
+      height: 100%;
+      background: black;
+      position: absolute;
+      transition: all 0.4s ease-in-out;
+      right: 0;
+   }
+   
+   button:hover::after {
+      right: auto;
+      left: 0;
+      width: 100%;
+   }
+   
+   button span {
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      width: 100%;
+      padding: 3px 5px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      // letter-spacing: 0.1em;
+      z-index: 20;
+      transition: all 0.3s ease-in-out;
+   }
+  
+   
+     button:hover span {
+      color:$detalles;
+      font-weight: 500;
+      animation: scaleUp 0.3s ease-in-out;
+     }
+     @keyframes scaleUp {
+      0% {
+       transform: scale(1);
+      }
+     
+      50% {
+       transform: scale(0.95);
+      }
+     
+      100% {
+       transform: scale(1);
+      }
+     }
+     
+  }
+  .iconClose{
+   margin-top: 10px;
+  }
+}

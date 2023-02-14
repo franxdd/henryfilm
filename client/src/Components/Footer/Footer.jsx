@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import logo from "../../img/logo.png"
 import "../../Styles/components/_Footer.scss"
 import { Link } from "react-router-dom";
@@ -23,9 +23,9 @@ export default function Footer(){
             <ul className="Fotos">
             <li>
             <div className="userPicture">
-            <a href="https://github.com/aleframirez" target="_blank">
+            <a href="https://www.linkedin.com/in/alejandro-ramirez-64931919a/" target="_blank">
             <img
-              src="https://avatars.githubusercontent.com/u/96086242?v=4"
+              src="https://media-exp1.licdn.com/dms/image/C4E03AQFzkN5JRDGP2g/profile-displayphoto-shrink_800_800/0/1651196430788?e=1665619200&v=beta&t=HXkr-yfX8wAw7_4_yMCIrFImczjX1KHharlNolFKaUY"
               alt="Person"
               className="cardImage"
             />
@@ -34,7 +34,7 @@ export default function Footer(){
           </li>
           <li>
             <div className="userPicture">
-            <a href="https://github.com/EdgarRossi" target="_blank">
+            <a href="https://www.linkedin.com/in/edgar-rossi-a514ba211/" target="_blank">
             <img
               src="https://avatars.githubusercontent.com/u/51724649?v=4"
               alt="Person"
@@ -45,7 +45,7 @@ export default function Footer(){
           </li>
           <li>
             <div className="userPicture">
-            <a href="https://github.com/matiasstr" target="_blank">
+            <a href="https://www.linkedin.com/in/matias-strficek-68a203142/" target="_blank">
             <img
               src="https://avatars.githubusercontent.com/u/40149380?v=4"
               alt="Person"
@@ -56,7 +56,7 @@ export default function Footer(){
           </li>
           <li>
             <div className="userPicture">
-            <a href="https://github.com/Darikita" target="_blank">
+            <a href="https://www.linkedin.com/in/d%C3%A1rika-valdez-a367481a8/" target="_blank">
             <img
               src="https://avatars.githubusercontent.com/u/102616109?v=4"
               alt="Person"
@@ -67,7 +67,7 @@ export default function Footer(){
           </li>
           <li>
             <div className="userPicture">
-            <a href="https://github.com/franxdd" target="_blank">
+            <a href="https://www.linkedin.com/in/francisco-sequeira-349189240/" target="_blank">
             <img
               src="https://avatars.githubusercontent.com/u/99943249?v=4"
               alt="Person"

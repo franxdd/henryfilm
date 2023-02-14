@@ -17,7 +17,7 @@
   ::-webkit-input-placeholder {
     font-size: 1.1em;
   }
-  
+
   .name2 {
     background-color: #ebebeb;
     color: rgb(0, 0, 0);
@@ -39,24 +39,24 @@
   .submit2 {
     width: 50%;
     color: rgb(0, 0, 0);
-    background-color: $detalles;
+    background-color: $background-intermedio;
     font-size: 20px;
-    cursor: pointer
+    cursor: pointer;
+    color: $detalles;
   }
   .submit2:hover {
-
-    background-color: $background-intermedio;
-    color:$detalles;
+    background-color:$detalles;
+    color:  $background-intermedio;
   }
 .ratingStyle{
   margin-left: 180px;
 }
 
 }
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 600px) {
     .form3 {
       margin-left: 15px;
-      width: 330px;
+      width: 320px;
  
     }
     ::-webkit-input-placeholder {

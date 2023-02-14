@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import "../../Styles/components/_Form.scss";
 import "../../Styles/components/_Login.scss";
@@ -12,6 +12,7 @@ function LoginRegister() {
     username: "",
     email: "",
     password: "",
+    nickname:""
   });
   function handdleChange(e) {
     setInput({
@@ -21,12 +22,13 @@ function LoginRegister() {
   }
   function handdleSubmit(e) {
     e.preventDefault();
-    console.log('entro al register')
+    // console.log('entro al register')
     dispatch(PostUsuario(input));
     setInput({
       username: "",
       email: "",
       password: "",
+      nickname:"",
     });
     navigate("/home/login");
   }
@@ -43,6 +45,15 @@ function LoginRegister() {
               value={input.username}
               name="username"
               placeholder="Usuario: "
+              className="name formEntry"
+              onChange={handdleChange}
+            />
+            <input
+              autoComplete="off"
+              type={"text"}
+              value={input.nickname}
+              name="nickname"
+              placeholder="Nickname: "
               className="name formEntry"
               onChange={handdleChange}
             />

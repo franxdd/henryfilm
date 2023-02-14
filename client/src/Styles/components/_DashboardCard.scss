@@ -1,0 +1,196 @@
+@import "../Utilidades/_Variables.scss";
+
+.card25 {
+    width: 220px;
+    height: 80px;
+    transition: all .5s;
+    box-shadow: 15px 15px 30px rgba(25, 25, 25, 0.11),
+               -15px -15px 30px rgba(60, 60, 60, 0.082);
+    text-align: center;
+    overflow: hidden;
+    margin-bottom: 7px;
+  }
+  
+  .card25:hover {
+    height: 224px;
+    background: linear-gradient(360deg, #edededc5 60%, hsla(0, 0%, 13%, 1) 70%);
+  }
+  
+  .card25 .header {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #212121;
+    margin-bottom: 16px;
+  }
+  
+  .card25 .header .img-box {
+    width: 50px;
+  }
+  
+  .card25 .header .title {
+    font-size: 1.1em;
+    letter-spacing: .1em;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 4px 0 14px 0;
+    transition: all .5s;
+    color: #edededc5;
+  }
+  
+  .card25:hover .header {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 96%);
+  }
+  
+  .card25:hover .card25 .header .title {
+    padding: 0;
+  }
+  
+  .card .content {
+    display: block;
+    text-align: justify;
+    color: #212121;
+    margin: 0 18px;
+  }
+  
+  .card .content p {
+    transition: all .5s;
+    font-size: 1em;
+    margin-bottom: 8px;
+  }
+  
+  .card .content a {
+    color: $detalles;
+    cursor: pointer;
+    transition: all .5s;
+    font-size: .8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  
+  .card .content .btn-link:hover {
+    border-bottom: 1px solid $detalles;
+  }
+  .select4{
+    margin-top: 10px;
+    display: flex;
+    color: #fff;
+    select {
+       -webkit-appearance:none;
+       -moz-appearance:none;
+       -ms-appearance:none;
+       appearance:none;
+       outline:0;
+       box-shadow:none;
+       border:0!important;
+       background:$background-claro;
+       background-image: none;
+       flex: 1;
+       padding: 0 .5em;
+       color:#fff;
+       cursor:pointer;
+       font-size: 15px;
+  
+       select option:hover{
+        background : #fff ;
+        }
+    }
+    select::-ms-expand {
+       display: none;
+    }
+    .select {
+       position: relative;
+       display: flex;
+       width: 130px;
+       height: 25px;
+       line-height: 3;
+       background: #353737;
+       overflow: hidden;
+       border-radius: .25em;
+    }
+    .select::after {
+       content: '\25BC';
+       position: absolute;
+       top: -11px;
+       right: 0;
+       padding: 0 0.7em;
+       background: #2b2e2e;
+       cursor:pointer;
+       pointer-events:none;
+       transition:.25s all ease;
+    }
+    .select:hover::after {
+       color: $detalles;
+    }
+ 
+    button {
+       padding: 12px;
+       color:#fff;
+       position: relative;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       background:$background-claro;
+       box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+       overflow: hidden;
+       border: none;   
+    }
+    
+    button:after {
+       content: " ";
+       width: 0%;
+       height: 100%;
+       color:$detalles;
+       background: black;
+       position: absolute;
+       transition: all 0.4s ease-in-out;
+       right: 0;
+       
+    }
+    
+    button:hover::after {
+       right: auto;
+       left: 0;
+       width: 100%;
+       color:$detalles;
+    }
+    
+    button span {
+        margin-left: -5%;
+       justify-content: center;
+       text-align: center;
+       text-decoration: none;
+       width: 100%;
+       color: #fff;
+       font-size: 14px;
+       font-weight: 400;
+       // letter-spacing: 0.1em;
+       z-index: 20;
+       transition: all 0.3s ease-in-out;
+    }
+   
+    
+      button:hover span {
+       color:$detalles;
+       font-weight: 400;
+       animation: scaleUp 0.3s ease-in-out;
+      }
+      @keyframes scaleUp {
+       0% {
+        transform: scale(1);
+       }
+      
+       50% {
+        transform: scale(0.95);
+       }
+      
+       100% {
+        transform: scale(1);
+       }
+      }
+      
+   }
+
+ 

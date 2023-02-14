@@ -1,19 +1,32 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { postPeliculas, getGenerosMovies } from "../../Redux/Actions/Actions";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  postPeliculas,
+  getGenerosMovies,
+  getGenerosSeries,
+} from "../../Redux/Actions/Actions";
 import validate from "../../util/validate.js";
 import poster from "../../img/poster.jpg";
 import back from "../../img/backdrop.jpg";
 import "../../Styles/components/_FormPeliculas.scss";
+import { toast } from "react-toastify";
+
 
 const FormPeliculas = () => {
   let dispatch = useDispatch();
+  let navigate = useNavigate();
   useEffect(() => {
     dispatch(getGenerosMovies());
+    dispatch(getGenerosSeries());
   }, []);
 
-  const generos = useSelector((state) => state.generosMovies);
+  // var generos; // 343
+  const auxGenerosMovie = useSelector((state) => state.generosMovies);
+  const auxGenerosSerie = useSelector((state) => state.generosSeries);
+  const [generos, setGeneros] = useState();
+  const [tipo, setTipo] = useState("");
   const [error, setError] = useState({ " ": " " });
   const [data, setdata] = useState({
     name: "",
@@ -22,6 +35,9 @@ const FormPeliculas = () => {
     cast: [],
     runtime: "",
     release_date: "",
+    number_of_episodes: "",
+    episode_run_time: "",
+    number_of_seasons: "",
     posterImagen: null,
     backDropImagen: null,
     vote_average: "",
@@ -29,9 +45,35 @@ const FormPeliculas = () => {
     tipo: "",
   });
 
+  useEffect(() => {
+
+    // console.log(tipo)
+
+    if (tipo === "serie") {
+      // generos = auxGenerosSerie.slice()
+      setGeneros(auxGenerosSerie);
+    } else if (tipo === "pelicula") {
+      // generos = auxGenerosMovie.slice()
+      setGeneros(auxGenerosMovie);
+    }
+  }, [tipo]);
+
+  function peliculaCreada() {
+    return toast.success("Producto creado", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+
   const HandleSubmit = (e) => {
     e.preventDefault();
-    console.log("entre al inicio del submit");
+    // console.log("entre al inicio del submit");
     if (data.backDropImagen === "Alt") {
       data.backDropImagen = back;
     }
@@ -40,10 +82,11 @@ const FormPeliculas = () => {
     }
     // const reader = new FileReader();
     // reader.readAsDataURL(data.backDropImagen);
-    console.log("entro en el submit");
+
     dispatch(postPeliculas(data));
-    console.log(data);
-    alert("Pelicula creada");
+    // console.log(data);
+    // alert("Pelicula creada");
+    peliculaCreada()
     setdata({
       name: "",
       genre_ids: [],
@@ -51,8 +94,9 @@ const FormPeliculas = () => {
       cast: [],
       runtime: "",
       release_date: "",
-      number_of_episodes:"",
-      episode_run_time:"",
+      number_of_episodes: "",
+      episode_run_time: "",
+      number_of_seasons: "",
       posterImagen: null,
       backDropImagen: null,
       vote_average: "",
@@ -72,6 +116,8 @@ const FormPeliculas = () => {
         e.target[i].selectedIndex = 0;
       }
     }
+
+    // navigate("/home", { replace: true });
   };
 
   const HandleChangeGeneros = (e) => {
@@ -96,6 +142,7 @@ const FormPeliculas = () => {
       ...data,
       tipo: e.target.value,
     });
+    setTipo(e.target.value);
     setError(
       validate({
         ...data,
@@ -111,10 +158,7 @@ const FormPeliculas = () => {
       e.value = "";
     }
   };
-   const HandleInput = (e) => {
-    console.log(data);
-    console.log(e.target.files);
-    console.log("entro");
+  const HandleInput = (e) => {
     if (e.target.id === "posterImagen") {
       const file = e.target.files[0];
       const reader = new FileReader();
@@ -145,7 +189,7 @@ const FormPeliculas = () => {
         [e.target.name]: e.target.value,
       });
     }
-
+    
     setError(validate({ ...data, [e.target.name]: e.target.value }));
   };
 
@@ -156,8 +200,7 @@ const FormPeliculas = () => {
       genre_ids: arrAux,
     });
   };
-
-  console.log(data);
+  
   return (
     <>
       <div className="ContainerForm2">
@@ -173,6 +216,7 @@ const FormPeliculas = () => {
                 className="name formEntry2"
                 onChange={(e) => HandleInput(e)}
               />
+            <h4 style={{ color: "white" }}>{error.name}</h4>
             </div>
             <textarea
               id="Overview"
@@ -184,6 +228,7 @@ const FormPeliculas = () => {
               placeholder="Descripción:"
               onChange={(e) => HandleInput(e)}
             />
+            <h4 style={{ color: "white" }}>{error.overview}</h4>
             <section className="containerSelect">
               <div className="dropdown">
                 <select
@@ -197,6 +242,7 @@ const FormPeliculas = () => {
                 </select>
               </div>
             </section>
+            <h4 style={{ color: "white" }}>{error.tipo}</h4>
             {data && data.tipo === "pelicula" ? (
               <div className="nombreconteiner">
                 <input
@@ -207,7 +253,9 @@ const FormPeliculas = () => {
                   className="name formEntry2"
                   onChange={(e) => HandleInput(e)}
                 />
+                <h4 style={{ color: "white" }}>{error.runtime}</h4>
               </div>
+              
             ) : (
               <div>
                 <div className="nombreconteiner">
@@ -220,6 +268,7 @@ const FormPeliculas = () => {
                     onChange={(e) => HandleInput(e)}
                   />
                 </div>
+                <h4 style={{ color: "white" }}>{error.number_of_episodes}</h4>
                 <div className="nombreconteiner">
                   <input
                     id="episode_run_time"
@@ -230,8 +279,20 @@ const FormPeliculas = () => {
                     onChange={(e) => HandleInput(e)}
                   />
                 </div>
+                <div className="nombreconteiner">
+                  <input
+                    id="number_of_seasons"
+                    type="text"
+                    name="number_of_seasons"
+                    placeholder="Temporadas:"
+                    className="name formEntry2"
+                    onChange={(e) => HandleInput(e)}
+                  />
+                </div>
               </div>
             )}
+            {data && data.tipo === "pelicula" ? (
+
 
             <div className="nombreconteiner">
               <input
@@ -242,7 +303,14 @@ const FormPeliculas = () => {
                 className="name formEntry2"
                 onChange={(e) => HandleInput(e)}
               />
+            <h4 style={{ color: "white" }}>{error.release_date}</h4>
             </div>
+
+
+
+            ):(
+              <></>
+            )}
 
             <div className="nombreconteiner">
               <input
@@ -254,7 +322,7 @@ const FormPeliculas = () => {
                 onChange={(e) => HandleInput(e)}
               />
             </div>
-
+            <h4 style={{ color: "white" }}>{error.vote_average}</h4>
             <div className="nombreconteiner">
               <input
                 id="popularity"
@@ -265,7 +333,8 @@ const FormPeliculas = () => {
                 onChange={(e) => HandleInput(e)}
               />
             </div>
-
+            <h4 style={{ color: "white" }}>{error.popularity}</h4>
+      
             <div className="nombreconteiner">
               <input
                 id="elenco"
@@ -283,8 +352,8 @@ const FormPeliculas = () => {
               >
                 Agregar{" "}
               </button>
-            </div>
-
+            </div>   
+            <h4 style={{ color: "white" }}>{error.cast}</h4>
             <div className="nombreconteiner">
               <input
                 id="posterImagen"
@@ -296,6 +365,7 @@ const FormPeliculas = () => {
                 className="name formEntry2"
               />
             </div>
+            <h4 style={{ color: "white" }}>{error.posterImagen}</h4>
             <div className="nombreconteiner">
               <input
                 id="backDropImagen"
@@ -306,22 +376,29 @@ const FormPeliculas = () => {
                 className="name formEntry2"
               />
             </div>
-            <section className="containerSelect">
-              <div className="dropdown">
-                <select
-                  name="generos"
-                  onChange={(e) => HandleChangeGeneros(e)}
-                  className="dropdown-select"
-                >
-                  <option value=" ">Generos..</option>
-                  {generos?.map((t) => (
-                    <option key={t.id} value={t.name}>
-                      {t.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </section>
+            <h4 style={{ color: "white" }}>{error.backDropImagen}</h4>
+            {data.tipo !== "" ? (
+              <section className="containerSelect">
+                <div className="dropdown">
+                  <select
+                    name="generos"
+                    onChange={(e) => HandleChangeGeneros(e)}
+                    className="dropdown-select"
+                  >
+                    <option value=" ">Generos..</option>
+                    {generos?.map((t) => (
+                      <option key={t.id} value={t.name}>
+                        {t.name}
+                      </option>
+                    ))}
+            <h4 style={{ color: "white" }}>{error.genre_ids}</h4>
+                  </select>
+                </div>
+              </section>
+            ) : (
+              <></>
+            )}
+
             {data.genre_ids?.map((g) => (
               <div style={{ color: "white" }} onClick={() => eliminarGenero(g)}>
                 {g}
@@ -339,19 +416,7 @@ const FormPeliculas = () => {
           </form>
 
           <div className="erroresconteiner">
-            <h2 style={{ color: "white" }}>{error.name}</h2>
-            <h2 style={{ color: "white" }}>{error.genre_ids}</h2>
-            <h2 style={{ color: "white" }}>{error.overview}</h2>
-            <h2 style={{ color: "white" }}>{error.release_date}</h2>
-            <h2 style={{ color: "white" }}>{error.vote_average}</h2>
-            <h2 style={{ color: "white" }}>{error.cast}</h2>
-            <h2 style={{ color: "white" }}>{error.posterImagen}</h2>
-            <h2 style={{ color: "white" }}>{error.backDropImagen}</h2>
-            <h2 style={{ color: "white" }}>{error.popularity}</h2>
-            <h2 style={{ color: "white" }}>{error.tipo}</h2>
-            <h2 style={{ color: "white" }}>{error.runtime}</h2>
-            <h2 style={{ color: "white" }}>{error.episode_run_time}</h2>
-            <h2 style={{ color: "white" }}>{error.number_of_episodes}</h2>
+                
           </div>
 
           <div className="conteinerbackDropImagen">

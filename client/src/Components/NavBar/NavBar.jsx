@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import AppBar from "@mui/material/AppBar";
@@ -13,8 +13,6 @@ import Avatar from "@mui/material/Avatar";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import LoginIcon from "@mui/icons-material/Login";
-import LogoutIcon from "@mui/icons-material/Logout";
 import { Outlet } from "react-router-dom";
 import logo from "../../img/logo.png";
 import "../../Styles/components/_NavBar.scss";
@@ -30,15 +28,12 @@ import {
   logOut,
 } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_NavBar.scss";
-import {
-  BiHomeHeart as HomeIcon,
-  BiCameraMovie as CamaraIcon,
-} from "react-icons/bi";
+import { BiHomeHeart as HomeIcon, BiCameraMovie as CamaraIcon } from "react-icons/bi";
 import { MdAddShoppingCart as ShopIcon } from "react-icons/md";
 import { FiMonitor as MonitorIcon } from "react-icons/fi";
 import SearchBar from "../SearchBar/SearchBar";
 import perfil from "../../img/perfil2.png";
-import perfiladmin from "../../img/perfil3.png";
+
 
 function getToken() {
   const tokenString = sessionStorage.getItem("token");
@@ -47,8 +42,8 @@ function getToken() {
 }
 
 const Nav2 = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   let navigate = useNavigate();
   let cart = useSelector((state) => state.cart);
@@ -56,11 +51,11 @@ const Nav2 = () => {
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-    console.log("Estoy haciendo click");
+ 
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-    console.log("Estoy haciendo click2");
+  
   };
 
   const handleCloseNavMenu = () => {
@@ -124,17 +119,17 @@ const Nav2 = () => {
     sessionStorage.removeItem("token");
     localStorage.setItem("cart", JSON.stringify([]));
     localStorage.setItem("wishlist", JSON.stringify([]));
-
+    // $crisp.push(['do', 'session:reset']);
     navigate("/home");
   };
 
   // **************************** ESTA COMENTADO PORQUE EL LOG OUT ESTA EN PROFILE ***********************************
-
+  let foto = userReducer.picture === "" ? perfil : userReducer.picture;
   // return userReducer.isAdmin ? (
   return (
     <main>
       <AppBar position="static" sx={{ background: "black" }}>
-        <Container maxWidth="xl">
+        <Container maxWidth="xxl">
           <Toolbar disableGutters>
             <Link to="/" style={{ textDecoration: "none" }}>
               <Typography
@@ -151,13 +146,7 @@ const Nav2 = () => {
                 }}
               >
                 <Link className="logo" to={"/"}>
-                  <img
-                    className="logo"
-                    src={logo}
-                    alt="Logo"
-                    height="auto"
-                    width="130px"
-                  />
+                  <img className="logo" src={logo} alt="Logo" height="auto" width="130px" />
                 </Link>
               </Typography>
             </Link>
@@ -227,13 +216,7 @@ const Nav2 = () => {
                 }}
               >
                 <Link className="logo" to={"/"}>
-                  <img
-                    className="logo"
-                    src={logo}
-                    alt="Logo"
-                    height="auto"
-                    width="100px"
-                  />
+                  <img className="logo" src={logo} alt="Logo" height="auto" width="100px" />
                 </Link>
               </Typography>
             </Link>
@@ -244,27 +227,18 @@ const Nav2 = () => {
               }}
             >
               <Link style={{ textDecoration: "none" }} to="/home">
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white" }}
-                >
+                <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white" }}>
                   {" "}
                   <HomeIcon className="iconoHome" />
                 </Button>
               </Link>
               <Link style={{ textDecoration: "none" }} to="/home/peliculas">
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white" }}
-                >
+                <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white" }}>
                   <CamaraIcon className="iconoHome" />
                 </Button>
               </Link>
               <Link style={{ textDecoration: "none" }} to="/home/series">
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white" }}
-                >
+                <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white" }}>
                   <MonitorIcon className="iconoHome" />
                 </Button>
               </Link>
@@ -284,8 +258,9 @@ const Nav2 = () => {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Abrir las opciones">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar src={foto}/>
                     {/* <Avatar src={userReducer.username ?.img || "/broken-image.jpg"} /> */}
-                    <img src={perfil} height="auto" width="40px" />
+                    {/* <img src={foto} height="40px" width="40px"  border-radius= "50%"/> */}
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -305,10 +280,7 @@ const Nav2 = () => {
                   onClose={handleCloseUserMenu}
                 >
                   <MenuItem onClick={handleCloseUserMenu}>
-                    <Link
-                      to="/home/userProfile"
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
+                    <Link to="/home/userProfile" style={{ textDecoration: "none", color: "black" }}>
                       <Typography textalign="center">Perfil</Typography>
                     </Link>
                   </MenuItem>
@@ -317,30 +289,19 @@ const Nav2 = () => {
                   ) : userReducer.isAdmin ? (
                     <>
                       <MenuItem>
-                        <Link
-                          to="/home/agregar"
-                          style={{ textDecoration: "none", color: "black" }}
-                        >
-                          <Typography textaling="center">
-                            Agregar Producto
-                          </Typography>
+                        <Link to="/home/dashBoard" style={{ textDecoration: "none", color: "black" }}>
+                          <Typography textaling="center">DashBoard</Typography>
                         </Link>
                       </MenuItem>
                       <MenuItem>
-                        <Link
-                          to="/home/modificar"
-                          style={{ textDecoration: "none", color: "black" }}
-                        >
-                          <Typography textaling="center">Modificar</Typography>
+                        <Link to="/home/wishlist" style={{ textDecoration: "none", color: "black" }}>
+                          <Typography textaling="center">Favoritos</Typography>
                         </Link>
                       </MenuItem>
                     </>
                   ) : (
                     <MenuItem>
-                      <Link
-                        to="/home/wishlist"
-                        style={{ textDecoration: "none", color: "black" }}
-                      >
+                      <Link to="/home/wishlist" style={{ textDecoration: "none", color: "black" }}>
                         <Typography textaling="center">Favoritos</Typography>
                       </Link>
                     </MenuItem>
@@ -370,10 +331,7 @@ const Nav2 = () => {
                 </Button>
               </Box>
             ) : (
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                to={"/home/Login"}
-              >
+              <Link style={{ textDecoration: "none", color: "white" }} to={"/home/Login"}>
                 <Button sx={{ color: "white" }}> Login</Button>
               </Link>
             )}

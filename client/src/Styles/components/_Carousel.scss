@@ -12,7 +12,7 @@ margin-top: 20%;
   //  }
   .contenedor-titulo {
     font-family: 'Poppins', sans-serif;
-    width:1000px;
+    width:100%;
     display: flex;
     align-items: center;
     margin-top: 20px;
@@ -48,29 +48,36 @@ margin-top: 20%;
   }
  
 }
-@media screen and (max-width: 900px) {
-  .carousel {
-    .slick-slider {
-      width: 90%;
-    }
-  }
-}
+
 @media screen and (max-width: 500px) {
   .carousel {
+    width: 100%;
+    .slider{
+      width: 20%;
+    }
     .contenedor-titulo {
       h2 {
-        margin-top: 2%;
         font-size: 1.1rem;
+        width:100%;
+        margin-left:-15%;
 
       }
       .iconoMas {
+        margin-left:-175%;
         margin-top: 40%;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         color: $detalles;
       }
     }
     .slick-slider {
-      width: 80%;
-    }
+      width: 75%;
+      color: $detalles;
+      .slick-prev:before,
+      .slick-next:before {
+        margin-top: 12%;
+        color: $detalles;
+        font-size: 24px;
+      }
   }
+}
 }

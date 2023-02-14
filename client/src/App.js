@@ -12,6 +12,7 @@ import NavBar from "./Components/NavBar/NavBar";
 import SeriesHome from "./Components/SeriesHome/SeriesHome";
 import Context from "./contexto/Context";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Search from "./Components/Search/Search";
 import Profile from "./Components/Profile/Profile.jsx";
 import Carro from "./Components/Carro/Carro";
@@ -19,22 +20,18 @@ import Wishlist from "./Components/Wishlist/Wishlist";
 import { ToastContainer } from "react-toastify";
 import "./Styles/ReactToastify.css";
 import Footer from "./Components/Footer/Footer";
-import "./Styles/ReactToastify.css";
 import PutPeliculas from "./Components/Form/PutPeliculas";
 import UserProfile from "./Components/Profile/UserProfile";
 import PasarelaDePago from "./Components/PasarelaDePago/PasarelaDePago";
 import { BsGoogle } from "react-icons/bs";
+import DashBoard from "./Components/Dashboard/DashBoard";
+import Historiales from "./Components/Historiales/Historiales";
+import Page404 from "./Components/Page 404/Page404";
 
 const App = () => {
   const [lenguaje, setLenguaje] = useState("es");
   const [token, setToken] = useState();
-
-
-
-
-
-
-
+  const userReducer = useSelector((state) => state.user);
   // if(!token) {
   //   return <Login setToken={setToken} />
   // }
@@ -69,10 +66,21 @@ const App = () => {
             <Route path="Search" element={<Search />}></Route>
             <Route path="Profile" element={<Profile />}></Route>
             <Route path="Carro" element={<Carro />}></Route>
-            <Route path="modificar" element={<PutPeliculas />}></Route>
+            <Route path="comprados/:id" element={<Historiales />}></Route>
+            <Route
+              path="modificar/:id/:tipos"
+              element={<PutPeliculas />}
+            ></Route>
             <Route path="userProfile" element={<UserProfile />}></Route>
             <Route path="wishlist" element={<Wishlist />}></Route>
             <Route path="pasarela" element={<PasarelaDePago />}></Route>
+            {userReducer.isAdmin?(
+              <Route path="dashBoard" element={<DashBoard />}></Route>
+            ):(
+              <Route path="*" element={<Page404 />}></Route>
+            )}
+            
+            <Route path="*" element={<Page404 />}></Route>
           </Route>
         </Routes>
         <Routes>

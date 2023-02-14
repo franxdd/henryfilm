@@ -1,10 +1,10 @@
 const axios = require("axios");
 require("dotenv").config();
-const { Peliculas } = require("../DB/db.js");
+const { Peliculas, Series, ProductosModificados } = require("../DB/db.js");
 const { parseador, validate } = require("../utils/utils.js");
 const { API_KEY } = process.env;
 const { cloudinary } = require("../utils/cloudinary");
-const Series = require("../models/Series.js");
+// const Series = require("../models/Series.js");
 const getAllMovies = async (req, res) => {
   try {
     const cantidad = 5;
@@ -165,8 +165,30 @@ const getMovieDetailParams = async (req, res) => {
         videosAEnviar,
         urlVideos
       );
+
+      // console.log("entro aca");
+
+      let modificado = await ProductosModificados.findOne({
+        where: {
+          idProducto: idPelicula,
+        },
+      });
+
+      if (modificado) {
+        // console.log(modificado.dataValues.contenido[0]);
+        // console.log(datosAEnviar[0]);
+
+        for (const propOriginal in datosAEnviar[0]) {
+          for (const propMod in modificado.dataValues.contenido[0]) {
+            if (propOriginal === propMod) {
+              datosAEnviar[0][propOriginal] =
+                modificado.dataValues.contenido[0][propMod];
+            }
+          }
+        }
+      }
     }
-  
+
     res.status(200).json(datosAEnviar);
   } catch (error) {
     console.log("hubo un error con la API", error);
@@ -184,6 +206,7 @@ const postPeliculas = async (req, res) => {
     release_date, //*
     episode_run_time,
     number_of_episodes,
+    number_of_seasons,
     posterImagen, //*
     backDropImagen, //*
     vote_average, //*
@@ -197,6 +220,9 @@ const postPeliculas = async (req, res) => {
     overview,
     cast,
     runtime,
+    number_of_episodes,
+    number_of_seasons,
+    episode_run_time,
     release_date,
     posterImagen,
     backDropImagen,
@@ -207,16 +233,16 @@ const postPeliculas = async (req, res) => {
 
   if (Object.keys(errores).length !== 0) res.status(400).json(errores);
   try {
-    if (
-      !name ||
-      !genre_ids ||
-      !overview ||
-      !cast ||
-      !runtime ||
-      !release_date ||
-      !posterImagen
-    )
-      return res.status(404).send("Falta completar un dato..");
+    // if (
+    //   !name ||
+    //   !genre_ids ||
+    //   !overview ||
+    //   !cast ||
+    //   !runtime ||
+    //   !release_date ||
+    //   !posterImagen
+    // )
+    //   return res.status(404).send("Falta completar un dato..");
 
     const upload = await cloudinary.uploader.upload(posterImagen, {
       upload_preset: "mf7vmjsa",
@@ -224,21 +250,28 @@ const postPeliculas = async (req, res) => {
     const upload2 = await cloudinary.uploader.upload(backDropImagen, {
       upload_preset: "mf7vmjsa",
     });
+
+    console.log("antes del create");
+    var number_of_episodesParse = parseInt(number_of_episodes);
+    var number_of_seasonsParse = parseInt(number_of_seasons);
     if (tipo === "serie") {
+      // console.log(' create')
       const response = await Series.create({
         name,
         genre_ids,
         overview,
         cast,
         episode_run_time,
-        number_of_episodes,
-        release_date,
+        number_of_episodes: number_of_episodesParse,
+        number_of_seasons: number_of_seasonsParse,
         posterImagen: upload.url,
         backDropImagen: upload2.url,
         vote_average,
         popularity,
         tipo,
       });
+
+      // console.log(' salio')
       res.status(200).json(response.data);
     } else {
       const response = await Peliculas.create({
@@ -254,7 +287,7 @@ const postPeliculas = async (req, res) => {
         popularity,
         tipo,
       });
-      console.log("estoy entrando en el back");
+
       res.status(200).json(response.data);
     }
   } catch (error) {
@@ -295,7 +328,6 @@ const modificarPeli = async (req, res) => {
     let nuevaPeli = await peliActualizada.update(peliculitas);
     return res.status(200).send(nuevaPeli);
   } catch (error) {
-    console.log(error);
     res.status(400).json(error);
   }
 };

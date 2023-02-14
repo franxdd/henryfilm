@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { useDispatch } from "react-redux";
 import { removeCart } from "../../Redux/Actions/Actions";
 import "../../Styles/components/_CarritoCard.scss"
@@ -21,7 +21,7 @@ function CarritoCard({ id, nombre, image, qty, tipo, precio }) {
         <p className="textNameCarrito">{nombre}</p>
         </div>
         <div className="cardInfo3">
-        <p className="textDetalle"> Es {tipo} </p>
+        <p className="textDetalle"> Tipo: {tipo} </p>
       </div>
 
        <div className="cardAbajo">

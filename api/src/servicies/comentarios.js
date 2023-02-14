@@ -7,8 +7,7 @@ const { sign, verify, decode } = require("jsonwebtoken");
 
 const getComentarios = async (req, res) => {
   let { id, tipo } = req.query;
-  console.log(id);
-  console.log(tipo);
+
   if (tipo === "pelicula") {
     var comentarios = await Comentarios.findAll({ where: { idpelicula: id } });
   } else if (tipo === "serie") {
@@ -23,8 +22,7 @@ const getComentarios = async (req, res) => {
 };
 
 const postComentario = async (req, res) => {
-  let { contenido, puntuacion, idpelicula, token, idserie } = req.body;
-  console.log(idpelicula);
+  let { contenido, puntuacion, token, nickname, picture, id, tipo} = req.body;
   try {
     if (!token || !contenido || !puntuacion)
     return res.status(404).send("Falta completar un dato..");
@@ -33,23 +31,28 @@ const postComentario = async (req, res) => {
     
     const validToken = verify(tokenParsado, "jwtsecretcambiar");
     
-    if (idpelicula) {
+    if (tipo === "pelicula") {
+      console.log(validToken);
       var comentario = await Comentarios.create({
         username: validToken.username,
         contenido,
         puntuacion,
-        idpelicula,
+        idpelicula: id,
+        nickname,
+        picture,
       });
-    } else if (idserie) {
+    } else if (tipo === "serie") {
       var comentario = await Comentarios.create({
         username: validToken.username,
         contenido,
         puntuacion,
-        idserie,
+        idserie:id,
+        nickname,
+        picture,
       });
     }
     
-    console.log(validToken.id);
+ 
     comentario.setUsuario(validToken.id);
     // comentario.setPelicula(idPelicula);
     res.status(200).json(comentario);

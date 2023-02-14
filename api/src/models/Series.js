@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
 
   sequelize.define("Series", {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.STRING,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
@@ -43,6 +43,15 @@ module.exports = (sequelize) => {
     number_of_episodes:{
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    number_of_seasons:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    creado:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false
     },
     tipo: {
       type: DataTypes.ENUM(["serie", "pelicula"]),

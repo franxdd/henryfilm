@@ -1,16 +1,27 @@
-import { React, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CarritoCard from "../CarritoCard/CarritoCard";
 import "../../Styles/components/_Carrito.scss";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/components/_Carrito.scss";
 import tuCarrito from "../../img/tucarrito.png";
+import {
+  postHistorial,
+  getHistorial,
+  removeCart,
+} from "../../Redux/Actions/Actions";
+import { HiOutlineStop } from "react-icons/hi";
+import { toast } from "react-toastify";
+
+
 function Carro() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const [totalPrecio, settotalPrecio] = useState(0);
   const [totalItems, settotalItems] = useState([]);
   const { cart } = useSelector((state) => state);
+  const { user } = useSelector((state) => state);
+  const histo = useSelector((state) => state.historial);
 
   useEffect(() => {
     if (cart) {
@@ -20,25 +31,79 @@ function Carro() {
         });
       settotalItems(cart.length);
     }
+    if (user.id) {
+      // console.log('entro aca')
+      dispatch(getHistorial(user.id));
+    }
   }, [cart]);
 
-  const HandleClickComprar = () => {
+  function debesLogearte() {
+    return toast.error("Necesitas logearte", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+  function productoYaComprado() {
+    return toast.warn("Uno o mas productos ya fueron adquiridos", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+  const HandleClickComprar = (e) => {
+    e.preventDefault();
+
+    if (Object.keys(user).length === 0) {
+      debesLogearte()
+    }
+
     const token = sessionStorage.getItem("token");
-    if (token) {
+    if (token && cart.length !== 0 && histo.compras) {
+      var coincidencia = [];
+
+      for (let i = 0; i < cart.length; i++) {
+        for (let j = 0; j < histo.compras.length; j++) {
+          if (cart[i].id === histo.compras[j].id) {
+            coincidencia.push(cart[i]);
+          }
+        }
+      }
+
+      if (coincidencia.length === 0) {
+        navigate("/home/pasarela");
+      } else {
+        var mostrar = [];
+
+        for (let i = 0; i < coincidencia.length; i++) {
+          mostrar.push(coincidencia[i].name);
+        }
+        productoYaComprado()
+      }
+    } else if (
+      Object.keys(histo).length === 0 &&
+      Object.keys(user).length !== 0
+    ) {
       navigate("/home/pasarela");
-      console.log("COMPRADISIMO BRO");
-    } else {
-      navigate("/home/login");
     }
   };
 
   var totalPrice = 0;
 
   for (let i = 0; i < cart.length; i++) {
-    console.log(cart[i].price);
     totalPrice = totalPrice + cart[i].price;
   }
-
+  console.log(cart)
   return (
     <div className="container">
       <h3>
@@ -79,7 +144,7 @@ function Carro() {
             </p>
             <button
               className="submit formEntry4"
-              onClick={() => HandleClickComprar()}
+              onClick={(e) => HandleClickComprar(e)}
             >
               COMPRAR
             </button>

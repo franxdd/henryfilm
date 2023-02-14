@@ -37,7 +37,20 @@ import {
   GET_REVIEW,
   POST_REVIEW,
   GOOGLE_USER,
-  GOOGLE_LOG_OUT
+  GOOGLE_LOG_OUT,
+  PUT_PROFILE,
+  USER_MODIFICADO,
+  POST_HISTORIAL,
+  GET_HISTORIAL,
+  DELETED_MOVIE,
+  DELETED_SERIE,
+  MODIFICAR_SERIE,
+  MODIFICAR_MOVIE,
+  GET_ALL_USERS,
+  PUT_ADMIN,
+  PUT_ELIMINAR,
+  WILLUNMOUNT3,
+  GET_HISTORIALES
 } from "../Actions/Actions.js";
 
 import { filterGenres } from "../../util/filter.js";
@@ -121,8 +134,8 @@ if (!wishlistStorage) {
 const initialState = {
   allMovies: [],
   allSeries: [],
-  movieDetail: {},
-  seriesDetail: {},
+  movieDetail: [],
+  seriesDetail: [],
   backupSeries: [],
   backupMovies: [],
   generosMovies: [],
@@ -136,11 +149,16 @@ const initialState = {
   idioma: [],
   idiomaDefault: "es/ES",
   isos: [],
-  user: [],
+  user: {},
   googleUser: [],
+  historial: {},
+  historiales: {},
   comentarios: [],
   token: "",
   wishlist: wishlistStorage,
+  allUser: [],
+  isadmin: [],
+  flag : false,
 };
 
 const rootRouter = (state = initialState, action) => {
@@ -151,56 +169,169 @@ const rootRouter = (state = initialState, action) => {
         allSeries: action.payload,
         backupSeries: action.payload,
       };
+
+      case GET_HISTORIALES:
+        return {
+          ...state,
+          historiales: action.payload
+          
+        };
+    case PUT_ADMIN:
+      var cambio = action.payload;
+      var cambio2 = cambio.isAdmin;
+      let array = state.allUser.map((e) => {
+        if (e.id === cambio.id + "") {
+          e.isAdmin = cambio2;
+        }
+        return e;
+      });
+      console.log(state.flag);
+      return {
+        ...state,
+        allUser: array,
+        flag: state.flag ? false : true
+      };
+    case PUT_ELIMINAR:
+      var elimino = action.payload;
+      console.log(state.allUser);
+      console.log(action.payload);
+      let array2 = state.allUser.filter((e) => e.id !== elimino);
+      return {
+        ...state,
+        allUser: array2,
+      };
+    case GET_ALL_USERS:
+      console.log(action.payload);
+      return {
+        ...state,
+        allUser: action.payload,
+      };
+
+    case POST_HISTORIAL:
+      return {
+        ...state,
+        cart: [],
+      };
+
+    case GET_HISTORIAL:
+      console.log(action.payload)
+      if (action.payload !== false) {
+        return {
+          ...state,
+          historial: action.payload,
+        };
+      } else {
+        return {
+          ...state,
+          historial: {},
+        };
+      }
+
+    case DELETED_MOVIE:
+      let moviesFil = state.todo.filter((t) => t.id !== action.payload);
+      let moviesFilHome = state.allMovies.filter(
+        (t) => t.id !== action.payload
+      );
+
+      return {
+        ...state,
+        todo: moviesFil,
+        allMovies: moviesFilHome,
+      };
+
+    case DELETED_SERIE:
+      let seriesFil = state.todo.filter((t) => t.id !== action.payload);
+      let seriesFilHome = state.allSeries.filter(
+        (t) => t.id !== action.payload
+      );
+
+      return {
+        ...state,
+        todo: seriesFil,
+        allSeries: seriesFilHome,
+      };
+
+    case MODIFICAR_MOVIE:
+      return {
+        ...state,
+      };
+
+    case MODIFICAR_SERIE:
+      return {
+        ...state,
+      };
     case LOG_OUT:
       return {
         ...state,
-        user: [],
+        user: {},
         token: "",
         cart: [],
         wishlist: [],
         googleUser: [],
       };
-      case GOOGLE_USER:
-        // console.log(action.payload)
-        sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
-        localStorage.setItem("cart", JSON.stringify(action.payload[1]));
-        localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
+    case USER_MODIFICADO:
+      console.log(action.payload);
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case GOOGLE_USER:
+      // console.log(action.payload)
+      sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
+      localStorage.setItem("cart", JSON.stringify(action.payload[1]));
+      localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
 
-        return {
-          ...state,
-          token: action.payload[0],
-          cart: action.payload[1],
-          wishlist: action.payload[2],
-          googleUser: action.payload[0]
-        }
+      return {
+        ...state,
+        token: action.payload[0],
+        cart: action.payload[1],
+        wishlist: action.payload[2],
+        googleUser: action.payload[0],
+      };
 
-        case GOOGLE_LOG_OUT:
-          sessionStorage.removeItem("token");
-          localStorage.setItem("cart", JSON.stringify([]));
-          localStorage.setItem("wishlist", JSON.stringify([]));
-          return {
-            ...state,
-            token: "",
-            cart: [],
-            wishlist: [],
-            googleUser: [],
-            user: [],
-          }
+    case GOOGLE_LOG_OUT:
+      sessionStorage.removeItem("token");
+      localStorage.setItem("cart", JSON.stringify([]));
+      localStorage.setItem("wishlist", JSON.stringify([]));
+      return {
+        ...state,
+        token: "",
+        cart: [],
+        wishlist: [],
+        googleUser: [],
+        user: {},
+      };
     case POST_USUARIOS:
       return {
         ...state,
       };
     case POST_LOGIN:
-      console.log(action.payload[3])
+      // console.log(action.payload)
       sessionStorage.setItem("token", JSON.stringify(action.payload[0]));
-      localStorage.setItem("cart", JSON.stringify(action.payload[1]));
+      let local = localStorage.getItem("cart") || [];
+      let carroTotal;
+      let jsonTotal = JSON.parse(local);
+      let arrAuxjson = jsonTotal.slice()
+      console.log(action.payload[1])
+      console.log(jsonTotal)
+
+      if (arrAuxjson.length !== 0) {
+        // carroTotal = [new Set( ...action.payload[1])]
+        carroTotal = [...new Set(jsonTotal, action.payload[1])]
+        // carroTotal = [...jsonTotal, ...action.payload[1]];
+      } else {
+        carroTotal = [...action.payload[1]];
+      }
+      localStorage.setItem("cart", JSON.stringify(carroTotal));
+      console.log("soy el carro total", carroTotal);
       localStorage.setItem("wishlist", JSON.stringify(action.payload[2]));
-      
+
       return {
         ...state,
         token: action.payload[0],
-        cart: action.payload[1],
-        wishlist: action.payload[2]
+        cart: carroTotal,
+        wishlist: action.payload[2],
+        user: action.payload[3],
       };
     case CHECK_STATE:
       return {
@@ -208,13 +339,13 @@ const rootRouter = (state = initialState, action) => {
       };
 
     case POST_REVIEW:
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         comentarios: [...state.comentarios, action.payload],
       };
     case GET_REVIEW:
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         comentarios: action.payload,
@@ -248,7 +379,6 @@ const rootRouter = (state = initialState, action) => {
         seriesDetail: action.payload,
       };
     case GET_MOVIES_DETAIL:
-      console.log(action.payload)
       return {
         ...state,
         movieDetail: action.payload,
@@ -258,16 +388,25 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
         errores: action.payload,
+        allMovies: [...state.allMovies],
+        allSeries: [...state.allSeries]
       };
     case WILLUNMOUNT:
       return {
         ...state,
-        seriesDetail: {},
+        seriesDetail: [],
       };
+
     case WILLUNMOUNT2:
       return {
         ...state,
-        movieDetail: {},
+        movieDetail: [],
+        historial: {},
+      };
+    case WILLUNMOUNT3:
+      return {
+        ...state,
+        movieDetail: [],
       };
 
     case ORDER_NAME_ASC:
@@ -434,6 +573,7 @@ const rootRouter = (state = initialState, action) => {
         };
       }
     case GET_TODO:
+      console.log(action.payload);
       var arrAuxpeli = action.payload.filter((fil) => fil.tipo === "pelicula");
       var arrAuxserie = action.payload.filter((fil) => fil.tipo === "serie");
 
@@ -554,6 +694,11 @@ const rootRouter = (state = initialState, action) => {
       return {
         ...state,
       };
+    case PUT_PROFILE:
+      return {
+        ...state,
+        user: action.payload,
+      };
     case POST_COMENTARIO:
       return {
         ...state,
@@ -562,7 +707,7 @@ const rootRouter = (state = initialState, action) => {
     case ADD_TO_WISHLIST:
       const itemFromWishlist = state.todo.find((e) => e.id === action.payload);
       let wishlistStorage = localStorage.getItem("wishlist");
-      console.log( wishlistStorage);
+      // console.log( wishlistStorage);
 
       if (wishlistStorage === "undefined") {
         d();

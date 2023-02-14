@@ -47,9 +47,33 @@ export const GET_REVIEW = "GET_REVIEW";
 export const POST_REVIEW = "POST_REVIEW";
 export const GOOGLE_USER = "GOOGLE_USER";
 export const GOOGLE_LOG_OUT = "GOOGLE_LOG_OUT";
+export const POST_HISTORIAL = "POST_HISTORIAL";
+export const PUT_PROFILE = "PUT_PROFILE";
+export const USER_MODIFICADO = "USER_MODIFICADO";
+export const GET_HISTORIAL = "GET_HISTORIAL";
+export const DELETED_MOVIE = "DELETED_MOVIE";
+export const DELETED_SERIE = "DELETED_SERIE";
+export const MODIFICAR_MOVIE = "MODIFICAR_MOVIE";
+export const MODIFICAR_SERIE = "MODIFICAR_SERIE";
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const PUT_ADMIN = "PUT_ADMIN";
+export const PUT_ELIMINAR = "PUT_ELIMINAR";
+export const WILLUNMOUNT3 = "WILLUNMOUNT3";
+export const GET_HISTORIALES = "GET_HISTORIALES";
 
 function a(error) {
   return toast.error(error, {
+    position: "bottom-left",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+}
+function srryNotSrry() {
+  return toast.warn("Datos incorrectos", {
     position: "bottom-left",
     autoClose: 2000,
     hideProgressBar: false,
@@ -82,6 +106,103 @@ function b(mensaje) {
 //       });
 //   };
 // };
+
+export const postHistorial = (payload) => {
+  // console.log(payload)
+  return async function (dispatch) {
+    try {
+      let postHistorial = await axios.post(`/historial/agregar`, payload);
+      return dispatch({
+        type: POST_HISTORIAL,
+        payload: postHistorial.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getHistorial = (id) => {
+  // console.log(id)
+  return async function (dispatch) {
+    try {
+      let getHistorial = await axios.get(`/historial/${id}`);
+      // console.log(getHistorial.data)
+      return dispatch({
+        type: GET_HISTORIAL,
+        payload: getHistorial.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+
+export const getTodosHistorial = () => {
+  console.log("entro a la action")
+  return async function (dispatch) {
+    try {
+      console.log("antes del get")
+      let getHistoriales = await axios.get(`/historial/todos/traer`);
+      console.log(getHistoriales.data)
+      return dispatch({
+        type: GET_HISTORIALES,
+        payload: getHistoriales.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const deleteMovie = (payload) => {
+  console.log(payload);
+  return async function (dispatch) {
+    let deleted = await axios.post(`/productosEliminados/postProd`, payload);
+
+
+    return dispatch({
+      type: DELETED_MOVIE,
+      payload: payload[0],
+    });
+  };
+};
+
+export const deleteSerie = (payload) => {
+  console.log(payload);
+  return async function (dispatch) {
+    let deleted = await axios.post(`/productosEliminados/postProd`, payload);
+    console.log(deleted);
+    return dispatch({
+      type: DELETED_SERIE,
+      payload: payload[0],
+    });
+  };
+};
+
+export const modificarMovie = (payload) => {
+  return async function (dispatch) {
+    let deleted = await axios.post(`/productosModificados/postProd`, payload);
+
+    return dispatch({
+      type: MODIFICAR_MOVIE,
+      payload: payload[0],
+    });
+  };
+};
+
+export const modificarSerie = (payload) => {
+  return async function (dispatch) {
+    let deleted = await axios.post(`/productosModificados/postProd`, payload);
+
+    return dispatch({
+      type: MODIFICAR_SERIE,
+      payload: payload[0],
+    });
+  };
+};
+
 export const getAllSeries = () => {
   return async function (dispatch) {
     let getAllSeries = await axios(`/series`);
@@ -155,10 +276,18 @@ export const willunmont = () => {
   };
 };
 
+
+export const willunmont3 = () => {
+  return function (dispatch) {
+    return dispatch({
+      type: WILLUNMOUNT3,
+    });
+  };
+};
+
 export const PostUsuario = (payload) => {
   return async function (dispatch) {
     try {
-      console.log("mando la action");
       let created = await axios.post("/usuarios/register", payload);
       // console.log(created.data)
       return dispatch({ type: POST_USUARIOS });
@@ -180,7 +309,6 @@ export const PostLogin = (payload) => {
       // {
       //   // withCredentials: true,
       // });
-      console.log(created.data);
 
       sessionStorage.setItem("token", JSON.stringify(created.data[0]));
 
@@ -189,8 +317,9 @@ export const PostLogin = (payload) => {
         b(created.data[3])
       );
     } catch (error) {
+      console.log("lelele", error);
+      srryNotSrry()
       a(error.response.data);
-      // console.log(error)
       return error;
     }
   };
@@ -219,11 +348,13 @@ export const signInUser = (payload) => {
     try {
       console.log("entro a al action");
       var user = await axios.post("/usuarios/google", payload);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
     // {
     //   // withCredentials: true,
     // });
-    console.log(user);
+    // console.log(user);
     // sessionStorage.setItem("token", JSON.stringify(user.data));
 
     return dispatch({ type: GOOGLE_USER, payload: user.data });
@@ -237,7 +368,6 @@ export const googleLogOut = () => {
 };
 export const getUser = (token) => {
   return async function (dispatch) {
-    // console.log("access-token=" + token);
     var obj = {
       "access-token": token,
     };
@@ -390,6 +520,9 @@ export const removeCart = (id) => {
       payload: id,
     });
 };
+
+
+
 export const adjusq = (id, value) => {
   return (dispatch) =>
     dispatch({
@@ -440,10 +573,9 @@ export const loadCurren = (payload) => {
 };
 
 export const putPeliculas = (payload) => {
-  // console.log(payload);
   return async (dispatch) => {
     let created = await axios.put(
-      `/peliculas/modificarPeli/${payload.id}`,
+      `/${payload.tipo}s/modificar/${payload.id}`,
       payload
     );
     dispatch({
@@ -453,7 +585,6 @@ export const putPeliculas = (payload) => {
   };
 };
 export const createReview = (payload) => {
-  console.log(payload);
   return async (dispatch) => {
     let creado = await axios.post("/comentarios/agregar", payload);
     return dispatch({
@@ -491,8 +622,71 @@ export const removeToWishlist = (id) => {
     });
 };
 
-// export const postPagos = (payload) => {
-//   return async (dispatch) => {
+export const putProfile = (payload) => {
+  console.log(payload);
+  return async (dispatch) => {
+    try {
+      let profile = await axios.put(`/usuarios/IProfile`, payload);
 
-//   }
-// }
+      dispatch({
+        type: PUT_PROFILE,
+        payload: profile.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const usermodificado = (payload) => {
+  return {
+    type: USER_MODIFICADO,
+    payload: payload,
+  };
+};
+
+export const allusers = () => {
+  console.log("estoy entrando en la action");
+  return async function (dispatch) {
+    try {
+      let getUsers = await axios.get(`/usuarios`);
+
+      return dispatch({
+        type: GET_ALL_USERS,
+        payload: getUsers.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const putAdmin = (payload) => {
+  console.log(payload);
+  return async (dispatch) => {
+    try {
+      let profileA = await axios.put(`/usuarios/cambiar`, payload);
+
+      dispatch({
+        type: PUT_ADMIN,
+        payload: profileA.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const putElminar = (payload) => {
+  console.log(payload);
+  var objaux = {id:payload}
+  return async (dispatch) => {
+    try {
+      let profileB = await axios.put(`/usuarios/eliminar`, objaux);
+
+      dispatch({
+        type: PUT_ELIMINAR,
+        payload: payload,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

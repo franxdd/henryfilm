@@ -15,6 +15,13 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      picture: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      nickname: {
+        type: DataTypes.STRING,
+      },
       contenido: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -25,13 +32,10 @@ module.exports = (sequelize) => {
       },
       idserie: {
         type: DataTypes.STRING,
-        
       },
-      idpelicula:{
+      idpelicula: {
         type: DataTypes.STRING,
-       
-
-      }
+      },
     },
     {
       timestamps: false,
