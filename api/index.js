@@ -1,6 +1,6 @@
 const server = require("./App.js");
 const { conn } = require("./src/DB/db.js");
-
+require('dotenv').config();
 // const PORT = process.env.PORT;
 
 conn.sync({ force: false }).then(() => {
