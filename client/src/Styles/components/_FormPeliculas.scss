@@ -1,13 +1,13 @@
 @import "../Utilidades/_Variables.scss";
 
-.ContainerForm2{
+.ContainerForm2 {
   display: flex;
   width: 100%;
-  background-size:contain;
- justify-content: center;
+  background-size: contain;
+  justify-content: center;
   height: 100%;
-  
- .form2 {
+
+  .form2 {
     margin-top: 35px;
     background: black;
     box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
@@ -19,34 +19,34 @@
     padding-bottom: 3px;
     left: 0;
     right: 0;
- position: relative;
+    position: relative;
     border-top: 5px solid $detalles;
-  /*   z-index: 1; */
+    /*   z-index: 1; */
     // animation: bounce 1.5s infinite;
   }
   ::-webkit-input-placeholder {
     font-size: 1.3em;
   }
-  
-  .title{
+
+  .title {
     display: block;
     font-family: sans-serif;
     margin: 15px auto 5px;
     width: 300px;
-    color: $blanco
+    color: $blanco;
   }
-  .termsConditions{
+  .termsConditions {
     margin: 0 auto 5px 80px;
   }
-  
-  .pageTitle{
+
+  .pageTitle {
     font-size: 2em;
     font-weight: bold;
   }
-  .secondaryTitle{
+  .secondaryTitle {
     color: grey;
   }
-  
+
   .name {
     background-color: #ebebeb;
     color: rgb(0, 0, 0);
@@ -56,20 +56,20 @@
     // height: 30px;
     // width: 380px;
   }
-  
+
   .message {
     background-color: #ebebeb;
     overflow: hidden;
-    height: 10rem;
+    height: 3rem;
   }
-  
+
   .message:hover {
     border-bottom: 5px solid $detalles;
     // height: 12em;
     // width: 380px;
     // transition: ease 0.5s;
   }
-  
+
   .formEntry2 {
     display: block;
     margin: 20px auto;
@@ -86,7 +86,7 @@
     font-size: 20px;
     cursor: pointer;
   }
-  
+
   .submit:hover {
     box-shadow: 15px 15px 15px 5px rgba(78, 72, 77, 0.219);
     transform: translateY(-3px);
@@ -94,10 +94,10 @@
     background-color: $background-intermedio;
     // border-top: 5px solid $blanco;
     border-radius: 0%;
-    color:$detalles;
+    color: $detalles;
   }
 }
-.ContainerForm2 h6{
+.ContainerForm2 h6 {
   color: white;
   display: flex;
   justify-content: flex-start;
@@ -134,8 +134,9 @@
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
 }
 
-.dropdown:before, .dropdown:after {
-  content: '';
+.dropdown:before,
+.dropdown:after {
+  content: "";
   position: absolute;
   z-index: 2;
   top: 9px;
@@ -237,7 +238,7 @@
 .dropdown-dark .dropdown-select {
   color: #aaa;
   text-shadow: 0 1px black;
-  background: #444;  /* Fallback for IE 8 */
+  background: #444; /* Fallback for IE 8 */
 }
 
 .dropdown-dark .dropdown-select:focus {
@@ -248,11 +249,11 @@
   background: #444;
   text-shadow: 0 1px rgba(0, 0, 0, 0.4);
 }
-  @keyframes bounce {
-    0% {
-      tranform: translate(0, 4px);
-    }
-    50% {
-      transform: translate(0, 8px);
-    }
-  } 
+@keyframes bounce {
+  0% {
+    tranform: translate(0, 4px);
+  }
+  50% {
+    transform: translate(0, 8px);
+  }
+}
